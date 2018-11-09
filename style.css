@@ -7,3 +7,364 @@ Version: 0.0.1
 Tags: customized
 Text Domain: joshuatzwp
 */
+div#navbarheader {
+    background: #2E3641;
+    font-size: 1.7em;
+    color: #FFF;
+    width:100%;
+    height:auto;
+    min-height: 70px;
+    position:fixed;
+    margin-bottom: 40px;
+    top:0px;
+}
+div#navbarheader a {
+    color: #FFF;
+}
+
+@media (min-width: 640px){
+    div#navbarheader {
+        text-align: center;
+    }
+    div#navbarheader li {
+        
+        width: 20%;
+        float:left;
+    }
+    
+}
+#nav-toggle {
+    margin-left: 5px;
+    margin-top: 5px;
+    width:60px;
+    background: #2E3641;
+    text-align: center;
+}
+
+@media (max-width: 39.999em) {
+    div#navbarheader {
+        background: none;
+    }
+    #navbarheader li {
+        background: rgba(46, 54, 65, 0.69);
+    }
+}
+
+@media (max-width:979px){
+    #nav-search-wrapper {
+        width: 100%
+    }
+}
+@media (min-width:980px){
+    #nav-search-wrapper {
+        width: auto;
+    }
+}
+
+/* Google CSE Search Bar Fix */
+#masthead .bl_search {
+    /*max-width: 230px;*/
+    margin-top: 5px;
+}
+#nav-search-wrapper {
+    overflow: hidden;
+}
+div.nav-collapse.collapse {
+    float:left;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+    
+body {
+	background-image:  url('data:image/gif;base64,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');
+    margin:0px;
+    font-family: 'lato',sans-serif;
+}
+#mainmenu {
+	width:100%;
+	text-align:center;
+	padding-top: 40px;
+}
+/* Bob */
+@-webkit-keyframes hvr-bob {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes hvr-bob {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@-webkit-keyframes hvr-bob-float {
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes hvr-bob-float {
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+.hvr-bob {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {
+  -webkit-animation-name: hvr-bob-float, hvr-bob;
+  animation-name: hvr-bob-float, hvr-bob;
+  -webkit-animation-duration: .3s, 1.5s;
+  animation-duration: .3s, 1.5s;
+  -webkit-animation-delay: 0s, .3s;
+  animation-delay: 0s, .3s;
+  -webkit-animation-timing-function: ease-out, ease-in-out;
+  animation-timing-function: ease-out, ease-in-out;
+  -webkit-animation-iteration-count: 1, infinite;
+  animation-iteration-count: 1, infinite;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-direction: normal, alternate;
+  animation-direction: normal, alternate;
+}
+.myButton {
+	-moz-box-shadow: 0px 10px 14px -7px #276873;
+	-webkit-box-shadow: 0px 10px 14px -7px #276873;
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #408c99));
+	background:-moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
+	background:-webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
+	background:-o-linear-gradient(top, #599bb3 5%, #408c99 100%);
+	background:-ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+	background-color:#599bb3;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:18px 32px;
+	text-decoration:none;
+	text-shadow:0px 5px 15px #2d6375;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
+	background:-moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+	background:-webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+	background:-o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+	background:-ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+	background-color:#408c99;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+.menubutton{
+	margin-right:30px;
+	width:20%;
+	min-width:90px;
+	margin-bottom:30px;
+}
+#main, .container.main, .main {
+    padding-top: 100px; /* necessary to avoid appearing behind sticky nav */
+}
+p {
+    font-family: 'Lato',sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+}
+div#main {
+    /*
+    background-color: rgba(255,255, 255, 0.86);
+    padding-left: 10px;
+    padding-right: 10px;
+    */
+}
+#main_post_wrapper, #main_content, #maincontent{
+    background-color: #FFF;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+	padding-bottom: 10px;
+	padding-top: 1px;
+    border-radius: 5px;
+}
+
+#maingallery {
+	width:100%;
+	text-align:center;
+	padding-top: 40px;
+}
+.menubutton{
+	margin-right:30px;
+	width:20%;
+	min-width:90px;
+	margin-bottom:30px;
+}
+#mainmenu p {
+	padding-top:10px;
+	width:95%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	background-color:#FFF;
+	padding:4px;
+}
+/*
+#mainmenu img {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+*/
+
+.spacer {
+	background-color:#FFF;
+	height:20%;
+	min-height:20px;
+	width:100%;
+}
+#site {
+	text-align:center;
+	width:30%;
+	display:inline-block;
+	padding:15px;
+}
+h1 {
+	text-align:center;
+}
+h2 {
+	text-align:center;
+}
+.projectItem {
+	background-color:#A3BFE1;
+	padding-bottom:30px;
+	padding-top:30px;
+}
+.projectItem a > .projectLinkClickArea {
+    max-width: 95%;
+    height: auto;
+    max-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.projectItem a > .projectLinkClickArea:hover{
+	outline-color: rgba(25,0,252,0.5);
+	outline-style:solid;
+	outline-width:20px;
+	outline-offset:-10px;
+}
+.top-color-clearfix {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    min-height: 5px;
+    display:block;
+}
+
+.clearfix {
+    *zoom:1
+}
+
+.clearfix:before,.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.top-color-clearfix div {
+    float:left;
+    height: 8px;
+    width: 25%;
+}
+
+div.Promo_Image_Wrapper img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+    width: 95%;
+}
+div.Promo_Image_Wrapper > a {
+    display: inline-block;
+}
+
+.hero_image_wrapper {
+    width: 100%;
+    text-align: center;
+}
+.hero_image_wrapper > img {
+    width: 100%;
+    height: auto;
+}
+div#main_post_wrapper > p {
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+/* ===== Fix for hover overlay on LinkedIn Icon in Nav =====*/
+ul.nav a#linkedIn {
+    padding-bottom: 13px;
+}
+
+.projectListing {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px auto;
+}
+.projectListingTitle {
+    font-size: 24px;
+    display: block;
+}
