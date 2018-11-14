@@ -18,9 +18,11 @@ get_header(); ?>
                     <?php
                         // per post pre-processing
                         $hasFeaturedImage = has_post_thumbnail();
+                        $hasExcerpt = has_excerpt();
                     ?>
                     <div id="<?php echo the_ID(); ?>" class="projectItem">
                         <h2><?php echo the_title(); ?></h2>
+                        <!-- Project Link Area -->
                         <a href="<?php echo the_permalink(); ?>" target="_self">
                             <?php if($hasFeaturedImage): ?>
                                 <img class="projectLinkClickArea" src="<?php echo the_post_thumbnail_url('medium'); ?>" >
@@ -30,6 +32,12 @@ get_header(); ?>
                                 </div>
                             <?php endif; ?>
                         </a>
+                        <!-- Project Excerpt Area -->
+                        <?php if($hasExcerpt): ?>
+                            <div class="projectExcerptWrapper">
+                                <p><?php echo get_the_excerpt(); ?></p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php
                 // End loop

@@ -218,13 +218,6 @@ p {
     font-size: 18px;
     font-weight: 300;
 }
-div#main {
-    /*
-    background-color: rgba(255,255, 255, 0.86);
-    padding-left: 10px;
-    padding-right: 10px;
-    */
-}
 #main_post_wrapper, #main_content, #maincontent{
     background-color: #FFF;
     margin-left: 10px;
@@ -247,16 +240,7 @@ div#main {
 	min-width:90px;
 	margin-bottom:30px;
 }
-#mainmenu p {
-	padding-top:10px;
-	width:95%;
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:20px;
-	font-family:Georgia, "Times New Roman", Times, serif;
-	background-color:#FFF;
-	padding:4px;
-}
+
 /*
 #mainmenu img {
 	display:block;
@@ -283,24 +267,7 @@ h1 {
 h2 {
 	text-align:center;
 }
-.projectItem {
-	background-color:#A3BFE1;
-	padding-bottom:30px;
-	padding-top:30px;
-}
-.projectItem a > .projectLinkClickArea {
-    max-width: 95%;
-    height: auto;
-    max-height: 300px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.projectItem a > .projectLinkClickArea:hover{
-	outline-color: rgba(25,0,252,0.5);
-	outline-style:solid;
-	outline-width:20px;
-	outline-offset:-10px;
-}
+
 .top-color-clearfix {
     position: fixed;
     top: 0px;
@@ -358,6 +325,9 @@ ul.nav a#linkedIn {
     padding-bottom: 13px;
 }
 
+/**
+* Project Listings
+*/
 .projectListing {
     background: white;
     padding: 10px;
@@ -367,4 +337,32 @@ ul.nav a#linkedIn {
 .projectListingTitle {
     font-size: 24px;
     display: block;
+}
+.projectItem {
+	background-color:#A3BFE1;
+	padding-bottom:30px;
+	padding-top:30px;
+}
+.projectItem a > .projectLinkClickArea {
+    max-width: 95%;
+    height: auto;
+    max-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.projectItem a > .projectLinkClickArea:hover{
+	outline-color: rgba(25,0,252,0.5);
+	outline-style:solid;
+	outline-width:20px;
+	outline-offset:-10px;
+}
+.projectExcerptWrapper {
+	padding-top:10px;
+	width:95%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	background-color:#FFF;
+	padding:4px;
 }
