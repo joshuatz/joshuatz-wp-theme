@@ -6,9 +6,18 @@
  */
 
 class JtzwpHelpers {
+    /**
+     * Constants
+     */
+    const PROJECT_TYPES_TAXONOMY_BASE = 'project_types';
+
+    /**
+     * Constructor
+     */
     public function __construct(){
         $this->isDebug = $this->getIsDebug();
     }
+
     /**
      * Get terms belonging to a taxonomy, either top level or all
      * @param {string} $taxonomyName - the name of the taxonomy to get terms for
@@ -46,12 +55,17 @@ class JtzwpHelpers {
         }
         return $finalTerms;
     }
+    
+    public function getProjectTypesTerms(){
+        return $this->getTermsByName(self::PROJECT_TYPES_TAXONOMY_BASE);
+    }
+
     private function getIsDebug(){
         $debug = false;
 
         // TODO
         $debug = true;
-        
+
         return $debug;
     }
 }
