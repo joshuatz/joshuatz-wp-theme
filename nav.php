@@ -1,6 +1,6 @@
 <?php
     // Nav processing
-    $jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHelpers());
+    global $jtzwpHelpers;
     $projectTerms = $jtzwpHelpers->getProjectTypesTerms();
 ?>
 

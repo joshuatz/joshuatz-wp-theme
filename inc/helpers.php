@@ -55,7 +55,7 @@ class JtzwpHelpers {
         }
         return $finalTerms;
     }
-    
+
     public function getProjectTypesTerms(){
         return $this->getTermsByName(self::PROJECT_TYPES_TAXONOMY_BASE);
     }
@@ -69,5 +69,3 @@ class JtzwpHelpers {
         return $debug;
     }
 }
-
-$jtzwpHelpers = new JtzwpHelpers();

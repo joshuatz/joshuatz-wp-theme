@@ -7,7 +7,6 @@
 
 <?php
     // Nav processing
-    $jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHelpers());
     $projectTerms = $jtzwpHelpers->getProjectTypesTerms();
 ?>
 

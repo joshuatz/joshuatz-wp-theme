@@ -1,12 +1,24 @@
 <?php
+/**
+ * Setup resources
+ */
 $debug = true;
 $themeLibURL = (get_template_directory_uri().'/lib');
 $themeIncURL = (get_template_directory_uri().'/inc');
 $themeIncPath = (get_template_directory() . '/inc');
 
+/**
+ * Load required files
+ */
 require_once($themeIncPath . '/taxonomies.php');
 require_once($themeIncPath . '/custom-post-types.php');
 require_once($themeIncPath . '/helpers.php');
+
+/**
+ * Make sure helpers is loaded globally
+ */
+global $jtzwpHelpers;
+$jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHelpers());
 
 /**
  * Special WP flags
@@ -55,3 +67,11 @@ if ($debug){
     // REMOVE ME
     flush_rewrite_rules(false);
 }
+
+/**
+ * Hook into wp_head for anything that needs to run first - useful for global includes
+ */
+function jtzwp_head_hook(){
+    //
+}
+add_action('wp_head','jtzwp_head_hook');
