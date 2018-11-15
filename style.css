@@ -341,7 +341,8 @@ ul.nav a#linkedIn {
 .projectItem {
 	background-color:#A3BFE1;
 	padding-bottom:30px;
-	padding-top:30px;
+    padding-top:30px;
+    margin-bottom: 10px;
 }
 .projectItem a > .projectLinkClickArea {
     max-width: 95%;
@@ -365,4 +366,20 @@ ul.nav a#linkedIn {
 	font-family:Georgia, "Times New Roman", Times, serif;
 	background-color:#FFF;
 	padding:4px;
+}
+.projectLinkClickPrefix {
+    background-color: white;
+    width: 50%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    margin-bottom: 7px;
+}
+/**
+* SPECIAL: Materialize Reset Stuff
+*/
+article ul,li {
+    padding-left: inherit !important;
+    list-style-type: inherit !important;
 }

@@ -25,6 +25,7 @@ get_header(); ?>
                         <!-- Project Link Area -->
                         <a href="<?php echo the_permalink(); ?>" target="_self">
                             <?php if($hasFeaturedImage): ?>
+                                <div class="projectLinkClickPrefix">Click here or the image below for the full project page!</div>
                                 <img class="projectLinkClickArea" src="<?php echo the_post_thumbnail_url('medium'); ?>" >
                             <?php else: ?>
                                 <div class="projectLinkClickArea">

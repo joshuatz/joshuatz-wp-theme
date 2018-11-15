@@ -6,6 +6,7 @@ $themeIncPath = (get_template_directory() . '/inc');
 
 require_once($themeIncPath . '/taxonomies.php');
 require_once($themeIncPath . '/custom-post-types.php');
+require_once($themeIncPath . '/helpers.php');
 
 /**
  * Special WP flags
@@ -19,10 +20,10 @@ add_theme_support( 'post-thumbnails' );
 
 function joshuatzwp_styles() {
     global $themeLibURL;
-    // Load main theme CSS file (style.css)
-    wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array('Materialize'),false,'all');
     // Materialize CSS
-    wp_enqueue_style('Materialize',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
+    wp_enqueue_style('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
+    // Load main theme CSS file (style.css)
+    wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array('materialize-style'),false,'all');
 }
 
 function joshuatzwp_scripts() {

@@ -1,3 +1,9 @@
+<?php
+    // Nav processing
+    $jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHelpers());
+    $projectTerms = $jtzwpHelpers->getTermsByName('project_types');
+?>
+
 <!--Ripped from original site-->
 <style>
 .nav{margin-left:0;margin-bottom:20px;list-style:none}
@@ -481,7 +487,11 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
 	overflow:hidden;
 	/*height:0;*/
 } 
-.jtnavbar .btn-jtnavbar{display:block;} .jtnavbar-static .jtnavbar-inner{padding-left:10px;padding-right:10px;}}@media (min-width:980px){.nav-jtcollapse.jtcollapse{height:auto !important;overflow:visible !important;}}
+.jtnavbar .btn-jtnavbar{
+    display:block;
+    -webkit-appearance:inherit;
+}
+.jtnavbar-static .jtnavbar-inner{padding-left:10px;padding-right:10px;}}@media (min-width:980px){.nav-jtcollapse.jtcollapse{height:auto !important;overflow:visible !important;}}
 @media (min-width: 1200px) {
     .span9{width:840px}
     .share-story-jtcontainer small{margin:19px;position:static}
@@ -566,7 +576,7 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
 
 </style>
 
-<div id='masthead' role='banner'>
+<div id='masthead' role='banner' class="mainNavContainerWrapper">
   <div class='top-color clearfix'>
 	<div style='background: none repeat scroll 0% 0% #F69087;'></div>
 	<div style='background: none repeat scroll 0% 0% #85CCB1;'></div>
@@ -603,9 +613,14 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
 				</a>
 			</li>
 			<li class='dropdown'>
-			  <a class='dropdown-toggle' data-toggle='dropdown' href='#'>Projects</a>
+			  <a class='dropdown-toggle' data-toggle='dropdown' href='/projects/'>Projects</a>
 			  <ul class='dropdown-menu'>
-				<li class="dropdown">
+                <?php foreach($projectTerms as $projectTerm): ?>
+                    <li class="dropdown">
+                        <a href="<?php echo get_term_link($projectTerm);?>"><?php echo $projectTerm->name; ?></a>
+                    </li>
+                <?php endforeach; ?>
+				<!--<li class="dropdown">
 				  <a href='/electronics'>Electronics</a>
 				</li>
 				<li class="dropdown">
@@ -619,7 +634,7 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
 				</li>
 				<li>
 				  <a href='/other'>Other</a>
-				</li>
+				</li>-->
 			  </ul>
 			</li>
 			<li>
@@ -1650,3 +1665,21 @@ jQuery(function() {
 </script>
 <!-- End Scripts -->
 
+<script>
+/**
+* WP Admin bar fix 
+*/
+(function($){
+    $(document).ready(function(){
+        var wpAdminBarElem = document.querySelector('div#wpadminbar');
+        console.log((wpAdminBarElem));
+        console.log(typeof(wpAdminBarElem));
+        if (typeof(wpAdminBarElem)==='object' && wpAdminBarElem!==null){
+            var wpAdminBarHeight = window.getComputedStyle(wpAdminBarElem).height;
+            $('.mainNavContainerWrapper').css({
+                'top' : wpAdminBarHeight
+            });
+        }
+    })
+})(jQuery);
+</script>
