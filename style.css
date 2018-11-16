@@ -385,11 +385,29 @@ article ul,li {
 }
 
 /**
+* SPECIAL: Materialize extension stuff
+*/
+/** Different headings for collapsible sections based on expanded vs collapsed */
+ul.collapsible li .whenExpanded {
+    display: none;
+}
+ul.collapsible li .whenCollapsed {
+    display: inherit;
+}
+ul.collapsible li.active .whenExpanded {
+    display: inherit;
+}
+ul.collapsible li.active .whenCollapsed {
+    display: none;
+}
+
+/**
 * post-metainfo-box aka Full Post Details Expandable Card
 */
-.expandablePostDetailsCard {
+.expandablePostDetailsCard,.expandablePostDetailsSection {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     max-width: 500px;
+    background-color: white;
 }

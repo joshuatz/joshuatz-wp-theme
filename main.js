@@ -1,5 +1,15 @@
 /**
- * Materialize Stuff
+ * Materialize Stuff - Init
+ */
+(function($,Materialize){
+    $(document).ready(function(){
+        // Collapsible (aka accordian) sections
+        $('.collapsible').collapsible();
+    });
+})(jQuery,M);
+
+/**
+ * Materialize Stuff - extenders
  */
 (function($,Materialize){
     /**
