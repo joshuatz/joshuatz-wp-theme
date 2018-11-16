@@ -589,7 +589,7 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
 		<div class='btn-jtnavbar jtcollapsed' data-target='.nav-jtcollapse' data-toggle='jtcollapse' type='button'>
 		  <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAjCAMAAADR57icAAAAdVBMVEWFzLGFzLGQ0bgAAACFzLGJxa99uKNjiYGR0bmGzbKDyK55t6KJxK9zrJljj4WDxq2Exa1ol4poloqFzLGGzbL6/v32+PiIyrFuoo6DzLCNz7aAyKxwo5Cr1buK0raDzLaAy6/3+Pjd9vb29vTa8PB+xK52qpLUNYl7AAAAE3RSTlPMgc8A9cV3EM/Ou5l2LSnHxz093oLWngAAAJNJREFUOMvt0rcSwkAMRVGBNjgTVoQliMz/fyIVRjMetFu68KnvjF4hQN/YYq4qbOMRvGUKpArE1oPjGJIiO1hSyEALKEOWEiAvhPGEJKjhUVDD9/7Ue9HfMF6e26/b43xVwvvmZxBKOyGxsTdtHJ4+COrGKIz1w8cZ1pzTcQ2doXRHpgNcVSbVmWqNgNi6WYJrET8q82NhjDxGFQAAAABJRU5ErkJggg==' />
 		</div>
-		<div class='header section' id='header'>
+		<div class='header' id='header'>
 		  <div class='widget Header' data-version='1' id='Header1'>
 			<div id='header-inner'>
 			  <div class='titlewrapper'>
@@ -660,15 +660,14 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
                 border-color: transparent !Important;
                 background-color: transparent !Important;
             }
+            form.gsc-search-box > table {
+                border-collapse: separate;
+            }
+            .cse .gsc-control-cse, .gsc-control-cse {
+                padding: 1px;
+            }
         </style>
         <gcse:search></gcse:search>
-            <!-- Old search form from Blogger
-		  <form action='/search' class='searchform' id='searchform' method='get' role='search'>
-			<div>
-			<label class='screen-reader-text' for='s'>Search for:</label> 
-			<input id='s' name='q' type='text' value='' /> 
-			<input id='searchsubmit' type='submit' value='Search' /></div>
-		  </form>-->
 		</div>
         </div>
 	  </div>
