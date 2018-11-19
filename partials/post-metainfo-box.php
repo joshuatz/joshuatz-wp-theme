@@ -9,8 +9,8 @@
         <li>
             <div class="collapsible-header">
                 <i class="material-icons">info</i>
-                <div class="whenExpanded">Full Project Details</div>
-                <div class="whenCollapsed">Click for Full Project Details</div>
+                <div class="whenExpanded">Full <?php echo ucwords(get_post_type()); ?> Details</div>
+                <div class="whenCollapsed">Click for Full <?php echo ucwords(get_post_type()); ?> Details</div>
             </div>
             <div class="collapsible-body">
                 <div class="fullPostDetailsWrapper">

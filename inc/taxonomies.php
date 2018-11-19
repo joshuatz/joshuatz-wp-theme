@@ -18,7 +18,7 @@ function jtzwp_register_project_types_taxonomy(){
             "slug" => "projects",
             "with_front" => true
         ),
-		"show_admin_column" => false,
+		"show_admin_column" => true,
 		"show_in_rest" => false,
 		"rest_base" => "project_types",
 		"rest_controller_class" => "WP_REST_Terms_Controller",

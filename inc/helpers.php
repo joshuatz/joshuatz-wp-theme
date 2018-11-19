@@ -10,6 +10,7 @@ class JtzwpHelpers {
      * Constants
      */
     const PROJECT_TYPES_TAXONOMY_BASE = 'project_types';
+    const PROJECTS_POST_TYPE = 'projects';
 
     /**
      * Constructor

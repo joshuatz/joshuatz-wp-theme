@@ -29,7 +29,7 @@ get_header(); ?>
                                 <img class="projectLinkClickArea" src="<?php echo the_post_thumbnail_url('medium'); ?>" >
                             <?php else: ?>
                                 <div class="projectLinkClickArea">
-                                    <h3>Click for Project Details!</h3>
+                                    <h3 style="padding:10px;">Click for Project Details!</h3>
                                 </div>
                             <?php endif; ?>
                         </a>

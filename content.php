@@ -22,8 +22,9 @@
 		?>
 	</header><!-- .entry-header -->
 
+	<?php get_template_part('partials/post-metainfo-box'); ?>
+
 	<div class="entry-content">
-        <h1>content.php</h1>
 		<?php
 			/* translators: %s: Name of current post */
 			the_content( sprintf(

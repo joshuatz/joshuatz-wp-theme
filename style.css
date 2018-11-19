@@ -218,7 +218,8 @@ p {
     font-size: 18px;
     font-weight: 300;
 }
-#main_post_wrapper, #main_content, #maincontent{
+/*#main_post_wrapper, #main_content, #maincontent{*/
+.entry-content{
     background-color: #FFF;
     margin-left: 10px;
     margin-right: 10px;
@@ -228,6 +229,7 @@ p {
 	padding-top: 1px;
     border-radius: 5px;
 }
+
 
 #maingallery {
 	width:100%;
@@ -382,6 +384,9 @@ ul.nav a#linkedIn {
 article ul,li {
     padding-left: inherit !important;
     list-style-type: inherit !important;
+}
+article ul {
+    margin-left: 3em;
 }
 
 /**

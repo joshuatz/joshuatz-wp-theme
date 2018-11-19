@@ -1,0 +1,67 @@
+{
+    "key": "group_5bf194a7966cc",
+    "title": "Project Options",
+    "fields": [
+        {
+            "key": "field_5bf194ddfdebd",
+            "label": "Project Page is Hosted Elsewhere",
+            "name": "project_page_is_hosted_elsewhere",
+            "type": "true_false",
+            "instructions": "Check this box if you don't want to display any sort of writeup, but just take the user directly to an externally hosted project page (e.g. a Github repo URL).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5bf19561fdebe",
+            "label": "Externally Hosted Project Page URL",
+            "name": "externally_hosted_project_page_url",
+            "type": "url",
+            "instructions": "Use this for an \"externally-hosted\" project page (e.g. Github repo URL).",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bf194ddfdebd",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "projects"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1542559201
+}

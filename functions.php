@@ -66,7 +66,7 @@ function joshuatzwp_enqueue_loader() {
 add_action('wp_enqueue_scripts','joshuatzwp_enqueue_loader');
 
 // Load custom post types
-add_action('init','jtzwp_register_projects_posttype');
+add_action('init','jtwp_register_all_custom_posttypes');
 
 // Load custom taxonomies
 add_action('init','jtwp_register_all_custom_taxonomies');
@@ -82,3 +82,22 @@ function jtzwp_head_hook(){
     //
 }
 add_action('wp_head','jtzwp_head_hook');
+
+/**
+ * Hook into template_redirect for anything that needs to happen after query, but BEFORE headers are sent - e.g. redirects
+ */
+function jtwzp_template_redirect_hook(){
+    global $jtzwpHelpers;
+    // If post type = project && project is just externally hosted (e.g. no writeup stored)
+    if (get_post_type()===$jtzwpHelpers::PROJECTS_POST_TYPE && get_field('project_page_is_hosted_elsewhere')){
+        if (get_field('externally_hosted_project_page_url')){
+            wp_redirect(get_field('externally_hosted_project_page_url'));
+            exit;
+        }
+        else {
+            // For now, do nothing
+        }
+    }
+
+}
+add_action('template_redirect','jtwzp_template_redirect_hook');
