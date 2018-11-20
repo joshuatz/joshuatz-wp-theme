@@ -13,6 +13,7 @@ $themeIncPath = (get_template_directory() . '/inc');
  */
 require_once($themeIncPath . '/taxonomies.php');
 require_once($themeIncPath . '/custom-post-types.php');
+require_once($themeIncPath . '/custom-theme-settings.php');
 require_once($themeIncPath . '/helpers.php');
 
 /**
