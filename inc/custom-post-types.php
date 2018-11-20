@@ -97,7 +97,7 @@ function jtwp_register_tools_posttype(){
 		"map_meta_cap" => true,
 		"hierarchical" => false,
 		"rewrite" => array(
-			"slug" => "custom_built_tools",
+			"slug" => "custom-tools",
 			"with_front" => true
 		),
 		"menu_icon" => "dashicons-hammer",
