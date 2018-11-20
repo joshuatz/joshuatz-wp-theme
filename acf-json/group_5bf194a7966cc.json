@@ -1,11 +1,11 @@
 {
     "key": "group_5bf194a7966cc",
-    "title": "Project Options",
+    "title": "Projects \/ Tools Options",
     "fields": [
         {
             "key": "field_5bf194ddfdebd",
-            "label": "Project Page is Hosted Elsewhere",
-            "name": "project_page_is_hosted_elsewhere",
+            "label": "Full Page is Only Hosted Elsewhere",
+            "name": "full_page_is_only_hosted_elsewhere",
             "type": "true_false",
             "instructions": "Check this box if you don't want to display any sort of writeup, but just take the user directly to an externally hosted project page (e.g. a Github repo URL).",
             "required": 0,
@@ -23,8 +23,8 @@
         },
         {
             "key": "field_5bf19561fdebe",
-            "label": "Externally Hosted Project Page URL",
-            "name": "externally_hosted_project_page_url",
+            "label": "Externally Hosted Full Page URL",
+            "name": "externally_hosted_full_page_url",
             "type": "url",
             "instructions": "Use this for an \"externally-hosted\" project page (e.g. Github repo URL).",
             "required": 0,
@@ -53,6 +53,13 @@
                 "operator": "==",
                 "value": "projects"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "custom_built_tools"
+            }
         ]
     ],
     "menu_order": 0,
@@ -63,5 +70,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1542559201
+    "modified": 1542702368
 }

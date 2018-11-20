@@ -11,6 +11,7 @@ class JtzwpHelpers {
      */
     const PROJECT_TYPES_TAXONOMY_BASE = 'project_types';
     const PROJECTS_POST_TYPE = 'projects';
+    const TOOLS_POST_TYPE = 'custom_built_tools';
 
     /**
      * Constructor
