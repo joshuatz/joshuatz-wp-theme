@@ -62,6 +62,66 @@ class JtzwpHelpers {
         return $this->getTermsByName(self::PROJECT_TYPES_TAXONOMY_BASE);
     }
 
+    /**
+     * Get a custom post type singular name
+     */
+    public function getCustomPostTypeSingularName(){
+        $singularName = '';
+        if (get_post_type()){
+            $singularName = get_post_type_object(get_post_type())->labels->singular_name;
+        }
+        $singularName = ucwords($singularName);
+        return $singularName;
+    }
+
+    /**
+     * Get an icon URL path or font-awesome class to use, based on hosted code URL
+     */
+    public function codeHostIconMapper($hostURL = null){
+        $finalIconInfo = array(
+            'type' => false,
+            'value' => false,
+            'html' => ''
+        );
+        $iconFolder = '';
+        $codeHostIconMappings = array(
+            '/github/' => array(
+                'type' => 'font-awesome',
+                'value' => 'fa-github'
+            ),
+            '/codepen/' => array(
+                'type' => 'font-awesome',
+                'value' => 'fa-codepen'
+            ),
+            '/jsfiddle/' => array(
+                'type' => 'font-awesome',
+                'value' => 'fa-jsfiddle'
+            ),
+            '/bitbucket/' => array(
+                'type' => 'font-awesome',
+                'value' => 'fa-bitbucket'
+            )
+        );
+        if (isset($hostURL)){
+            $foundMatch = false;
+            foreach ($codeHostIconMappings as $key => $value) {
+                if(preg_match($key,$hostURL)){
+                    $foundMatch = true;
+                    $finalIconInfo = $value;
+                    break;
+                }
+            }          
+        }
+        // Generate HTML
+        if ($finalIconInfo['type']==='font-awesome'){
+            $finalIconInfo['html'] = '<i class="fa ' . $finalIconInfo['value'] . '" aria-hidden="true"></i>';
+        }
+        else if ($finalIconInfo['type']==='image'){
+            $finalIconInfo['html'] = '<img src="' . $iconFolder . $finalIconInfo['value'] . '">';
+        }
+        return $finalIconInfo;
+    }
+
     private function getIsDebug(){
         $debug = false;
 
@@ -70,4 +130,5 @@ class JtzwpHelpers {
 
         return $debug;
     }
+    
 }

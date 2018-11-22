@@ -56,18 +56,18 @@ function jtzwp_register_projects_posttype(){
 
 function jtwp_register_tools_posttype(){
 	$labels = array(
-		"name" => __( "Custom Built Tools", "joshuatzwp" ),
+		"name" => __( "Custom Developed Tools", "joshuatzwp" ),
 		"singular_name" => __( "Custom Built Tool", "joshuatzwp" ),
-		"menu_name" => __( "Custom Built Tools", "joshuatzwp" ),
+		"menu_name" => __( "Custom Developed Tools", "joshuatzwp" ),
 		"all_items" => __( "All Tools", "joshuatzwp" ),
 		"add_new" => __( "Add New Tool", "joshuatzwp" ),
 		"add_new_item" => __( "Add New Tool", "joshuatzwp" ),
 		"edit_item" => __( "Edit Tool", "joshuatzwp" ),
 		"new_item" => __( "New Tool", "joshuatzwp" ),
 		"view_item" => __( "View Tool", "joshuatzwp" ),
-		"view_items" => __( "View Custom Built Tools", "joshuatzwp" ),
+		"view_items" => __( "View Custom Developed Tools", "joshuatzwp" ),
 		"search_items" => __( "Search Tools", "joshuatzwp" ),
-		"not_found" => __( "No Custom Built Tools Found", "joshuatzwp" ),
+		"not_found" => __( "No Custom Developed Tools Found", "joshuatzwp" ),
 		"not_found_in_trash" => __( "No CBTs found in Trash", "joshuatzwp" ),
 		"parent_item_colon" => __( "Parent Tool", "joshuatzwp" ),
 		"featured_image" => __( "Featured Image", "joshuatzwp" ),
@@ -79,7 +79,7 @@ function jtwp_register_tools_posttype(){
 	);
 	
 	$args = array(
-		"label" => __( "Custom Built Tools", "joshuatzwp" ),
+		"label" => __( "Custom Developed Tools", "joshuatzwp" ),
 		"labels" => $labels,
 		"description" => "A place for one-off tools that I have built that are worth sharing (code pens, JSFiddles, little bookmarklets, etc.). If something took less than a day to build but more than an hour or two, that is probably a good sign it should not be a blog post, nor a project - it would fall under a tool.",
 		"public" => true,

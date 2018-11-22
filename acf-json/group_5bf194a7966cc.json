@@ -44,6 +44,22 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_5bf600f770f1f",
+            "label": "Externally Hosted Code URL",
+            "name": "externally_hosted_code_url",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -70,5 +86,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1542702368
+    "modified": 1542848789
 }

@@ -42,6 +42,11 @@ function joshuatzwp_styles() {
     wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array('materialize-style'),false,'all');
 }
 
+function joshuatzwp_styles_deferred(){
+    // Font Awesome - defer OK
+    wp_enqueue_style('font-awesome-style','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',array(),false,'all');
+}
+
 function joshuatzwp_scripts() {
     global $themeLibURL;
     global $themeIncPath;
@@ -53,18 +58,31 @@ function joshuatzwp_scripts() {
     wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','materialize-js'),false,true);
 }
 
-function joshuatzwp_enqueue_loader() {
+function joshuatzwp_scripts_deferred(){
+    //
+}
+
+function joshuatzwp_enqueue_loader_head() {
     // Load styles
     joshuatzwp_styles();
     // Load scripts
     joshuatzwp_scripts();
 }
 
+function joshuatzwp_enqueue_loader_deferred(){
+    // Load styles
+    joshuatzwp_styles_deferred();
+    // Load scripts
+    joshuatzwp_scripts_deferred();
+}
+
 /**
  * Actual loader section
  */
 // Load scripts and styles
-add_action('wp_enqueue_scripts','joshuatzwp_enqueue_loader');
+add_action('wp_enqueue_scripts','joshuatzwp_enqueue_loader_head');
+// Load scripts and styles - DEFERRED
+add_action('wp_footer','joshuatzwp_enqueue_loader_deferred');
 
 // Load custom post types
 add_action('init','jtwp_register_all_custom_posttypes');
@@ -90,15 +108,16 @@ add_action('wp_head','jtzwp_head_hook');
 function jtwzp_template_redirect_hook(){
     global $jtzwpHelpers;
     // If post type = (project|tool) && (project|tool) is just externally hosted (e.g. no writeup stored)
-    if ((get_post_type()===$jtzwpHelpers::PROJECTS_POST_TYPE || get_post_type()===$jtzwpHelpers::TOOLS_POST_TYPE) && get_field('full_page_is_only_hosted_elsewhere')){
-        if (get_field('externally_hosted_full_page_url')){
-            wp_redirect(get_field('externally_hosted_full_page_url'));
-            exit;
-        }
-        else {
-            // For now, do nothing
+    if (is_singular()){
+        if ((get_post_type()===$jtzwpHelpers::PROJECTS_POST_TYPE || get_post_type()===$jtzwpHelpers::TOOLS_POST_TYPE) && get_field('full_page_is_only_hosted_elsewhere')){
+            if (get_field('externally_hosted_full_page_url')){
+                wp_redirect(get_field('externally_hosted_full_page_url'));
+                exit;
+            }
+            else {
+                // For now, do nothing
+            }
         }
     }
-
 }
 add_action('template_redirect','jtwzp_template_redirect_hook');

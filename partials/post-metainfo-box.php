@@ -4,13 +4,16 @@
  * Current design uses Materialize cards
  */
 ?>
+<?php
+    global $jtzwpHelpers;
+?>
 <div class="expandablePostDetailsSection">
     <ul class="collapsible">
         <li>
             <div class="collapsible-header">
                 <i class="material-icons">info</i>
-                <div class="whenExpanded">Full <?php echo ucwords(get_post_type()); ?> Details</div>
-                <div class="whenCollapsed">Click for Full <?php echo ucwords(get_post_type()); ?> Details</div>
+                <div class="whenExpanded">Full <?php echo $jtzwpHelpers->getCustomPostTypeSingularName(); ?> Details</div>
+                <div class="whenCollapsed">Click for Full <?php echo $jtzwpHelpers->getCustomPostTypeSingularName(); ?> Details</div>
             </div>
             <div class="collapsible-body">
                 <div class="fullPostDetailsWrapper">
