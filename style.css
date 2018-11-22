@@ -421,7 +421,7 @@ ul.collapsible li.active .whenCollapsed {
 }
 
 /**
-* cards
+* Materialize Cards - Special Fixed Footers
 */
 .card .fixed-footer {
     text-align: center;
@@ -445,4 +445,7 @@ ul.collapsible li.active .whenCollapsed {
 }
 .card .fixed-footer .col > .btn {
     width: 100%;
+}
+.card .fixed-footer .btn, .card .fixed-footer a>i {
+    font-size: x-large !important;
 }

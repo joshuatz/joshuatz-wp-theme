@@ -90,8 +90,8 @@ add_action('init','jtwp_register_all_custom_posttypes');
 // Load custom taxonomies
 add_action('init','jtwp_register_all_custom_taxonomies');
 if ($debug){
-    // REMOVE ME
-    flush_rewrite_rules(false);
+    // REMOVEME
+    //flush_rewrite_rules(false);
 }
 
 /**
