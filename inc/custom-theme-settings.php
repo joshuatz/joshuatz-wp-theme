@@ -24,13 +24,29 @@ function jtzwp_initial_settings_api_init(){
 		'jtzwp_options_page'
 	);
 
-	add_settings_field( 
-		'jtzwp_ga_gauid', 
-		__( 'Google Analytics GA ID', 'wordpress' ), 
-		'jtwzp_text_field_ga_gauid_render', 
-		'jtzwp_options_page', 
-		'jtzwp_general_settings_section' 
-	);
+    // Google Analytics GAUID
+	add_settings_field(
+		'jtzwp_ga_gauid',
+		__( 'Google Analytics GA ID', 'wordpress' ),
+		'jtzwp_generic_text_field_render',
+		'jtzwp_options_page',
+        'jtzwp_general_settings_section',
+        array(
+            'jtzwp_ga_gauid'
+        )
+    );
+    
+    // Disqus commenting subdomain
+    add_settings_field(
+        'jtzwp_disqus_subdomain',
+        __( 'Disqus Custom Subdomain','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_general_settings_section',
+        array(
+            'jtzwp_disqus_subdomain'
+        )
+    );
 }
 // Attach settings init function to wp settings init
 add_action('admin_init','jtzwp_initial_settings_api_init');
@@ -54,11 +70,16 @@ function jtzwp_options_page_html(){
 /**
  * HTML generation for subfields
  */
-function jtwzp_text_field_ga_gauid_render(){
+
+/**
+ * Re-usable HTML generation for subfield - textbox type
+ * When using with add_setting_field(), make sure 6th argument to that function (the args option) is array('YOUR_SETTING_NAME'), because this will get passed as $args here
+ */
+function jtzwp_generic_text_field_render($args){
     $options = get_option('jtzwp_settings');
-    ?>
-    <input type='text' name='jtzwp_settings[jtzwp_ga_gauid]' value='<?php echo $options['jtzwp_ga_gauid']; ?>'>
-	<?php
+    $currOptionName = $args[0];
+    $currOptionvalue = $options[$currOptionName];
+    echo '<input type="text" id="'. $currOptionName .'" name="jtzwp_settings['. $currOptionName .']" value="' . $currOptionvalue . '" />';
 }
 
 /**

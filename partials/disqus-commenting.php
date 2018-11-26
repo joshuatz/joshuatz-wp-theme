@@ -1,0 +1,5 @@
+<?php
+/**
+ * Disqus commenting section
+ */
+?>
