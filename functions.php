@@ -45,6 +45,8 @@ function joshuatzwp_styles() {
 function joshuatzwp_styles_deferred(){
     // Font Awesome - defer OK
     wp_enqueue_style('font-awesome-style','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',array(),false,'all');
+    // Google Fonts - defer OK
+    wp_enqueue_style('google-fonts','https://fonts.googleapis.com/css?family=Lato',array(),false,'all');
 }
 
 function joshuatzwp_scripts() {

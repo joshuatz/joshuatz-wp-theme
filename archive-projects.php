@@ -23,16 +23,22 @@ get_header(); ?>
                     <div id="<?php echo the_ID(); ?>" class="projectItem">
                         <h2><?php echo the_title(); ?></h2>
                         <!-- Project Link Area -->
-                        <a href="<?php echo the_permalink(); ?>" target="_self">
+                        <div>
                             <?php if($hasFeaturedImage): ?>
-                                <div class="projectLinkClickPrefix">Click here or the image below for the full project page!</div>
-                                <img class="projectLinkClickArea" src="<?php echo the_post_thumbnail_url('medium'); ?>" >
+                                <a href="<?php echo the_permalink(); ?>" target="_self" class="projectLinkWrapper">
+                                    <div class="projectLinkClickPrefix">Click here or the image below for the full project page!</div>
+                                </a>
+                                <a href="<?php echo the_permalink(); ?>" target="_self" class="projectLinkWrapper">
+                                    <img class="projectLinkClickArea" src="<?php echo the_post_thumbnail_url('medium'); ?>" >
+                                </a>
                             <?php else: ?>
                                 <div class="projectLinkClickArea">
-                                    <h3 style="padding:10px;">Click for Project Details!</h3>
+                                    <a href="<?php echo the_permalink(); ?>" target="_self" class="projectLinkWrapper">
+                                        <h3 style="padding:10px;">Click for Project Details!</h3>
+                                    </a>
                                 </div>
                             <?php endif; ?>
-                        </a>
+                        </div>
                         <!-- Project Excerpt Area -->
                         <?php if($hasExcerpt): ?>
                             <div class="projectExcerptWrapper">

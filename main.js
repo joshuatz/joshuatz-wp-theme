@@ -40,13 +40,16 @@
             cardReveal.css({'display' : cardRevealInitialDisplay});
         });
     }
-    materializeAutoCardHeight();
     if ($('div.card > .card-reveal').length > 0){
         $(window).on('resize',function(){
             materializeAutoCardHeight();
         });
     }
-    
+
+    // Custom materialize init stuff
+    $(document).ready(function(){
+        materializeAutoCardHeight();
+    });
 })(jQuery,M);
 
 /**

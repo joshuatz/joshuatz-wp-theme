@@ -453,9 +453,11 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 		</div>
 		<div class='nav-jtcollapse jtcollapse'>
 		  <ul class='nav' id='menu-primary'>
+            <?php if(!is_front_page()): ?>
 			<li>
 			  <a href='/'>Home</a>
-			</li>
+            </li>
+            <?php endif; ?>
 			<li>
 			  <a href="https://www.linkedin.com/in/joshuatzucker" target="_blank" id="linkedIn">About / <i class="fa fa-linkedin-square" style="font-size:large"></i>
 				</a>

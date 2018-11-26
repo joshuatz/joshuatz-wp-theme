@@ -122,6 +122,63 @@ class JtzwpHelpers {
         return $finalIconInfo;
     }
 
+    public function getHtmlFromRaw($raw){
+        $finalHtml = $this->parseHtmlForPostBody($raw);
+        return $finalHtml;
+    }
+
+    public function getHtmlFromFile($path){
+        $fileContents = file_get_contents($path);
+        $finalHtml = false;
+        if ($fileContents!==false && $fileContents!==''){
+            $finalHtml = $this->parseHtmlForPostBody($fileContents);
+        }
+        return $finalHtml;
+    }
+
+    public function parseHtmlForPostBody($html){
+        $processedHTML = (object) array(
+            'body' => '',
+            'head' => ''
+        );
+        $hasExplicitHead = false;
+        $hasExplicityBody = false;
+        $headInnerHTML = '';
+        $bodyInnerHTML = '';
+        // First, determime structure of contents
+        $matches = array();
+        if (preg_match('/<head>(([\r\n\.]|.)*)<\/head>/',$html,$matches)){
+            $hasExplicitHead = true;
+            $headInnerHTML = $matches[1];
+            // Strip <head></head> out
+        }
+        // Check for explicit body section
+        $matches = array();
+        if (preg_match('/<body>(([\r\n\.]|.)*)<\/body>/',$html,$matches)){
+            $hasExplicityBody = true;
+            $bodyInnerHTML = $matches[1];
+        }
+        else {
+            // No explicit <body></body> section defined, so just grab eveything, but avoid <head></head>
+            if ($hasExplicitHead){
+                // Grab everything from end of head to bottom of page
+                $matches = array();
+                if(preg_match('/(?:<\/head>){1}(([\r\n]|.)*)$/',$html,$matches)){
+                    $bodyInnerHTML = $matches[1];
+                }
+            }
+            else {
+                // No <head></head> section, so just grab everything
+                $bodyInnerHTML = $html;
+            }
+        }
+
+        // Configure return info
+        $processedHTML->body = $bodyInnerHTML;
+        $processedHTML->head = $headInnerHTML;
+        return $processedHTML;
+    }
+
     private function getIsDebug(){
         $debug = false;
 

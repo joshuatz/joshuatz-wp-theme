@@ -91,7 +91,7 @@ body {
 #mainmenu {
 	width:100%;
 	text-align:center;
-	padding-top: 40px;
+	padding-top: 20px;
 }
 /* Bob */
 @-webkit-keyframes hvr-bob {
@@ -348,8 +348,12 @@ ul.nav a#linkedIn {
 .projectItem {
 	background-color:#A3BFE1;
 	padding-bottom:30px;
-    padding-top:30px;
-    margin-bottom: 10px;
+    padding-top:10px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    border-radius: 2px;
 }
 .projectItem a.projectLinkWrapper {
     width: 70%;
