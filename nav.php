@@ -3,7 +3,11 @@
     global $jtzwpHelpers;
     $projectTerms = $jtzwpHelpers->getProjectTypesTerms();
 ?>
-
+<?php
+    // Easy nav settings
+    $navBreakpoint = 980;
+    $navBreakpointPx = '' . $navBreakpoint . 'px';
+?>
 <!--Ripped from original site-->
 <style>
 .nav{margin-left:0;margin-bottom:20px;list-style:none}
@@ -382,7 +386,6 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 .jtcontainer:after{clear:both}
 #header{margin-right:30px;float:left}
 #header,#header a{color:#FFF}
-#header h1{font-weight:normal;line-height:20px;margin-top:20px;margin-left:30px}
 #header img{margin-top:13px;width:auto;max-height:60px}
 #side-bar{width:300px;margin-left:30px}
 #content-wrapper{margin-bottom:50px;padding-top:125px}
@@ -501,10 +504,8 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
     .span9{width:840px}
     .share-story-jtcontainer small{margin:19px;position:static}
     .share-story{margin:13px 0 0}
-    .entry-video iframe,.entry-video object{min-height:472.5px}
 }
 @media (min-width: 768px) and (max-width: 979px) {
-    .entry-video iframe,.entry-video object{min-height:472.5px}
     #primary,.site-footer .jtcontainer{padding-left:20px;padding-right:20px}
     #masthead{position:fixed}
     .bl_instagram,.bl_instagram .widget-body{width:100%!important}
@@ -578,7 +579,6 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
     .jtnavbar .brand{padding-left:5px;padding-right:5px}
     .bl_background{display:none}
 }
-
 </style>
 
 <div id='masthead' role='banner' class="mainNavContainerWrapper">
@@ -628,21 +628,6 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
                         <a href="<?php echo get_term_link($projectTerm);?>"><?php echo $projectTerm->name; ?></a>
                     </li>
                 <?php endforeach; ?>
-				<!--<li class="dropdown">
-				  <a href='/electronics'>Electronics</a>
-				</li>
-				<li class="dropdown">
-				  <a href='/marketing'>Marketing</a>
-				</li>
-				<li class="dropdown">
-				  <a href='/web-stuff'>Web Stuff</a>
-				</li>
-				<li class="dropdown">
-				  <a href='/writing'>Writing</a>
-				</li>
-				<li>
-				  <a href='/other'>Other</a>
-				</li>-->
 			  </ul>
 			</li>
 			<li>
@@ -651,32 +636,32 @@ border:none; -moz-box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.1) inset; -webkit-box-s
 		  </ul>
 		</div>
         <div id="nav-search-wrapper">
-		<div class='bl_search nav-jtcollapse jtcollapse'>
-          <script>
-          (function() {
-            var cx = '006023929046275200110:crr5g9pbyae';
-            var gcse = document.createElement('script');
-            gcse.type = 'text/javascript';
-            gcse.async = true;
-            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(gcse, s);
-          })();
-        </script>
-        <style>
-            .gsc-control-cse.gsc-control-cse-en {
-                border-color: transparent !Important;
-                background-color: transparent !Important;
-            }
-            form.gsc-search-box > table {
-                border-collapse: separate;
-            }
-            .cse .gsc-control-cse, .gsc-control-cse {
-                padding: 1px;
-            }
-        </style>
-        <gcse:search></gcse:search>
-		</div>
+            <div class='bl_search nav-jtcollapse jtcollapse'>
+            <script>
+            (function() {
+                var cx = '006023929046275200110:crr5g9pbyae';
+                var gcse = document.createElement('script');
+                gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+            })();
+            </script>
+            <style>
+                .gsc-control-cse.gsc-control-cse-en {
+                    border-color: transparent !Important;
+                    background-color: transparent !Important;
+                }
+                form.gsc-search-box > table {
+                    border-collapse: separate;
+                }
+                .cse .gsc-control-cse, .gsc-control-cse {
+                    padding: 1px;
+                }
+            </style>
+            <gcse:search></gcse:search>
+            </div>
         </div>
 	  </div>
 	</div>
@@ -740,69 +725,6 @@ function loophalaman(a) {
         b = "";
     if (g)
         g.innerHTML = '<div class="pagenavi">' + b + "</div>"
-}
-/* old search function from blogger
-function hitungtotaldata(a) {
-    var b = a.feed;
-    var c = parseInt(b.openSearch$totalResults.$t, 10);
-    loophalaman(c)
-}
-*/
-/* old search function from blogger
-function I() {
-    var a = C;
-    if (a.indexOf("/search/label/") != -1)
-        if (a.indexOf("?updated-max") != -1)
-            F = a.substring(a.indexOf("/search/label/") + 14, a.indexOf("?updated-max"));
-        else
-            F = a.substring(a.indexOf("/search/label/") + 14, a.indexOf("?&max"));
-    if (a.indexOf("?q=") == -1 && a.indexOf(".html") == -1)
-        if (a.indexOf("/search/label/") == -1) {
-            D = "page";
-            if (C.indexOf("#PageNo=") != -1)
-                B = C.substring(C.indexOf("#PageNo=") + 8, C.length);
-            else
-                B = 1;
-            document.write('<script src="' + G + 'feeds/posts/summary?max-results=1&alt=json-in-script&callback=hitungtotaldata">\x3c/script>')
-        } else {
-            D = "label";
-            if (a.indexOf("&max-results=") == -1)
-                posts = 20;
-            if (C.indexOf("#PageNo=") != -1)
-                B = C.substring(C.indexOf("#PageNo=") + 8, C.length);
-            else
-                B = 1;
-            document.write('<script src="' + G + "feeds/posts/summary/-/" + F + '?alt=json-in-script&callback=hitungtotaldata&max-results=1" >\x3c/script>')
-        }
-}
-*/
-function redirectpage(a) {
-    jsonstart = (a - 1) * posts;
-    H = a;
-    var b = document.getElementsByTagName("head")[0];
-    var c = document.createElement("script");
-    c.type = "text/javascript";
-    c.setAttribute("src", G + "feeds/posts/summary?start-index=" + jsonstart + "&max-results=1&alt=json-in-script&callback=finddatepost");
-    b.appendChild(c)
-}
-function redirectlabel(a) {
-    jsonstart = (a - 1) * posts;
-    H = a;
-    var b = document.getElementsByTagName("head")[0];
-    var c = document.createElement("script");
-    c.type = "text/javascript";
-    c.setAttribute("src", G + "feeds/posts/summary/-/" + F + "?start-index=" + jsonstart + "&max-results=1&alt=json-in-script&callback=finddatepost");
-    b.appendChild(c)
-}
-function finddatepost(a) {
-    post = a.feed.entry[0];
-    var b = post.published.$t.substring(0, 19) + post.published.$t.substring(23, 29);
-    var c = encodeURIComponent(b);
-    if (D == "page")
-        var d = "/search?updated-max=" + c + "&max-results=" + posts + "#PageNo=" + H;
-    else
-        var d = "/search/label/" + F + "?updated-max=" + c + "&max-results=" + posts + "#PageNo=" + H;
-    location.href = d
 }
 !function(a) {
     a(function() {
@@ -1331,60 +1253,6 @@ function finddatepost(a) {
     }
 }(window.jQuery),
 !function(a) {
-    var b = function(a, b) {
-        this.init("popover", a, b)
-    }
-    ;
-    b.prototype = a.extend({}, a.fn.tooltip.Constructor.prototype, {
-        constructor: b,
-        setContent: function() {
-            var a = this.tip()
-              , b = this.getTitle()
-              , c = this.getContent();
-            a.find(".popover-title")[this.options.html ? "html" : "text"](b),
-            a.find(".popover-content")[this.options.html ? "html" : "text"](c),
-            a.removeClass("fade top bottom left right in")
-        },
-        hasContent: function() {
-            return this.getTitle() || this.getContent()
-        },
-        getContent: function() {
-            var a, b = this.$element, c = this.options;
-            return a = (typeof c.content == "function" ? c.content.call(b[0]) : c.content) || b.attr("data-content"),
-            a
-        },
-        tip: function() {
-            return this.$tip || (this.$tip = a(this.options.template)),
-            this.$tip
-        },
-        destroy: function() {
-            this.hide().$element.off("." + this.type).removeData(this.type)
-        }
-    });
-    var c = a.fn.popover;
-    a.fn.popover = function(c) {
-        return this.each(function() {
-            var d = a(this)
-              , e = d.data("popover")
-              , f = typeof c == "object" && c;
-            e || d.data("popover", e = new b(this,f)),
-            typeof c == "string" && e[c]()
-        })
-    }
-    ,
-    a.fn.popover.Constructor = b,
-    a.fn.popover.defaults = a.extend({}, a.fn.tooltip.defaults, {
-        placement: "right",
-        trigger: "click",
-        content: "",
-        template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-    }),
-    a.fn.popover.noConflict = function() {
-        return a.fn.popover = c,
-        this
-    }
-}(window.jQuery),
-!function(a) {
     var b = function(b, c) {
         this.options = a.extend({}, a.fn.affix.defaults, c),
         this.$window = a(window).on("scroll.affix.data-api", a.proxy(this.checkPosition, this)).on("click.affix.data-api", a.proxy(function() {
@@ -1625,41 +1493,6 @@ function finddatepost(a) {
     })
 }(window.jQuery);
 jQuery(function() {
-    jQuery('#searchform input[type="text"]').val("Search...");
-    jQuery('#searchform input[type="text"]').focus(function() {
-        if (jQuery(this).val() == "Search...")
-            jQuery(this).val("")
-    });
-    jQuery('#searchform input[type="text"]').blur(function() {
-        if (jQuery(this).val() == "")
-            jQuery(this).val("Search...")
-    });
-    jQuery(".tips").tooltip();
-    jQuery(".bl_popover").popover();
-    var d = jQuery(".entry-video iframe, .entry-video object, .related-video iframe, .related-video iframe")
-      , $fluidEl = jQuery("#content");
-    $fluidElRelated = jQuery("#related-posts > div").first();
-    d.each(function() {
-        var a = this.height === "" ? 473 : this.height;
-        var b = this.width === "" ? 840 : this.width;
-        jQuery(this).attr("data-aspectRatio", a / b).removeAttr("height").removeAttr("width")
-    });
-    jQuery(window).resize(function() {
-        var b = $fluidEl.width();
-        var c = $fluidElRelated.width();
-        d.each(function() {
-            var a = jQuery(this);
-            if (a.parent().hasClass("related-header"))
-                a.width(c).height(c * a.attr("data-aspectRatio"));
-            else
-                a.width(b).height(b * a.attr("data-aspectRatio"))
-        })
-    }).resize()
-});
-function social_share(a) {
-    window.open(a, "fbshare", "height=450,width=760,resizable=0,toolbar=0,menubar=0,status=0,location=0,scrollbars=0")
-}
-jQuery(function() {
     if (jQuery(".above_header").length > 0)
         var a = jQuery(".above_header").height();
     else
@@ -1690,3 +1523,30 @@ jQuery(function() {
     })
 })(jQuery);
 </script>
+
+<style>
+    <?php // If width is SMALLER than breakpoint ?>
+    @media (max-width: <?php echo $navBreakpointPx; ?>){
+        #masthead .titlewrapper h1.title {
+            font-weight:normal;
+            line-height:20px;
+            margin-top:20px;
+            margin-left:30px;
+            font-size: 36px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        #header-inner > .titlewrapper {
+            position: relative;
+        }
+    }
+
+    <?php // If width is LARGER than breakpoint ?>
+    @media (min-width: <?php echo $navBreakpointPx; ?>){
+        #masthead .titlewrapper h1.title {
+            font-size : 44px;
+            margin-top: 7px;
+        }
+    }
+</style>

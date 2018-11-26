@@ -209,7 +209,7 @@ body {
 }
 .menubutton{
 	margin-right:30px;
-	width:20%;
+	/* width:20%; */
 	min-width:90px;
 	margin-bottom:30px;
 }
@@ -220,6 +220,14 @@ p {
     font-family: 'Lato',sans-serif;
     font-size: 18px;
     font-weight: 300;
+}
+
+/* Default Font */
+p,body,h1,h2,h3,h4,h5,h6 {
+    font-family: 'Lato',sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: bold;
 }
 /*#main_post_wrapper, #main_content, #maincontent{*/
 .entry-content{
@@ -238,12 +246,6 @@ p {
 	width:100%;
 	text-align:center;
 	padding-top: 40px;
-}
-.menubutton{
-	margin-right:30px;
-	width:20%;
-	min-width:90px;
-	margin-bottom:30px;
 }
 
 /*
@@ -337,7 +339,7 @@ ul.nav a#linkedIn {
     background: white;
     padding: 10px;
     border-radius: 8px;
-    margin: 10px auto;
+    margin: 10px;
 }
 .projectListingTitle {
     font-size: 24px;
@@ -349,14 +351,21 @@ ul.nav a#linkedIn {
     padding-top:30px;
     margin-bottom: 10px;
 }
+.projectItem a.projectLinkWrapper {
+    width: 70%;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 .projectItem a > .projectLinkClickArea {
-    max-width: 95%;
+    width: 100%;
+    max-width: 410px;
     height: auto;
-    max-height: 300px;
     margin-left: auto;
     margin-right: auto;
 }
-.projectItem a > .projectLinkClickArea:hover{
+.projectItem .projectLinkClickArea:hover,.projectItem .projectLinkClickPrefix:hover{
 	outline-color: rgba(25,0,252,0.5);
 	outline-style:solid;
 	outline-width:20px;
@@ -374,12 +383,14 @@ ul.nav a#linkedIn {
 }
 .projectLinkClickPrefix {
     background-color: white;
-    width: 50%;
-    max-width: 300px;
+    width: 100%;
+    /* max-width: 300px; */
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
     margin-bottom: 7px;
+    font-size: 20px;
+    padding: 20px;
 }
 /**
 * SPECIAL: Materialize Reset Stuff
