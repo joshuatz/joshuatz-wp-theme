@@ -15,10 +15,7 @@
 .nav>li>a:hover,.nav>li>a:focus{text-decoration:none;background-color:#eee}
 .nav>li>a>img{max-width:none}
 .nav>.pull-right{float:right}
-.nav-header{display:block;padding:3px 15px;font-size:11px;font-weight:bold;line-height:20px;color:#999;text-shadow:0 1px 0 rgba(255,255,255,0.5);text-transform:uppercase}
-.nav li+.nav-header{margin-top:9px}
 .nav-list{padding-left:15px;padding-right:15px;margin-bottom:0}
-.nav-list>li>a,.nav-list .nav-header{margin-left:-15px;margin-right:-15px;text-shadow:0 1px 0 rgba(255,255,255,0.5)}
 .nav-list>li>a{padding:3px 15px}
 .nav-list>.active>a,.nav-list>.active>a:hover,.nav-list>.active>a:focus{color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,0.2);background-color:#08c}
 .nav-list [class^="icon-"],.nav-list [class*=" icon-"]{margin-right:2px}
@@ -156,7 +153,6 @@
 .dropdown-submenu:hover>a:after{border-left-color:#fff}
 .dropdown-submenu.pull-left{float:none}
 .dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px}
-.dropdown .dropdown-menu .nav-header{padding-left:20px;padding-right:20px}
 .typeahead{z-index:1051;margin-top:2px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
 .accordion{margin-bottom:20px}
 .accordion-group{margin-bottom:2px;border:1px solid #e5e5e5;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
@@ -164,10 +160,6 @@
 .accordion-heading .accordion-toggle{display:block;padding:8px 15px}
 .accordion-toggle{cursor:pointer}
 .accordion-inner{padding:9px 15px;border-top:1px solid #e5e5e5}
-.well{min-height:20px;padding:19px;margin-bottom:20px;background-color:#f5f5f5;border:1px solid #e3e3e3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.05);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.05);box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}
-.well blockquote{border-color:#ddd;border-color:rgba(0,0,0,0.15)}
-.well-large{padding:24px;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px}
-.well-small{padding:9px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}
 .close{float:right;font-size:20px;font-weight:bold;line-height:20px;color:#000;text-shadow:0 1px 0 #fff;opacity:0.2;filter:alpha(opacity=20)}
 .close:hover,.close:focus{color:#000;text-decoration:none;cursor:pointer;opacity:0.4;filter:alpha(opacity=40)}
 button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-appearance:none}
@@ -229,8 +221,7 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
         padding-top: 0;
     }
 
-    .jtnavbar-fixed-top,
-    .jtnavbar-fixed-bottom {
+    .jtnavbar-fixed-top,.jtnavbar-fixed-bottom {
         position: static;
     }
 
@@ -277,11 +268,6 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 
     .nav-jtcollapse .nav>.divider-vertical {
         display: none;
-    }
-
-    .nav-jtcollapse .nav .nav-header {
-        color: #777777;
-        text-shadow: none;
     }
 
     .nav-jtcollapse .nav>li>a,
@@ -395,7 +381,6 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
     .jtnavbar-inverse .nav-jtcollapse .nav > li > a:hover,.jtnavbar-inverse .nav-jtcollapse .nav > li > a:focus,.jtnavbar-inverse .nav-jtcollapse .dropdown-menu a:hover,.jtnavbar-inverse .nav-jtcollapse .dropdown-menu a:focus{background:transparent}
     .nav-jtcollapse .nav > li > a,.nav-jtcollapse .dropdown-menu a{font-weight:normal;padding:12px 15px;margin:0}
     .nav-jtcollapse .open > .dropdown-menu{background:#212833;margin:0}
-    .instagram-images-jtcontainer{width:100%;overflow-x:auto}
     #footer-body > [class*="span"]{margin-bottom:20px}
 }
 @media (max-width: 767px) {
@@ -462,19 +447,22 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 			  <a href="https://www.linkedin.com/in/joshuatzucker" target="_blank" id="linkedIn">About / <i class="fa fa-linkedin-square" style="font-size:large"></i>
 				</a>
 			</li>
-            <li>
-                <a href="/custom-tools/">Custom Developed Tools</a>
-            </li>
 			<li class='dropdown'>
-			  <a class='dropdown-toggle' data-toggle='dropdown' href='/projects/'>Projects</a>
+			  <a class='dropdown-toggle' data-toggle='dropdown' href='#'>Projects</a>
 			  <ul class='dropdown-menu'>
+                <li class="dropdown">
+                    <a href="/projects/">All</a>
+                </li>
                 <?php foreach($projectTerms as $projectTerm): ?>
                     <li class="dropdown">
-                        <a href="<?php echo get_term_link($projectTerm);?>"><?php echo $projectTerm->name; ?></a>
+                        <a href="<?php echo get_term_link($projectTerm);?>">|--> <?php echo $projectTerm->name; ?></a>
                     </li>
                 <?php endforeach; ?>
 			  </ul>
-			</li>
+            </li>
+            <li>
+                <a href="/custom-tools/">Custom Developed Tools</a>
+            </li>
 			<li>
 			  <a href='mailto:joshuatz.com@gmail.com' ga-on="click,auxclick,contextmenu", ga-event-category="Social" ga-event-label="Email">Contact</a>
 			</li>

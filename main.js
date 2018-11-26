@@ -56,5 +56,8 @@
  * Rest of stuff
  */
 (function($,Materialize){
-
+    $(document).ready(function(){
+        // wow.js init
+        new WOW().init();
+    });
 })(jQuery,M);
