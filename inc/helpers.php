@@ -182,12 +182,23 @@ class JtzwpHelpers {
     }
 
     private function getIsDebug(){
-        $debug = false;
-
-        // TODO
-        $debug = true;
-
+        $debug = ($this->getIsDebugDomain()||$this->getIsDebugUser());
         return $debug;
+    }
+
+    private function getIsDebugDomain(){
+        $hostName = (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : gethostname());
+        return preg_match('/\.test$/',$hostName);
+    }
+
+    private function getIsDebugUser(){
+        $user = wp_get_current_user();
+        if ($user && $user->roles[0]==='administrator'){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
 }
