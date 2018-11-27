@@ -10,7 +10,7 @@
 $hasValidDisqus = false;
 $hasNoDisqus = false;
 $disqusCustomSubdomain = get_option('jtzwp_settings')['jtzwp_disqus_subdomain'];
-if (isset($disqusCustomSubdomain) && preg_match('/[^\.]+\.disqus\.com/',$jtzwp_disqus_subdomain)){
+if (isset($disqusCustomSubdomain) && preg_match('/[^\.]+\.disqus\.com/',$disqusCustomSubdomain)){
     $hasValidDisqus = true;
 }
 else if (!isset($disqusCustomSubdomain) || $disqusCustomSubdomain===''){

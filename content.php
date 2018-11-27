@@ -22,6 +22,7 @@
 		?>
 	</header><!-- .entry-header -->
 
+	<!-- partials/post-metainfo-box -->
 	<?php get_template_part('partials/post-metainfo-box'); ?>
 
 	<div class="entry-content">
@@ -31,7 +32,11 @@
 				__( 'Continue reading %s', 'twentyfifteen' ),
 				the_title( '<span class="screen-reader-text">', '</span>', false )
 			) );
+			?>
 
+			<?php get_template_part('partials/post-customhtml-echo'); ?>
+
+			<?php
 			wp_link_pages( array(
 				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfifteen' ) . '</span>',
 				'after'       => '</div>',

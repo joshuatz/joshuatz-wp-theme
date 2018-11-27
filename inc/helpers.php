@@ -139,7 +139,8 @@ class JtzwpHelpers {
     public function parseHtmlForPostBody($html){
         $processedHTML = (object) array(
             'body' => '',
-            'head' => ''
+            'head' => '',
+            'combo' => ''
         );
         $hasExplicitHead = false;
         $hasExplicityBody = false;
@@ -147,9 +148,9 @@ class JtzwpHelpers {
         $bodyInnerHTML = '';
         // First, determime structure of contents
         $matches = array();
-        if (preg_match('/<head>(([\r\n\.]|.)*)<\/head>/',$html,$matches)){
+        if (preg_match_all('/<head>(.*)<\/head>/mis',$html,$matches)){
             $hasExplicitHead = true;
-            $headInnerHTML = $matches[1];
+            $headInnerHTML = $matches[1][0];
             // Strip <head></head> out
         }
         // Check for explicit body section
@@ -176,6 +177,7 @@ class JtzwpHelpers {
         // Configure return info
         $processedHTML->body = $bodyInnerHTML;
         $processedHTML->head = $headInnerHTML;
+        $processedHTML->combo = $headInnerHTML . '<br\>' . $bodyInnerHTML;
         return $processedHTML;
     }
 
