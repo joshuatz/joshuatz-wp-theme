@@ -7,6 +7,32 @@ Version: 0.0.1
 Tags: customized
 Text Domain: joshuatzwp
 */
+
+/** Theme globals - reusable color classes */
+.jtzwp-salmon {
+    background-color: #F69087;
+    color: white;
+}
+.jtzwp-red {
+    background-color: #dd614a;
+    color: white;
+}
+.jtzwp-aqua {
+    background-color: #85CCB1;
+}
+.jtzwp-blue,.jtzwp-lightblue {
+    background-color: #A3BFE1;
+}
+.jtzwp-green {
+    background-color: #B0CB7A;
+    color: #2E3641;
+}
+.jtzwp-dark,.jtzwp-darkblue {
+    background-color: #2E3641;
+}
+
+
+/** Nav stuff */
 div#navbarheader {
     background: #2E3641;
     font-size: 1.7em;
@@ -423,7 +449,13 @@ ul.collapsible li.active .whenExpanded {
 ul.collapsible li.active .whenCollapsed {
     display: none;
 }
-
+/** Horizontal Align */
+.halign {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: inherit !important;
+    display: block !important;
+}
 /**
 * post-metainfo-box aka Full Post Details Expandable Card
 */
