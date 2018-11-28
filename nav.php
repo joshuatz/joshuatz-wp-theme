@@ -470,32 +470,33 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 		</div>
         <div id="nav-search-wrapper">
             <div class='bl_search nav-jtcollapse jtcollapse'>
-            <script>
-            (function() {
-                var cx = '006023929046275200110:crr5g9pbyae';
-                var gcse = document.createElement('script');
-                gcse.type = 'text/javascript';
-                gcse.async = true;
-                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(gcse, s);
-            })();
-            </script>
-            <style>
-                .gsc-control-cse.gsc-control-cse-en {
-                    border-color: transparent !Important;
-                    background-color: transparent !Important;
-                }
-                form.gsc-search-box > table {
-                    border-collapse: separate;
-                }
-                .cse .gsc-control-cse, .gsc-control-cse {
-                    padding: 1px;
-                }
-            </style>
-            <gcse:search></gcse:search>
+                <script>
+                    (function() {
+                        var cx = '006023929046275200110:crr5g9pbyae';
+                        var gcse = document.createElement('script');
+                        gcse.type = 'text/javascript';
+                        gcse.async = true;
+                        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(gcse, s);
+                    })();
+                </script>
+                <style>
+                    .gsc-control-cse.gsc-control-cse-en {
+                        border-color: transparent !Important;
+                        background-color: transparent !Important;
+                    }
+                    form.gsc-search-box > table {
+                        border-collapse: separate;
+                    }
+                    .cse .gsc-control-cse, .gsc-control-cse {
+                        padding: 1px;
+                    }
+                </style>
+                <gcse:search></gcse:search>
             </div>
         </div>
+        <div class="fullHeightEnd" style="height:100%; width:1px;"></div>
 	  </div>
 	</div>
   </div>
@@ -686,24 +687,7 @@ var G = "/", C = location.href, H, D, B, F;
 </script>
 <!-- End Scripts -->
 
-<script>
-/**
-* WP Admin bar fix 
-*/
-(function($){
-    $(document).ready(function(){
-        var wpAdminBarElem = document.querySelector('div#wpadminbar');
-        console.log((wpAdminBarElem));
-        console.log(typeof(wpAdminBarElem));
-        if (typeof(wpAdminBarElem)==='object' && wpAdminBarElem!==null){
-            var wpAdminBarHeight = window.getComputedStyle(wpAdminBarElem).height;
-            $('.mainNavContainerWrapper').css({
-                'top' : wpAdminBarHeight
-            });
-        }
-    })
-})(jQuery);
-</script>
+
 
 <style>
     /* If width is SMALLER than breakpoint */
@@ -721,6 +705,10 @@ var G = "/", C = location.href, H, D, B, F;
         #header-inner > .titlewrapper {
             position: relative;
         }
+        #main {
+            margin-top: 85px;
+            padding-top: 0px;
+        }
     }
 
     /* If width is LARGER than breakpoint */
@@ -729,5 +717,68 @@ var G = "/", C = location.href, H, D, B, F;
             font-size : 44px;
             margin-top: 7px;
         }
+        #main {
+            margin-top : 75px;
+            padding-top: 0px;
+        }
     }
 </style>
+
+<script>
+(function($){
+    $(document).ready(function(){
+        function offsetNavFromAdminBar(){
+            var wpAdminBarElem = document.querySelector('div#wpadminbar');
+            if (typeof(wpAdminBarElem)==='object' && wpAdminBarElem!==null){
+                var wpAdminBarHeight = window.getComputedStyle(wpAdminBarElem).height;
+                $('.mainNavContainerWrapper').css({
+                    'top' : wpAdminBarHeight
+                });
+            }
+        }
+        offsetNavFromAdminBar();
+        function offsetMainFromTop(){
+            var masthead = $('#masthead')[0];
+            var topColorBar = $('#masthead > .top-color')[0];
+            var mainNav = $('#mainNavContainer .jtnavbar-inner')[0];
+            var innermostNav = $('#mainNavContainer #menu-primary')[0];
+            var wpAdminBar = $('#wpadminbar')[0];
+            var topColorBarHeight = parseFloat(getComputedStyle(topColorBar).height.replace('px',''));
+            var mainNavHeight = parseFloat(getComputedStyle(mainNav).height.replace('px',''));
+            var mastheadTop = parseFloat(getComputedStyle(masthead).top.replace('px',''));
+            var innermostNavHeight = parseFloat(getComputedStyle(innermostNav).height.replace('px',''));
+            var wpAdminBarHeight = 0;
+            //var mastheadTop = 0;
+            if (typeof(wpAdminBar)!=='undefined'){
+                wpAdminBarHeight = parseFloat(getComputedStyle(wpAdminBar).height.replace('px',''));
+            }
+            // Quirk - can't find padding off by few px when not collapsed, so get more accurate inner nav height if not collapsed
+            if (innermostNavHeight < mainNavHeight){
+                mainNavHeight = innermostNavHeight;
+            }
+            var newOffset = mainNavHeight + topColorBarHeight + mastheadTop - wpAdminBarHeight;
+            console.group('height report');
+                console.log('topColorBarHeight = ' + topColorBarHeight);
+                console.log('mainNavHeight = ' + mainNavHeight);
+                console.log('innermostNavHeight = ' + innermostNavHeight);
+                console.log('mastheadTop = ' + mastheadTop);
+                console.log('wpAdminBarHeight = ' + wpAdminBarHeight);
+                console.log('newOffset = ' + newOffset);
+            console.groupEnd();
+            $('#main').css({
+                'margin-top' : newOffset + 'px'
+            });
+        }
+        offsetMainFromTop();
+
+        // Since nav bar is fixed, on resize need to get new height and offset main (which is not fixed) by height
+        $(window).on('resize',function(){
+            // offset should be nav height + top-color-bar height + masthead top offset
+            offsetNavFromAdminBar();
+            setTimeout(function(){
+                offsetMainFromTop();
+            },10);
+        });
+    });
+})(jQuery)
+</script>

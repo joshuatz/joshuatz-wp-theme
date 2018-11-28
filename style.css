@@ -31,6 +31,15 @@ Text Domain: joshuatzwp
     background-color: #2E3641;
 }
 
+/** Theme Globals - blocks */
+.jtzwp-seethrough {
+    background: rgba(255, 255, 255, 0.47);
+}
+
+/** Page headings */
+.pageHeaderSection {
+    background: rgba(255, 255, 255, 0.47);
+}
 
 /** Nav stuff */
 div#navbarheader {
@@ -432,7 +441,11 @@ article ul,li {
 article ul {
     margin-left: 3em;
 }
-
+/* set again */
+ul.collapsible, ul.collapsible li {
+    padding-left: 0px !important;
+    list-style-type: none !important;
+}
 /**
 * SPECIAL: Materialize extension stuff
 */
