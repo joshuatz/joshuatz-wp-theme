@@ -21,6 +21,24 @@ class JtzwpHelpers {
     }
 
     /**
+     * Get current page URL - wordpress variant
+     */
+    public function getCurrentWPUrl(){
+        global $wp;
+        return home_url($wp->request);
+    }
+
+    /**
+     * Get current page URL - using $_SERVER globals
+     * https://cssjockey.com/current-url-in-php-with-or-without-query-string/
+     */
+    public function getCurrentUrl(){
+        $pageURL = (isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on') ? "https://" : "http://";
+        $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+        return $pageURL;
+    }
+
+    /**
      * Get terms belonging to a taxonomy, either top level or all
      * @param {string} $taxonomyName - the name of the taxonomy to get terms for
      * @param {boolean} [$ignoreHierarchy=false] - whether or not to get ALL ($ignoreHierarchy=true) or just top level terms
@@ -201,4 +219,95 @@ class JtzwpHelpers {
         }
     }
     
+    private function getCustomRedirectSettingsAll(){
+        $customRedirectSettings = (object) array();
+
+
+        return $customRedirectSettings;
+    }
+
+    private function getCustomRedirectSettingSingle(){
+        //
+    }
+
+    public function checkForCustomRedirect($requestUrl = null){
+        $requestUrl = isset($requestUrl) ? $requestUrl : $this->getCurrentUrl();
+        xdebug_break();
+    }
+
+    public function handleCustomRedirect(){
+
+    }
+
+    private function cacheRedirect(){
+        // TODO
+    }
+
+    /**
+     * Get information about a URL (or the current request), broken down into standard sections
+     * @param {string} [$fullUrlInput] - the URL you want to get info about. If not provided, defaults to current URL
+     * @return {assoc array} - Info about the URL
+     */
+    public function getUrlInfo($fullUrlInput = null){
+        $fromCurrentUrl = !isset($fullUrlInput);
+        $finalInfo = array_fill_keys(array('protocol','hostname','path','querystring'),'');
+        $fullUrl = isset($fullUrlInput) ? $fullUrlInput : $this->getCurrentUrl();
+        $finalInfo['fullUrl'] = $fullUrl;
+
+        // Parse protocol. Default to HTTPS if unknown
+        if ($fromCurrentUrl){
+            if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT']===443)){
+                $finalInfo['protocol'] = 'https://';
+            }
+            else {
+                $finalInfo['protocol'] = 'http://';
+            }
+        }
+        else {
+            $matches = array();
+            if (preg_match('/^(https{0,1}:\/\/)/i',$fullUrlInput,$matches)){
+                $finalInfo['protocol'] = strtolower($matches[1]);
+            }
+        }
+
+        // Parse domain / hostname
+        if ($fromCurrentUrl){
+            $hostName = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : gethostname();
+            $finalInfo['hostname'] = $hostName;
+        }
+        else {
+            $matches = array();
+            if (preg_match('/(?:https{0,1}:\/\/)([^\/]*)/i',$fullUrlInput,$matches)){
+                $hostName = $matches[1];
+                $hostName = preg_replace('/^www\./i','',$hostName);
+                $finalInfo['hostname'] = $hostName;
+            }
+        }
+
+        // Parse path
+        $finalInfo['path'] = '/';
+        if ($fromCurrentUrl){
+            if (isset($_SERVER['REQUEST_URI'])){
+                $finalInfo['path'] = preg_replace('/\?[^\/]*$/i','',$_SERVER['REQUEST_URI']);
+            }
+            else {
+                $finalInfo['path'] = '/' . $GLOBALS['wp']->request . '/';
+            }
+        }
+        else {
+            $matches = array();
+            if (preg_match('/^(?:https{0,1}\/\/){0,1}[^\/]+\/([^?]+)/i',$fullUrlInput,$matches)){
+                $finalInfo['path'] = $matches[1];
+            }
+        }
+
+        // Parse QueryString
+        $matches = array();
+        if(preg_match('/\?([^\/]+)$/i',$fullUrl,$matches)){
+            $finalInfo['querystring'] = $matches[1];
+        }
+
+        // Return info
+        return $finalInfo;
+    }
 }
