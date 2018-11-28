@@ -212,6 +212,7 @@ class JtzwpHelpers {
 
     private function getIsDebugUser(){
         $user = wp_get_current_user();
+        // Note: This will have to be updated if moved to a multiple role system
         if ($user && $user->roles[0]==='administrator'){
             return true;
         }
