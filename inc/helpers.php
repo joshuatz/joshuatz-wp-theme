@@ -12,6 +12,7 @@ class JtzwpHelpers {
     const PROJECT_TYPES_TAXONOMY_BASE = 'project_types';
     const PROJECTS_POST_TYPE = 'projects';
     const TOOLS_POST_TYPE = 'custom_built_tools';
+    const CUSTOM_REDIRECTS_FILENAME = 'jtzwp-custom-redirects.json';
 
     /**
      * Constructor
@@ -220,23 +221,102 @@ class JtzwpHelpers {
     }
     
     private function getCustomRedirectSettingsAll(){
+        // Possible file paths
+        $highestLevelFilePath = $_SERVER['DOCUMENT_ROOT'] . $this::CUSTOM_REDIRECTS_FILENAME;
+        $themeFilePath = $this::CUSTOM_REDIRECTS_FILENAME;
+        $fileContentsRaw = '';
+
         $customRedirectSettings = (object) array();
+        
+        // Check for highest level file first
+        if (file_exists($highestLevelFilePath)){
+            $fileContentsRaw = file_get_contents($highestLevelFilePath);
+        }
+        else if (file_exists($themeFilePath)){
+            $fileContentsRaw = file_get_contents($themeFilePath);
+        }
+        $customRedirectSettings = json_decode($fileContentsRaw,true);
 
+        // Set for future use
+        $this->allRedirectSettings = $customRedirectSettings;
 
+        // return all settings
         return $customRedirectSettings;
     }
 
-    private function getCustomRedirectSettingSingle(){
-        //
+    private function getCustomRedirectSettingSingle($lookupUrl, $allowRegex = true){
+        $matchFound = false;
+        $retArr = (object) array(
+            'hasCustomSetting' => false,
+            'customConfig' => array()
+        );
+
+        // Make sure all settings are loaded
+        $allRedirectSettings = isset($this->allRedirectSettings) ? $this->allRedirectSettings : $this->getCustomRedirectSettingsAll();
+
+        // If regex matching is allowed, iterate through and test patterns
+        if ($allowRegex && !$matchFound){
+            foreach($allRedirectSettings as $desiredMatch=>$redirectConfig){
+                $regPattern = str_replace('/','\/',$desiredMatch);
+                $regPattern = '/' . $regPattern . '/i';
+                if (preg_match($regPattern,$lookupUrl)){
+                    // match found
+                    $matchFound = true;
+                    $retArr->customConfig = $redirectConfig;
+                    break;
+                }
+            }
+        }
+
+        // Now, try regular lookup
+        else if (!$matchFound){
+            if (isset($allRedirectSettings[$lookupUrl])){
+                $matchFound = true;
+                $retArr->customConfig = $allRedirectSettings[$lookupUrl];
+            }
+        }
+
+        // Return findings
+        $retArr->hasCustomSetting = $matchFound;
+        return $retArr;
     }
 
-    public function checkForCustomRedirect($requestUrl = null){
-        $requestUrl = isset($requestUrl) ? $requestUrl : $this->getCurrentUrl();
+    public function checkForAndHandleCustomRedirect($requestUrl = null, $allowRegex = true){
+        $matchFound = false;
+
+
+        // Will look up redirects in order of most granular to lease
+        // Example - redirect specifying query string will trigger before redirect looking for domain
+        $requestUrlInfo = $this->getUrlInfo($requestUrl);
+        $redirectLookupKeys = array(
+            // https://example.com/foobar/hello.html?test=true
+            $requestUrlInfo['fullUrl'],
+            // https://example.com/foobar/html.com
+            $requestUrlInfo['protocol'] . $requestUrlInfo['hostname'] . $requestUrlInfo['path'],
+            // example.com/foobar/html.com
+            $requestUrlInfo['hostname'] . $requestUrlInfo['path'],
+            // /foobar/html.com
+            $requestUrlInfo['path']
+        );
+
+        // Get info
+        $redirectInfo = $this->getCustomRedirectSettingSingle($requestUrl,$allowRegex);
         xdebug_break();
-    }
+        // If custom redirect...
+        if ($redirectInfo->hasCustomSetting && isset($redirectInfo->customConfig)){
+            $customConfig = $redirectInfo->customConfig;
+            if (!isset($customConfig['disable']) || $customConfig['disable'] == false){
+                // Setup defaults
+                $redirectCode = isset($customConfig['redirectCode']) ? $customConfig['redirectCode'] : 302;
+                $passRef = (isset($customConfig['passRef']) && $customConfig['passRef'] === true) ? true : false;
+                // Compose new URL to redirect to
 
-    public function handleCustomRedirect(){
-
+                // Redirect to new URL
+                xdebug_break();
+                wp_redirect('','');
+                exit;
+            }
+        }
     }
 
     private function cacheRedirect(){

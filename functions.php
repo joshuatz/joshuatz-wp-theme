@@ -114,7 +114,6 @@ add_action('wp_head','jtzwp_head_hook');
 function jtwzp_template_redirect_hook(){
     global $jtzwpHelpers;
     $currentUrl = $jtzwpHelpers->getCurrentUrl();
-    xdebug_break();
     // If post type = (project|tool) && (project|tool) is just externally hosted (e.g. no writeup stored)
     if (is_singular()){
         if ((get_post_type()===$jtzwpHelpers::PROJECTS_POST_TYPE || get_post_type()===$jtzwpHelpers::TOOLS_POST_TYPE) && get_field('full_page_is_only_hosted_elsewhere')){
@@ -129,7 +128,7 @@ function jtwzp_template_redirect_hook(){
     }
     // If path not found...
     else if (is_404()){
-        $jtzwpHelpers->checkForCustomRedirect($currentUrl);
+        $jtzwpHelpers->checkForAndHandleCustomRedirect($currentUrl);
     }
 }
 add_action('template_redirect','jtwzp_template_redirect_hook');
