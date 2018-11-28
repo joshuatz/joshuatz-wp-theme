@@ -22,8 +22,8 @@ get_header(); ?>
 
 				<div class="page-content row">
 					<div class="col s12 m6 halign">
-						<div class="card-panel jtzwp-red">
-							<span><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'joshuatzwp' ); ?></span>
+						<div class="card-panel white">
+							<span>It looks like the page you are trying to reach does not exist, no longer exists, or just doesn't feel like talking to you right now. Maybe you can find it by using the navigation menu above?</span>
 						</div>
 					</div>
 

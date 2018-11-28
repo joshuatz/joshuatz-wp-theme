@@ -1,6 +1,6 @@
 <?php
 /**
- * Special: Home page template file
+ * Special: Home page template file - doesn't show posts, just shows custom home page
  */
 ?>
 <?php get_header(); ?>
