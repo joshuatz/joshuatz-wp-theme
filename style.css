@@ -46,6 +46,7 @@ Text Domain: joshuatzwp
     padding: 20px;
     border-style: dashed;
     border-width: 1px;
+    margin-bottom: 20px;
 }
 .pageHeaderSection .pageTitle {
     font-size: 3rem;
@@ -62,6 +63,9 @@ Text Domain: joshuatzwp
     padding-top: 3px;
 }
 /** Nav stuff */
+#wpadminbar {
+    position: fixed !important;
+}
 div#navbarheader {
     background: #2E3641;
     font-size: 1.7em;
@@ -391,13 +395,25 @@ ul.nav a#linkedIn {
 * Generic Post Listings
 */
 .genericPostItem {
-
+    background-color: #efefef80;
+    width: 95%;
+    margin-left: 2.5%;
+    padding: 0px 10px;
 }
 .genericPostItem .featuredImage {
     width: 100%;
     height: auto;
 }
-
+.genericPostItem .featuredImageWrapperLink:hover{
+	outline-color: rgba(25,0,252,0.5);
+	outline-style:solid;
+	outline-width:20px;
+	outline-offset:-10px;
+}
+.genericPostItem .postExcerptWrapper {
+    background-color: white;
+    padding: 20px;
+}
 /**
 * Project Listings
 */
@@ -549,6 +565,15 @@ ul.collapsible li.active .whenCollapsed {
 }
 
 /**
+* Commenting System - Generic
+*/
+.comments-area {
+    width: 98%;
+    margin-left: 1%;
+    margin-bottom: 20px;
+}
+
+/**
 * Commenting System - Wordpress
 */
 #wordpress-comments {
@@ -562,4 +587,24 @@ ul.collapsible li.active .whenCollapsed {
 }
 #wordpress-comments .submit {
     margin-left: 20%;
+}
+#wordpress-comments .reply {
+    margin-left: 10%;
+    background-color: #f69087;
+    border-radius: 30px;
+    padding: 12px;
+    text-align: center;
+    max-width: 100px;
+}
+#wordpress-comments .reply > a {
+    color: white !important;
+}
+#wordpress-comments .comment-list li.comment {
+    padding: 20px 10px;
+    background-color: rgba(255, 255, 255, 0.59);
+    border-radius: 10px;
+    list-style-type: none !important;
+}
+#wordpress-comments .children li {
+    margin: 20px 0px;
 }

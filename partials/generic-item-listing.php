@@ -25,7 +25,7 @@
         <?php endif; ?>
             
         <div class="col <?php echo ($hasFeaturedImage ? 's11 offset-s1 m6' : 's11 offset-s1'); ?>">
-            <div class="projectExcerptWrapper">
+            <div class="postExcerptWrapper">
                 <?php if($hasExcerpt): ?>
                     <p><?php echo get_the_excerpt(); ?></p>
                 <?php else: ?>

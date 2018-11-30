@@ -463,6 +463,9 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
             <li>
                 <a href="/custom-tools/">Custom Developed Tools</a>
             </li>
+            <li>
+                <a href="/blog/">Blog</a>
+            </li>
 			<li>
 			  <a href='mailto:joshuatz.com@gmail.com' ga-on="click,auxclick,contextmenu", ga-event-category="Social" ga-event-label="Email">Contact</a>
 			</li>

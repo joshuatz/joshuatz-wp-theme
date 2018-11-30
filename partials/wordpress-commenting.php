@@ -59,7 +59,7 @@ if ( post_password_required() ) {
 	<?php
         // See https://codex.wordpress.org/Function_Reference/comment_form
         $customCommentingArgs = array(
-            'comment_field' => '<div class="row"><div class="input-field col s12"><textarea id="wordpressCommentTextInput" class="materialize-textarea"></textarea><label for="wordpressCommentTextInput">Comment...</label></div></div>',
+            'comment_field' => '<div class="row"><div class="input-field col s12"><textarea id="wordpressCommentTextInput" name="comment" class="materialize-textarea"></textarea><label for="wordpressCommentTextInput">Comment...</label></div></div>',
             'logged_in_as' => '<div class="col s12"><div class="card-panel blue lighten-5"><p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p></div></div>',
             'class_submit' => 'submit btn waves-effect waves-light light-green lighten-2'
         );
