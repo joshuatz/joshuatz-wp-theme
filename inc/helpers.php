@@ -84,12 +84,14 @@ class JtzwpHelpers {
     /**
      * Get a custom post type singular name
      */
-    public function getCustomPostTypeSingularName(){
+    public function getCustomPostTypeSingularName($properCase = true){
         $singularName = '';
         if (get_post_type()){
             $singularName = get_post_type_object(get_post_type())->labels->singular_name;
         }
-        $singularName = ucwords($singularName);
+        if($properCase){
+            $singularName = ucwords($singularName);
+        }
         return $singularName;
     }
 

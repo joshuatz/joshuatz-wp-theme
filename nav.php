@@ -706,8 +706,8 @@ var G = "/", C = location.href, H, D, B, F;
             position: relative;
         }
         #main {
-            margin-top: 85px;
-            padding-top: 0px;
+            padding-top: 85px;
+            margin-top: 0px;
         }
     }
 
@@ -718,8 +718,8 @@ var G = "/", C = location.href, H, D, B, F;
             margin-top: 7px;
         }
         #main {
-            margin-top : 75px;
-            padding-top: 0px;
+            padding-top : 75px;
+            margin-top: 0px;
         }
     }
 </style>
@@ -766,11 +766,10 @@ var G = "/", C = location.href, H, D, B, F;
                 console.log('newOffset = ' + newOffset);
             console.groupEnd();
             $('#main').css({
-                'margin-top' : newOffset + 'px'
+                'padding-top' : newOffset + 'px'
             });
         }
         offsetMainFromTop();
-
         // Since nav bar is fixed, on resize need to get new height and offset main (which is not fixed) by height
         $(window).on('resize',function(){
             // offset should be nav height + top-color-bar height + masthead top offset

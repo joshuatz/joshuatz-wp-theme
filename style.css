@@ -39,8 +39,28 @@ Text Domain: joshuatzwp
 /** Page headings */
 .pageHeaderSection {
     background: rgba(255, 255, 255, 0.47);
+    margin-top: 20px;
+    width: 95%;
+    margin-left: 2.5%;
+    border-radius: 20px;
+    padding: 20px;
+    border-style: dashed;
+    border-width: 1px;
 }
-
+.pageHeaderSection .pageTitle {
+    font-size: 3rem;
+}
+.pageHeaderSection .pageDescription {
+    font-size: 1.5rem;
+    margin-left: 8%;
+    margin-top: 8px;
+    border-top: 1px dashed black;
+    margin-right: -1.5rem;
+    border-top-right-radius: 18px;
+    border-top-left-radius: 13px;
+    padding-left: 16px;
+    padding-top: 3px;
+}
 /** Nav stuff */
 div#navbarheader {
     background: #2E3641;
@@ -368,6 +388,17 @@ ul.nav a#linkedIn {
 }
 
 /**
+* Generic Post Listings
+*/
+.genericPostItem {
+
+}
+.genericPostItem .featuredImage {
+    width: 100%;
+    height: auto;
+}
+
+/**
 * Project Listings
 */
 .projectListing {
@@ -431,6 +462,13 @@ ul.nav a#linkedIn {
     font-size: 20px;
     padding: 20px;
 }
+/**
+* Custom Tool Listings
+*/
+.customToolListing {
+    max-width: 550px;
+}
+
 /**
 * SPECIAL: Materialize Reset Stuff
 */
