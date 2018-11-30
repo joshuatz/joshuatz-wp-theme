@@ -23,12 +23,20 @@ Text Domain: joshuatzwp
 .jtzwp-blue,.jtzwp-lightblue {
     background-color: #A3BFE1;
 }
+.btn.jtzwp-blue:hover,.btn.jtzwp-lightblue:hover {
+    background-color: #dd614a;
+    color: white;
+}
 .jtzwp-green {
     background-color: #B0CB7A;
     color: #2E3641;
 }
 .jtzwp-dark,.jtzwp-darkblue {
     background-color: #2E3641;
+}
+.btn.jtzwp-dark:hover, .btn.jtzwp-darkblue:hover {
+    background-color: #A3BFE1;
+    color: black;
 }
 
 /** Theme Globals - blocks */
@@ -40,8 +48,8 @@ Text Domain: joshuatzwp
 .pageHeaderSection {
     background: rgba(255, 255, 255, 0.47);
     margin-top: 20px;
-    width: 95%;
-    margin-left: 2.5%;
+    width: 96%;
+    margin-left: 2%;
     border-radius: 20px;
     padding: 20px;
     border-style: dashed;
@@ -56,7 +64,7 @@ Text Domain: joshuatzwp
     margin-left: 8%;
     margin-top: 8px;
     border-top: 1px dashed black;
-    margin-right: -1.5rem;
+    margin-right: -1.3rem;
     border-top-right-radius: 18px;
     border-top-left-radius: 13px;
     padding-left: 16px;
@@ -396,9 +404,15 @@ ul.nav a#linkedIn {
 */
 .genericPostItem {
     background-color: #efefef80;
-    width: 95%;
-    margin-left: 2.5%;
+    width: 92%;
+    margin-left: 4%;
+    margin-bottom: 20px;
     padding: 0px 10px;
+    border-top: 4px double;
+    border-bottom: 4px double;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-color: #2e3641;
 }
 .genericPostItem .featuredImage {
     width: 100%;
@@ -413,6 +427,9 @@ ul.nav a#linkedIn {
 .genericPostItem .postExcerptWrapper {
     background-color: white;
     padding: 20px;
+}
+a.readMore {
+    margin-top: 30px;
 }
 /**
 * Project Listings
