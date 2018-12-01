@@ -6,10 +6,18 @@
 
 get_header(); ?>
 
+<?php
+    $projectListingTitle = 'Here are some projects where I have used my ' . strtolower(single_cat_title('',false)) . ' skills';
+    if (term_description()!==''){
+        // Note: strip_tags necessary because term_description returns <p></p> wrapped text
+        $projectListingTitle = strip_tags(term_description());
+    }
+?>
+
 <div id="main">
     <div class="projectListing">
         <?php if(have_posts()): ?>
-            <h2 class="projectListingTitle">Here are some projects where I have used my <?php echo strtolower(single_cat_title('',false)); ?> skills</h2>
+            <h2 class="projectListingTitle"><?php echo $projectListingTitle; ?></h2>
             <div id="mainmenu">
                 <?php 
                 // Loop through matching posts

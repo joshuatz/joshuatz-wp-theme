@@ -3,11 +3,17 @@
  * The template for displaying comments
  */
 ?>
-<div id="comments" class="comments-area">
-    <div id="wordpress-commenting-wrapper-wrapper">
-        <?php include('partials/wordpress-commenting.php'); ?>
+<?php if(get_field('disable_comments')===true): ?>
+    <div id="comments" class="comments-area">
+        Comments have been disabled for this post.
     </div>
-    <div id="disqus-commenting-wrapper-wrapper">
-        <?php include('partials/disqus-commenting.php'); ?>
+<?php else: ?>
+    <div id="comments" class="comments-area">
+        <div id="wordpress-commenting-wrapper-wrapper">
+            <?php include('partials/wordpress-commenting.php'); ?>
+        </div>
+        <div id="disqus-commenting-wrapper-wrapper">
+            <?php include('partials/disqus-commenting.php'); ?>
+        </div>
     </div>
-</div>
+<?php endif; ?>

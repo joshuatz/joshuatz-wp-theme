@@ -3,6 +3,25 @@
     "title": "Global",
     "fields": [
         {
+            "key": "field_5c030c0ceaebb",
+            "label": "Custom SEO Meta Description",
+            "name": "custom_seo_meta_description",
+            "type": "textarea",
+            "instructions": "Use this if you want to have a different excerpt to display on the site versus what gets pulled into the meta description tag. 160 chars or less, 155 or LESS for OPTIMUM",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": 160,
+            "rows": 4,
+            "new_lines": ""
+        },
+        {
             "key": "field_5becd0012cbdf",
             "label": "Disable Comments?",
             "name": "disable_comments",
@@ -93,6 +112,52 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5c030603f0385",
+            "label": "Show Disclaimer?",
+            "name": "show_disclaimer",
+            "type": "true_false",
+            "instructions": "Check this if you want to show a disclaimer.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5c03062df0386",
+            "label": "Custom Disclaimer",
+            "name": "custom_disclaimer",
+            "type": "wysiwyg",
+            "instructions": "Use this field to create and include a custom disclaimer message.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5c030603f0385",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
         }
     ],
     "location": [
@@ -119,5 +184,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1542861113
+    "modified": 1543704226
 }
