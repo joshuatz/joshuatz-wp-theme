@@ -393,4 +393,19 @@ class JtzwpHelpers {
         // Return info
         return $finalInfo;
     }
+
+    /**
+     * Get basic post info
+     */
+    public function getBasicPostInfo($post){
+        $id = $post->ID;
+        return (object) array (
+            'postObj' => $post,
+            'id' => $id,
+            'permalink' => get_permalink($id),
+            'title' => get_the_title($id),
+            'hasFeaturedImage' => has_post_thumbnail($id),
+            'featuredImageSrc' => (has_post_thumbnail($id)) ? get_the_post_thumbnail_url($id) : ''
+        );
+    }
 }
