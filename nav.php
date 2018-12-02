@@ -407,6 +407,36 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
     .jtnavbar .brand{padding-left:5px;padding-right:5px}
     .bl_background{display:none}
 }
+.top-color-clearfix {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    min-height: 5px;
+    display:block;
+}
+.clearfix {
+    *zoom:1
+}
+
+.clearfix:before,.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.top-color-clearfix div {
+    float:left;
+    height: 8px;
+    width: 25%;
+}
+/* ===== Fix for hover overlay on LinkedIn Icon in Nav =====*/
+ul.nav a#linkedIn {
+    padding-bottom: 13px;
+}
 </style>
 
 <div id='masthead' role='banner' class="mainNavContainerWrapper">

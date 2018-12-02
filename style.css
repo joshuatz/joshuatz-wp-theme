@@ -342,33 +342,7 @@ h2 {
 	text-align:center;
 }
 
-.top-color-clearfix {
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    min-height: 5px;
-    display:block;
-}
 
-.clearfix {
-    *zoom:1
-}
-
-.clearfix:before,.clearfix:after {
-    display: table;
-    content: "";
-    line-height: 0
-}
-
-.clearfix:after {
-    clear: both
-}
-
-.top-color-clearfix div {
-    float:left;
-    height: 8px;
-    width: 25%;
-}
 
 div.Promo_Image_Wrapper img {
     display: block;
@@ -392,11 +366,6 @@ div.Promo_Image_Wrapper > a {
 div#main_post_wrapper > p {
     padding-left: 20px;
     padding-right: 10px;
-}
-
-/* ===== Fix for hover overlay on LinkedIn Icon in Nav =====*/
-ul.nav a#linkedIn {
-    padding-bottom: 13px;
 }
 
 /**
