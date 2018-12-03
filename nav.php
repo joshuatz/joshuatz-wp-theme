@@ -99,14 +99,6 @@
 .jtnavbar .nav .dropdown-toggle .caret{margin-top:8px}
 .jtnavbar .nav>li>a:focus,.jtnavbar .nav>li>a:hover{background-color:transparent;color:#333;text-decoration:none}
 .jtnavbar .nav>.active>a,.jtnavbar .nav>.active>a:hover,.jtnavbar .nav>.active>a:focus{color:#555;text-decoration:none;background-color:#e5e5e5;-webkit-box-shadow:inset 0 3px 8px rgba(0,0,0,0.125);-moz-box-shadow:inset 0 3px 8px rgba(0,0,0,0.125);box-shadow:inset 0 3px 8px rgba(0,0,0,0.125)}
-.jtnavbar .btn-jtnavbar{
-    display:none;
-    float:right;
-    padding:7px 10px;
-    margin-left:5px;
-    margin-right:5px;
-    color:#fff;
-}
 .jtnavbar .nav>li>.dropdown-menu:before{content:'';display:inline-block;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #ccc;border-bottom-color:rgba(0,0,0,0.2);position:absolute;top:-7px;left:9px}
 .jtnavbar .nav>li>.dropdown-menu:after{content:'';display:inline-block;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff;position:absolute;top:-6px;left:10px}
 .jtnavbar-fixed-bottom .nav>li>.dropdown-menu:before{border-top:7px solid #ccc;border-top-color:rgba(0,0,0,0.2);border-bottom:0;bottom:-7px;top:auto}
@@ -217,6 +209,14 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
     padding:0px 10px;
     display:block;
     -webkit-appearance:inherit;
+}
+.jtnavbar .btn-jtnavbar {
+    display:none;
+    float:right;
+    padding:7px 10px;
+    margin-left:5px;
+    margin-right:5px;
+    color:#fff;
 }
 .nav-jtcollapse .nav > li > a,.nav-jtcollapse .dropdown-menu a{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0}
 #masthead{height:75px;background:#2E3641;margin-bottom:50px;left:0;position:fixed;top:0;width:100%;z-index:999}
@@ -457,7 +457,7 @@ ul.nav {
 #nav-search-wrapper {
     margin-right: 0px !important;
     padding-right: 0px !important;
-    margin-top: 16px
+    margin-top: 0px;
 }
 </style>
 
@@ -764,6 +764,9 @@ var G = "/", C = location.href, H, D, B, F;
             padding-top: 85px;
             margin-top: 0px;
         }
+        .jtnavbar .btn-jtnavbar {
+            display: block;
+        }
     }
 
     /* If width is LARGER than breakpoint */
@@ -778,6 +781,9 @@ var G = "/", C = location.href, H, D, B, F;
         }
         #nav-search-wrapper {
             width: auto;
+        }
+        .jtnavbar .btn-jtnavbar {
+            display: none;
         }
     }
 </style>
