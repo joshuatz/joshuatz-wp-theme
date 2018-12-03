@@ -33,11 +33,13 @@ add_theme_support( 'post-thumbnails' );
  */
 
 function joshuatzwp_styles() {
-    global $themeLibURL;
-    // Materialize CSS
-    wp_enqueue_style('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
-    // Materialize Icon Set
-    wp_enqueue_style('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
+    global $themeLibURL,$jtzwpHelpers;
+    if ($jtzwpHelpers->isPageWP()){
+        // Materialize CSS
+        wp_enqueue_style('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
+        // Materialize Icon Set
+        wp_enqueue_style('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
+    }
     // Load main theme CSS file (style.css)
     wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array('materialize-style'),false,'all');
 }

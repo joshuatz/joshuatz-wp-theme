@@ -99,7 +99,14 @@
 .jtnavbar .nav .dropdown-toggle .caret{margin-top:8px}
 .jtnavbar .nav>li>a:focus,.jtnavbar .nav>li>a:hover{background-color:transparent;color:#333;text-decoration:none}
 .jtnavbar .nav>.active>a,.jtnavbar .nav>.active>a:hover,.jtnavbar .nav>.active>a:focus{color:#555;text-decoration:none;background-color:#e5e5e5;-webkit-box-shadow:inset 0 3px 8px rgba(0,0,0,0.125);-moz-box-shadow:inset 0 3px 8px rgba(0,0,0,0.125);box-shadow:inset 0 3px 8px rgba(0,0,0,0.125)}
-.jtnavbar .btn-jtnavbar{display:none;float:right;padding:7px 10px;margin-left:5px;margin-right:5px;color:#fff;}
+.jtnavbar .btn-jtnavbar{
+    display:none;
+    float:right;
+    padding:7px 10px;
+    margin-left:5px;
+    margin-right:5px;
+    color:#fff;
+}
 .jtnavbar .nav>li>.dropdown-menu:before{content:'';display:inline-block;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #ccc;border-bottom-color:rgba(0,0,0,0.2);position:absolute;top:-7px;left:9px}
 .jtnavbar .nav>li>.dropdown-menu:after{content:'';display:inline-block;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff;position:absolute;top:-6px;left:10px}
 .jtnavbar-fixed-bottom .nav>li>.dropdown-menu:before{border-top:7px solid #ccc;border-top-color:rgba(0,0,0,0.2);border-bottom:0;bottom:-7px;top:auto}
@@ -204,7 +211,13 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 .dropdown-menu > li > a:hover{background:#38404B}
 .jtnavbar-inverse .nav li.dropdown.open > .dropdown-toggle,.jtnavbar-inverse .nav li.dropdown.active > .dropdown-toggle,.jtnavbar-inverse .nav li.dropdown.open.active > .dropdown-toggle{background:none repeat scroll 0 0 #212833}
 .dropdown-toggle i{font-size:12px;margin:0 0 0 4px}
-.btn-jtnavbar{cursor:pointer;margin:18px 15px 18px 0;padding:7px 10px}
+.jtnavbar .btn-jtnavbar{
+    cursor:pointer;
+    margin:18px 15px 18px 0;
+    padding:0px 10px;
+    display:block;
+    -webkit-appearance:inherit;
+}
 .nav-jtcollapse .nav > li > a,.nav-jtcollapse .dropdown-menu a{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0}
 #masthead{height:75px;background:#2E3641;margin-bottom:50px;left:0;position:fixed;top:0;width:100%;z-index:999}
 #page{position:relative}
@@ -357,10 +370,7 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 	overflow:hidden;
 	/*height:0;*/
 } 
-.jtnavbar .btn-jtnavbar{
-    display:block;
-    -webkit-appearance:inherit;
-}
+
 .jtnavbar-static .jtnavbar-inner{padding-left:10px;padding-right:10px;}}@media (min-width:980px){.nav-jtcollapse.jtcollapse{height:auto !important;overflow:visible !important;}}
 @media (min-width: 1200px) {
     .span9{width:840px}
@@ -742,7 +752,7 @@ var G = "/", C = location.href, H, D, B, F;
             line-height:20px;
             margin-top:20px;
             margin-left:30px;
-            font-size: 36px;
+            font-size: 32px;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -759,7 +769,7 @@ var G = "/", C = location.href, H, D, B, F;
     /* If width is LARGER than breakpoint */
     @media (min-width: <?php echo $navBreakpointPx; ?>){
         #masthead .titlewrapper h1.title {
-            font-size : 44px;
+            font-size : 38px;
             margin-top: 7px;
         }
         #main {
@@ -805,6 +815,7 @@ var G = "/", C = location.href, H, D, B, F;
                 mainNavHeight = innermostNavHeight;
             }
             var newOffset = mainNavHeight + topColorBarHeight + mastheadTop - wpAdminBarHeight;
+            /*
             console.group('height report');
                 console.log('topColorBarHeight = ' + topColorBarHeight);
                 console.log('mainNavHeight = ' + mainNavHeight);
@@ -813,6 +824,7 @@ var G = "/", C = location.href, H, D, B, F;
                 console.log('wpAdminBarHeight = ' + wpAdminBarHeight);
                 console.log('newOffset = ' + newOffset);
             console.groupEnd();
+            */
             $('#main').css({
                 'padding-top' : newOffset + 'px'
             });

@@ -408,4 +408,13 @@ class JtzwpHelpers {
             'featuredImageSrc' => (has_post_thumbnail($id)) ? get_the_post_thumbnail_url($id) : ''
         );
     }
+
+    /**
+     * Check if the current page is ANY kind of WP page
+     */
+    public function isPageWP(){
+        $isWP = false;
+        $isWP = (is_single() || is_page() || is_singular() || is_front_page());
+        return $isWP;
+    }
 }

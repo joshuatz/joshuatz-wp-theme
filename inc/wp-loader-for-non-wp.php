@@ -65,10 +65,14 @@ function getWpBodyStuff(){
     <?php
 }
 
-function getWpMenuOnly(){
+function getWpMenuOnly($includeJQuery = true){
     global $pathCurrent;
     ?>
+    <?php if($includeJQuery): ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <?php endif; ?>
     <link href="<?php echo get_stylesheet_uri(); ?>" rel="stylesheet" type="text/css">
     <?php include $pathCurrent . '/../nav.php'; ?>
+    <?php wp_footer(); ?>
     <?php
 }
