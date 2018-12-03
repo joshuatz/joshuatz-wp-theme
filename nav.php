@@ -212,7 +212,10 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 .jtcontainer{margin-right:auto;margin-left:auto;*zoom:1}
 .jtcontainer:before,.jtcontainer:after{display:table;content:"";line-height:0}
 .jtcontainer:after{clear:both}
-#header{margin-right:30px;float:left}
+#header{
+    /* margin-right:30px; */
+    float:left
+}
 #header,#header a{color:#FFF}
 #header img{margin-top:13px;width:auto;max-height:60px}
 
@@ -436,6 +439,15 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 /* ===== Fix for hover overlay on LinkedIn Icon in Nav =====*/
 ul.nav a#linkedIn {
     padding-bottom: 13px;
+}
+/* More responsive */
+ul.nav {
+    padding-left: 0px !important;
+}
+#nav-search-wrapper {
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 16px
 }
 </style>
 
@@ -753,6 +765,9 @@ var G = "/", C = location.href, H, D, B, F;
         #main {
             padding-top : 75px;
             margin-top: 0px;
+        }
+        #nav-search-wrapper {
+            width: auto;
         }
     }
 </style>

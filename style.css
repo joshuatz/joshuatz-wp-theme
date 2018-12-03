@@ -122,11 +122,6 @@ div#navbarheader a {
         width: 100%
     }
 }
-@media (min-width:980px){
-    #nav-search-wrapper {
-        width: auto;
-    }
-}
 
 /* Google CSE Search Bar Fix */
 #masthead .bl_search {
