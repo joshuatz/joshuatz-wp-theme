@@ -439,4 +439,10 @@ class JtzwpHelpers {
             return $isWP;
         }
     }
+
+    public function scriptLog($msg){
+        ?>
+        <script>console.log(<?php echo $msg; ?>);</script>
+        <?php
+    }
 }

@@ -133,4 +133,18 @@ function jtwzp_template_redirect_hook(){
         $jtzwpHelpers->checkForAndHandleCustomRedirect($currentUrl);
     }
 }
+
+/**
+ * Check whether or not the stored GAUID string is valid (at least based on pattern)
+ */
+function jtzwp_validate_gauid_setting(){
+    $gauid = get_option('jtzwp_settings')['jtzwp_ga_gauid'];
+    if ($gauid && preg_match('/UA-\d{8}-\d{1}/',$gauid)){
+        return $gauid;
+    }
+    else {
+        return false;
+    }   
+}
+
 add_action('template_redirect','jtwzp_template_redirect_hook');
