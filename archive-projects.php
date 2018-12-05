@@ -17,7 +17,7 @@ get_header(); ?>
 <div id="main">
     <div class="projectListing">
         <?php if(have_posts()): ?>
-            <h2 class="projectListingTitle"><?php echo $projectListingTitle; ?></h2>
+            <h1 class="projectListingTitle mainTitle"><?php echo $projectListingTitle; ?></h1>
             <div id="mainmenu">
                 <?php 
                 // Loop through matching posts
@@ -29,7 +29,7 @@ get_header(); ?>
                         $hasExcerpt = has_excerpt();
                     ?>
                     <div id="<?php echo the_ID(); ?>" class="projectItem">
-                        <h2><?php echo the_title(); ?></h2>
+                    <h2 class="projectItemTitle title"><a href="<?php echo the_permalink(); ?>" target="_self" class="hoverLinkOutlineThin"><?php echo the_title(); ?></a></h2>
                         <!-- Project Link Area -->
                         <div>
                             <?php if($hasFeaturedImage): ?>
@@ -67,7 +67,7 @@ get_header(); ?>
                 ?>
             </div>
         <?php else: ?>
-            <h1>No matching projects found :(</h1>
+            <h1 class="mainTitle">No matching projects found :(</h1>
         <?php endif; ?>
     </div>
 </div>

@@ -38,6 +38,18 @@ Text Domain: joshuatzwp
     background-color: #A3BFE1;
     color: black;
 }
+.hoverLinkOutlineThick:hover {
+    outline-color: rgba(25,0,252,0.5);
+	outline-style:solid;
+	outline-width:20px;
+	outline-offset:-10px;
+}
+.hoverLinkOutlineThin:hover {
+    outline-color: rgba(25,0,252,0.5);
+    outline-style: solid;
+    outline-width: 10px;
+    outline-offset: 8px;
+}
 
 /** Theme Globals - blocks */
 .jtzwp-seethrough {
@@ -56,6 +68,17 @@ Text Domain: joshuatzwp
 }
 
 /** Page headings */
+.mainTitle {
+    width: 98%;
+    margin-left: 1%;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 2px;
+    font-size: 3em;
+    border-radius: 8px;
+    margin-bottom: 2px;
+}
 .pageHeaderSection {
     background: rgba(255, 255, 255, 0.47);
     margin-top: 20px;
@@ -411,14 +434,13 @@ a.readMore {
 * Project Listings
 */
 .projectListing {
-    background: white;
+    background: rgba(255, 255, 255, 0.65);
     padding: 10px;
     border-radius: 8px;
     margin: 10px;
 }
 .projectListingTitle {
-    font-size: 24px;
-    display: block;
+    font-size: 2.8em;
 }
 .projectItem {
 	background-color:#A3BFE1;
@@ -428,7 +450,25 @@ a.readMore {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
-    border-radius: 2px;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 60px;
+    border-style: solid;
+    border-color: #2e3641;
+    border-width: 2px;
+}
+.projectItemTitle {
+    font-size: 2em;
+    color: black;
+    border-top: 2px solid rgba(0,0,0,0.2);
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    padding: 10px 0px;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    text-decoration: underline;
+    text-underline-position: under;
 }
 .projectItem a.projectLinkWrapper {
     width: 70%;
@@ -458,7 +498,14 @@ a.readMore {
 	margin-top:20px;
 	font-family:Georgia, "Times New Roman", Times, serif;
 	background-color:#FFF;
-	padding:4px;
+    padding:4px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 60px;
+    border-style: solid;
+    border-color: rgba(46, 54, 65, 0.76);
+    border-width: 2px;
 }
 .projectLinkClickPrefix {
     background-color: white;
@@ -474,6 +521,16 @@ a.readMore {
 /**
 * Custom Tool Listings
 */
+.customToolsListingsWrapper {
+    background: rgba(255, 255, 255, 0.45);
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px;
+}
+.customToolsListingsTitle {
+    font-size: 2.3em;
+    margin-bottom: 10px;
+}
 .customToolListing {
     max-width: 550px;
 }
@@ -654,4 +711,12 @@ ul.collapsible li.active .whenCollapsed {
         transform: rotate(359deg);
         -webkit-transform: rotate(359deg);
     }
+}
+
+
+#main > article {
+    background: rgba(255, 255, 255, 0.45);
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px;
 }

@@ -40,7 +40,7 @@ function getFixedFooter(){
 <div id="main">
     <div class="customToolsListingsWrapper">
         <?php if(have_posts()): ?>
-            <h2 class="customToolsListingsTitle">Here are some software tools I have developed, either for myself or others.</h2>
+            <h2 class="customToolsListingsTitle mainTitle">Here are some software tools I have developed, either for myself or others.</h2>
 
             <div id="customToolsListings">
                 <div class="row">

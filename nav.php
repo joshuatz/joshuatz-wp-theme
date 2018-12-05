@@ -478,9 +478,9 @@ ul.nav {
 		  <div class='widget Header' data-version='1' id='Header1'>
 			<div id='header-inner'>
 			  <div class='titlewrapper'>
-				<h1 class='title'>
+				<div class='title'>
 				  <a href='/'>Joshuatz.com</a>
-				</h1>
+                </div>
 			  </div>
 			  <div class='descriptionwrapper'>
 				<p class='description'></p>
@@ -745,6 +745,13 @@ var G = "/", C = location.href, H, D, B, F;
 
 
 <style>
+    div.title {
+        font-size: 38px;
+        margin-top: 7px;
+        text-align: center;
+        display: inline-block;
+    }
+
     /* If width is SMALLER than breakpoint */
     @media (max-width: <?php echo $navBreakpointPx; ?>){
         #masthead .titlewrapper h1.title {

@@ -33,7 +33,7 @@ add_theme_support( 'post-thumbnails' );
  */
 
 function joshuatzwp_styles() {
-    global $themeLibURL,$jtzwpHelpers;
+    global $themeLibURL,$themeRootURL,$jtzwpHelpers;
     if ($jtzwpHelpers->isPageWP()){
         // Materialize CSS
         wp_enqueue_style('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
@@ -42,6 +42,8 @@ function joshuatzwp_styles() {
     }
     // Load main theme CSS file (style.css)
     wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array('materialize-style'),false,'all');
+    // Load final <head></head> style
+    wp_enqueue_style('style-final-head',$themeRootURL.'/style-final-head.css',array('joshuatzwp-style','materialize-style'),false,'all');
 }
 
 function joshuatzwp_styles_deferred(){
