@@ -411,10 +411,32 @@ class JtzwpHelpers {
 
     /**
      * Check if the current page is ANY kind of WP page
+     * This is a little confusing. Both 404s and non-wp have unique wp_query props in common:
+     *       - wp_query->post_count = 0
+     *       - wp_query->post = undefined
+     *       - wp_query->query->page = ''
+     *       - wp_query->posts = array(0)
+     * HOWEVER, there is one key difference, which is counter-intuitive. The 404 will have:
+     *      wp_query->is_page = false
+     * Even though it is a WP page, and the non-existant WP page will actually return wp_query->is_page = true!
      */
-    public function isPageWP(){
-        $isWP = false;
-        $isWP = (is_single() || is_page() || is_singular() || is_front_page());
-        return $isWP;
+    public function isPageWP($assumeTrue = true){
+        global $wp_query;
+        if ($assumeTrue === false){
+            $isWP = false;
+            // Check for default singulars, or archive
+            $isWP = (is_single() || is_singular() || is_front_page() || is_archive());
+            // If a page, make sure that not non-wp (non-wp will have no matching posts (post_count=0), and undefined post, but is_page will be true)
+            $isWP = ($isWP || (!is_page() && $wp_query->post_count===0 && !isset($wp_query->post)));
+            return $isWP;
+        }
+        else if ($assumeTrue === true) {
+            $isWP = true;
+            // Check for very specific scenario for non-wp
+            if (is_page() && $wp_query->post_count===0 && !isset($wp_query->post)){
+                $isWP = false;
+            }
+            return $isWP;
+        }
     }
 }
