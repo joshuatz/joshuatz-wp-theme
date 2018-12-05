@@ -21,11 +21,6 @@
             <?php foreach($projectTerms as $projectTerm): ?>
                 <a href="<?php echo get_term_link($projectTerm);?>" class="hvr-bob myButton menubutton"><?php echo $projectTerm->name; ?></a>
             <?php endforeach; ?>
-            <!--<a href="/electronics" class="hvr-bob myButton menubutton">Electronics</a>
-            <a href="/marketing" class="hvr-bob myButton menubutton">Marketing</a>
-            <a href="/web-stuff" class="hvr-bob myButton menubutton">Web Stuff</a>
-            <a href="/writing" class="hvr-bob myButton menubutton">Writing</a>
-            <a href="/other" class="hvr-bob myButton menubutton">Other</a>-->
         </div>
     </div>
 </div>

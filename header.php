@@ -16,5 +16,4 @@
 </head>
 <body>
     <?php include 'nav.php'; ?>
-    <?php //include 'nav-2.php'; ?>
     <?php get_template_part('partials/preloader'); ?>
