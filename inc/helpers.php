@@ -43,6 +43,7 @@ class JtzwpHelpers {
      * Get terms belonging to a taxonomy, either top level or all
      * @param {string} $taxonomyName - the name of the taxonomy to get terms for
      * @param {boolean} [$ignoreHierarchy=false] - whether or not to get ALL ($ignoreHierarchy=true) or just top level terms
+     * @return {array} Returns an array of WP terms that belong to the input taxonomy
      */
     public function getTermsByName($taxonomyName,$ignoreHierarchy = false){
         $finalTerms = array();
@@ -77,12 +78,17 @@ class JtzwpHelpers {
         return $finalTerms;
     }
 
+    /**
+     * Get the "project type terms" - e.g. "Web Stuff, Electronics" - that belong to the project types taxonomy
+     */
     public function getProjectTypesTerms(){
         return $this->getTermsByName(self::PROJECT_TYPES_TAXONOMY_BASE);
     }
 
     /**
      * Get a custom post type singular name
+     * @param {boolean} [$properCase = true] - whether or not you want the singular name to be in "sentence case" - e.g. "Electronics Project" vs "electronics project".
+     * @return {string} the singular name
      */
     public function getCustomPostTypeSingularName($properCase = true){
         $singularName = '';
@@ -97,6 +103,8 @@ class JtzwpHelpers {
 
     /**
      * Get an icon URL path or font-awesome class to use, based on hosted code URL
+     * @param {string} $hostURL - URL of the hosted code - e.g. Github gist, codemirror demo, etc.
+     * @return {assoc array} details about the icon to use, and the actual HTML you can echo out
      */
     public function codeHostIconMapper($hostURL = null){
         $finalIconInfo = array(
@@ -157,6 +165,11 @@ class JtzwpHelpers {
         return $finalHtml;
     }
 
+    /**
+     * Parse raw HTML text (for example from file_get_contents($htmlDocFile)) into sections for WP
+     * @param {string} $html - raw html text
+     * @return {object} body, head, both combined without wrappers
+     */
     public function parseHtmlForPostBody($html){
         $processedHTML = (object) array(
             'body' => '',
@@ -202,16 +215,25 @@ class JtzwpHelpers {
         return $processedHTML;
     }
 
+    /**
+     * Check if page should load in debug mode or not, based on set criteria
+     */
     private function getIsDebug(){
         $debug = ($this->getIsDebugDomain()||$this->getIsDebugUser());
         return $debug;
     }
 
+    /**
+     * Check if the current domain matches a dev domain for debugging (based on TLD)
+     */
     private function getIsDebugDomain(){
         $hostName = (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : gethostname());
         return preg_match('/\.test$/',$hostName);
     }
 
+    /**
+     * Check if the currently logged in WP should get debug mode ON based on admin level
+     */
     private function getIsDebugUser(){
         $user = wp_get_current_user();
         // Note: This will have to be updated if moved to a multiple role system
@@ -223,6 +245,9 @@ class JtzwpHelpers {
         }
     }
     
+    /**
+     * Load up the entire custom redirect settings file and parse
+     */
     private function getCustomRedirectSettingsAll(){
         // Possible file paths
         $highestLevelFilePath = $_SERVER['DOCUMENT_ROOT'] . $this::CUSTOM_REDIRECTS_FILENAME;
@@ -247,6 +272,12 @@ class JtzwpHelpers {
         return $customRedirectSettings;
     }
 
+    /**
+     * Lookup a single URL to see if someone has configured a custom redirect that matches the URL
+     * @param {string} $lookupUrl - the original URL to check if needs to be redirected
+     * @param {boolean} [$allowRegex=true] - Allow for the custom defined rule to match based on Regex, vs requiring exact match
+     * @return {object} contains results, showing whether or not the URL should be redirected, and if so, with what specifications. Does not actually do any redirecting itself.
+     */
     private function getCustomRedirectSettingSingle($lookupUrl, $allowRegex = true){
         $matchFound = false;
         $retArr = (object) array(
@@ -284,6 +315,12 @@ class JtzwpHelpers {
         return $retArr;
     }
 
+    /**
+     * This handles the whole end to end process of checking an incoming URL for configured redirects, trying variant matching of the pattern, and handling any redirects that are necessary
+     * Essentially a very slim custom routing configuration to supplement the built in routing handled by WP
+     * @param {string} [$requestUrl] - the incoming URL to check for a redirect. If left as null, will default to current URL
+     * @param {boolean} $allowRegex - whether or not to allow regex pattern matching on custom rule set
+     */
     public function checkForAndHandleCustomRedirect($requestUrl = null, $allowRegex = true){
         $matchFound = false;
 
@@ -304,7 +341,6 @@ class JtzwpHelpers {
 
         // Get info
         $redirectInfo = $this->getCustomRedirectSettingSingle($requestUrl,$allowRegex);
-        xdebug_break();
         // If custom redirect...
         if ($redirectInfo->hasCustomSetting && isset($redirectInfo->customConfig)){
             $customConfig = $redirectInfo->customConfig;
@@ -315,7 +351,6 @@ class JtzwpHelpers {
                 // Compose new URL to redirect to
 
                 // Redirect to new URL
-                xdebug_break();
                 wp_redirect('','');
                 exit;
             }
