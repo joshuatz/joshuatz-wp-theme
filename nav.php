@@ -754,7 +754,7 @@ var G = "/", C = location.href, H, D, B, F;
 
     /* If width is SMALLER than breakpoint */
     @media (max-width: <?php echo $navBreakpointPx; ?>){
-        #masthead .titlewrapper h1.title {
+        #masthead .titlewrapper .title {
             font-weight:normal;
             line-height:20px;
             margin-top:20px;
@@ -778,7 +778,7 @@ var G = "/", C = location.href, H, D, B, F;
 
     /* If width is LARGER than breakpoint */
     @media (min-width: <?php echo $navBreakpointPx; ?>){
-        #masthead .titlewrapper h1.title {
+        #masthead .titlewrapper .title {
             font-size : 38px;
             margin-top: 7px;
         }
