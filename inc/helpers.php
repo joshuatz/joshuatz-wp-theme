@@ -480,4 +480,40 @@ class JtzwpHelpers {
         <script>console.log(<?php echo $msg; ?>);</script>
         <?php
     }
+
+    public function wpDateToDateTime($wpDate){
+        $finalDateTime = new DateTime();
+        $wpStamp = strtotime($wpDate);
+        $finalDateTime->setTimestamp($wpStamp);
+        return $finalDateTime;
+    }
+
+    /**
+     * Get the difference between the date a post was published and today
+     */
+    public function getPublishedDateDiff($post){
+        $publishedDate = $this->wpDateToDateTime(get_the_date('',$post));
+        $todayDate = new DateTime('now');
+        $diffInterval = date_diff($publishedDate,$todayDate,true);
+        return $diffInterval;
+    }
+
+    public function getDateDiffByUnit($diffInterval,$unit){
+        $formattedDiff = null;
+        if ($unit){
+            if ($unit === 'years' || $unit==='year'){
+                $formattedDiff = $diffInterval->format('%y');
+            }
+            else if ($unit === 'months' || $unit === 'month'){
+                $formattedDiff = $diffInterval->format('%m');
+            }
+        }
+        if (isset($formattedDiff)){
+            $formattedDiff = floatval($formattedDiff);
+        }
+        else {
+            $formattedDiff = $diffInterval;
+        }
+        return $formattedDiff;
+    }
 }

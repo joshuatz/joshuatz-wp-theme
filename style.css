@@ -34,6 +34,10 @@ Text Domain: joshuatzwp
 .jtzwp-dark,.jtzwp-darkblue {
     background-color: #2E3641;
 }
+.jtzwp-error {
+    background-color: #F69087;
+    color: white;
+}
 .btn.jtzwp-dark:hover, .btn.jtzwp-darkblue:hover {
     background-color: #A3BFE1;
     color: black;
@@ -580,10 +584,19 @@ ul.collapsible li.active .whenCollapsed {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    max-width: 500px;
+    max-width: 900px;
     background-color: white;
 }
-
+.expandablePostDetailsSection .collapsible-body {
+    padding: 1em 0.5em 0.5em 0.5em;
+}
+.expandablePostDetailsSection .card-panel {
+    margin: 0em 0em 0.4em 1.2em;
+    padding: 10px;
+}
+.expandablePostDetailsSection .card-panel p {
+    margin: 0px;
+}
 /**
 * Materialize Cards - Special Fixed Footers
 */

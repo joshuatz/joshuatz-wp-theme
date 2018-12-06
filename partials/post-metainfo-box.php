@@ -9,9 +9,25 @@
 ?>
 <div class="expandablePostDetailsSection">
     <ul class="collapsible">
+        <?php if(jtzwp_get_disclaimer()): ?>
+            <!-- Disclaimers -->
+            <li class="active">
+                <div class="collapsible-header">
+                    <i class="material-icons">report</i>
+                    <div class="whenExpanded">Disclaimer</div>
+                    <div class="whenCollapsed">Click for Disclaimer</div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="card-panel jtzwp-error">
+                        <?php echo jtzwp_get_disclaimer(); ?>
+                    </div>
+                </div>
+            </li>
+        <?php endif; ?>
+        <!-- Post Date Stamps Meta Info -->
         <li>
             <div class="collapsible-header">
-                <i class="material-icons">info</i>
+                <i class="material-icons">info_outline</i>
                 <div class="whenExpanded">Full <?php echo $jtzwpHelpers->getCustomPostTypeSingularName(); ?> Details</div>
                 <div class="whenCollapsed">Click for Full <?php echo $jtzwpHelpers->getCustomPostTypeSingularName(); ?> Details</div>
             </div>

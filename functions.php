@@ -159,3 +159,20 @@ function jtzwp_validate_gauid_setting(){
 }
 
 add_action('template_redirect','jtwzp_template_redirect_hook');
+
+function jtzwp_get_disclaimer(){
+    global $jtzwpHelpers;
+    $disclaimer = false;
+    if (get_field('show_disclaimer')===true){
+        $yearsOld = $jtzwpHelpers->getDateDiffByUnit($jtzwpHelpers->getPublishedDateDiff(get_post()),'years');
+        $customDisclaimer = get_field('custom_disclaimer');
+        if (strlen($customDisclaimer)>1){
+            $disclaimer = $customDisclaimer;
+        }
+        else if ($yearsOld > 1){
+            $singularName = $jtzwpHelpers->getCustomPostTypeSingularName();
+            $disclaimer = 'This ' . $singularName . ' is over a year old (first published about ' . $yearsOld . ' years ago). As such, please keep in mind that some of the information may no longer be accurate, best practice, or a reflection of how I would approach the same thing today.';
+        }
+    }
+    return $disclaimer;
+}
