@@ -454,6 +454,13 @@ class JtzwpHelpers {
         return $finalInfo;
     }
 
+    /**
+     * Bulk modify the query string of a URL by simply passing a string
+     * @param {string} $url - the URL to modify the QS of
+     * @param {string} $queryString - the querystring to set on the url. Can include or exclude leading ?.
+     *   - Example: $queryString = '?keyparam=keyval&paramtwo=123'
+     * @return {string} New URL modified with the new query string
+     */
     public function modQueryStringBulk($url,$queryString){
         // Strip leading ?
         $queryString = preg_replace('/^\?/','',$queryString);
@@ -472,6 +479,7 @@ class JtzwpHelpers {
 
     /**
      * Modify the query string of a URL - adding a single param and value
+     * TODO: Check to see if param already is in QS before appending - replace vs append
      */
     public function modQueryStringSingle($url,$param,$val){
         $urlInfo = $this->getUrlInfo($url);
