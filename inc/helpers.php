@@ -256,7 +256,7 @@ class JtzwpHelpers {
 
         $customRedirectSettings = (object) array();
         
-        // Check for highest level file first
+        // Check for highest level file first - this will take precedent over local file path
         if (file_exists($highestLevelFilePath)){
             $fileContentsRaw = file_get_contents($highestLevelFilePath);
         }
@@ -281,6 +281,7 @@ class JtzwpHelpers {
     private function getCustomRedirectSettingSingle($lookupUrl, $allowRegex = true){
         $matchFound = false;
         $retArr = (object) array(
+            'originalURL' => $lookupUrl,
             'hasCustomSetting' => false,
             'customConfig' => array()
         );
@@ -293,6 +294,7 @@ class JtzwpHelpers {
             foreach($allRedirectSettings as $desiredMatch=>$redirectConfig){
                 $regPattern = str_replace('/','\/',$desiredMatch);
                 $regPattern = '/' . $regPattern . '/i';
+                // TODO - above needs to be optimized to check against non reg vs reg strings
                 if (preg_match($regPattern,$lookupUrl)){
                     // match found
                     $matchFound = true;
@@ -341,17 +343,35 @@ class JtzwpHelpers {
 
         // Get info
         $redirectInfo = $this->getCustomRedirectSettingSingle($requestUrl,$allowRegex);
-        // If custom redirect...
+        // If custom VALID redirect...
         if ($redirectInfo->hasCustomSetting && isset($redirectInfo->customConfig)){
             $customConfig = $redirectInfo->customConfig;
             if (!isset($customConfig['disable']) || $customConfig['disable'] == false){
                 // Setup defaults
                 $redirectCode = isset($customConfig['redirectCode']) ? $customConfig['redirectCode'] : 302;
                 $passRef = (isset($customConfig['passRef']) && $customConfig['passRef'] === true) ? true : false;
+                $preserveQuery = (isset($customConfig['preserveQuery']) && $customConfig['preserveQuery'] === true) ? true : false;
+                $newUrl = isset($redirectInfo->customConfig['redirectTo']) && $redirectInfo->customConfig['redirectTo']!=='' ? $redirectInfo->customConfig['redirectTo'] : $requestUrlInfo['homepage'];
+                $newUrlInfo = $this->getUrlInfo($newUrl);
+
+                // Make sure new URL has protocol, since that will break wp_redirect if missing
+                if ($newUrlInfo['protocol']===''){
+                    $newUrl = 'https://' . $newUrl;
+                    $newUrlInfo = $this->getUrlInfo($newUrl);
+                }
+
+                xdebug_break();
                 // Compose new URL to redirect to
+                if ($preserveQuery){
+                    $newUrl = $this->modQueryStringBulk($newUrl,$requestUrlInfo['querystring']);
+                }
+                if ($passRef){
+                    $newUrl = $this->modQueryStringSingle($newUrl,'redirectedFrom',$requestUrl);
+                }
+                xdebug_break();
 
                 // Redirect to new URL
-                wp_redirect('','');
+                wp_redirect($newUrl,intval($redirectCode,10));
                 exit;
             }
         }
@@ -368,7 +388,7 @@ class JtzwpHelpers {
      */
     public function getUrlInfo($fullUrlInput = null){
         $fromCurrentUrl = !isset($fullUrlInput);
-        $finalInfo = array_fill_keys(array('protocol','hostname','path','querystring'),'');
+        $finalInfo = array_fill_keys(array('protocol','hostname','path','querystring','homepage'),'');
         $fullUrl = isset($fullUrlInput) ? $fullUrlInput : $this->getCurrentUrl();
         $finalInfo['fullUrl'] = $fullUrl;
 
@@ -403,7 +423,7 @@ class JtzwpHelpers {
         }
 
         // Parse path
-        $finalInfo['path'] = '/';
+        $finalInfo['path'] = '';
         if ($fromCurrentUrl){
             if (isset($_SERVER['REQUEST_URI'])){
                 $finalInfo['path'] = preg_replace('/\?[^\/]*$/i','',$_SERVER['REQUEST_URI']);
@@ -425,8 +445,46 @@ class JtzwpHelpers {
             $finalInfo['querystring'] = $matches[1];
         }
 
+        /**
+         * Put collected info together for some combination values
+         */
+        $finalInfo['homepage'] = $finalInfo['protocol'] . $finalInfo['hostname'];
+
         // Return info
         return $finalInfo;
+    }
+
+    public function modQueryStringBulk($url,$queryString){
+        // Strip leading ?
+        $queryString = preg_replace('/^\?/','',$queryString);
+        // Break apart querystring by &
+        $keyPairs = explode('&',$queryString);
+        foreach ($keyPairs as $index => $keyPair) {
+            // Break apart keypair by =
+            $arr = explode('=',$keyPair);
+            $key = $arr[0];
+            $val = $arr[1];
+            // Pass to ModQueryStringSingle
+            $url = $this->modQueryStringSingle($url,$key,$val);
+        }
+        return $url;
+    }
+
+    /**
+     * Modify the query string of a URL - adding a single param and value
+     */
+    public function modQueryStringSingle($url,$param,$val){
+        $urlInfo = $this->getUrlInfo($url);
+        $origQueryString = $urlInfo['querystring'];
+        // If no existing query string, make sure URL ends with slash if homepage
+        if ($urlInfo['path']==='' || $url === $urlInfo['homepage']){
+            $finalChar = mb_substr($url,-1);
+            $url = $finalChar!=='/' ? $url.'/' : $url;
+        }
+        // If no existing query string, start it with ?, otherwise append with &
+        $url = $url . ($origQueryString==='' ? '?' : '&');
+        $url = $url . urlencode($param) . '=' . urlencode($val);
+        return $url;
     }
 
     /**
@@ -481,6 +539,9 @@ class JtzwpHelpers {
         <?php
     }
 
+    /**
+     * Convert a WP style date (e.g. result of get_the_date()) - to a regular PHP datetime object
+     */
     public function wpDateToDateTime($wpDate){
         $finalDateTime = new DateTime();
         $wpStamp = strtotime($wpDate);
