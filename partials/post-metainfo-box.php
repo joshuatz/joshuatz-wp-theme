@@ -7,6 +7,7 @@
 <?php
     global $jtzwpHelpers;
 ?>
+<?php if(get_field('show_meta_info_box')!==false): ?>
 <div class="expandablePostDetailsSection">
     <ul class="collapsible">
         <?php if(jtzwp_get_disclaimer()): ?>
@@ -46,3 +47,4 @@
         </li>
     </ul>
 </div>
+<?php endif; ?>
