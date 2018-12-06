@@ -10,6 +10,13 @@
  */
 ?>
 
+<?php
+/**
+ * Disable auto <p></p> wrapping
+ */
+remove_filter('the_content','wpautop');
+?>
+
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<header class="entry-header">

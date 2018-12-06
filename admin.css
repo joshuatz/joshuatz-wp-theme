@@ -1,0 +1,12 @@
+/**
+* Styles for wp-admin area
+*/
+.offset-s1 {
+    margin-left: calc((100/(12/1))*1%) !important;
+}
+.offset-s2 {
+    margin-left: calc((100/(12/2))*1%) !important;
+}
+.offset-s3 {
+    margin-left: calc((100/(12/3))*1%) !important;
+}

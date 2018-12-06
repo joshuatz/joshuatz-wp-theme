@@ -114,16 +114,43 @@
             "maxlength": ""
         },
         {
+            "key": "field_5c08a366a3709",
+            "label": "Show Meta Info Box",
+            "name": "show_meta_info_box",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5c030603f0385",
             "label": "Show Disclaimer?",
             "name": "show_disclaimer",
             "type": "true_false",
             "instructions": "Check this if you want to show a disclaimer.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5c08a366a3709",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
-                "width": "",
-                "class": "",
+                "width": "90",
+                "class": "offset-s1",
                 "id": ""
             },
             "message": "",
@@ -142,6 +169,11 @@
             "conditional_logic": [
                 [
                     {
+                        "field": "field_5c08a366a3709",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
                         "field": "field_5c030603f0385",
                         "operator": "==",
                         "value": "1"
@@ -149,8 +181,8 @@
                 ]
             ],
             "wrapper": {
-                "width": "",
-                "class": "",
+                "width": "80",
+                "class": "offset-s2",
                 "id": ""
             },
             "default_value": "",
@@ -158,6 +190,33 @@
             "toolbar": "full",
             "media_upload": 1,
             "delay": 1
+        },
+        {
+            "key": "field_5c08a3a3a370b",
+            "label": "Show DateTimes",
+            "name": "show_datetimes",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5c08a366a3709",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "offset-s1",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -184,5 +243,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1543704226
+    "modified": 1544071045
 }

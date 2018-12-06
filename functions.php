@@ -61,6 +61,11 @@ function joshuatzwp_styles_deferred(){
     wp_enqueue_style('lightbox-2-css','https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css',array(),false,'all');
 }
 
+function joshuatzwp_styles_for_admin(){
+    global $themeRootURL;
+    wp_enqueue_style('admin-styles', $themeRootURL.'/admin.css',array(),false,'all');
+}
+
 function joshuatzwp_scripts() {
     global $themeLibURL;
     global $themeIncPath;
@@ -95,6 +100,10 @@ function joshuatzwp_enqueue_loader_deferred(){
     joshuatzwp_scripts_deferred();
 }
 
+function joshuatzwp_enqueue_loader_admin(){
+    joshuatzwp_styles_for_admin();
+}
+
 /**
  * Actual loader section
  */
@@ -102,6 +111,8 @@ function joshuatzwp_enqueue_loader_deferred(){
 add_action('wp_enqueue_scripts','joshuatzwp_enqueue_loader_head');
 // Load scripts and styles - DEFERRED
 add_action('wp_footer','joshuatzwp_enqueue_loader_deferred');
+// Load scripts and styles - admin area
+add_action('admin_enqueue_scripts','joshuatzwp_enqueue_loader_admin');
 
 // Load custom post types
 add_action('init','jtwp_register_all_custom_posttypes');
