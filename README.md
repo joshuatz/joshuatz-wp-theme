@@ -20,3 +20,4 @@ Custom WordPress theme for joshuatz.com
      - Add SRI attribute support to script queue
  - Redo nav and change from hardcoded to more dynamic based on native WP menu
      - Optionally, integrate Materialize walker version
+ - Add Gutenberg support (color palettes, blocks, etc.)
