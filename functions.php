@@ -195,3 +195,18 @@ function jtzwp_get_disclaimer(){
     }
     return $disclaimer;
 }
+
+/**
+ * Special Yoast SEO plugin settings
+ */
+function jtzwp_yoast_var_replacement__jtzwp_description($varName){
+    $metaDescription = get_the_excerpt();
+    if (get_field('custom_seo_meta_description') && get_field('custom_seo_meta_description')!==''){
+        $metaDescription = get_field('custom_seo_meta_description');
+    }
+    return $metaDescription;
+}
+function jtzwp_register_yoast_extra_vars(){
+    wpseo_register_var_replacement('%%jtzwp_description%%','jtzwp_yoast_var_replacement__jtzwp_description','advanced','Generated description based on ACF');
+}
+add_action('wpseo_register_extra_replacements','jtzwp_register_yoast_extra_vars');
