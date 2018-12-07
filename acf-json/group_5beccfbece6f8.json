@@ -22,6 +22,25 @@
             "new_lines": ""
         },
         {
+            "key": "field_5c0af45ca8b67",
+            "label": "Custom SEO Keywords",
+            "name": "custom_seo_keywords",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5becd0012cbdf",
             "label": "Disable Comments?",
             "name": "disable_comments",
@@ -217,6 +236,70 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5c0aec1bf9fcb",
+            "label": "Show DateTime Published",
+            "name": "show_datetime_published",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5c08a366a3709",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_5c08a3a3a370b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "offset-s2",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5c0aec6cf9fce",
+            "label": "Show DateTime Updated",
+            "name": "show_datetime_updated",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5c08a366a3709",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_5c08a3a3a370b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "offset-s2",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -243,5 +326,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1544071045
+    "modified": 1544221826
 }

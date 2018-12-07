@@ -585,4 +585,36 @@ class JtzwpHelpers {
         }
         return $formattedDiff;
     }
+
+    public function getCurrPost(){
+        $currPost = isset($post) ? $post : get_post();
+        return $currPost;
+    }
+
+    public function getTagsInfoArrs(){
+        $tagsInfo = (object) array(
+            'tagNames' => array(),
+            'tagIds' => array(),
+            'commaSep' => '',
+            'raw' => array(),
+            'count' => 0
+        );
+        $commaSepTags = '';
+        $tags = get_the_tags();
+        if ($tags){
+            $counter = 0;
+            foreach ($tags as $tag) {
+                array_push($tagsInfo->tagNames,$tag->name);
+                array_push($tagsInfo->tagIds,$tag->term_id);
+                if ($counter>0){
+                    $tagsInfo->commaSep .= ',';
+                }
+                $tagsInfo->commaSep .= $tag->name;
+                $counter++;
+            }
+            $tagsInfo->raw = $tags;
+            $tagsInfo->count = $counter;
+        }
+        return $tagsInfo;
+    }
 }

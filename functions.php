@@ -206,7 +206,22 @@ function jtzwp_yoast_var_replacement__jtzwp_description($varName){
     }
     return $metaDescription;
 }
+function jtzwp_yoast_var_replacement__jtzwp_keywords($varName){
+    global $jtzwpHelpers,$post;
+    $keywordsCommaSep = '';
+    if (get_field('custom_seo_keywords') && get_field('custom_seo_keywords')!==''){
+        $keywordsCommaSep = get_field('custom_seo_keywords');
+    }
+    else if ($jtzwpHelpers->getTagsInfoArrs()->count > 0) {
+        $keywordsCommaSep = $jtzwpHelpers->getTagsInfoArrs()->commaSep;
+    }
+    else if (strlen(WPSEO_Meta::get_value('focuskw',$post->ID)>0)){
+        $keywordsCommaSep = WPSEO_Meta::get_value('focuskw',$post->ID);
+    }
+    return $keywordsCommaSep;
+}
 function jtzwp_register_yoast_extra_vars(){
     wpseo_register_var_replacement('%%jtzwp_description%%','jtzwp_yoast_var_replacement__jtzwp_description','advanced','Generated description based on ACF');
+    wpseo_register_var_replacement('%%jtzwp_keywords%%','jtzwp_yoast_var_replacement__jtzwp_keywords','advanced','Generated keywords based on ACF and post');
 }
 add_action('wpseo_register_extra_replacements','jtzwp_register_yoast_extra_vars');
