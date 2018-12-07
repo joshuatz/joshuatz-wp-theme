@@ -28,9 +28,8 @@
         <!-- Post Date Stamps Meta Info -->
         <li>
             <div class="collapsible-header">
-                <i class="material-icons">info_outline</i>
-                <div class="whenExpanded">Full <?php echo $jtzwpHelpers->getCustomPostTypeSingularName(); ?> Details</div>
-                <div class="whenCollapsed">Click for Full <?php echo $jtzwpHelpers->getCustomPostTypeSingularName(); ?> Details</div>
+                <div class="whenExpanded"><i class="material-icons">info</i>Full <?php echo $jtzwpHelpers->getCustomPostTypeSingularName(); ?> Details</div>
+                <div class="whenCollapsed"><i class="material-icons">info_outline</i>Click for Full <?php echo $jtzwpHelpers->getCustomPostTypeSingularName(); ?> Details</div>
             </div>
             <div class="collapsible-body">
                 <div class="fullPostDetailsWrapper">

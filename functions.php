@@ -26,7 +26,9 @@ $jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHe
  * Special WP flags
  */
 // "feature image" support
-add_theme_support( 'post-thumbnails' ); 
+add_theme_support('post-thumbnails'); 
+// Allow excerpts for pages
+add_post_type_support('page','excerpt');
 
 /**
  * Reusable loaders
