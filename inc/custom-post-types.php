@@ -46,7 +46,7 @@ function jtzwp_register_projects_posttype(){
 		// Requires https://wordpress.org/plugins/custom-post-type-permalinks/
 		// Avoided using JUST %project_types% as path, since you can't limit a taxonomy to a single selection (not easily), so this is safer and more permanent permalink
         //"cptp_permalink_structure" => "/%year%/proj_%post_id%/%postname%/",
-        "cptp_permalink_structure" => "/%project_types%/%year%/%postname%/",
+        "cptp_permalink_structure" => "/%project_types%/%postname%/",
 		"menu_icon" => "dashicons-portfolio",
 		"supports" => array( "title", "editor", "thumbnail", "excerpt", "comments"),
 		"taxonomies" => array( "category", "post_tag", "project_types" )
@@ -101,6 +101,7 @@ function jtwp_register_tools_posttype(){
 			"slug" => "custom-tools",
 			"with_front" => true
 		),
+		"cptp_permalink_structure" => "/%year%/%postname%/",
 		"menu_icon" => "dashicons-hammer",
 		"supports" => array( "title", "editor", "thumbnail", "excerpt", "comments", "revisions" ),
 		"taxonomies" => array( "category", "post_tag" )

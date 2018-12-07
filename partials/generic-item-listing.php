@@ -23,7 +23,7 @@
         <?php if($hasFeaturedImage): ?>
             <div class="col s12 m6">
                 <a href="<?php echo the_permalink(); ?>" target="_self" class="featuredImageWrapperLink">
-                    <img class="featuredImage" src="<?php echo the_post_thumbnail_url('medium'); ?>" >
+                    <img class="featuredImage" src="<?php echo the_post_thumbnail_url('large'); ?>" >
                 </a>
             </div>
         <?php endif; ?>
