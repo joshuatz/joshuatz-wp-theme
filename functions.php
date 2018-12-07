@@ -24,6 +24,8 @@ $jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHe
 
 /**
  * Special WP flags
+ * https://codex.wordpress.org/Option_Reference
+ * https://codex.wordpress.org/Theme_Features
  */
 // "feature image" support
 add_theme_support('post-thumbnails'); 
