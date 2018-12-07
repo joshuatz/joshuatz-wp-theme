@@ -147,6 +147,10 @@ function jtwzp_template_redirect_hook(){
                 wp_redirect(get_field('externally_hosted_full_page_url'));
                 exit;
             }
+            else if (get_field('externally_hosted_code_url')){
+                wp_redirect(get_field('externally_hosted_code_url'));
+                exit;
+            }
             else {
                 // For now, do nothing
             }
