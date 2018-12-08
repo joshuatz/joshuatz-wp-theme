@@ -67,11 +67,29 @@
                 var description = $('meta[name="description"]').attr('content');
                 console.group('SEO Stuff');
                     console.log('Title = ' + $('title').text());
-                    console.log('Description = ' + description);
-                    console.log('Description Length = ' + description.length + ' / 60');
+                    if (typeof(description)==='undefined'){
+                        console.warn('Description is not set!!!');
+                    }
+                    else {
+                        console.log('Description = ' + description);
+                        console.log('Description Length = ' + description.length + ' / 60');
+                    }
                     if ($('meta[name="keywords"]').length){
                         console.log('Keywords = ' + $('meta[name="keywords"]').attr('content'));
                     }
+                    console.group('Canonical Info');
+                        console.log('Is Current Page = *' + ($('link[rel="canonical"]').attr('href') === document.location.href).toString().toUpperCase() + '*');
+                        console.log('Canonical URL = ' + $('link[rel="canonical"]').attr('href'));
+                    console.groupEnd();
+                    console.group('Headings');
+                        var maxHCount = 8;
+                        for (var x=1; x<maxHCount; x++){
+                            var headingCount = $('h' + x).length;
+                            if (x<=3 || headingCount > 0){
+                                console.log('<h' + x + '></h' + x + '> Count = ' + headingCount);
+                            }
+                        }
+                    console.groupEnd();
                 console.groupEnd();
             },100);
         }

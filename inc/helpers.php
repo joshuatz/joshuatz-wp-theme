@@ -618,13 +618,38 @@ class JtzwpHelpers {
         return $tagsInfo;
     }
 
-    /**
-     * Checks whether or not a given post/page/etc should have the no-index flag applied
-     *  - NoIndex tells search engines not to index the given page, which prevents being penalized for having "thin content" or other less favorable content
-     * This is based on my criteria - either if page only links externally (redirects immediately) or fails sanity check of simple word count
-     * @return {boolean} true/false - if noindex flag should be applied. Does not set flag itself.
-     */
-    public function shouldPostUseNoIndex($post){
+    public function postOnlyLinksExternally($postId){
+        $postExternalLink = false;
+        $currentUrl = $this->getCurrentUrl();
+        // If post type = (project|tool) && (project|tool) is just externally hosted (e.g. no writeup stored)
+        if ((get_post_type($postId)===$this::PROJECTS_POST_TYPE || get_post_type($postId)===$this::TOOLS_POST_TYPE) && get_field('full_page_is_only_hosted_elsewhere',$postId)){
+            if (get_field('externally_hosted_full_page_url',$postId)){
+                $postExternalLink = get_field('externally_hosted_full_page_url',$postId);
+            }
+            else if (get_field('externally_hosted_code_url',$postId)){
+                $postExternalLink = get_field('externally_hosted_code_url',$postId);
+            }
+        }
+        return $postExternalLink;
+    }
 
+    /**
+     * Checks whether or not a given post/page/etc should have be indexed - vs having the noindex flag applied
+     *  - NoIndex tells search engines not to index the given page, which prevents being penalized for having "thin content" or other less favorable content
+     * This is based on my criteria - will be false either if page only links externally (redirects immediately) or fails sanity check of simple word count
+     * @return {boolean} true/false - if should be indexed. Default is true
+     */
+    public function shouldPostBeIndexed($postId){
+        $postShouldIndex = true;
+
+        if ($this->postOnlyLinksExternally($postId)!==false){
+            $postShouldIndex = false;
+        }
+
+        return $postShouldIndex;
+    }
+
+    public function log($msg,$OPT_special = false){
+        
     }
 }

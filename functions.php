@@ -140,22 +140,12 @@ add_action('wp_head','jtzwp_head_hook');
  * Hook into template_redirect for anything that needs to happen after query, but BEFORE headers are sent - e.g. redirects
  */
 function jtwzp_template_redirect_hook(){
-    global $jtzwpHelpers;
+    global $jtzwpHelpers,$post;
     $currentUrl = $jtzwpHelpers->getCurrentUrl();
-    // If post type = (project|tool) && (project|tool) is just externally hosted (e.g. no writeup stored)
     if (is_singular()){
-        if ((get_post_type()===$jtzwpHelpers::PROJECTS_POST_TYPE || get_post_type()===$jtzwpHelpers::TOOLS_POST_TYPE) && get_field('full_page_is_only_hosted_elsewhere')){
-            if (get_field('externally_hosted_full_page_url')){
-                wp_redirect(get_field('externally_hosted_full_page_url'));
-                exit;
-            }
-            else if (get_field('externally_hosted_code_url')){
-                wp_redirect(get_field('externally_hosted_code_url'));
-                exit;
-            }
-            else {
-                // For now, do nothing
-            }
+        if ($jtzwpHelpers->postOnlyLinksExternally($post)){
+            wp_redirect($jtzwpHelpers->postOnlyLinksExternally($post));
+            exit;
         }
     }
     // If path not found...
@@ -199,6 +189,13 @@ function jtzwp_get_disclaimer(){
 /**
  * Special Yoast SEO plugin settings
  */
+function jtzwp_yoast_save_meta_val($metaKey,$metaVal,$postId){
+    if (function_exists('wpseo_set_value')){
+        add_action('wpseo_saved_postdata',function() use ($metaKey,$metaVal,$postId){
+            update_post_meta($postId,$metaKey,$metaVal);
+        },11);
+    }
+}
 function jtzwp_yoast_var_replacement__jtzwp_description($varName){
     global $jtzwpHelpers;
     // Lower
@@ -248,8 +245,17 @@ function jtzwp_after_post_edit($postId){
     // Make sure ID is of real post and not revision
     $postId = (!wp_is_post_revision($postId)) ? $postId : $postId->post_parent;
 
+    xdebug_break();
+
     // Check to see if "NoIndex" flag should be applied since post is "thin content"
-    
+    if ($jtzwpHelpers->shouldPostBeIndexed($postId) === false){
+        xdebug_break();
+        update_post_meta($postId,'_yoast_wpseo_meta-robots-noindex','1');
+        //jtzwp_yoast_save_meta_val($postId,'_yoast_wpseo_meta-robots-noindex','1');
+    }
+    else {
+        //update_post_meta($postId,'_yoast_wpseo_meta-robots-noindex','0');
+    }
 
     add_action('save_post','jtzwp_after_post_edit');
 
