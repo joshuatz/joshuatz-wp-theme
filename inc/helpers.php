@@ -630,6 +630,22 @@ class JtzwpHelpers {
         return $tagsInfo;
     }
 
+    public function getPostContentByRef($postRef){
+        $postContent = '';
+        $postObj = false;
+
+        if (gettype($postRef)==='integer'){
+            $postObj = get_post($postRef);
+        }
+        else if (gettype($postRef)==='object'){
+            $postObj = $postRef;
+        }
+        if ($postObj){
+            $postContent = $postObj->post_content;
+        }
+        return $postContent;
+    }
+
     public function postOnlyLinksExternally($postId){
         $postExternalLink = false;
         $currentUrl = $this->getCurrentUrl();
@@ -653,9 +669,17 @@ class JtzwpHelpers {
      */
     public function shouldPostBeIndexed($postId){
         $postShouldIndex = true;
+        $postUsesStaticHTMLFile = (get_field('uploaded_custom_html_file_path',$postId)!==null && strlen(get_field('uploaded_custom_html_file_path',$postId))>0);
 
         if ($this->postOnlyLinksExternally($postId)!==false){
             $postShouldIndex = false;
+        }
+        // If post content is less than 5 characters long
+        else if (strlen($this->getPostContentByRef($postId))<5 && strlen(get_field('raw_custom_html_code',$postId))<5 && !$postUsesStaticHTMLFile){
+            $postShouldIndex = false;
+            if ($this->isDebug){
+                $this->log('Post #' . $postId . ' is set to publish internally, but is failing content length requirements to index!');
+            }
         }
 
         return $postShouldIndex;
