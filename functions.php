@@ -189,7 +189,7 @@ function jtzwp_get_disclaimer(){
 /**
  * Special Yoast SEO plugin settings
  */
-function jtzwp_yoast_save_meta_val($metaKey,$metaVal,$postId){
+function jtzwp_yoast_save_meta_val($postId,$metaKey,$metaVal){
     if (function_exists('wpseo_set_value')){
         add_action('wpseo_saved_postdata',function() use ($metaKey,$metaVal,$postId){
             update_post_meta($postId,$metaKey,$metaVal);
@@ -245,17 +245,37 @@ function jtzwp_after_post_edit($postId){
     // Make sure ID is of real post and not revision
     $postId = (!wp_is_post_revision($postId)) ? $postId : $postId->post_parent;
 
-    xdebug_break();
-
     // Check to see if "NoIndex" flag should be applied since post is "thin content"
-    if ($jtzwpHelpers->shouldPostBeIndexed($postId) === false){
-        xdebug_break();
-        update_post_meta($postId,'_yoast_wpseo_meta-robots-noindex','1');
-        //jtzwp_yoast_save_meta_val($postId,'_yoast_wpseo_meta-robots-noindex','1');
-    }
-    else {
-        //update_post_meta($postId,'_yoast_wpseo_meta-robots-noindex','0');
-    }
+    /**
+     * !!!-NOTE-!!! - Yoast no longer uses binary setting with _yoast_wpseo_meta-robots-noindex
+     *       - If you want to turn off indexing (noindex) - the value should be '1'
+     *       - When you turn indexing back ON (default setting) there are a few ways to do this
+     *           - You can set the value to '2' - which equates to 'yes'
+     *              OR - and this is what Yoast does if you change the setting yourself in the GUI back to default -
+     *           - You can DELETE the meta value for the post, which tells Yoast that the post INHERITS the noindex setting from the post-type group. For example, if you delete the meta value for a custom post type, that post will inherit the indexing setting applied for that specific custom post type group.
+     *              - Deleting the meta key seems the safest route, so that way you can easily toggle the default setting and still affect all the posts you want to.
+     */
+
+    xdebug_break();
+    add_action('wpseo_saved_postdata',function() use ($metaKey,$metaVal,$postId,$jtzwpHelpers){
+        update_post_meta($postId,$metaKey,$metaVal);
+        if ($jtzwpHelpers->shouldPostBeIndexed($postId) === false){
+            update_post_meta($postId,'_yoast_wpseo_meta-robots-noindex','1');
+            $jtzwpHelpers->log('Setting NoIndex to ON');
+        }
+        else {
+            // See note above about special Yoast noindex meta values
+            //update_post_meta($postId,'_yoast_wpseo_meta-robots-noindex','2');
+            delete_post_meta($postId,'_yoast_wpseo_meta-robots-noindex');
+            $jtzwpHelpers->log('Setting NoIndex to OFF');
+    
+        }
+        if ($jtzwpHelpers->isDebug){
+            $jtzwpHelpers->log('shouldPostBeIndexed() = ' . $jtzwpHelpers->boolToString($jtzwpHelpers->shouldPostBeIndexed($postId),true));
+            $jtzwpHelpers->log('_yoast_wpseo_meta-robots-noindex = ' . print_r(get_post_meta($postId,'_yoast_wpseo_meta-robots-noindex',true)),true);
+        }
+    },11);
+    
 
     add_action('save_post','jtzwp_after_post_edit');
 

@@ -667,16 +667,39 @@ class JtzwpHelpers {
     public function log($msg,$OPT_special = false){
         if ($this->isDebug){
             $logFilePath = $this->themeRootPath . '/config/log.txt';
+            $stamp = new DateTime('now');
             xdebug_break();
             if(file_exists($logFilePath) && is_writable($logFilePath)){
                 $logFile = fopen($logFilePath,'a') or die();
-                // make sure final char is new line, otherwise add
-                $msg = preg_match('/[\r\n]+[\s]{0,1}$/',$msg) ? $msg : $msg . "\n";
-                // write out the msg to file
-                fwrite($logFile,$msg);
-                // close file
-                fclose($logFile);
+                if ($OPT_special==='clearLog'){
+                    fwrite($logFile,'');
+                    fclose($logFile);
+                }
+                else {
+                    // make sure final char is new line, otherwise add
+                    $msg = preg_match('/[\r\n]+[\s]{0,1}$/',$msg) ? $msg : $msg . "\n";
+                    // Add timestamp to beginning of msg
+                    $msg = $stamp->getTimestamp() . ' --- ' . $msg;
+                    // write out the msg to file
+                    fwrite($logFile,$msg);
+                    // close file
+                    fclose($logFile);
+                }
             }
         }
+    }
+
+    /**
+     * Clear the log file
+     */
+    public function clearLog(){
+        $this->log('','clearLog');
+    }
+
+    /**
+     * Dang PHP casting
+     */
+    public function boolToString($myBool){
+        return $myBool ? 'true' : 'false';
     }
 }
