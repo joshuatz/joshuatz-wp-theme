@@ -19,6 +19,18 @@ class JtzwpHelpers {
      */
     public function __construct(){
         $this->isDebug = $this->getIsDebug();
+        $this->resetPaths();
+    }
+
+    /**
+     * Get Paths
+     */
+    public function resetPaths(){
+        $this->themeRootURL = (get_template_directory_uri());
+        $this->themeRootPath = (get_theme_root(get_template()) . '/' . get_template());
+        $this->themeLibURL = (get_template_directory_uri().'/lib');
+        $this->themeIncURL = (get_template_directory_uri().'/inc');
+        $this->themeIncPath = (get_template_directory() . '/inc');
     }
 
     /**
@@ -649,7 +661,22 @@ class JtzwpHelpers {
         return $postShouldIndex;
     }
 
+    /**
+     * Log a text string to the theme log file
+     */
     public function log($msg,$OPT_special = false){
-        
+        if ($this->isDebug){
+            $logFilePath = $this->themeRootPath . '/config/log.txt';
+            xdebug_break();
+            if(file_exists($logFilePath) && is_writable($logFilePath)){
+                $logFile = fopen($logFilePath,'a') or die();
+                // make sure final char is new line, otherwise add
+                $msg = preg_match('/[\r\n]+[\s]{0,1}$/',$msg) ? $msg : $msg . "\n";
+                // write out the msg to file
+                fwrite($logFile,$msg);
+                // close file
+                fclose($logFile);
+            }
+        }
     }
 }
