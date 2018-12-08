@@ -200,9 +200,20 @@ function jtzwp_get_disclaimer(){
  * Special Yoast SEO plugin settings
  */
 function jtzwp_yoast_var_replacement__jtzwp_description($varName){
-    $metaDescription = get_the_excerpt();
-    if (get_field('custom_seo_meta_description') && get_field('custom_seo_meta_description')!==''){
+    global $jtzwpHelpers;
+    // Lower
+    $metaDescription = '';
+    if (is_single() && get_field('custom_seo_meta_description') && get_field('custom_seo_meta_description')!==''){
         $metaDescription = get_field('custom_seo_meta_description');
+    }
+    else if (!is_single() && term_description() && term_description()!==''){
+        $metaDescription = strip_tags(term_description());
+    }
+    else if (!is_single() && get_post_type()===$jtzwpHelpers::PROJECTS_POST_TYPE){
+        $metaDescription = 'Projects that have used the ' . strtolower(single_cat_title('',false)) . ' skills of Joshua Tzucker';
+    }
+    else {
+        $metaDescription = get_the_excerpt();
     }
     return $metaDescription;
 }

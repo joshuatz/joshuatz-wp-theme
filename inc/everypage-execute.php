@@ -13,11 +13,19 @@
  */
 ?>
 <?php if($jtzwpHelpers->isDebug): ?>
+    <script>window.isDebug = true;</script>
     <script>console.log(<?php echo json_encode($wp_query); ?>);</script>
     <script>
         console.group('URL Info');
             console.log(<?php echo json_encode($jtzwpHelpers->getUrlInfo()); ?>);
         console.groupEnd();
+    </script>
+    <script>
+        (function($,Materialize){
+            $(document).ready(function(){
+                //
+            });
+        })(jQuery,M);
     </script>
 <?php endif; ?>
 

@@ -59,5 +59,21 @@
     $(document).ready(function(){
         // wow.js init
         new WOW().init();
+
+        // Debug stuff
+        if (window.isDebug){
+            // SEO
+            window.setTimeout(function(){
+                var description = $('meta[name="description"]').attr('content');
+                console.group('SEO Stuff');
+                    console.log('Title = ' + $('title').text());
+                    console.log('Description = ' + description);
+                    console.log('Description Length = ' + description.length + ' / 60');
+                    if ($('meta[name="keywords"]').length){
+                        console.log('Keywords = ' + $('meta[name="keywords"]').attr('content'));
+                    }
+                console.groupEnd();
+            },100);
+        }
     });
 })(jQuery,M);
