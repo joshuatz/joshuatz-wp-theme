@@ -617,4 +617,14 @@ class JtzwpHelpers {
         }
         return $tagsInfo;
     }
+
+    /**
+     * Checks whether or not a given post/page/etc should have the no-index flag applied
+     *  - NoIndex tells search engines not to index the given page, which prevents being penalized for having "thin content" or other less favorable content
+     * This is based on my criteria - either if page only links externally (redirects immediately) or fails sanity check of simple word count
+     * @return {boolean} true/false - if noindex flag should be applied. Does not set flag itself.
+     */
+    public function shouldPostUseNoIndex($post){
+
+    }
 }

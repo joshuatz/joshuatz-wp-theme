@@ -236,3 +236,22 @@ function jtzwp_register_yoast_extra_vars(){
     wpseo_register_var_replacement('%%jtzwp_keywords%%','jtzwp_yoast_var_replacement__jtzwp_keywords','advanced','Generated keywords based on ACF and post');
 }
 add_action('wpseo_register_extra_replacements','jtzwp_register_yoast_extra_vars');
+
+/**
+ * Hooks on saving a post
+ */
+function jtzwp_after_post_edit($postId){
+    global $jtzwpHelpers;
+    // Immediately unhook this function to avoid infinite loops
+    remove_action('save_post','jtzwp_after_post_edit');
+
+    // Make sure ID is of real post and not revision
+    $postId = (!wp_is_post_revision($postId)) ? $postId : $postId->post_parent;
+
+    // Check to see if "NoIndex" flag should be applied since post is "thin content"
+    
+
+    add_action('save_post','jtzwp_after_post_edit');
+
+}
+add_action('save_post','jtzwp_after_post_edit');
