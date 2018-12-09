@@ -80,6 +80,18 @@ function jtzwp_initial_settings_api_init(){
         )
     );
 
+    // About Me - Public Coder Profile URL
+    add_settings_field(
+        'jtzwp_about_me_coding_profile_url',
+        __( 'Coding Profile URL (Github, BitBucket, Etc.)','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_coding_profile_url'
+        )
+    );
+
     // About Me - Birthday
     add_settings_field(
         'jtzwp_about_me_birthdate',
