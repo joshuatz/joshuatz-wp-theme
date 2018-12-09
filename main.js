@@ -93,5 +93,10 @@
                 console.groupEnd();
             },100);
         }
+
+        // Fancybox-3
+        if (typeof($.fancybox)!=='undefined' && typeof($.fancybox.defaults)==='object'){
+            $.fancybox.defaults.arrows = true;
+        }
     });
 })(jQuery,M);

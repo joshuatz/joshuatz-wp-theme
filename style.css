@@ -733,3 +733,10 @@ ul.collapsible li.active .whenCollapsed {
     border-radius: 8px;
     margin: 10px;
 }
+
+/**
+* Lightboxes
+*/
+.fancybox-image, .fancybox-spaceball {
+    padding: 30px;
+}

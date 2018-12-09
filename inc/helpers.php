@@ -149,6 +149,10 @@ class JtzwpHelpers {
             '/bitbucket/' => array(
                 'type' => 'font-awesome',
                 'value' => 'fa-bitbucket'
+            ),
+            '/gitlab/' => array(
+                'type' => 'font-awesome',
+                'value' => 'fa-gitlab'
             )
         );
         if (isset($hostURL)){
