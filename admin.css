@@ -26,3 +26,7 @@
     background-color: red;
     color: white;
 }
+.jtzwp_options_page_form .settingsWrapper input[invalid="unknown"] {
+    background-color: yellow;
+    color: black;
+}

@@ -90,6 +90,12 @@ function joshuatzwp_scripts_deferred(){
     wp_enqueue_script('lightbox-2-js','https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js',array('jquery-3'),false,true);
 }
 
+function joshuatzwp_scripts_admin(){
+    global $themeRootURL;
+    // admin.js
+    wp_enqueue_script('admin-script',$themeRootURL.'/admin.js',array('jquery'),false,true);
+}
+
 function joshuatzwp_enqueue_loader_head() {
     // Load styles
     joshuatzwp_styles();
@@ -105,7 +111,10 @@ function joshuatzwp_enqueue_loader_deferred(){
 }
 
 function joshuatzwp_enqueue_loader_admin(){
+    // Load styles
     joshuatzwp_styles_for_admin();
+    // Load scripts
+    joshuatzwp_scripts_admin();
 }
 
 /**
