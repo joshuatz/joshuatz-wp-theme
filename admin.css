@@ -22,3 +22,7 @@
     padding-top: 10px;
     margin-right: 12%;
 }
+.jtzwp_options_page_form .settingsWrapper input.invalid, .jtzwp_options_page_form .settingsWrapper input[invalid="true"]  {
+    background-color: red;
+    color: white;
+}

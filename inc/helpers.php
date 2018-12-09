@@ -22,7 +22,11 @@ class JtzwpHelpers {
         $this->isDebug = $this->getIsDebug();
         $this->resetPaths();
         $this->themeUserSettingsValidations = array(
-            'jtzwp_about_me_email' => "/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/"
+            'jtzwp_ga_gauid' => "/UA-\d{8}-\d{1}/i",
+            'jtzwp_disqus_subdomain' => "/[^\.]+\.disqus\.com/i",
+            'jtzwp_about_me_email' => ",[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?,i",
+            'jtzwp_about_me_birthdate' => "/\d{2}\/\d{2}\/\d{4}/i",
+            'jtzwp_about_me_profile_picture_filepath' => "/jpg|jpeg|webm|png|gif|bmp/i"
         );
     }
 
@@ -731,7 +735,7 @@ class JtzwpHelpers {
         return $myBool ? 'true' : 'false';
     }
 
-    private function validateThemeUserSetting($key,$val){
+    public function validateThemeUserSetting($key,$val){
         if ($val!==''){
             if (isset($this->themeUserSettingsValidations[$key])){
                 return preg_match($this->themeUserSettingsValidations[$key],$val);

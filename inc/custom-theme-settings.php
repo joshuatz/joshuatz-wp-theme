@@ -79,6 +79,54 @@ function jtzwp_initial_settings_api_init(){
             'jtzwp_about_me_linkedin_url'
         )
     );
+
+    // About Me - Birthday
+    add_settings_field(
+        'jtzwp_about_me_birthdate',
+        __( 'Birthdate - used to display age. Please use MM/DD/YYYY format','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_birthdate'
+        )
+    );
+
+    // About Me - Profile Picture Path
+    add_settings_field(
+        'jtzwp_about_me_profile_picture_filepath',
+        __( 'URL to uploaded profile picture. If left blank, will default to site icon or silhouette.','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_profile_picture_filepath'
+        )
+    );
+
+    // About Me - Displayed Name
+    add_settings_field(
+        'jtzwp_about_me_displayed_name',
+        __( 'The name to display around the site','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_displayed_name'
+        )
+    );
+
+    // About Me - Geo Description
+    add_settings_field(
+        'jtzwp_about_me_geo_description',
+        __( 'How you want to describe your geography. Something like "Greater Seattle Area"','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_geo_description'
+        )
+    );
 }
 // Attach settings init function to wp settings init
 add_action('admin_init','jtzwp_initial_settings_api_init');
@@ -92,18 +140,12 @@ function jtzwp_options_page_html(){
         <h2>joshuatz-wp Options</h2>
         <div class="divider"></div>
         <div class="settingsWrapper">
-            <div class="generalSettings">
-                <div class="offset-s1">
-                    <?php
-                        settings_fields('jtzwp_options_page');
-                        do_settings_sections('jtzwp_options_page');
-                        submit_button();
-                    ?>
-                </div>
-            </div>
-            <div class="aboutMeSettings">
-                <div class="offset-s1">
-                </div>
+            <div class="offset-s1">
+                <?php
+                    settings_fields('jtzwp_options_page');
+                    do_settings_sections('jtzwp_options_page');
+                    submit_button();
+                ?>
             </div>
         </div>
         
@@ -120,11 +162,13 @@ function jtzwp_options_page_html(){
  * When using with add_setting_field(), make sure 6th argument to that function (the args option) is array('YOUR_SETTING_NAME'), because this will get passed as $args here
  */
 function jtzwp_generic_text_field_render($args){
+    global $jtzwpHelpers;
     $options = get_option('jtzwp_settings');
     $currOptionName = $args[0];
-    $classString = isset($ars[1]) ? $ars[1] : '';
     $currOptionvalue = $options[$currOptionName];
-    echo '<input type="text" class="' . $classString . '" id="'. $currOptionName .'" name="jtzwp_settings['. $currOptionName .']" value="' . $currOptionvalue . '" />';
+    $currOptionValidity = $jtzwpHelpers->validateThemeUserSetting($currOptionName,$currOptionvalue);
+    $classString = isset($ars[1]) ? $ars[1] : '';
+    echo '<input type="text" class="' . $classString . '" id="'. $currOptionName .'" name="jtzwp_settings['. $currOptionName .']" value="' . $currOptionvalue . '" invalid="' . $jtzwpHelpers->boolToString(!$currOptionValidity) . '" />';
 }
 
 /**
