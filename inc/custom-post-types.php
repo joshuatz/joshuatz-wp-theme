@@ -41,7 +41,7 @@ function jtzwp_register_projects_posttype(){
         "hierarchical" => true,
 		"rewrite" => array(
             "slug" => "projects",
-            "with_front" => true
+            "with_front" => false
         ),
 		// Requires https://wordpress.org/plugins/custom-post-type-permalinks/
 		// Avoided using JUST %project_types% as path, since you can't limit a taxonomy to a single selection (not easily), so this is safer and more permanent permalink
@@ -99,7 +99,7 @@ function jtwp_register_tools_posttype(){
 		"hierarchical" => false,
 		"rewrite" => array(
 			"slug" => "custom-tools",
-			"with_front" => true
+			"with_front" => false
 		),
 		"cptp_permalink_structure" => "/%year%/%postname%/",
 		"menu_icon" => "dashicons-hammer",

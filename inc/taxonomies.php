@@ -16,7 +16,7 @@ function jtzwp_register_project_types_taxonomy(){
         // "rewrite" => false,
         "rewrite" => array(
             "slug" => "projects",
-            "with_front" => true
+            "with_front" => false
         ),
 		"show_admin_column" => true,
 		"show_in_rest" => false,
