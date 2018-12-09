@@ -13,6 +13,7 @@ class JtzwpHelpers {
     const PROJECTS_POST_TYPE = 'projects';
     const TOOLS_POST_TYPE = 'custom_built_tools';
     const CUSTOM_REDIRECTS_FILENAME = 'jtzwp-custom-redirects.json';
+    const USER_SETTINGS_REG_NAME = 'jtzwp_settings';
 
     /**
      * Constructor
@@ -20,6 +21,9 @@ class JtzwpHelpers {
     public function __construct(){
         $this->isDebug = $this->getIsDebug();
         $this->resetPaths();
+        $this->themeUserSettingsValidations = array(
+            'jtzwp_about_me_email' => "/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/"
+        );
     }
 
     /**
@@ -725,5 +729,38 @@ class JtzwpHelpers {
      */
     public function boolToString($myBool){
         return $myBool ? 'true' : 'false';
+    }
+
+    private function validateThemeUserSetting($key,$val){
+        if ($val!==''){
+            if (isset($this->themeUserSettingsValidations[$key])){
+                return preg_match($this->themeUserSettingsValidations[$key],$val);
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function getThemeUserSetting($key){
+        $retVal = (object) array(
+            'isSet' => false,
+            'isValid' => false,
+            'val' => ''
+        );
+        $themeUserSettings = get_settings($this::USER_SETTINGS_REG_NAME);
+        if ($isset($themeUserSettings[$key])){
+            $val = $themeUserSettings[$key];
+            if ($val!==''){
+                $retVal->isSet = true;
+                $retVal->val = $val;
+                // Check against regex validators
+                $retVal->isValid = $this->validateThemeUserSetting($key,$val);
+            }
+        }
+        return $retVal;
     }
 }
