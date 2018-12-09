@@ -10,3 +10,15 @@
 .offset-s3 {
     margin-left: calc((100/(12/3))*1%) !important;
 }
+
+/**
+* Styles for options pages
+*/
+.jtzwp_options_page_form .settingsWrapper table.form-table {
+    margin-left: 10%;
+}
+.jtzwp_options_page_form .settingsWrapper h2 {
+    border-top: 1px dashed black;
+    padding-top: 10px;
+    margin-right: 12%;
+}

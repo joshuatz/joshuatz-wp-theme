@@ -17,14 +17,22 @@ add_action('admin_menu','jtwzp_add_admin_menu');
  */
 function jtzwp_initial_settings_api_init(){
     register_setting('jtzwp_options_page','jtzwp_settings');
+    // Add "general settings" group / section
     add_settings_section(
 		'jtzwp_general_settings_section', 
 		__( 'General Settings', 'wordpress' ), 
 		'jtzwp_section_description_echo_general_settings', 
 		'jtzwp_options_page'
-	);
+    );
+    // Add "About Me" settings group / section
+    add_settings_section(
+        'jtzwp_about_me_settings_section',
+        __('About Me','wordpress'),
+        'jtzwp_sections_description_echo_about_me_settings',
+        'jtzwp_options_page'
+    );
 
-    // Google Analytics GAUID
+    // General Settings - Google Analytics GAUID
 	add_settings_field(
 		'jtzwp_ga_gauid',
 		__( 'Google Analytics GA ID', 'wordpress' ),
@@ -36,7 +44,7 @@ function jtzwp_initial_settings_api_init(){
         )
     );
     
-    // Disqus commenting subdomain
+    // General Settings - Disqus commenting subdomain
     add_settings_field(
         'jtzwp_disqus_subdomain',
         __( 'Disqus Custom Subdomain','wordpress'),
@@ -45,6 +53,30 @@ function jtzwp_initial_settings_api_init(){
         'jtzwp_general_settings_section',
         array(
             'jtzwp_disqus_subdomain'
+        )
+    );
+
+    // About Me - Email Address
+    add_settings_field(
+        'jtzwp_about_me_email',
+        __( 'Email Address for Contact','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_email'
+        )
+    );
+
+    // About Me - LinkedIn URL
+    add_settings_field(
+        'jtzwp_about_me_linkedin_url',
+        __( 'LinkedIn URL','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_linkedin_url'
         )
     );
 }
@@ -56,13 +88,25 @@ add_action('admin_init','jtzwp_initial_settings_api_init');
  */
 function jtzwp_options_page_html(){
     ?>
-    <form action="options.php" method="post">
+    <form action="options.php" method="post" class="jtzwp_options_page_form">
         <h2>joshuatz-wp Options</h2>
-        <?php
-            settings_fields('jtzwp_options_page');
-            do_settings_sections('jtzwp_options_page');
-            submit_button();
-        ?>
+        <div class="divider"></div>
+        <div class="settingsWrapper">
+            <div class="generalSettings">
+                <div class="offset-s1">
+                    <?php
+                        settings_fields('jtzwp_options_page');
+                        do_settings_sections('jtzwp_options_page');
+                        submit_button();
+                    ?>
+                </div>
+            </div>
+            <div class="aboutMeSettings">
+                <div class="offset-s1">
+                </div>
+            </div>
+        </div>
+        
     </form>
     <?php
 }
@@ -78,8 +122,9 @@ function jtzwp_options_page_html(){
 function jtzwp_generic_text_field_render($args){
     $options = get_option('jtzwp_settings');
     $currOptionName = $args[0];
+    $classString = isset($ars[1]) ? $ars[1] : '';
     $currOptionvalue = $options[$currOptionName];
-    echo '<input type="text" id="'. $currOptionName .'" name="jtzwp_settings['. $currOptionName .']" value="' . $currOptionvalue . '" />';
+    echo '<input type="text" class="' . $classString . '" id="'. $currOptionName .'" name="jtzwp_settings['. $currOptionName .']" value="' . $currOptionvalue . '" />';
 }
 
 /**
@@ -87,4 +132,7 @@ function jtzwp_generic_text_field_render($args){
  */
 function jtzwp_section_description_echo_general_settings(){
     echo __( 'This section covers general settings of the joshuatz-wp theme', 'wordpress' );
+}
+function jtzwp_sections_description_echo_about_me_settings(){
+    echo __('This section is for putting your personal details that will be used to populate the contact areas of the site.');
 }
