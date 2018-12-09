@@ -1,2 +1,4 @@
 # Ignore log files
 /config/log.txt
+# Ignore scratch
+/scratch
