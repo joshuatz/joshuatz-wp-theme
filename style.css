@@ -704,6 +704,9 @@ ul.collapsible li.active .whenCollapsed {
     font-size: 18em;
     color: white;
 }
+.preloaderAnimation img {
+    width: 100%;
+}
 .rotating {
     animation: rotating 2s infinite linear;
     -webkit-animation: rotating 2s infinite linear;
@@ -866,10 +869,11 @@ ul.collapsible li.active .whenCollapsed {
 * Modal version of business card
 */
 .businessCardMaterializeModal {
-    top: 16% !important;
+    top: 10% !important;
     background-color: unset;
     max-width: 600px;
     width: 94% !important;
+    min-height: 450px;
 }
 .businessCardMaterializeModal .businessCard {
     width: 100%;
