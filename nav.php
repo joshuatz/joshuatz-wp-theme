@@ -496,7 +496,7 @@ ul.nav {
             </li>
             <?php endif; ?>
 			<li>
-			  <a href="https://www.linkedin.com/in/joshuatzucker" target="_blank" id="linkedIn">About / <i class="fa fa-linkedin-square" style="font-size:large"></i>
+			  <a href="#businessCardMaterializeModal" id="linkedIn" class="modal-trigger">About / <i class="fa fa-linkedin-square" style="font-size:large"></i>
 				</a>
 			</li>
 			<li class='dropdown'>

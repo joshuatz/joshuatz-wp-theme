@@ -5,6 +5,23 @@
     $(document).ready(function(){
         // Collapsible (aka accordian) sections
         $('.collapsible').collapsible();
+        // Modals
+        $('.modal').each(function(){
+            var modal = this;
+            var modalConfig = {};
+            var modalOptions = ['opacity','inDuration','outDuration','onOpenStart','onOpenEnd','onCloseStart','onCloseEnd','preventScrolling','dismissible','startingTop','endingTop'];
+            for (var x=0; x<modalOptions.length; x++){
+                if (modal.hasAttribute(modalOptions[x]) && modal.getAttribute(modalOptions[x])!==''){
+                    modalConfig[modalOptions[x]] = modal.getAttribute(modalOptions[x]);
+                }
+            }
+            if (modalConfig!=={}){
+                $(modal).modal(modalConfig);
+            }
+            else {
+                $(modal).modal();
+            }
+        });
     });
 })(jQuery,M);
 
