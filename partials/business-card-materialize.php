@@ -49,11 +49,11 @@
 <?php if($minimumsMet): ?>
 <div class="businessCard materialize">
     <div class="background">
-        <div class="diagonals"></div>
+        <div class="diagonals hide-on-small-only"></div>
     </div>
     <div class="card-panel z-depth-4 hoverable">
-        <div class="row valign-wrapper">
-            <div class="col s8 leftSide">
+        <div class="row">
+            <div class="col s12 m8 leftSide">
                 <div class="row nameAndTitleSection">
                     <div class="fullName col s12"><?php echo $name->val; ?></div>
                     <div class="divider col s12" style="height: 2px;"></div>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s4 rightSide">
+            <div class="col s6 offset-s3 m4 rightSide">
                 <div class="valign-wrapper">
                     <?php if($profilePictureURL): ?>
                     <div class="profilePictureWrapper col s12 z-depth-2">

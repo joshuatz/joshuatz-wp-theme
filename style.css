@@ -857,14 +857,24 @@ ul.collapsible li.active .whenCollapsed {
 .businessCard .linksAndDetailsSection {
     min-height: 88px;
 }
+@media (max-width: 600px) {
+    .businessCard .profilePictureWrapper {
+        margin-top: 0px;
+    }
+}
+/**
+* Modal version of business card
+*/
 .businessCardMaterializeModal {
-    top: 25% !important;
+    top: 16% !important;
     background-color: unset;
     max-width: 600px;
+    width: 94% !important;
 }
 .businessCardMaterializeModal .businessCard {
     width: 100%;
     margin-top: 0px;
+    /* min-width: 500px; */
 }
 .businessCardMaterializeModal .card-panel {
     margin: unset;
