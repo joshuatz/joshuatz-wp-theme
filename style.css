@@ -854,3 +854,6 @@ ul.collapsible li.active .whenCollapsed {
     font-size: medium;
     font-style: italic;
 }
+.businessCard .linksAndDetailsSection {
+    min-height: 88px;
+}

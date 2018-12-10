@@ -136,23 +136,28 @@ class JtzwpHelpers {
         $codeHostIconMappings = array(
             '/github/' => array(
                 'type' => 'font-awesome',
-                'value' => 'fa-github'
+                'value' => 'fa-github',
+                'name' => 'GitHub'
             ),
             '/codepen/' => array(
                 'type' => 'font-awesome',
-                'value' => 'fa-codepen'
+                'value' => 'fa-codepen',
+                'name' => 'Codepen'
             ),
             '/jsfiddle/' => array(
                 'type' => 'font-awesome',
-                'value' => 'fa-jsfiddle'
+                'value' => 'fa-jsfiddle',
+                'name' => 'JSFiddle'
             ),
             '/bitbucket/' => array(
                 'type' => 'font-awesome',
-                'value' => 'fa-bitbucket'
+                'value' => 'fa-bitbucket',
+                'name' => 'Bitbucket'
             ),
             '/gitlab/' => array(
                 'type' => 'font-awesome',
-                'value' => 'fa-gitlab'
+                'value' => 'fa-gitlab',
+                'name' => 'GitLab'
             )
         );
         if (isset($hostURL)){
@@ -163,7 +168,8 @@ class JtzwpHelpers {
                     $finalIconInfo = $value;
                     break;
                 }
-            }          
+            }
+            $finalIconInfo['foundMatch'] = $foundMatch;
         }
         // Generate HTML
         if ($finalIconInfo['type']==='font-awesome'){

@@ -17,6 +17,7 @@
     $geography = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_geo_description');
     $linkedInURL = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_linkedin_url');
     $codingProfileURL = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_coding_profile_url');
+    $codingProfileIconInfo = $jtzwpHelpers->codeHostIconMapper($codingProfileURL->val);
     $profilePictureFilePath = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_profile_picture_filepath');
 
 
@@ -54,9 +55,11 @@
         <div class="row valign-wrapper">
             <div class="col s8 leftSide">
                 <div class="row nameAndTitleSection">
-                    <div class="fullName col s12">Mr. Joshua Tzucker</div>
+                    <div class="fullName col s12"><?php echo $name->val; ?></div>
                     <div class="divider col s12" style="height: 2px;"></div>
-                    <div class="jobTitle col s11 offset-s1">Professional Tinkerer</div>
+                    <?php if ($nameSubHeading->isValid): ?>
+                    <div class="jobTitle col s11 offset-s1"><?php echo $nameSubHeading->val; ?></div>
+                    <?php endif; ?>
                 </div>
                 <div class="row">
                     <div class="col s11 offset-s1 linksAndDetailsSection">
@@ -71,9 +74,9 @@
                                     <a href="mailto:<?php echo $emailAddress->val; ?>?subject=I%20Found%20Your%20Website" target="_blank"><?php echo $emailAddress->val; ?></a>
                                 </div>
                             </div>
-                            <div class="rowJoinerWrapper"><div class="rowJoiner iconsSolidBackground"></div></div>
                         <?php endif; ?>
                         <?php if($geography->isValid): ?>
+                            <div class="rowJoinerWrapper"><div class="rowJoiner iconsSolidBackground"></div></div>
                             <div class="geography col s12 valign-wrapper">
                                 <div class="iconWrapper z-depth-2 iconsSolidBackground">
                                     <div class="icon">
@@ -84,9 +87,9 @@
                                     <span><?php echo $geography->val; ?></span>
                                 </div>
                             </div>
-                            <div class="rowJoinerWrapper"><div class="rowJoiner iconsSolidBackground"></div></div>
                         <?php endif; ?>
                         <?php if ($linkedInURL->isValid): ?>
+                            <div class="rowJoinerWrapper"><div class="rowJoiner iconsSolidBackground"></div></div>
                             <div class="linkedInURL col s12 valign-wrapper">
                                 <div class="iconWrapper z-depth-2 iconsSolidBackground">
                                     <div class="icon">
@@ -97,17 +100,22 @@
                                     <a href="<?php echo $linkedInURL->val; ?>" target="_blank">LinkedIn</a>
                                 </div>
                             </div>
-                            <div class="rowJoinerWrapper"><div class="rowJoiner iconsSolidBackground"></div></div>
                         <?php endif; ?>
                         <?php if($codingProfileURL->isValid): ?>
+                            <div class="rowJoinerWrapper"><div class="rowJoiner iconsSolidBackground"></div></div>
                             <div class="codingProfileURL col s12 valign-wrapper">
                                 <div class="iconWrapper z-depth-2 iconsSolidBackground">
                                     <div class="icon">
-                                        <i class="material-icons left">code</i><i class="fa fa-github iconsSolidBackground" aria-hidden="true"></i>
+                                        <i class="material-icons left">code</i>
+                                        <?php if($codingProfileIconInfo['foundMatch']===true && $codingProfileIconInfo['type']==='font-awesome'): ?>
+                                        <i class="fa fa-github iconsSolidBackground" aria-hidden="true"></i>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="textWrapper">
-                                    <a href="https://github.com/joshuatz" target="_blank">Github</a>
+                                    <a href="<?php echo $codingProfileURL->val; ?>" target="_blank">
+                                        <?php echo ($codingProfileIconInfo['foundMatch']===true) ? $codingProfileIconInfo['name'] : 'Coding Examples' ?>
+                                    </a>
                                 </div>
                             </div>
                         <?php endif; ?>
