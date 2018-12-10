@@ -78,7 +78,7 @@ function getFixedFooter(){
 
                         
                     ?>
-                    <div class="col s12 m6 l6 xl6 customToolListing" data-id="<?php echo the_ID(); ?>">
+                    <div class="col s12 m6 l4 xl4 customToolListing" data-id="<?php echo the_ID(); ?>">
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-light">
                                 <img class="activator" style="padding:20px;" src="<?php echo $promoImageSrc; ?>">

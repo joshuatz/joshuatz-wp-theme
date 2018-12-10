@@ -36,8 +36,8 @@ Text Domain: joshuatzwp
     color: white;
 }
 .jtzwp-error {
-    background-color: #F69087;
-    color: white;
+    background-color: #F69087 !important;
+    color: white !important;
 }
 .btn.jtzwp-dark:hover, .btn.jtzwp-darkblue:hover {
     background-color: #A3BFE1;
