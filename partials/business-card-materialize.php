@@ -3,6 +3,20 @@
  * Materialize styled business card
  */
 ?>
+<?php
+/**
+ * Preprocessing
+ */
+    global $jtzwpHelpers;
+    $age = false;
+    $birthday = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_birthdate');
+    if ($birthday->isValid){
+        $birthdayDateTime = new DateTime($birthday->val);
+        $now = new DateTime('now');
+        $ageDiff = date_diff($birthdayDateTime,$now,true);
+        $age = $jtzwpHelpers->getDateDiffByUnit($ageDiff,'years');
+    }
+?>
 <div class="businessCard materialize">
     <div class="background">
         <div class="diagonals"></div>
@@ -66,12 +80,14 @@
             <div class="col s4 rightSide">
                 <div class="valign-wrapper">
                     <div class="profilePictureWrapper col s12 z-depth-2">
-                        <img class="profilePicture responsive-img" src="wp-content/uploads/favicon3.png">
+                        <img class="profilePicture responsive-img" src="/wp-content/uploads/favicon3.png">
                     </div>
                 </div>
-                <div class="ageWrapper col s12 center">
-                    <span>Age 26</span>
-                </div>
+                <?php if ($age): ?>
+                    <div class="ageWrapper col s12 center">
+                        <span>Age <?php echo $age; ?></span>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

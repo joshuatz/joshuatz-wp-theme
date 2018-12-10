@@ -760,7 +760,7 @@ class JtzwpHelpers {
             'val' => ''
         );
         $themeUserSettings = get_settings($this::USER_SETTINGS_REG_NAME);
-        if ($isset($themeUserSettings[$key])){
+        if (isset($themeUserSettings[$key])){
             $val = $themeUserSettings[$key];
             if ($val!==''){
                 $retVal->isSet = true;
