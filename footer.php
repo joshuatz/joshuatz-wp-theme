@@ -9,17 +9,6 @@
         <?php get_template_part('partials/business-card-materialize'); ?>
     </div>
 </div>
-<script>
-setTimeout(function(){
-    (function($,Materialize){
-        $(document).ready(function(){
-            $('.businessCardMaterializeModal').modal({
-                opacity : 0.9
-            });
-        })
-    })(jQuery,M);
-}, 100);
-</script>
 <?php get_template_part('partials/business-card-materialize'); ?>
 <?php wp_footer(); ?>
 </body>

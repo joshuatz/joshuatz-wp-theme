@@ -10,12 +10,16 @@
             var modal = this;
             var modalConfig = {};
             var modalOptions = ['opacity','inDuration','outDuration','onOpenStart','onOpenEnd','onCloseStart','onCloseEnd','preventScrolling','dismissible','startingTop','endingTop'];
+            var matchingOptions = 0;
             for (var x=0; x<modalOptions.length; x++){
-                if (modal.hasAttribute(modalOptions[x]) && modal.getAttribute(modalOptions[x])!==''){
-                    modalConfig[modalOptions[x]] = modal.getAttribute(modalOptions[x]);
+                var optionAttrName = 'data-' + modalOptions[x];
+                if (modal.hasAttribute(optionAttrName) && modal.getAttribute(optionAttrName)!==''){
+                    modalConfig[modalOptions[x]] = modal.getAttribute(optionAttrName);
+                    matchingOptions++;
                 }
             }
-            if (modalConfig!=={}){
+            if (matchingOptions > 0){
+                console.log(modalConfig);
                 $(modal).modal(modalConfig);
             }
             else {
