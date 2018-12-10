@@ -128,6 +128,19 @@ function jtzwp_initial_settings_api_init(){
         )
     );
 
+    // About Me - Name Sub-heading / Job Title
+    add_settings_field(
+        'jtzwp_about_me_name_subheading',
+        __( 'Job Title / Name Sub-Heading','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_name_subheading'
+        )
+    );
+
+
     // About Me - Geo Description
     add_settings_field(
         'jtzwp_about_me_geo_description',

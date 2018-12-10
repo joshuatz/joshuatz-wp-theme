@@ -33,6 +33,7 @@ Text Domain: joshuatzwp
 }
 .jtzwp-dark,.jtzwp-darkblue {
     background-color: #2E3641;
+    color: white;
 }
 .jtzwp-error {
     background-color: #F69087;
@@ -69,6 +70,14 @@ Text Domain: joshuatzwp
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.autoFullWrap {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
 }
 
 /** Page headings */
@@ -739,4 +748,109 @@ ul.collapsible li.active .whenCollapsed {
 */
 .fancybox-image, .fancybox-spaceball {
     padding: 30px;
+}
+
+/**
+* Business Card - Materialize Styled
+*/
+.businessCard {
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    font-family: 'lato','sans-serif';
+    font-size: 1.1em;
+    position: relative;
+}
+.businessCard .fullName {
+    font-weight: bolder;
+    font-size: 2em;
+}
+.businessCard .jobTitle {
+    font-style: italic;
+    font-size: 1.3em;
+}
+.businessCard .profilePictureWrapper {
+    overflow: hidden;
+    border-radius: 50%;
+    padding: 10px;
+    border: 4px solid black;
+    margin-top: 38%;
+}
+.businessCard .linksAndDetailsSection .rowJoinerWrapper {
+    width: 34px;
+    height: 15px;
+    padding-left: 0.75rem;
+    min-height: 1px;
+    position: relative;
+    text-align: center;
+    z-index: 999;
+    float: left;
+    margin-bottom: -1px;
+    margin-top: -1px;
+}
+.businessCard .linksAndDetailsSection .rowJoiner {
+    width: 50%;
+    height: 100%;
+    margin-left: auto;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.businessCard .linkedInURL i, .businessCard .codingProfileURL i {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    font-size: large;
+}
+.businessCard .linksAndDetailsSection i.fa {
+    font-size: x-large;
+}
+.businessCard .linksAndDetailsSection .iconWrapper {
+    display: inline-block;
+    width: 34px;
+    height: 31px;
+    padding-top: 3px;
+    padding-left: 4px;
+    margin-right: 10px;
+    border-radius: 8px;
+    border: 1px solid black;
+
+}
+.businessCard .linksAndDetailsSection .textWrapper {
+    display: inline-block;
+}
+.businessCard .iconsSolidBackground {
+    background-color: black;
+    color: white !important;
+}
+.businessCard .diagonals {
+    position: absolute;
+    height: 200%;
+    width: 14px;
+    top: -50%;
+    right: 222px;
+    border-left: 4px solid red;
+    border-right: 4px solid red;
+    transform: rotateZ(24deg);
+    background-color: #38013d;
+}
+.businessCard > .card-panel {
+    position: relative;
+    background-color: unset;
+}
+.businessCard .background {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    background-color: white;
+}
+.businessCard .ageWrapper {
+    margin-top: 4px;
+    font-size: medium;
+    font-style: italic;
 }
