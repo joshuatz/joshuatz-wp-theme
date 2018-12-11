@@ -136,6 +136,11 @@
                     </div>
                 <?php endif; ?>
             </div>
+            <div class="fixedUpperRightToolbar">
+                <div class="closeButtonWrapper modal-close">
+                    <i class="material-icons right">close</i>
+                </div>
+            </div>
         </div>
     </div>
 </div>

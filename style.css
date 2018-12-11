@@ -860,6 +860,11 @@ ul.collapsible li.active .whenCollapsed {
 .businessCard .linksAndDetailsSection {
     min-height: 88px;
 }
+.businessCard .fixedUpperRightToolbar {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
 @media (max-width: 600px) {
     .businessCard .profilePictureWrapper {
         margin-top: 0px;
@@ -873,7 +878,8 @@ ul.collapsible li.active .whenCollapsed {
     background-color: unset;
     max-width: 600px;
     width: 94% !important;
-    min-height: 450px;
+    min-height: 325px;
+    overflow-y: hidden;
 }
 .businessCardMaterializeModal .businessCard {
     width: 100%;
@@ -885,4 +891,7 @@ ul.collapsible li.active .whenCollapsed {
 }
 .businessCardMaterializeModal .modal-content {
     padding: 0px;
+}
+.businessCard .modal-close {
+    color: grey;
 }
