@@ -777,4 +777,10 @@ class JtzwpHelpers {
         }
         return $retVal;
     }
+
+    public function thePostThumbnailWithClass($size,$classString){
+        $rawHTML = the_post_thumbnail($size);
+        $finalHTML = preg_replace('/class="([^"]+)"/','class="$1 '.$classString,$rawHTML);
+        return $finalHTML;
+    }
 }

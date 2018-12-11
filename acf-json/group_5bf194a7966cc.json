@@ -60,6 +60,25 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_5c0f3b67c9813",
+            "label": "Custom Content For Listing",
+            "name": "custom_content_for_listing",
+            "type": "wysiwyg",
+            "instructions": "This content will display below the project listing description. Useful for extra promo images, callouts, etc.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
         }
     ],
     "location": [
@@ -86,5 +105,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1542848789
+    "modified": 1544502218
 }

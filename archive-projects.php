@@ -7,6 +7,7 @@
 get_header(); ?>
 
 <?php
+    global $jtzwpHelpers;
     $projectListingTitle = 'Here are some projects where I have used my ' . strtolower(single_cat_title('',false)) . ' skills';
     if (term_description()!==''){
         // Note: strip_tags necessary because term_description returns <p></p> wrapped text
@@ -27,21 +28,23 @@ get_header(); ?>
                         // per post pre-processing
                         $hasFeaturedImage = has_post_thumbnail();
                         $hasExcerpt = has_excerpt();
+                        $projectOnlyLinksExternally = $jtzwpHelpers->postOnlyLinksExternally($post->ID);
+                        $projectPermalink = ($projectOnlyLinksExternally===false) ? get_the_permalink() : $projectOnlyLinksExternally;
                     ?>
                     <div id="<?php echo the_ID(); ?>" class="projectItem">
                     <h2 class="projectItemTitle title"><a href="<?php echo the_permalink(); ?>" target="_self" class="hoverLinkOutlineThin"><?php echo the_title(); ?></a></h2>
                         <!-- Project Link Area -->
                         <div>
                             <?php if($hasFeaturedImage): ?>
-                                <a href="<?php echo the_permalink(); ?>" target="_self" class="projectLinkWrapper">
+                                <a href="<?php echo $projectPermalink; ?>" target="_self" class="projectLinkWrapper">
                                     <div class="projectLinkClickPrefix">Click here or the image below for the full project page!</div>
                                 </a>
-                                <a href="<?php echo the_permalink(); ?>" target="_self" class="projectLinkWrapper">
-                                    <img class="projectLinkClickArea" src="<?php echo the_post_thumbnail_url('medium'); ?>" >
+                                <a href="<?php echo $projectPermalink; ?>" target="_self" class="projectLinkWrapper">
+                                    <?php the_post_thumbnail('medium',array('class'=>'projectLinkClickArea')); ?>
                                 </a>
                             <?php else: ?>
                                 <div class="projectLinkClickArea">
-                                    <a href="<?php echo the_permalink(); ?>" target="_self" class="projectLinkWrapper">
+                                    <a href="<?php echo $projectPermalink; ?>" target="_self" class="projectLinkWrapper">
                                         <h3 style="padding:10px;">Click for Project Details!</h3>
                                     </a>
                                 </div>
@@ -51,6 +54,12 @@ get_header(); ?>
                         <?php if($hasExcerpt): ?>
                             <div class="projectExcerptWrapper">
                                 <p><?php echo get_the_excerpt(); ?></p>
+                            </div>
+                        <?php endif; ?>
+                        <!-- Project Custom Content For Listing -->
+                        <?php if(get_field('custom_content_for_listing') && get_field('custom_content_for_listing')!==''): ?>
+                            <div class="projectCustomContentForListingWrapper">
+                                <?php echo get_field('custom_content_for_listing'); ?>
                             </div>
                         <?php endif; ?>
                     </div>

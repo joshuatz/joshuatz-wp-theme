@@ -27,6 +27,7 @@ function getFixedFooter(){
             <div class="col <?php echo $footerColumnsMaterialize; ?> externalCodePageLinkWrapper">
                 <div class="btn black">
                     <a class="externalCodePageLink" href="<?php echo $externalCodePage; ?>" target="_blank">
+                        <span class="externalCodePageLinkName"><?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['name']; ?></span>
                         <?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['html']; ?>
                     </a>
                 </div>

@@ -483,6 +483,10 @@ a.readMore {
     text-decoration: underline;
     text-underline-position: under;
 }
+.projectItemTitle > a {
+    color: #2E3641;
+    text-decoration-color: #039be5
+}
 .projectItem a.projectLinkWrapper {
     width: 70%;
     max-width: 580px;

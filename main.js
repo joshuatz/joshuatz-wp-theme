@@ -19,7 +19,6 @@
                 }
             }
             if (matchingOptions > 0){
-                console.log(modalConfig);
                 $(modal).modal(modalConfig);
             }
             else {

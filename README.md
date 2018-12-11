@@ -15,6 +15,7 @@ Custom WordPress theme for joshuatz.com
          - You can configure a bunch of pattern based custom redirects with a simple JSON file, rather than having to install a special plugin. Clone jtzwp-custom-redirects.example.json and name as jtzwp-custom-redirects.json and place either in theme directory OR root of WP install - theme will check for both, and take root as preference.
 ### Recommended plugins and tweaks
  - Recommended Plugins
+     - Custom Post Type Permalinks - Highly Recommended for my custom post types - [WP Plugin Page](https://wordpress.org/plugins/custom-post-type-permalinks/)
      - Yoast SEO - [WP Plugin Page](https://wordpress.org/plugins/wordpress-seo/)
      - Advanced Custom Fields - [WP Plugin Page](https://wordpress.org/plugins/advanced-custom-fields/)
  - Recommended core tweaks
@@ -32,3 +33,4 @@ Custom WordPress theme for joshuatz.com
  - Redo nav and change from hardcoded to more dynamic based on native WP menu
      - Optionally, integrate Materialize walker version
  - Add Gutenberg support (color palettes, blocks, etc.)
+ - Add support for the AMP spec version of pages/posts

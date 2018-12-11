@@ -195,16 +195,20 @@ add_action('template_redirect','jtwzp_template_redirect_hook');
 function jtzwp_get_disclaimer(){
     global $jtzwpHelpers;
     $disclaimer = false;
+    $singularName = $jtzwpHelpers->getCustomPostTypeSingularName();
+    $yearsOld = $jtzwpHelpers->getDateDiffByUnit($jtzwpHelpers->getPublishedDateDiff(get_post()),'years');
+    $yearsOldDisclaimer = 'This ' . $singularName . ' is over a year old (first published about ' . $yearsOld . ' years ago). As such, please keep in mind that some of the information may no longer be accurate, best practice, or a reflection of how I would approach the same thing today.';
     if (get_field('show_disclaimer')===true){
-        $yearsOld = $jtzwpHelpers->getDateDiffByUnit($jtzwpHelpers->getPublishedDateDiff(get_post()),'years');
         $customDisclaimer = get_field('custom_disclaimer');
         if (strlen($customDisclaimer)>1){
             $disclaimer = $customDisclaimer;
         }
         else if ($yearsOld > 1){
-            $singularName = $jtzwpHelpers->getCustomPostTypeSingularName();
-            $disclaimer = 'This ' . $singularName . ' is over a year old (first published about ' . $yearsOld . ' years ago). As such, please keep in mind that some of the information may no longer be accurate, best practice, or a reflection of how I would approach the same thing today.';
+            $disclaimer = $yearsOldDisclaimer;
         }
+    }
+    else if ($yearsOld > 2){
+        $disclaimer = $yearsOldDisclaimer;
     }
     return $disclaimer;
 }
@@ -230,7 +234,9 @@ function jtzwp_yoast_var_replacement__jtzwp_description($varName){
         $metaDescription = strip_tags(term_description());
     }
     else if (!is_single() && get_post_type()===$jtzwpHelpers::PROJECTS_POST_TYPE){
-        $metaDescription = 'Projects that have used the ' . strtolower(single_cat_title('',false)) . ' skills of Joshua Tzucker';
+        $customName = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_displayed_name');
+        $name = $customName->isValid===true ? $customName->val : "this site's creator";
+        $metaDescription = 'Projects using the ' . strtolower(single_cat_title('',false)) . ' skills of ' . $name;
     }
     else {
         $metaDescription = get_the_excerpt();
