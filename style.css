@@ -79,6 +79,10 @@ Text Domain: joshuatzwp
     left: 0px;
     overflow: hidden;
 }
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 /** Page headings */
 .mainTitle {
@@ -463,6 +467,7 @@ a.readMore {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
+    min-width: 200px;
     border-top-left-radius: 60px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -470,6 +475,9 @@ a.readMore {
     border-style: solid;
     border-color: #2e3641;
     border-width: 2px;
+}
+.projectItem.half {
+    width: 45%;
 }
 .projectItemTitle {
     font-size: 2em;

@@ -8,18 +8,20 @@ get_header(); ?>
 
 <?php
     global $jtzwpHelpers;
+    xdebug_break();
     $projectListingTitle = 'Here are some projects where I have used my ' . strtolower(single_cat_title('',false)) . ' skills';
     if (term_description()!==''){
         // Note: strip_tags necessary because term_description returns <p></p> wrapped text
         $projectListingTitle = strip_tags(term_description());
     }
+    $projectCountOnPage = $wp_query->post_count;
 ?>
 
 <div id="main">
     <div class="projectListing">
         <?php if(have_posts()): ?>
             <h1 class="projectListingTitle mainTitle"><?php echo $projectListingTitle; ?></h1>
-            <div id="mainmenu">
+            <div id="mainmenu" class="flex">
                 <?php 
                 // Loop through matching posts
                 while (have_posts()): the_post();
@@ -31,8 +33,8 @@ get_header(); ?>
                         $projectOnlyLinksExternally = $jtzwpHelpers->postOnlyLinksExternally($post->ID);
                         $projectPermalink = ($projectOnlyLinksExternally===false) ? get_the_permalink() : $projectOnlyLinksExternally;
                     ?>
-                    <div id="<?php echo the_ID(); ?>" class="projectItem">
-                    <h2 class="projectItemTitle title"><a href="<?php echo the_permalink(); ?>" target="_self" class="hoverLinkOutlineThin"><?php echo the_title(); ?></a></h2>
+                    <div id="<?php echo the_ID(); ?>" class="projectItem <?php echo $projectCountOnPage >=5 ? 'half' : 'full'; ?>">
+                        <h2 class="projectItemTitle title"><a href="<?php echo the_permalink(); ?>" target="_self" class="hoverLinkOutlineThin"><?php echo the_title(); ?></a></h2>
                         <!-- Project Link Area -->
                         <div>
                             <?php if($hasFeaturedImage): ?>
