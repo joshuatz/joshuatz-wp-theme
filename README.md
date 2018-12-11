@@ -19,6 +19,11 @@ Custom WordPress theme for joshuatz.com
      - Advanced Custom Fields - [WP Plugin Page](https://wordpress.org/plugins/advanced-custom-fields/)
  - Recommended core tweaks
      - Dynamically define WP_SITEURL and WP_HOME in wp-config.php - see [this](https://forum.laragon.org/topic/167/tutorial-how-to-force-wordpress-to-use-relative-urls-ngrok)
+     - Reduce the number of revisions that wordpress keeps (default is infinity!)
+         ````
+         define( 'WP_POST_REVISIONS', 3);
+         ````
+     - Here is a pretty good list of optimizations to make from the default config - [link](https://www.labnol.org/internet/wordpress-optimization-guide/3931/)
 ---
 ### ToDo
  - Create mapping system for loading scripts / styles

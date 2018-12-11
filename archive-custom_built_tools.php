@@ -70,7 +70,7 @@ function getFixedFooter(){
                         }
                         $allowReadMoreLink = isset($readMoreLink);
                         // External code page
-                        $hasExternalCodePage = get_field('externally_hosted_code_url')!==null;
+                        $hasExternalCodePage = get_field('externally_hosted_code_url')!==null && get_field('externally_hosted_code_url')!=='';
                         $externalCodePage = get_field('externally_hosted_code_url');
                         // Determine number of columns that will appear in footer
                         $footerColumns = ($allowReadMoreLink && $externalCodePage) ? 2 : 1;

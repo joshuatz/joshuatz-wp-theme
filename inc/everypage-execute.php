@@ -20,13 +20,6 @@
             console.log(<?php echo json_encode($jtzwpHelpers->getUrlInfo()); ?>);
         console.groupEnd();
     </script>
-    <script>
-        (function($,Materialize){
-            $(document).ready(function(){
-                //
-            });
-        })(jQuery,M);
-    </script>
 <?php endif; ?>
 
 <?
