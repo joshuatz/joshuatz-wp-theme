@@ -13,6 +13,12 @@ Custom WordPress theme for joshuatz.com
          - Disqus Custom Subdomain - For if you have Disqus setup and want to enable their comment embed system
      - Custom redirect system
          - You can configure a bunch of pattern based custom redirects with a simple JSON file, rather than having to install a special plugin. Clone jtzwp-custom-redirects.example.json and name as jtzwp-custom-redirects.json and place either in theme directory OR root of WP install - theme will check for both, and take root as preference.
+### Recommended plugins and tweaks
+ - Recommended Plugins
+     - Yoast SEO - [WP Plugin Page](https://wordpress.org/plugins/wordpress-seo/)
+     - Advanced Custom Fields - [WP Plugin Page](https://wordpress.org/plugins/advanced-custom-fields/)
+ - Recommended core tweaks
+     - Dynamically define WP_SITEURL and WP_HOME in wp-config.php - see [this](https://forum.laragon.org/topic/167/tutorial-how-to-force-wordpress-to-use-relative-urls-ngrok)
 ---
 ### ToDo
  - Create mapping system for loading scripts / styles
