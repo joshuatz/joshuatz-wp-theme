@@ -114,9 +114,12 @@ Text Domain: joshuatzwp
     text-align: center;
     padding: 10px;
     margin-top: 2px;
-    font-size: 3em;
+    font-size: 2rem;
     border-radius: 8px;
     margin-bottom: 10px;
+}
+.title {
+    font-size: 1.5rem;
 }
 .pageHeaderSection {
     background: rgba(255, 255, 255, 0.47);
@@ -227,7 +230,6 @@ body {
 #mainmenu {
 	width:100%;
 	text-align:center;
-	padding-top: 20px;
 }
 /* Bob */
 @-webkit-keyframes hvr-bob {
@@ -478,9 +480,6 @@ a.readMore {
     border-radius: 8px;
     margin: 10px;
 }
-.projectListingTitle {
-    font-size: 2.8em;
-}
 .projectItem {
 	background-color:#A3BFE1;
 	padding-bottom:30px;
@@ -488,7 +487,6 @@ a.readMore {
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 90%;
     min-width: 200px;
     border-top-left-radius: 60px;
     border-top-right-radius: 10px;
@@ -497,12 +495,13 @@ a.readMore {
     border-style: solid;
     border-color: #2e3641;
     border-width: 2px;
+    /* Comment out the below line if you don't care about equal height columns */
+    height: 96%;
 }
 .projectItem.half {
     width: 45%;
 }
 .projectItemTitle {
-    font-size: 2em;
     color: black;
     border-top: 2px solid rgba(0,0,0,0.2);
     border-bottom: 2px solid rgba(0,0,0,0.2);
@@ -554,6 +553,9 @@ a.readMore {
     border-color: rgba(46, 54, 65, 0.76);
     border-width: 2px;
 }
+.projectExcerptWrapper p {
+    font-size: 1.2rem;
+}
 .projectLinkClickPrefix {
     background-color: white;
     width: 100%;
@@ -562,8 +564,8 @@ a.readMore {
     margin-right: auto;
     border-radius: 10px;
     margin-bottom: 7px;
-    font-size: 20px;
-    padding: 20px;
+    font-size: 1rem;
+    padding: 8px 0px;
 }
 /**
 * Custom Tool Listings
@@ -573,10 +575,6 @@ a.readMore {
     padding: 10px;
     border-radius: 8px;
     margin: 10px;
-}
-.customToolsListingsTitle {
-    font-size: 2.3em;
-    margin-bottom: 10px;
 }
 .customToolListing {
     max-width: 550px;
@@ -912,7 +910,7 @@ ul.collapsible li.active .whenCollapsed {
     background-color: unset;
     max-width: 600px;
     width: 94% !important;
-    min-height: 325px;
+    min-height: 450px;
     overflow-y: hidden;
     display: none;
 }
@@ -948,4 +946,32 @@ ul.collapsible li.active .whenCollapsed {
     width: 100%;
     position: fixed;
     bottom: -20px;
+}
+
+/**
+* Main Materialize Breakpoints
+*/
+/** First breakpoint, .s */
+@media only screen and (max-width: 600px){
+    .mainTitle {
+        font-size: 1.4rem;
+    }
+    .title {
+        font-size: 1.2rem;
+    }
+    .projectExcerptWrapper p {
+        font-size: 1rem;
+    }
+}
+/** Second breakpoint, .m */
+@media only screen and (min-width:601px){
+
+}
+/** Third breakpoint, .l */
+@media only screen and (min-width:992px){
+
+}
+/** Fourth breakpoint, .xl */
+@media only screen and (min-width:1200px){
+
 }
