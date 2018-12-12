@@ -112,7 +112,7 @@ function getFixedFooter(){
                     endwhile;
                     ?>
                 </div>
-                <?php the_posts_pagination(); ?>
+                <?php get_template_part('partials/materialize-page-navigation'); ?>
             </div>
         <?php else: ?>
             <h2>Sorry, nothing here yet...</h2>

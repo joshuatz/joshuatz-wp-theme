@@ -47,11 +47,7 @@ get_header(); ?>
 			endwhile;
 
 			// Previous/next page navigation.
-			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'joshuatzwp' ),
-				'next_text'          => __( 'Next page', 'joshuatzwp' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'joshuatzwp' ) . ' </span>',
-			) );
+			get_template_part('partials/materialize-page-navigation');
 
 		// If no content, include the "No posts found" template.
 		else :
