@@ -18,14 +18,14 @@ function getFixedFooter(){
     <div class="fixed-footer row valign-wrapper" data-column="<?php echo $footerColumns; ?>">
         <?php if($allowReadMoreLink): ?>
             <div class="col <?php echo $footerColumnsMaterialize; ?> readMoreLinkWrapper">
-                <div class="btn black">
+                <div class="btn black wow bounce" data-wow-delay="0.5s" data-wow-iteration="2">
                     <a class="readMoreLink" href="<?php echo $readMoreLink; ?>">Read More</a>
                 </div>
             </div>
         <?php endif; ?>
         <?php if($hasExternalCodePage): ?>
             <div class="col <?php echo $footerColumnsMaterialize; ?> externalCodePageLinkWrapper">
-                <div class="btn black">
+                <div class="btn black wow bounce" data-wow-delay="0.5s" data-wow-iteration="2">
                     <a class="externalCodePageLink" href="<?php echo $externalCodePage; ?>" target="_blank">
                         <span class="externalCodePageLinkName"><?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['name']; ?></span>
                         <?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['html']; ?>
@@ -87,7 +87,6 @@ function getFixedFooter(){
                             </div>
                             <div class="card-content">
                                 <span class="card-title activator grey-text text-darken-4"><?php echo $displayTitle; ?><i class="material-icons right">more_vert</i></span>
-                                <?php //getFixedFooter(); ?>
                                 <div class="fixed-footer row">
                                     <div class="col s12 activator">
                                         <div class="btn black activator">
