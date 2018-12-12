@@ -15,6 +15,8 @@ get_header(); ?>
         $projectListingTitle = strip_tags(term_description());
     }
     $projectCountOnPage = $wp_query->post_count;
+    $totalNumPages = $wp_query->max_num_pages;
+    $currentPageNum = isset($paged) ? $paged : 1;
 ?>
 
 <div id="main">
@@ -68,15 +70,9 @@ get_header(); ?>
                 <?php
                 // End loop
                 endwhile;
-
-                // Previous/next page navigation.
-                the_posts_pagination(array(
-                    'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
-                    'next_text'          => __( 'Next page', 'twentyfifteen' ),
-                    'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
-                ));
                 ?>
             </div>
+            <?php get_template_part('partials/materialize-page-navigation'); ?>
         <?php else: ?>
             <h1 class="mainTitle">No matching projects found :(</h1>
         <?php endif; ?>

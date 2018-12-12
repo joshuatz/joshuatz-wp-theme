@@ -777,4 +777,11 @@ class JtzwpHelpers {
         }
         return $retVal;
     }
+    
+    public function grabHrefFromATag($aTag){
+        $matches = array();
+        preg_match('/href="([^"]*)"/i',$aTag,$matches);
+        $href = count($matches)>0 ? $matches[1] : '';
+        return $href;
+    }
 }

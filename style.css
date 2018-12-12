@@ -10,38 +10,39 @@ Text Domain: joshuatzwp
 
 /** Theme globals - reusable color classes */
 .jtzwp-salmon {
-    background-color: #F69087;
-    color: white;
+    background-color: #F69087 !important;
+    color: white !important;
 }
 .jtzwp-red {
-    background-color: #dd614a;
-    color: white;
+    background-color: #dd614a !important;
+    color: white !important;
 }
 .jtzwp-aqua {
-    background-color: #85CCB1;
+    background-color: #85CCB1 !important;
 }
 .jtzwp-blue,.jtzwp-lightblue {
-    background-color: #A3BFE1;
+    background-color: #A3BFE1 !important;
+    color: #2E3641 !important;
 }
 .btn.jtzwp-blue:hover,.btn.jtzwp-lightblue:hover {
-    background-color: #dd614a;
-    color: white;
+    background-color: #2E3641 !important;
+    color: white !important;
 }
 .jtzwp-green {
-    background-color: #B0CB7A;
-    color: #2E3641;
+    background-color: #B0CB7A !important;
+    color: #2E3641 !important;
 }
 .jtzwp-dark,.jtzwp-darkblue {
-    background-color: #2E3641;
-    color: white;
+    background-color: #2E3641 !important;
+    color: white !important;
 }
 .jtzwp-error {
     background-color: #F69087 !important;
     color: white !important;
 }
 .btn.jtzwp-dark:hover, .btn.jtzwp-darkblue:hover {
-    background-color: #A3BFE1;
-    color: black;
+    background-color: #A3BFE1 !important;
+    color: black !important;
 }
 .hoverLinkOutlineThick:hover {
     outline-color: rgba(25,0,252,0.5);
@@ -82,6 +83,19 @@ Text Domain: joshuatzwp
 .flex {
     display: flex;
     flex-wrap: wrap;
+}
+.largeDivider {
+    height: 4px;
+    overflow: hidden;
+    background-color: black;
+    margin-bottom: 20px;
+}
+.largeDividerDashed {
+    height: auto;;
+    overflow: hidden;
+    background-color: unset !important;
+    border-bottom: 4px dashed black;
+    margin-bottom: 20px;
 }
 
 /** Page headings */
