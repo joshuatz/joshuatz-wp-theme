@@ -11,8 +11,8 @@
 ?>
 
 <div id="main">
-    <div style="background:rgba(255, 255, 255, 0.47); padding-top:4px; margin:50px 20px; min-height:700px;" class="autoCenterParent">
-        <div class="autoCenterChild" style="width:100%;">
+    <div style="background:rgba(255, 255, 255, 0.47); padding-top:4px; margin:10px 8px; min-height:500px;" class="">
+        <div class="" style="width:100%;">
             <div>
                 <div class="row">
                     <h1 style="font-size:2rem; margin:20px 0px 0px 0px;">Homepage of Joshua Tzucker</h1>
@@ -29,8 +29,8 @@
                     <?php $secDelay = 0.5; ?>
                     <?php foreach($projectTerms as $projectTerm): ?>
                         <?php $secDelay = $secDelay + 0.5; ?>
-                        <div class="wow bounce" data-wow-delay="<?php echo $secDelay; ?>s" style="display:inline-block;">
-                            <a href="<?php echo get_term_link($projectTerm);?>" class="hvr-bob myButton menubutton"><?php echo $projectTerm->name; ?></a>
+                        <div class="wow bounce homepageButtonWrapper" data-wow-delay="<?php echo $secDelay; ?>s" style="display:inline-block;">
+                            <a href="<?php echo get_term_link($projectTerm);?>" class="hvr-bob homepageButton"><?php echo $projectTerm->name; ?></a>
                         </div>
                     <?php endforeach; ?>
                 </div>

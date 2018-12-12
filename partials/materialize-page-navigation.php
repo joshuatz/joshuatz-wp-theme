@@ -6,7 +6,7 @@
 <?php
     // Preprocessing
     global $jtzwpHelpers;
-    $currentPageNum = isset($paged) ? $paged : 1;
+    $currentPageNum = (isset($paged) && $paged!==0) ? $paged : 1;
     $totalNumPages = $wp_query->max_num_pages;
     $nextPageLink = $jtzwpHelpers->grabHrefFromATag(get_next_posts_link());
     $hasNextPage = isset($nextPageLink) && $nextPageLink!=='';
