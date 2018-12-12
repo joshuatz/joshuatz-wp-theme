@@ -200,7 +200,9 @@ add_action('template_redirect','jtwzp_template_redirect_hook');
 function jtzwp_template_include_hook($template){
     global $jtzwpHelpers,$wp_query;
     $currentUrl = $jtzwpHelpers->getCurrentUrl();
-    if ($jtzwpHelpers->getIsUnderConstruction()===true && preg_match('/\/under-construction\//',$currentUrl)){
+    $currentUrlInfo = $jtzwpHelpers->getUrlInfo($currentUrl);
+    // Under construction page
+    if (preg_match('/\/under-construction\//',$currentUrl) && $jtzwpHelpers->getIsUnderConstruction()===true){
         $underConstructionTemplate = locate_template(array('page-under-construction.php'));
         if ($underConstructionTemplate!==''){
             // Make sure to modify 404 first
@@ -212,6 +214,32 @@ function jtzwp_template_include_hook($template){
         else {
             return $template;
         }
+    }
+    // Post-deployment webhook
+    if ($currentUrlInfo['path']==='/deployment-hook/'){
+        // Prevent 404
+        $wp_query->is_404 = false;
+        
+        // JSON template
+        $postDeployActionsResults = (object) array(
+            'success' => false,
+            'msg' => ''
+        );
+        // Check to make sure that key matches
+        if ($jtzwpHelpers->getQueryVal('deploymentkey','')===$jtzwpHelpers->getUsersWebhookKey()){
+            $postDeployActionsResults->success = true;
+            status_header('200');
+            // Go ahead and update the cache bust string
+            $newCacheBustStamp = $jtzwpHelpers->updateCacheBuster();
+            $postDeployActionsResults->msg = 'Success! Updated cache bust to ' . $newCacheBustStamp;
+        }
+        else {
+            // Unauthorized!
+            status_header('401');
+            $postDeployActionsResults->msg = 'Unauthorized! Please check your special key value!';
+        }
+        echo json_encode($postDeployActionsResults);
+        exit();
     }
     else {
         // Do nothing

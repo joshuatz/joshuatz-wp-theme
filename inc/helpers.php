@@ -436,6 +436,7 @@ class JtzwpHelpers {
         $finalInfo = array_fill_keys(array('protocol','hostname','path','querystring','homepage'),'');
         $fullUrl = isset($fullUrlInput) ? $fullUrlInput : $this->getCurrentUrl();
         $finalInfo['fullUrl'] = $fullUrl;
+        $finalInfo['queryKeyPairs'] = array();
 
         // Parse protocol. Default to HTTPS if unknown
         if ($fromCurrentUrl){
@@ -479,7 +480,7 @@ class JtzwpHelpers {
         }
         else {
             $matches = array();
-            if (preg_match('/^(?:https{0,1}\/\/){0,1}[^\/]+\/([^?]+)/i',$fullUrlInput,$matches)){
+            if (preg_match('/^(?:https{0,1}:\/\/){0,1}[^\/]+(\/[^?]+)/',$fullUrlInput,$matches)){
                 $finalInfo['path'] = $matches[1];
             }
         }
@@ -488,6 +489,19 @@ class JtzwpHelpers {
         $matches = array();
         if(preg_match('/\?([^\/]+)$/i',$fullUrl,$matches)){
             $finalInfo['querystring'] = $matches[1];
+            $queryString = $matches[1];
+            $queryString = preg_replace('/^\?/','',$queryString);
+            // Break apart querystring by &
+            $keyPairs = explode('&',$queryString);
+            foreach ($keyPairs as $index => $keyPair) {
+                // Break apart keypair by =
+                $arr = explode('=',$keyPair);
+                $key = $arr[0];
+                $val = $arr[1];
+                // Save down to assoc array
+                $finalInfo['queryKeyPairs'][$key] = $val;
+            }
+
         }
 
         /**
@@ -497,6 +511,11 @@ class JtzwpHelpers {
 
         // Return info
         return $finalInfo;
+    }
+
+    public function getQueryVal($key,$OPT_DefaultValue = null,$OPT_URL = null){
+        $queryKeyPairs = $this->getUrlInfo($OPT_URL)['queryKeyPairs'];
+        return isset($queryKeyPairs[$key]) ? $queryKeyPairs[$key] : $OPT_DefaultValue;
     }
 
     /**
@@ -824,14 +843,13 @@ class JtzwpHelpers {
         return false;
     }
 
-    // TODO
     public function updateCacheBuster(){
         $now = new DateTime();
         $stamp = $now->getTimestamp();
         $this->setThemeUserSetting('jtzwp_cachebust_stamp',$stamp);
+        return $stamp;
     }
 
-    // TODO
     public function getCacheBuster($retry = true){
         $cacheBuster = $this->getThemeUserSetting('jtzwp_cachebust_stamp');
         if ($cacheBuster->isValid){
