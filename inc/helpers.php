@@ -267,12 +267,27 @@ class JtzwpHelpers {
     private function getIsDebugUser(){
         $user = wp_get_current_user();
         // Note: This will have to be updated if moved to a multiple role system
-        if ($user && $user->roles[0]==='administrator'){
+        if ($this->getIsUserAdmin()){
             return true;
         }
         else {
             return false;
         }
+    }
+
+    public function getIsUserAdmin(){
+        $user = wp_get_current_user();
+        if ($user){
+            if (isset($user->roles)){
+                $roles = $user->roles;
+                foreach ($roles as $role){
+                    if ($role==='administrator'){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
     
     /**
@@ -783,5 +798,19 @@ class JtzwpHelpers {
         preg_match('/href="([^"]*)"/i',$aTag,$matches);
         $href = count($matches)>0 ? $matches[1] : '';
         return $href;
+    }
+
+    public function getIsUnderConstruction(){
+        if (defined('UNDER_CONSTRUCTION') && UNDER_CONSTRUCTION===true){
+            return true;
+        }
+        return false;
+    }
+
+    public function getShouldUserSeeUnderConstruction(){
+        if ($this->getIsUnderConstruction()===true && !$this->getIsUserAdmin()){
+            return true;
+        }
+        return false;
     }
 }

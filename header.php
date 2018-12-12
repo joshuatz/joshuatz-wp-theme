@@ -16,4 +16,7 @@
 </head>
 <body>
     <?php include 'nav.php'; ?>
+    <?php if ($jtzwpHelpers->getIsUserAdmin()): ?>
+        <?php get_template_part('partials/dev-bar'); ?>
+    <?php endif; ?>
     <?php get_template_part('partials/preloader'); ?>

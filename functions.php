@@ -165,17 +165,51 @@ add_action('wp_head','jtzwp_head_hook');
 function jtwzp_template_redirect_hook(){
     global $jtzwpHelpers,$post;
     $currentUrl = $jtzwpHelpers->getCurrentUrl();
-    if (is_singular()){
-        if ($jtzwpHelpers->postOnlyLinksExternally($post)){
-            wp_redirect($jtzwpHelpers->postOnlyLinksExternally($post));
-            exit;
+    // Make sure to not cause endless loop - check to make sure page is NOT areadly /under-construction/ before sending user there
+    if ($jtzwpHelpers->getIsUnderConstruction()===true && !preg_match('/\/under-construction\//',$currentUrl) && !$jtzwpHelpers->getIsUserAdmin()){
+        wp_redirect('/under-construction/',302);
+    }
+    else {
+        if (is_singular()){
+            if ($jtzwpHelpers->postOnlyLinksExternally($post)){
+                wp_redirect($jtzwpHelpers->postOnlyLinksExternally($post));
+                exit;
+            }
+        }
+        // If path not found...
+        else if (is_404()){
+            $jtzwpHelpers->checkForAndHandleCustomRedirect($currentUrl);
         }
     }
-    // If path not found...
-    else if (is_404()){
-        $jtzwpHelpers->checkForAndHandleCustomRedirect($currentUrl);
+}
+add_action('template_redirect','jtwzp_template_redirect_hook');
+
+/**
+ * Hook into template_include for changing which template file gets used for rendering, or otherwise interrupting the normal WP pattern for including template files
+ * REMINDER: Even if locate_template succeeds, and you can return a valid template file, if the URL/slug being requested results in a query that does not map, the headers will have 404, regardless of template load success. Looks like only work around is to manually override the global wp_query object and set a status header of 200
+ */
+function jtzwp_template_include_hook($template){
+    global $jtzwpHelpers,$wp_query;
+    $currentUrl = $jtzwpHelpers->getCurrentUrl();
+    if ($jtzwpHelpers->getIsUnderConstruction()===true && preg_match('/\/under-construction\//',$currentUrl)){
+        $underConstructionTemplate = locate_template(array('page-under-construction.php'));
+        if ($underConstructionTemplate!==''){
+            // Make sure to modify 404 first
+            $wp_query->is_404 = false;
+            status_header('200');
+            return $underConstructionTemplate;
+            exit();
+        }
+        else {
+            return $template;
+        }
+    }
+    else {
+        // Do nothing
+        return $template;
     }
 }
+add_action('template_include','jtzwp_template_include_hook');
 
 /**
  * Check whether or not the stored GAUID string is valid (at least based on pattern)
@@ -189,8 +223,6 @@ function jtzwp_validate_gauid_setting(){
         return false;
     }   
 }
-
-add_action('template_redirect','jtwzp_template_redirect_hook');
 
 function jtzwp_get_disclaimer(){
     global $jtzwpHelpers;

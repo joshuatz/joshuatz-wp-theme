@@ -72,6 +72,14 @@ Text Domain: joshuatzwp
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.autoCenterSimple {
+    text-align: center;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: auto !important;
+    right: auto !important;
+    float: none !important;
+}
 .autoFullWrap {
     width: 100%;
     position: absolute;
@@ -920,4 +928,23 @@ ul.collapsible li.active .whenCollapsed {
 }
 .businessCard .modal-close {
     color: grey;
+}
+/**
+* Under construction page
+*/
+.underConstruction .iconWrapper {
+    padding: 20px;
+    border-radius: 51px;
+    border: 10px solid white;
+    width: 50%;
+    min-width: 220px;
+    max-width: 300px;
+}
+/**
+* Dev Bar
+*/
+.devBar {
+    width: 100%;
+    position: fixed;
+    bottom: -20px;
 }

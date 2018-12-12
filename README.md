@@ -13,6 +13,13 @@ Custom WordPress theme for joshuatz.com
          - Disqus Custom Subdomain - For if you have Disqus setup and want to enable their comment embed system
      - Custom redirect system
          - You can configure a bunch of pattern based custom redirects with a simple JSON file, rather than having to install a special plugin. Clone jtzwp-custom-redirects.example.json and name as jtzwp-custom-redirects.json and place either in theme directory OR root of WP install - theme will check for both, and take root as preference.
+     - "Under Construction" mode
+         - You can easily set the site into under-construction mode, which will redirect all non-wp-admins to /under-construction/ for every single page. You don't have to set up the /under-construction/ page to use this feature. To enable, simply define the UNDER_CONSTRUCTION constant to be true (easiest spot is in your wp-config.php file) like so:
+             ````
+             define('UNDER_CONSTRUCTION',true);
+             ````
+             - This should be used with extreme caution, as leaving the site in this mode for an extended length of time can have a negative effect on SEO (not to mention a bad user experience).
+
 ### Recommended plugins and tweaks
  - Recommended Plugins
      - Custom Post Type Permalinks - Highly Recommended for my custom post types - [WP Plugin Page](https://wordpress.org/plugins/custom-post-type-permalinks/)
