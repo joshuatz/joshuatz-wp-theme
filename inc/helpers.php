@@ -405,7 +405,6 @@ class JtzwpHelpers {
                     $newUrlInfo = $this->getUrlInfo($newUrl);
                 }
 
-                xdebug_break();
                 // Compose new URL to redirect to
                 if ($preserveQuery){
                     $newUrl = $this->modQueryStringBulk($newUrl,$requestUrlInfo['querystring']);
@@ -413,7 +412,6 @@ class JtzwpHelpers {
                 if ($passRef){
                     $newUrl = $this->modQueryStringSingle($newUrl,'redirectedFrom',$requestUrl);
                 }
-                xdebug_break();
 
                 // Redirect to new URL
                 wp_redirect($newUrl,intval($redirectCode,10));
@@ -725,7 +723,6 @@ class JtzwpHelpers {
         if ($this->isDebug){
             $logFilePath = $this->themeRootPath . '/config/log.txt';
             $stamp = new DateTime('now');
-            xdebug_break();
             if(file_exists($logFilePath) && is_writable($logFilePath)){
                 $logFile = fopen($logFilePath,'a') or die();
                 if ($OPT_special==='clearLog'){

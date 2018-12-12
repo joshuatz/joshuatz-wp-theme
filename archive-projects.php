@@ -8,7 +8,6 @@ get_header(); ?>
 
 <?php
     global $jtzwpHelpers;
-    xdebug_break();
     $projectListingTitle = 'Here are some projects where I have used my ' . strtolower(single_cat_title('',false)) . ' skills';
     if (term_description()!==''){
         // Note: strip_tags necessary because term_description returns <p></p> wrapped text
