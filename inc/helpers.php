@@ -777,7 +777,7 @@ class JtzwpHelpers {
             'isValid' => false,
             'val' => ''
         );
-        $themeUserSettings = get_settings($this::USER_SETTINGS_REG_NAME);
+        $themeUserSettings = get_option($this::USER_SETTINGS_REG_NAME);
         if (isset($themeUserSettings[$key])){
             $val = $themeUserSettings[$key];
             if ($val!==''){
