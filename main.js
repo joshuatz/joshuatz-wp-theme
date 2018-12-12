@@ -123,5 +123,49 @@
         if (typeof($.fancybox)!=='undefined' && typeof($.fancybox.defaults)==='object'){
             $.fancybox.defaults.arrows = true;
         }
+
+        /**
+         * Analytics tracking
+         */
+        // Fire an event
+        window.fireEvent = function(action,category,label,value){
+            var eventConfig = {
+                'action' : action,
+                'category' : category,
+                'label' : label,
+                'value' : value
+            }
+            var acceptedKeys = ['category','label','value'];
+            if (typeof(action)==='object'){
+                eventConfig = action;
+            }
+            var formattedEventParams = {};
+            for (var x=0; x<acceptedKeys.length; x++){
+                currKey = acceptedKeys[x];
+                if (typeof(eventConfig[currKey])!=='undefined'){
+                    formattedEventParams.currKey = eventConfig.currKey;
+                }
+            }
+            if (typeof(eventConfig['action'])==='string'){
+                if (typeof(window['gtag'])!=='undefined'){
+                    gtag('event', eventConfig.action, formattedEventParams);
+                }
+                else if (typeof(window['ga'])!=='undefined') {
+                    ga('send',{
+                        hitType : 'event',
+                        eventCategory : formattedEventParams.category,
+                        eventAction : formattedEventParams.action,
+                        eventLabel : formattedEventParams.label,
+                        eventValue : formattedEventParams.value
+                    });
+                }
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        // Attach listeners to all clicks
+
     });
 })(jQuery);
