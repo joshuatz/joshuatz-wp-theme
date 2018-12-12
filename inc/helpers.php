@@ -515,7 +515,7 @@ class JtzwpHelpers {
 
     public function getQueryVal($key,$OPT_DefaultValue = null,$OPT_URL = null){
         $queryKeyPairs = $this->getUrlInfo($OPT_URL)['queryKeyPairs'];
-        return isset($queryKeyPairs[$key]) ? $queryKeyPairs[$key] : $OPT_DefaultValue;
+        return isset($queryKeyPairs[$key]) ? urldecode($queryKeyPairs[$key]) : $OPT_DefaultValue;
     }
 
     /**

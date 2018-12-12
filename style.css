@@ -913,6 +913,7 @@ ul.collapsible li.active .whenCollapsed {
     min-height: 450px;
     overflow-y: hidden;
     display: none;
+    box-shadow: unset;
 }
 .businessCardMaterializeModal .businessCard {
     width: 100%;
