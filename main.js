@@ -25,6 +25,11 @@
                 $(modal).modal();
             }
         });
+
+        // Check to see if page is supposed to load with modal already open for business card
+        if (document.location.hash === '#businessCardMaterializeModal'){
+            Materialize.Modal.getInstance($('#businessCardMaterializeModal')[0]).open();
+        }
     });
 })(jQuery,M);
 
@@ -75,7 +80,7 @@
 /**
  * Rest of stuff
  */
-(function($,Materialize){
+(function($){
     $(document).ready(function(){
         // wow.js init
         new WOW().init();
@@ -119,4 +124,4 @@
             $.fancybox.defaults.arrows = true;
         }
     });
-})(jQuery,M);
+})(jQuery);

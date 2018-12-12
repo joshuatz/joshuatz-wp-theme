@@ -52,7 +52,7 @@ function joshuatzwp_styles() {
         wp_enqueue_style('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
     }
     // Load main theme CSS file (style.css)
-    wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array('materialize-style'),false,'all');
+    wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array(),false,'all');
     // Load final <head></head> style
     wp_enqueue_style('style-final-head',$themeRootURL.'/style-final-head.css',array('joshuatzwp-style','materialize-style'),false,'all');
 }

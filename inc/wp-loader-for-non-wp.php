@@ -45,10 +45,6 @@ $wp->parse_request();
 $wp->query_posts();
 $wp->register_globals();
 
-//wp_nav_menu();
-//include $pathCurrent . '/../nav.php';
-//include $pathCurrent . '/../header.php';
-
 function getWpHeadStuff(){
     global $pathCurrent, $themeIncPath;
     ?>
@@ -62,6 +58,7 @@ function getWpBodyStuff(){
     global $pathCurrent;
     ?>
     <?php include $pathCurrent . '/../nav.php'; ?>
+    <?php wp_footer(); ?>
     <?php
 }
 

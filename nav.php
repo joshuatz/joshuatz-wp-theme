@@ -496,7 +496,12 @@ ul.nav {
             </li>
             <?php endif; ?>
 			<li>
-			  <a href="#businessCardMaterializeModal" id="linkedIn" class="modal-trigger">About / <i class="fa fa-linkedin-square" style="font-size:large"></i>
+            <?php
+                // The business card materialize modal can really only be reliably shown on WP pages, so change to link to homepage and about popup if on non wp
+                $aboutMeLink = $jtzwpHelpers->isPageWP()===true ? '#businessCardMaterializeModal' : '/#businessCardMaterializeModal';
+                $aboutMeTarget = $jtzwpHelpers->isPageWP()===true ? '_self' : '_blank';
+            ?>
+			  <a href="<?php echo $aboutMeLink; ?>" id="linkedIn" class="modal-trigger" target="<?php echo $aboutMeTarget; ?>">About / <i class="fa fa-linkedin-square" style="font-size:large"></i>
 				</a>
 			</li>
 			<li class='dropdown'>
@@ -858,3 +863,8 @@ var G = "/", C = location.href, H, D, B, F;
     });
 })(jQuery)
 </script>
+<div id="businessCardMaterializeModal" class=" businessCardMaterializeModal modal" data-opacity="0.9">
+    <div class="modal-content">
+        <?php get_template_part('partials/business-card-materialize'); ?>
+    </div>
+</div>
