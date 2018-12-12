@@ -43,6 +43,18 @@ function jtzwp_initial_settings_api_init(){
             'jtzwp_ga_gauid'
         )
     );
+
+    // General Settings - Webhook Key
+    add_settings_field(
+		'jtzwp_webhook_key',
+		__( 'Random string for webhooks', 'wordpress' ),
+		'jtzwp_generic_text_field_render',
+		'jtzwp_options_page',
+        'jtzwp_general_settings_section',
+        array(
+            'jtzwp_webhook_key'
+        )
+    );
     
     // General Settings - Disqus commenting subdomain
     add_settings_field(

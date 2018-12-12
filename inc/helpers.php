@@ -28,6 +28,8 @@ class JtzwpHelpers {
             'jtzwp_about_me_birthdate' => "/\d{2}\/\d{2}\/\d{4}/i",
             'jtzwp_about_me_profile_picture_filepath' => "/jpg|jpeg|webm|png|gif|bmp/i"
         );
+        // Make sure webhook key is set
+        $this->getUsersWebhookKey();
     }
 
     /**
@@ -777,7 +779,7 @@ class JtzwpHelpers {
             'isValid' => false,
             'val' => ''
         );
-        $themeUserSettings = get_option($this::USER_SETTINGS_REG_NAME);
+        $themeUserSettings = get_option($this::USER_SETTINGS_REG_NAME,array());
         if (isset($themeUserSettings[$key])){
             $val = $themeUserSettings[$key];
             if ($val!==''){
@@ -788,6 +790,17 @@ class JtzwpHelpers {
             }
         }
         return $retVal;
+    }
+
+    public function setThemeUserSetting($key,$val){
+        $success = false;
+        $existingSettings = get_option($this::USER_SETTINGS_REG_NAME,array());
+        if ($existingSettings){
+            $newSettings = $existingSettings;
+            $newSettings[$key] = $val;
+            $success = update_option($this::USER_SETTINGS_REG_NAME,$newSettings);
+        }
+        return $success;
     }
     
     public function grabHrefFromATag($aTag){
@@ -809,5 +822,41 @@ class JtzwpHelpers {
             return true;
         }
         return false;
+    }
+
+    // TODO
+    public function updateCacheBuster(){
+        $now = new DateTime();
+        $stamp = $now->getTimestamp();
+        $this->setThemeUserSetting('jtzwp_cachebust_stamp',$stamp);
+    }
+
+    // TODO
+    public function getCacheBuster($retry = true){
+        $cacheBuster = $this->getThemeUserSetting('jtzwp_cachebust_stamp');
+        if ($cacheBuster->isValid){
+            return $cacheBuster->val;
+        }
+        else if ($retry) {
+            $this->updateCacheBuster();
+            // Try one more time
+            $this->getCacheBuster(false);
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public function getUsersWebhookKey(){
+        $configuredKey = $this->getThemeUserSetting('jtzwp_webhook_key');
+        if ($configuredKey->isValid){
+            return $configuredKey->val;
+        }
+        else {
+            // use wp password gen to create a random key, and save the value
+            $newKey = wp_generate_password(18,false,false);
+            $this->setThemeUserSetting('jtzwp_webhook_key',$newKey);
+            return $newKey;
+        }
     }
 }
