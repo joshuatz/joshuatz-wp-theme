@@ -31,6 +31,8 @@ $jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHe
 add_theme_support('post-thumbnails'); 
 // Allow excerpts for pages
 add_post_type_support('page','excerpt');
+// Declare support for title-tags (necessary for Yoast to know it can inject them)
+add_theme_support('title-tag');
 
 /**
  * Special WP Cleanup
