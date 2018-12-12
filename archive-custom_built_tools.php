@@ -51,9 +51,10 @@ function getFixedFooter(){
                     ?>
                     <?php
                         // Per post processing
-                        $hasFeaturedImage = has_post_thumbnail();
+                        $featuredImageUrl = get_the_post_thumbnail_url(get_the_ID(),'medium');
+                        $hasFeaturedImage = has_post_thumbnail() && $featuredImageUrl!==false;
                         $hasExcerpt = has_excerpt();
-                        $promoImageSrc = ($hasFeaturedImage===true ? get_the_post_thumbnail_url('medium') : $fallbackPromoImageSrc);
+                        $promoImageSrc = ($hasFeaturedImage===true ? $featuredImageUrl : $fallbackPromoImageSrc);
                         $displayTitle = get_the_title();
 
                         // External Project Page
