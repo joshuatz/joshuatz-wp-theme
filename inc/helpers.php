@@ -713,27 +713,54 @@ class JtzwpHelpers {
         return $postExternalLink;
     }
 
+    public function isFrontPageByRef($postId){
+        if (is_front_page()){
+            return true;
+        }
+        else {
+            $frontPageId = (int) get_option('page_on_front');
+            return ($postId==$frontPageId);
+        }
+    }
+
+    public function isHomeByRef($postId){
+        if (is_home()){
+            return true;
+        }
+        else {
+            $homeId = (int) get_option('page_for_posts');
+            return ($postId==$homeId);
+        }
+    }
+
     /**
      * Checks whether or not a given post/page/etc should have be indexed - vs having the noindex flag applied
      *  - NoIndex tells search engines not to index the given page, which prevents being penalized for having "thin content" or other less favorable content
      * This is based on my criteria - will be false either if page only links externally (redirects immediately) or fails sanity check of simple word count
+     * Note: Remember that since this is usually called from a callback after a post is edited, the global $post object no longer refers to the post that was edited and you can't rely on functions like is_home()
      * @return {boolean} true/false - if should be indexed. Default is true
      */
     public function shouldPostBeIndexed($postId){
+        global $jtzwpHelpers;
         $postShouldIndex = true;
-        $postUsesStaticHTMLFile = (get_field('uploaded_custom_html_file_path',$postId)!==null && strlen(get_field('uploaded_custom_html_file_path',$postId))>0);
-
-        if ($this->postOnlyLinksExternally($postId)!==false){
-            $postShouldIndex = false;
+        // Always set index=true for homepage, blog page, front, etc.
+        if ($jtzwpHelpers->isHomeByRef($postId)===true || $jtzwpHelpers->isFrontPageByRef($postId)===true){
+            $postShouldIndex = true;
         }
-        // If post content is less than 5 characters long
-        else if (strlen($this->getPostContentByRef($postId))<5 && strlen(get_field('raw_custom_html_code',$postId))<5 && !$postUsesStaticHTMLFile){
-            $postShouldIndex = false;
-            if ($this->isDebug){
-                $this->log('Post #' . $postId . ' is set to publish internally, but is failing content length requirements to index!');
+        else {
+            $postUsesStaticHTMLFile = (get_field('uploaded_custom_html_file_path',$postId)!==null && strlen(get_field('uploaded_custom_html_file_path',$postId))>0);
+
+            if ($this->postOnlyLinksExternally($postId)!==false){
+                $postShouldIndex = false;
+            }
+            // If post content is less than 5 characters long
+            else if (strlen($this->getPostContentByRef($postId))<5 && strlen(get_field('raw_custom_html_code',$postId))<5 && !$postUsesStaticHTMLFile){
+                $postShouldIndex = false;
+                if ($this->isDebug){
+                    $this->log('Post #' . $postId . ' is set to publish internally, but is failing content length requirements to index!');
+                }
             }
         }
-
         return $postShouldIndex;
     }
 
