@@ -122,6 +122,56 @@
         // Fancybox-3
         if (typeof($.fancybox)!=='undefined' && typeof($.fancybox.defaults)==='object'){
             $.fancybox.defaults.arrows = true;
+
+            /**
+             * Function to automatically turn an image into a fancybox-3 trigger
+             */
+            function forceFancyBoxOnImage(imgTag,OPT_GalleryId){
+                window.globalForceFancyBoxCount = (window.globalForceFancyBoxCount || 0);
+                var galleryId = (OPT_GalleryId || 'gallery_' + window.globalForceFancyBoxCount);
+                var isLinkWrapped = (imgTag.parentElement && imgTag.parentElement.nodeName==='A');
+                // If not link wrapped, do so
+                if (!isLinkWrapped){
+                    var linkWrapper = document.createElement('a');
+                    imgTag.parentElement.insertBefore(linkWrapper,imgTag);
+                    // Get the link to the full size image, and set it as the href on the link wrapper
+                    var fullSizeImageLink = imgTag.getAttribute('src').replace(/(-\d+x\d*)(\.[^.]+$)/g,"$2");
+                    linkWrapper.setAttribute('href',fullSizeImageLink);
+                    // Move the img tag into the link wrapper
+                    linkWrapper.appendChild(imgTag);
+                }
+                // Get parent element of imgTag, which now has to be an A tag wrapper
+                var linkTag = imgTag.parentElement;
+
+                // If image link is missing fancybox trigger
+                if (linkTag.getAttribute('data-fancybox')==null || linkTag.getAttribute('data-fancybox')==''){
+                    linkTag.setAttribute('data-fancybox',galleryId);
+                }
+                // If image link is missing caption
+                if (linkTag.getAttribute('data-caption')==null || linkTag.getAttribute('data-caption')==''){
+                    var alt = imgTag.getAttribute('alt');
+                    if (alt && alt!==''){
+                        linkTag.setAttribute('data-caption',alt);
+                    }
+                }
+
+                // Increment global counter
+                window.globalForceFancyBoxCount++;
+            }
+            /**
+             * Find images that are not currently setup to trigger fancybox, and modify them to do so
+             */
+            // First, find galleries
+            $('.gallery').each(function(){
+                var galleryId = this.getAttribute('id');
+                $(this).find('.gallery-item a > img').each(function(){
+                    forceFancyBoxOnImage(this,galleryId);
+                });
+            });
+            // Find single images that are not set to trigger fancybox, but do link
+            $('a > img[class*="wp-image-"]').each(function(){
+                forceFancyBoxOnImage(this);
+            });
         }
 
         /**

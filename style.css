@@ -121,6 +121,9 @@ Text Domain: joshuatzwp
 .title {
     font-size: 1.5rem;
 }
+.entry-content h2 {
+    font-size: 1.5rem;
+}
 .pageHeaderSection {
     background: rgba(255, 255, 255, 0.47);
     margin-top: 20px;
@@ -958,6 +961,9 @@ ul.collapsible li.active .whenCollapsed {
         font-size: 1.4rem;
     }
     .title {
+        font-size: 1.2rem;
+    }
+    .entry-content h2 {
         font-size: 1.2rem;
     }
     .projectExcerptWrapper p {

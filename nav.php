@@ -807,6 +807,7 @@ var G = "/", C = location.href, H, D, B, F;
 <script>
 (function($){
     $(document).ready(function(){
+
         function offsetNavFromAdminBar(){
             var wpAdminBarElem = document.querySelector('div#wpadminbar');
             if (typeof(wpAdminBarElem)==='object' && wpAdminBarElem!==null){
@@ -816,7 +817,7 @@ var G = "/", C = location.href, H, D, B, F;
                 });
             }
         }
-        offsetNavFromAdminBar();
+
         function offsetMainFromTop(){
             var masthead = $('#masthead')[0];
             var topColorBar = $('#masthead > .top-color')[0];
@@ -851,14 +852,19 @@ var G = "/", C = location.href, H, D, B, F;
                 'padding-top' : newOffset + 'px'
             });
         }
-        offsetMainFromTop();
-        // Since nav bar is fixed, on resize need to get new height and offset main (which is not fixed) by height
-        $(window).on('resize',function(){
+
+        function navKludge(){
             // offset should be nav height + top-color-bar height + masthead top offset
             offsetNavFromAdminBar();
             setTimeout(function(){
                 offsetMainFromTop();
             },10);
+        }
+        navKludge();
+
+        // Since nav bar is fixed, on resize need to get new height and offset main (which is not fixed) by height
+        $(window).on('resize',function(){
+            navKludge();
         });
     });
 })(jQuery)
