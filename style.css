@@ -464,8 +464,9 @@ div#main_post_wrapper > p {
     border-color: #2e3641;
 }
 .genericPostItem .featuredImage {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    width: auto;
+    max-height: 500px;
 }
 .genericPostItem .featuredImageWrapperLink:hover{
 	outline-color: rgba(25,0,252,0.5);
