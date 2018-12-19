@@ -370,7 +370,7 @@ p,body,h1,h2,h3,h4,h5,h6 {
 h1,h2,h3,h4,h5,h6 {
     font-weight: bold;
 }
-/*#main_post_wrapper, #main_content, #maincontent{*/
+/* Main body content styling */
 .entry-content{
     background-color: #FFF;
     margin-left: 10px;
@@ -381,21 +381,27 @@ h1,h2,h3,h4,h5,h6 {
 	padding-top: 10px;
     border-radius: 5px;
 }
+/* Code blocks */
+.entry-content pre {
+    background-color: rgba(222, 222, 222, 0.45);
+    color: black;
+    padding: 2px 0px 2px 10px;
+}
 
+/* Fix for content overflowing the body */
+.entry-content p > iframe {
+    max-width: 100%;
+}
+.entry-content pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
 
 #maingallery {
 	width:100%;
 	text-align:center;
 	padding-top: 40px;
 }
-
-/*
-#mainmenu img {
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
-}
-*/
 
 .spacer {
 	background-color:#FFF;
