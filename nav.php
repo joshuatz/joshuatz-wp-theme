@@ -866,6 +866,40 @@ var G = "/", C = location.href, H, D, B, F;
         $(window).on('resize',function(){
             navKludge();
         });
+
+        // Kludge to offset window jump on hash change due to navbar overlapping screen
+        function applyNavHashJumpOffsetFixer(){
+            var shifted = false;
+            var shiftWindow = function() {
+                var topnavHeight = document.getElementById("mainNavContainer").offsetHeight;
+                
+                scrollBy(0, -(topnavHeight+8));
+                shifted = true;
+                console.log("hash jump - fix applied");
+            };
+
+            window.addEventListener("hashchange", shiftWindow);
+
+            window.addEventListener("click",function(e){
+                if (e.target && /#/.test(e.target)){
+                    shifted = false;
+                    console.log("hash link clicked!");
+                    setTimeout(function(){
+                        if (shifted == false){ // if hashchange listener did not catch page jump because hash stayed the same, apply fix
+                            shiftWindow();
+                        }
+                    },50);
+                }
+            })
+
+            window.addEventListener("load",function(){
+                if (window.location.hash !== ""){
+                    console.log("On page load, hash detected - fix applied");
+                    shiftWindow();
+                }
+            });
+        }
+        applyNavHashJumpOffsetFixer();
     });
 })(jQuery)
 </script>
