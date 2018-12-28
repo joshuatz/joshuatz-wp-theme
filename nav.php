@@ -818,7 +818,8 @@ var G = "/", C = location.href, H, D, B, F;
             }
         }
 
-        function offsetMainFromTop(){
+        function getOffsetFromTop(OPT_IncludeWpAdminBarHeight){
+            var includeAdminBarHeight = typeof(OPT_IncludeWpAdminBarHeight)==='boolean' ? OPT_IncludeWpAdminBarHeight : false;
             var masthead = $('#masthead')[0];
             var topColorBar = $('#masthead > .top-color')[0];
             var mainNav = $('#mainNavContainer .jtnavbar-inner')[0];
@@ -837,7 +838,16 @@ var G = "/", C = location.href, H, D, B, F;
             if (innermostNavHeight < mainNavHeight){
                 mainNavHeight = innermostNavHeight;
             }
-            var newOffset = mainNavHeight + topColorBarHeight + mastheadTop - wpAdminBarHeight;
+            // If you are trying to offset inner content, you probably want to subtract wpadminbarheight, otherwise, if you are trying to get offset from top, you probably want to add it
+            if (!includeAdminBarHeight) {
+                wpAdminBarHeight = wpAdminBarHeight * -1;
+            }
+            var offsetFromTop = mainNavHeight + topColorBarHeight + mastheadTop + wpAdminBarHeight;
+
+            return offsetFromTop;
+        }
+        function offsetMainFromTop(){
+            var newOffset = getOffsetFromTop();
             /*
             console.group('height report');
                 console.log('topColorBarHeight = ' + topColorBarHeight);
@@ -871,12 +881,10 @@ var G = "/", C = location.href, H, D, B, F;
         function applyNavHashJumpOffsetFixer(){
             var shifted = false;
             var shiftWindow = function() {
-                var topnavHeight = document.querySelector('div.mainNavContainerWrapper').offsetHeight;
-                var wpAdminBarHeight = $('#wpadminbar').length>0 ? $('#wpadminbar')[0].offsetHeight : 0;
-                var totalTopOffset = topnavHeight + wpAdminBarHeight;
-                scrollBy(0,-(totalTopOffset+8));
+                var totalTopOffset = getOffsetFromTop(true);
+                scrollBy(0,-(totalTopOffset));
                 shifted = true;
-                console.log('hash jump - fix applied');
+                console.log('Hash jump - fix applied');
             };
 
             var checkHashAndShift = function(){
