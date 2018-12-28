@@ -872,32 +872,41 @@ var G = "/", C = location.href, H, D, B, F;
             var shifted = false;
             var shiftWindow = function() {
                 var topnavHeight = document.querySelector('div.mainNavContainerWrapper').offsetHeight;
-                
-                scrollBy(0,-(topnavHeight+8));
+                var wpAdminBarHeight = $('#wpadminbar').length>0 ? $('#wpadminbar')[0].offsetHeight : 0;
+                var totalTopOffset = topnavHeight + wpAdminBarHeight;
+                scrollBy(0,-(totalTopOffset+8));
                 shifted = true;
                 console.log('hash jump - fix applied');
             };
 
-            window.addEventListener('hashchange', shiftWindow);
-
-            window.addEventListener('click',function(e){
-                if (e.target && /#/.test(e.target)){
-                    shifted = false;
-                    console.log('hash link clicked!');
-                    setTimeout(function(){
-                        // if hashchange listener did not catch page jump because hash stayed the same, apply fix
-                        if (shifted == false){ 
-                            shiftWindow();
-                        }
-                    },50);
-                }
-            })
-
-            window.addEventListener('load',function(){
-                if (window.location.hash !== ''){
+            var checkHashAndShift = function(){
+                if (window.location.hash !== '' && ($(window.location.hash).length > 0)){
                     console.log('On page load, hash detected - fix applied');
                     shiftWindow();
                 }
+            }
+
+            window.addEventListener('hashchange', checkHashAndShift);
+
+            window.addEventListener('click',function(e){
+                var linkClicked = e.target;
+                if (linkClicked && /#/.test(linkClicked)){
+                    // make sure that link is actually to a valid element
+                    if ($(linkClicked).length > 0){
+                        shifted = false;
+                        console.log('hash link clicked!');
+                        setTimeout(function(){
+                            // if hashchange listener did not catch page jump because hash stayed the same, apply fix
+                            if (shifted == false){ 
+                                shiftWindow();
+                            }
+                        },50);
+                    }
+                }
+            });
+
+            window.addEventListener('load',function(){
+                checkHashAndShift();
             });
         }
         applyNavHashJumpOffsetFixer();
