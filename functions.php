@@ -80,6 +80,16 @@ function joshuatzwp_styles_deferred(){
     // Fancybox 3 - Defer OK
     // sha256-5yrE3ZX38R20LqA/1Mvh3KHJWG1HJF42qtZlRtGGRgE=
     wp_enqueue_style('fancybox3-style','https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css',array(),false,'all');
+    // Highlight.js
+    // integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk="
+    //wp_enqueue_style('highlight-js-default-theme','https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css',array(),false,'all');
+    // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/vs2015.min.css" integrity="sha256-pID4+eRCTgxKCMuuV1xUteqtHBvQcvrYtKYHhJ8V4Js=" crossorigin="anonymous" />
+    //wp_enqueue_style('highlight-js-vs2015-theme','https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/vs2015.min.css',array(),false,'all');
+    // Prism.js syntax highlighter
+    // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
+    //wp_enqueue_style('prism-js-style','https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css',array(),false,'all');
+    // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css" integrity="sha256-+8ReLFz1xaTiP3T0xcJVWrHneeFwCnJUJwvcM0L+Ufw=" crossorigin="anonymous" />
+    wp_enqueue_style('prism-js-style','https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css',array(),false,'all');
 
 }
 
@@ -105,11 +115,20 @@ function joshuatzwp_scripts() {
 function joshuatzwp_scripts_deferred(){
     global $themeRootUrl;
     // Lightbox 2 - Lokesh
-    // sha256-DiHJ7hbvMejsMyP76bpVWacb5HSHQ2sQlrJV8n7KEvA=
+    // integrity="sha256-DiHJ7hbvMejsMyP76bpVWacb5HSHQ2sQlrJV8n7KEvA="
     //wp_enqueue_script('lightbox-2-js','https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js',array('jquery-3'),false,true);
     // Fancybox 3
-    // sha256-ULR2qlEu6WigJY4xQsDsJeW76e9tEE2EWjnKEQ+0L8Q=
+    // integrity="sha256-ULR2qlEu6WigJY4xQsDsJeW76e9tEE2EWjnKEQ+0L8Q="
     wp_enqueue_script('fancybox3-js','https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js',array('jquery-3'),false,true);
+    // Google Code Prettify
+    // integrity=""
+    //wp_enqueue_script('code-prettify','https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js',array(),false,true);
+    // Highlight.js syntax highlighter
+    // integrity="sha256-iq71rXEe/fvjCUP9AfLY0cKudQuKAQywiUpXkRFSkLc="
+    //wp_enqueue_script('highlight-js','https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js',array(),false,true);
+    // Prism.js syntax highlighter
+    // <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js" integrity="sha256-jc6y1s/Y+F+78EgCT/lI2lyU7ys+PFYrRSJ6q8/R8+o=" crossorigin="anonymous"></script>
+    wp_enqueue_script('prism-js','https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js',array(),false,true);
 }
 
 function joshuatzwp_scripts_admin(){

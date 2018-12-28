@@ -215,7 +215,11 @@
                 return false;
             }
         }
-        // Attach listeners to all clicks
+        
+        // Highlight.js
+        if (typeof(window.hljs)==='object'){
+            hljs.initHighlightingOnLoad();
+        }
 
     });
 })(jQuery);
