@@ -871,30 +871,31 @@ var G = "/", C = location.href, H, D, B, F;
         function applyNavHashJumpOffsetFixer(){
             var shifted = false;
             var shiftWindow = function() {
-                var topnavHeight = document.getElementById("mainNavContainer").offsetHeight;
+                var topnavHeight = document.querySelector('div.mainNavContainerWrapper').offsetHeight;
                 
-                scrollBy(0, -(topnavHeight+8));
+                scrollBy(0,-(topnavHeight+8));
                 shifted = true;
-                console.log("hash jump - fix applied");
+                console.log('hash jump - fix applied');
             };
 
-            window.addEventListener("hashchange", shiftWindow);
+            window.addEventListener('hashchange', shiftWindow);
 
-            window.addEventListener("click",function(e){
+            window.addEventListener('click',function(e){
                 if (e.target && /#/.test(e.target)){
                     shifted = false;
-                    console.log("hash link clicked!");
+                    console.log('hash link clicked!');
                     setTimeout(function(){
-                        if (shifted == false){ // if hashchange listener did not catch page jump because hash stayed the same, apply fix
+                        // if hashchange listener did not catch page jump because hash stayed the same, apply fix
+                        if (shifted == false){ 
                             shiftWindow();
                         }
                     },50);
                 }
             })
 
-            window.addEventListener("load",function(){
-                if (window.location.hash !== ""){
-                    console.log("On page load, hash detected - fix applied");
+            window.addEventListener('load',function(){
+                if (window.location.hash !== ''){
+                    console.log('On page load, hash detected - fix applied');
                     shiftWindow();
                 }
             });
