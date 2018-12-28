@@ -600,12 +600,19 @@ a.readMore {
 /**
 * SPECIAL: Materialize Reset Stuff
 */
+/* Set default so inherit below will work properly */
+article ul, article ul li {
+    list-style-type: disc !important;
+}
 article ul,li {
     padding-left: inherit !important;
     list-style-type: inherit !important;
 }
 article ul {
-    margin-left: 3em;
+    margin-left: 2em;
+}
+article ol {
+    padding-inline-start: 20px;
 }
 /* set again */
 ul.collapsible, ul.collapsible li {
