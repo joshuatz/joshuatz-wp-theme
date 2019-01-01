@@ -91,6 +91,10 @@
             window.setTimeout(function(){
                 var description = $('meta[name="description"]').attr('content');
                 console.group('SEO Stuff');
+                    if (/noindex/.test($('meta[name="robots"]').attr('content'))){
+                        console.warn('!!! - Page is set to noindex - !!!');
+                        console.log($('meta[name="robots"]')[0]);
+                    }
                     console.log('Title = ' + $('title').text());
                     if (typeof(description)==='undefined'){
                         console.warn('Description is not set!!!');
