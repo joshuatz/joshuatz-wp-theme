@@ -101,7 +101,7 @@
                     }
                     else {
                         console.log('Description = ' + description);
-                        console.log('Description Length = ' + description.length + ' / 60');
+                        console.log('Description Length = ' + description.length + ' / 160');
                     }
                     if ($('meta[name="keywords"]').length){
                         console.log('Keywords = ' + $('meta[name="keywords"]').attr('content'));

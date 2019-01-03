@@ -527,7 +527,7 @@ ul.nav {
             $emailAddress = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_email');
             if ($emailAddress->isValid): ?>
 			<li>
-			  <a href='mailto:<?php echo $emailAddress->val; ?>?subject=I%20Found%20Your%20Website' ga-on="click,auxclick,contextmenu", ga-event-category="Social" ga-event-label="Email" target="_blank">Contact</a>
+			  <a href='mailto:<?php echo $emailAddress->val; ?>?subject=I%20Found%20Your%20Website' ga-on="click,auxclick,contextmenu", ga-event-category="Social" ga-event-label="Email" target="_blank">Contact / <i class="fa fa-envelope-square" style="font-size:large"></i></a>
             </li>
             <?php endif; ?>
 		  </ul>
