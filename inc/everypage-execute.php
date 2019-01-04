@@ -25,11 +25,11 @@
 <?
 /**
  * Trackers
- * Note: Disabled for logged in WP users
+ * Note: Disabled for logged in WP users and debug
  */
 ?>
 <?php $gauid = jtzwp_validate_gauid_setting(); ?>
-<?php if($gauid && $jtzwpHelpers->getIsUserAdmin()===false): ?>
+<?php if($gauid && $jtzwpHelpers->getIsUserAdmin()===false && $jtzwpHelpers->isDebug===false): ?>
     <?php $analyticsVersion = 'analytics.js'; ?>
 
     <?php if ($analyticsVersion==='gtag.js'): ?>
