@@ -124,6 +124,15 @@ Text Domain: joshuatzwp
 .entry-content h2 {
     font-size: 1.5rem;
 }
+.entry-content h3 {
+    font-size: 1.3rem;
+}
+.entry-content h4 {
+    font-size: 1.1rem;
+}
+.entry-content h5,h6 {
+    font-size: 1rem;
+}
 .pageHeaderSection {
     background: rgba(255, 255, 255, 0.47);
     margin-top: 20px;
@@ -405,6 +414,10 @@ article pre {
 .entry-content pre {
     max-width: 100%;
     overflow-x: auto;
+}
+.entry-content a > img[class*="wp-image-"] {
+    max-width: 100%;
+    height: auto;
 }
 
 #maingallery {
@@ -990,6 +1003,15 @@ ul.collapsible li.active .whenCollapsed {
     }
     .entry-content h2 {
         font-size: 1.2rem;
+    }
+    .entry-content h3 {
+        font-size: 1.1rem;
+    }
+    .entry-content h4 {
+        font-size: 1rem;
+    }
+    .entry-content h5,h6 {
+        font-size: 1rem;
     }
     .projectExcerptWrapper p {
         font-size: 1rem;
