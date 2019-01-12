@@ -852,6 +852,7 @@ ul.collapsible li.active .whenCollapsed {
     padding: 10px;
     border: 4px solid black;
     margin-top: 38%;
+    background-color: white;
 }
 .businessCard .linksAndDetailsSection .rowJoinerWrapper {
     width: 34px;
