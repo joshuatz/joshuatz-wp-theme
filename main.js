@@ -227,7 +227,8 @@
 
         // PrismJS
         if (typeof(PrismToolbar)==='function'){
-            (new PrismToolbar('pre')).autoInit();
+            window.jPrismToolbar = new PrismToolbar('pre');
+            jPrismToolbar.autoInit();
         }
     });
 })(jQuery);

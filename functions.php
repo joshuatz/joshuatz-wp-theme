@@ -117,20 +117,11 @@ function joshuatzwp_scripts_deferred(){
     global $themeRootUrl;
     global $jtzwpHelpers;
     global $themeLibURL;
-    // Lightbox 2 - Lokesh
-    // integrity="sha256-DiHJ7hbvMejsMyP76bpVWacb5HSHQ2sQlrJV8n7KEvA="
-    //wp_enqueue_script('lightbox-2-js','https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js',array('jquery-3'),false,true);
     // Fancybox 3
     // integrity="sha256-ULR2qlEu6WigJY4xQsDsJeW76e9tEE2EWjnKEQ+0L8Q="
     wp_enqueue_script('fancybox3-js','https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js',array('jquery-3'),false,true);
-    // Google Code Prettify
-    // integrity=""
-    //wp_enqueue_script('code-prettify','https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js',array(),false,true);
-    // Highlight.js syntax highlighter
-    // integrity="sha256-iq71rXEe/fvjCUP9AfLY0cKudQuKAQywiUpXkRFSkLc="
-    //wp_enqueue_script('highlight-js','https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js',array(),false,true);
-    // Prism.js syntax highlighter
-    // <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js" integrity="sha256-jc6y1s/Y+F+78EgCT/lI2lyU7ys+PFYrRSJ6q8/R8+o=" crossorigin="anonymous"></script>
+    // ClipboardJS
+    wp_enqueue_script('clipboard-js',$themeLibURL . '/clipboardjs/clipboard.min.js',array(),false,true);
     $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js';
     wp_enqueue_script('prism-js',$prismJsFilePath,array(),false,true);
     // Prism.js custom toolbar
