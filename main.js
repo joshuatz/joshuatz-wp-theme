@@ -225,5 +225,9 @@
             hljs.initHighlightingOnLoad();
         }
 
+        // PrismJS
+        if (typeof(PrismToolbar)==='function'){
+            (new PrismToolbar('pre')).autoInit();
+        }
     });
 })(jQuery);

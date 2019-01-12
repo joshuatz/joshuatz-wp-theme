@@ -1,0 +1,3 @@
+[submodule "lib/j-prism-toolbar"]
+	path = lib/j-prism-toolbar
+	url = https://github.com/joshuatz/j-prism-toolbar.git
