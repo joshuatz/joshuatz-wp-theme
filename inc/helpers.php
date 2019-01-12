@@ -41,6 +41,8 @@ class JtzwpHelpers {
         $this->themeLibURL = (get_template_directory_uri().'/lib');
         $this->themeIncURL = (get_template_directory_uri().'/inc');
         $this->themeIncPath = (get_template_directory() . '/inc');
+        $this->siteRootPath = preg_replace('#\/$#','',isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : dirname(dirname(__FILE__)));
+        $this->siteRootUrl = $this->getUrlInfo()['homepage'];
     }
 
     /**

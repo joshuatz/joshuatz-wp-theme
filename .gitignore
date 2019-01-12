@@ -2,3 +2,5 @@
 /config/log.txt
 # Ignore scratch
 /scratch
+# vscode
+.vscode
