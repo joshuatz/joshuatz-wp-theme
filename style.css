@@ -109,6 +109,10 @@ Text Domain: joshuatzwp
     margin-left: auto;
     margin-right: auto;
 }
+/** Annoying wordpress auto-wrapping img tags in p tags */
+p > a.aligncenter {
+    display: block !important;
+}
 /** Page headings */
 .mainTitle {
     width: 98%;
