@@ -237,5 +237,12 @@
             window.jPrismToolbar = new PrismToolbar('pre');
             jPrismToolbar.autoInit();
         }
+
+        /**
+         * Wordpress Kludges
+         */
+        // Wordpress likes to wrap everything in <p></p> tags, including images, which screws up centering. This will "unwrap"
+        // Commented out, handled with CSS right now
+        //$('p > a[href] > img[class*="wp-image-"]').parent().unwrap();
     });
 })(jQuery);
