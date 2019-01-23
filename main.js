@@ -131,6 +131,7 @@
              * Function to automatically turn an image into a fancybox-3 trigger
              */
             function forceFancyBoxOnImage(imgTag,OPT_GalleryId){
+                var copyableClasses = ['aligncenter'];
                 window.globalForceFancyBoxCount = (window.globalForceFancyBoxCount || 0);
                 var galleryId = (OPT_GalleryId || 'gallery_' + window.globalForceFancyBoxCount);
                 var isLinkWrapped = (imgTag.parentElement && imgTag.parentElement.nodeName==='A');
@@ -141,6 +142,12 @@
                     // Get the link to the full size image, and set it as the href on the link wrapper
                     var fullSizeImageLink = imgTag.getAttribute('src').replace(/(-\d+x\d*)(\.[^.]+$)/g,"$2");
                     linkWrapper.setAttribute('href',fullSizeImageLink);
+                    // Check for CSS classes that should be copied from the <img> tag to the <a></a> wrapper
+                    for (var x=0; x<copyableClasses.length; x++){
+                        if (imgTag.classList.contains(copyableClasses[x])){
+                            linkWrapper.classList.add(copyableClasses[x]);
+                        }
+                    }
                     // Move the img tag into the link wrapper
                     linkWrapper.appendChild(imgTag);
                 }

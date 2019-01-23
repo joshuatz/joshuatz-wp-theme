@@ -105,7 +105,10 @@ Text Domain: joshuatzwp
     border-bottom: 4px dashed black;
     margin-bottom: 20px;
 }
-
+.alignCenter, .aligncenter {
+    margin-left: auto;
+    margin-right: auto;
+}
 /** Page headings */
 .mainTitle {
     width: 98%;
