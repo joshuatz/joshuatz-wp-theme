@@ -126,7 +126,6 @@
         // Fancybox-3
         if (typeof($.fancybox)!=='undefined' && typeof($.fancybox.defaults)==='object'){
             $.fancybox.defaults.arrows = true;
-
             /**
              * Function to automatically turn an image into a fancybox-3 trigger
              */
@@ -134,20 +133,15 @@
                 var copyableClasses = ['aligncenter'];
                 window.globalForceFancyBoxCount = (window.globalForceFancyBoxCount || 0);
                 var galleryId = (OPT_GalleryId || 'gallery_' + window.globalForceFancyBoxCount);
-                var isLinkWrapped = (imgTag.parentElement && imgTag.parentElement.nodeName==='A');
+                var linkWrapper = imgTag.parentElement;
+                var isLinkWrapped = (linkWrapper && linkWrapper.nodeName==='A');
                 // If not link wrapped, do so
                 if (!isLinkWrapped){
-                    var linkWrapper = document.createElement('a');
+                    linkWrapper = document.createElement('a');
                     imgTag.parentElement.insertBefore(linkWrapper,imgTag);
                     // Get the link to the full size image, and set it as the href on the link wrapper
                     var fullSizeImageLink = imgTag.getAttribute('src').replace(/(-\d+x\d*)(\.[^.]+$)/g,"$2");
                     linkWrapper.setAttribute('href',fullSizeImageLink);
-                    // Check for CSS classes that should be copied from the <img> tag to the <a></a> wrapper
-                    for (var x=0; x<copyableClasses.length; x++){
-                        if (imgTag.classList.contains(copyableClasses[x])){
-                            linkWrapper.classList.add(copyableClasses[x]);
-                        }
-                    }
                     // Move the img tag into the link wrapper
                     linkWrapper.appendChild(imgTag);
                 }
@@ -163,6 +157,12 @@
                     var alt = imgTag.getAttribute('alt');
                     if (alt && alt!==''){
                         linkTag.setAttribute('data-caption',alt);
+                    }
+                }
+                // Check for CSS classes that should be copied from the <img> tag to the <a></a> wrapper
+                for (var x=0; x<copyableClasses.length; x++){
+                    if (imgTag.classList.contains(copyableClasses[x]) && linkWrapper.classList.contains(copyableClasses[x])===false){
+                        linkWrapper.classList.add(copyableClasses[x]);
                     }
                 }
 
