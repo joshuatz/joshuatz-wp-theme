@@ -169,6 +169,9 @@ add_action('admin_enqueue_scripts','joshuatzwp_enqueue_loader_admin');
 // Load custom post types
 add_action('init','jtwp_register_all_custom_posttypes');
 
+// Add support for custom post types showing up in queries
+add_filter('pre_get_posts','jtzwp_custom_posttypes_archive_support');
+
 // Load custom taxonomies
 add_action('init','jtwp_register_all_custom_taxonomies');
 if ($debug){
@@ -389,3 +392,7 @@ function jtzwp_after_post_edit($postId){
 
 }
 add_action('save_post','jtzwp_after_post_edit');
+
+/**
+ * 
+ */

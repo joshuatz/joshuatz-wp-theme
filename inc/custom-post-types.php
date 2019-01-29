@@ -115,3 +115,15 @@ function jtwp_register_all_custom_posttypes(){
 	jtwp_register_tools_posttype();
     return true;
 }
+
+/**
+ * Adds support for registered custom post types to show up in queries. Register with add_filter('pre_get_posts');
+ */
+ function jtzwp_custom_posttypes_archive_support($query){
+	if (is_category() || is_tag() && empty($query->query_vars["suppress_filters"])){
+		$query->set("post_type", array(
+			"post", "nav_menu_item", "projects", "custom_built_tools"
+		));
+		return $query;
+	}
+}
