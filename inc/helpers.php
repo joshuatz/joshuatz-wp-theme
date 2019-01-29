@@ -569,11 +569,21 @@ class JtzwpHelpers {
         return (object) array (
             'postObj' => $post,
             'id' => $id,
-            'permalink' => get_permalink($id),
+            'permalink' => $this->getPostPermalink($id),
             'title' => get_the_title($id),
             'hasFeaturedImage' => has_post_thumbnail($id),
             'featuredImageSrc' => (has_post_thumbnail($id)) ? get_the_post_thumbnail_url($id) : ''
         );
+    }
+
+    public function featuredImageHasShadow($postId){
+        $hasShadow = false;
+        if (has_post_thumbnail($postId)){
+            if (preg_match('/_DS\.[Pp][Nn][Gg]$/',get_the_post_thumbnail_url($postId,'full'))){
+                $hasShadow = true;
+            }
+        }
+        return $hasShadow;
     }
 
     /**
@@ -700,19 +710,34 @@ class JtzwpHelpers {
         return $postContent;
     }
 
-    public function postOnlyLinksExternally($postId){
-        $postExternalLink = false;
-        $currentUrl = $this->getCurrentUrl();
+    public function getPostPermalink($postId){
+        $permalink = get_permalink($postId);
         // If post type = (project|tool) && (project|tool) is just externally hosted (e.g. no writeup stored)
         if ((get_post_type($postId)===$this::PROJECTS_POST_TYPE || get_post_type($postId)===$this::TOOLS_POST_TYPE) && get_field('full_page_is_only_hosted_elsewhere',$postId)){
             if (get_field('externally_hosted_full_page_url',$postId)){
-                $postExternalLink = get_field('externally_hosted_full_page_url',$postId);
+                $permalink = get_field('externally_hosted_full_page_url',$postId);
             }
             else if (get_field('externally_hosted_code_url',$postId)){
-                $postExternalLink = get_field('externally_hosted_code_url',$postId);
+                $permalink = get_field('externally_hosted_code_url',$postId);
             }
         }
-        return $postExternalLink;
+        return $permalink;
+    }
+
+    /**
+     * Determines whether a post only links externally (off-site) or not
+     */
+    public function postOnlyLinksExternally($postId){
+        return get_permalink($postId)!==$this->getPostPermalink($postId);
+    }
+
+    public function getPostExcerpt(){
+        if (has_excerpt()){
+            return get_the_excerpt();
+        }
+        else {
+            return wp_trim_excerpt();
+        }
     }
 
     public function isFrontPageByRef($postId){
@@ -905,5 +930,17 @@ class JtzwpHelpers {
             $this->setThemeUserSetting('jtzwp_webhook_key',$newKey);
             return $newKey;
         }
+    }
+
+    /**
+     * Replacement for get_template_part() which keeps variable scope by using include
+     */
+    public function includeTemplatePart($name,$scopedArgs=null){
+        $args = gettype($scopedArgs)==='array' ? $scopedArgs : array();
+        foreach($args as $argKey=>$argVal){
+            $$argKey = $argVal;
+        }
+        $filename = $name . '.php';
+        include(locate_template($filename));
     }
 }

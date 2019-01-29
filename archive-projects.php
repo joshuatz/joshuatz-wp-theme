@@ -31,8 +31,7 @@ get_header(); ?>
                         // per post pre-processing
                         $hasFeaturedImage = has_post_thumbnail();
                         $hasExcerpt = has_excerpt();
-                        $projectOnlyLinksExternally = $jtzwpHelpers->postOnlyLinksExternally($post->ID);
-                        $projectPermalink = ($projectOnlyLinksExternally===false) ? get_the_permalink() : $projectOnlyLinksExternally;
+                        $projectPermalink = $jtzwpHelpers->getPostPermalink($post->ID);
                     ?>
                     <div class="col <?php echo $projectCountOnPage >=5 ? 's12 m6' : 's12 m12'; ?>">
                         <div id="<?php echo the_ID(); ?>" class="projectItem full">

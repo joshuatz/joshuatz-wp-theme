@@ -8,6 +8,8 @@ get_header(); ?>
     global $jtzwpHelpers;
 ?>
 <div id="main">
+    <?php get_template_part('generic-archive-template'); ?>
 </div>
 
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>

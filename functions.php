@@ -200,7 +200,7 @@ function jtwzp_template_redirect_hook(){
     else {
         if (is_singular()){
             if ($jtzwpHelpers->postOnlyLinksExternally($post)){
-                wp_redirect($jtzwpHelpers->postOnlyLinksExternally($post));
+                wp_redirect($jtzwpHelpers->getPostPermalink($post));
                 exit;
             }
         }
