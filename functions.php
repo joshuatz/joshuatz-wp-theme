@@ -14,6 +14,7 @@ $themeIncPath = (get_template_directory() . '/inc');
 require_once($themeIncPath . '/taxonomies.php');
 require_once($themeIncPath . '/custom-post-types.php');
 require_once($themeIncPath . '/custom-theme-settings.php');
+require_once($themeIncPath . '/custom-sidebars.php');
 require_once($themeIncPath . '/helpers.php');
 
 /**
@@ -178,6 +179,9 @@ if ($debug){
     // REMOVEME
     //flush_rewrite_rules(false);
 }
+
+// Load / register custom sidebars / widgets
+add_action('widgets_init','jtzwp_register_sidebars');
 
 /**
  * Hook into wp_head for anything that needs to run first - useful for global includes
