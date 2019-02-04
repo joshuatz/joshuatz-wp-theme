@@ -16,3 +16,16 @@
         </div>
     </div>
 </div>
+
+<!-- Fatal error fallback -->
+<?php global $jtzwpHelpers; ?>
+
+<script>
+    (function(){
+        var userIsAdmin = (<?php echo (bool) $jtzwpHelpers->getIsUserAdmin(); ?>)==true;
+        var fallbackTimeout = userIsAdmin ? 200 : 6000;
+        setTimeout(function(){
+            document.querySelector('.preloaderWrapper').style.display = 'none';
+        },fallbackTimeout);
+    })()
+</script>
