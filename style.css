@@ -1042,3 +1042,21 @@ ul.collapsible li.active .whenCollapsed {
 @media only screen and (min-width:1200px){
 
 }
+
+/**
+* ================================
+* ===         Widgets          ===
+* ================================
+*/
+/** Wordpress Defaults */
+.widget .widgettitle, .widget .widgetTitle {
+    font-size: 2.5rem;
+}
+.postsDrawer .postAge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-style: italic;
+    border: 1px dashed black;
+    padding: 0px 4px;
+    margin-right: 10px;
+}

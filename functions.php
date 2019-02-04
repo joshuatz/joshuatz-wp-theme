@@ -16,6 +16,8 @@ require_once($themeIncPath . '/custom-post-types.php');
 require_once($themeIncPath . '/custom-theme-settings.php');
 require_once($themeIncPath . '/custom-sidebars.php');
 require_once($themeIncPath . '/helpers.php');
+// Widget files
+require_once($themeIncPath . '/widgets/widget-recentposts.php');
 
 /**
  * Make sure helpers is loaded globally
@@ -175,10 +177,6 @@ add_filter('pre_get_posts','jtzwp_custom_posttypes_archive_support');
 
 // Load custom taxonomies
 add_action('init','jtwp_register_all_custom_taxonomies');
-if ($debug){
-    // REMOVEME
-    //flush_rewrite_rules(false);
-}
 
 // Load / register custom sidebars / widgets
 add_action('widgets_init','jtzwp_register_sidebars');

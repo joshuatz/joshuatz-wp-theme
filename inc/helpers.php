@@ -110,14 +110,22 @@ class JtzwpHelpers {
     }
 
     /**
+     * Get whether or not a post is of a custom post type versus a WP built-in post type ('post','page', etc.)
+     */
+    public function getIsPostCustomType($post=null){
+        $customPostTypesArr = array(self::PROJECTS_POST_TYPE,self::TOOLS_POST_TYPE);
+        return in_array(get_post_type($post),$customPostTypesArr);
+    }
+
+    /**
      * Get a custom post type singular name
      * @param {boolean} [$properCase = true] - whether or not you want the singular name to be in "sentence case" - e.g. "Electronics Project" vs "electronics project".
      * @return {string} the singular name
      */
-    public function getCustomPostTypeSingularName($properCase = true){
+    public function getCustomPostTypeSingularName($properCase = true,$post=null){
         $singularName = '';
         if (get_post_type()){
-            $singularName = get_post_type_object(get_post_type())->labels->singular_name;
+            $singularName = get_post_type_object(get_post_type($post))->labels->singular_name;
         }
         if($properCase){
             $singularName = ucwords($singularName);
@@ -562,17 +570,48 @@ class JtzwpHelpers {
     }
 
     /**
+     * If you are unsure if passed arg was postID or post obj, pass it through this function to make sure you are getting post obj
+     */
+    public function getPostByMixed($postOrPostId){
+        if (gettype($postOrPostId)==='integer'){
+            return get_post($postOrPostId);
+        }
+        else {
+            return $postOrPostId;
+        }
+    }
+
+    /**
      * Get basic post info
      */
-    public function getBasicPostInfo($post){
+    public function getBasicPostInfo($postOrPostId){
+        $post = $this->getPostByMixed($postOrPostId);
         $id = $post->ID;
+        $publishedDateDiff = $this->getPublishedDateDiff($post);
         return (object) array (
             'postObj' => $post,
             'id' => $id,
             'permalink' => $this->getPostPermalink($id),
             'title' => get_the_title($id),
-            'hasFeaturedImage' => has_post_thumbnail($id),
-            'featuredImageSrc' => (has_post_thumbnail($id)) ? get_the_post_thumbnail_url($id) : ''
+            'excerpt' => $this->getPostExcerpt($post),
+            'featuredImage' => (object) array(
+                'hasFeaturedImage' => has_post_thumbnail($id),
+                'thumbnailSrc' => (has_post_thumbnail($id)) ? get_the_post_thumbnail_url($id) : '',
+                'hasShadow' => $this->featuredImageHasShadow($id)
+            ),
+            'date' => (object) array(
+                'published' => $this->wpDateToDateTime(get_the_date('',$post)),
+                'age' => (object) array(
+                    'days' => $this->getDateDiffByUnit($publishedDateDiff,'days'),
+                    'months' => $this->getDateDiffByUnit($publishedDateDiff,'months'),
+                    'years' => $this->getDateDiffByUnit($publishedDateDiff,'days')
+                )
+            ),
+            'org' => (object) array(
+                'isCustomPostType' => $this->getIsPostCustomType($post),
+                'postType' => get_post_type($post),
+                'postTypeSingular' => $this->getCustomPostTypeSingularName(false,$post)
+            )
         );
     }
 
@@ -651,6 +690,10 @@ class JtzwpHelpers {
             }
             else if ($unit === 'months' || $unit === 'month'){
                 $formattedDiff = $diffInterval->format('%m');
+            }
+            else if ($unit === 'days' || $unit === 'day'){
+                // http://php.net/manual/en/dateinterval.format.php
+                $formattedDiff = $diffInterval->format('%a');
             }
         }
         if (isset($formattedDiff)){
@@ -731,13 +774,25 @@ class JtzwpHelpers {
         return get_permalink($postId)!==$this->getPostPermalink($postId);
     }
 
-    public function getPostExcerpt(){
-        if (has_excerpt()){
-            return get_the_excerpt();
+    public function getPostExcerpt($post = null){
+        $excerpt = false;
+        // Note - most excerpt related WP functions can only be used inside the loop
+        if (!isset($post)){
+            if (has_excerpt()){
+                $excerpt = get_the_excerpt();
+            }
+            else {
+                $excerpt =  wp_trim_excerpt();
+            }
         }
         else {
-            return wp_trim_excerpt();
+            $excerpt = apply_filters('get_the_excerpt',get_post_field('post_excerpt',$post->ID));
+            if ($excerpt === ''){
+                // Fall back to first 55 words, which is wp_trim_excerpt equivalent
+                $excerpt = wp_trim_words($post->post_content,55);
+            }
         }
+        return $excerpt;
     }
 
     public function isFrontPageByRef($postId){
