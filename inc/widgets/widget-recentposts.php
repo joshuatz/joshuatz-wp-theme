@@ -75,7 +75,7 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
                             <?php if($postInfo->featuredImage->hasFeaturedImage): ?>
                                 <div class="col s6">
                                     <a class="featuedImageWrapperLink">
-                                        <img class="featuredImage" src="<?php echo $postInfo->featuredImage->thumbnailSrc; ?>" />
+                                        <img class="featuredImage" src="<?php echo $postInfo->featuredImage->getThumbnailSrc(); ?>" />
                                     </a>
                                 </div>
                             <?php endif; ?>

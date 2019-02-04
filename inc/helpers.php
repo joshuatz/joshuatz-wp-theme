@@ -588,15 +588,16 @@ class JtzwpHelpers {
         $post = $this->getPostByMixed($postOrPostId);
         $id = $post->ID;
         $publishedDateDiff = $this->getPublishedDateDiff($post);
-        return (object) array (
+        $postInfo = (object) array (
             'postObj' => $post,
             'id' => $id,
+            'ID' => $id,
             'permalink' => $this->getPostPermalink($id),
             'title' => get_the_title($id),
             'excerpt' => $this->getPostExcerpt($post),
+            'hasExcerpt' => $this->hasExcerpt($post),
             'featuredImage' => (object) array(
                 'hasFeaturedImage' => has_post_thumbnail($id),
-                'thumbnailSrc' => (has_post_thumbnail($id)) ? get_the_post_thumbnail_url($id) : '',
                 'hasShadow' => $this->featuredImageHasShadow($id)
             ),
             'date' => (object) array(
@@ -613,6 +614,11 @@ class JtzwpHelpers {
                 'postTypeSingular' => $this->getCustomPostTypeSingularName(false,$post)
             )
         );
+        return $postInfo;
+    }
+
+    public function getFeaturedImageSrc($postId,$size=null){
+        return (has_post_thumbnail($postId)) ? get_the_post_thumbnail_url($postId,$size) : '';
     }
 
     public function featuredImageHasShadow($postId){
@@ -772,6 +778,14 @@ class JtzwpHelpers {
      */
     public function postOnlyLinksExternally($postId){
         return get_permalink($postId)!==$this->getPostPermalink($postId);
+    }
+
+    public function hasExcerpt($post = null){
+        $excerpt = $this->getPostExcerpt($post);
+        if (!empty($excerpt)){
+            return true;
+        }
+        return false;
     }
 
     public function getPostExcerpt($post = null){
