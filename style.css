@@ -515,6 +515,7 @@ div#main_post_wrapper > p {
 }
 a.readMore {
     margin-top: 30px;
+    white-space: nowrap;
 }
 /**
 * Project Listings
@@ -1052,6 +1053,7 @@ ul.collapsible li.active .whenCollapsed {
 .widget .widgettitle, .widget .widgetTitle {
     font-size: 2.5rem;
 }
+/** Customized */
 .postsDrawer .postAge {
     display: inline-block;
     font-size: 0.75rem;
@@ -1059,4 +1061,30 @@ ul.collapsible li.active .whenCollapsed {
     border: 1px dashed black;
     padding: 0px 4px;
     margin-right: 10px;
+    min-width: 80px;
+    text-align: center;
+    padding: 1px 0px 0px 0px;
+}
+.widget.jtzwpRecentPosts {
+    width: 97%;
+    margin: 10px auto;
+    padding: 0px;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 10px;
+    border-width: 3px;
+    border-color: #2E3641;
+    border-style: solid;
+    background: rgba(255, 255, 255, 0.47);
+}
+.widget.jtzwpRecentPosts .collapsible-body {
+    padding: 0px;
+}
+.widget.jtzwpRecentPosts .widgetBody {
+    margin-bottom: -14px;
+}
+.widget .genericPostItem {
+    width: 100%;
+    padding: 0px 0px 8px 0px;
+    margin: 0px;
+    border: none;
 }

@@ -57,41 +57,28 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
         }
         ?>
         <?php /* Now output the actual inner widget content */ ?>
-            <ul class="collapsible postsDrawer">
-            <?php $counter = 0; ?>
-            <?php foreach($postsQuery->posts as $recentPost): ?>
-                <?php
-                    $counter++;
-                    $postInfo = $jtzwpHelpers->getBasicPostInfo($recentPost);
-                    xdebug_break();
-                ?>
-                <li class="<?php echo $counter===1 ? " active" : ""; ?>">
-                    <div class="collapsible-header">
-                        <div class="postAge"><?php echo $postInfo->date->age->days; ?> Days Old</div>
-                        <?php echo $postInfo->title; ?>
-                    </div>
-                    <div class="collapsible-body">
-                        <div class="row">
-                            <?php if($postInfo->featuredImage->hasFeaturedImage): ?>
-                                <div class="col s6">
-                                    <a class="featuedImageWrapperLink">
-                                        <img class="featuredImage" src="<?php echo $postInfo->featuredImage->getThumbnailSrc(); ?>" />
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                            <div class="col s<?php echo $postInfo->featuredImage->hasFeaturedImage ? 's6' : 's12'; ?> postExcerptWrapper">
-                                <p><?php echo $postInfo->excerpt; ?></p>
-                            </div>
-                            <div class="col s2 offset-s2">
-                                <a class="btn waves-effect readMore jtzwp-dark" href="<?php echo $postInfo->permalink; ?>">
-                                    Read More <i class="material-icons right">more_horiz</i>
-                                </a>
-                            </div>
+            <div class="widgetBody">
+                <ul class="collapsible postsDrawer">
+                <?php $counter = 0; ?>
+                <?php foreach($postsQuery->posts as $recentPost): ?>
+                    <?php
+                        $counter++;
+                        $postInfo = $jtzwpHelpers->getBasicPostInfo($recentPost);
+                    ?>
+                    <li class="<?php echo $counter===1 ? " active" : ""; ?>">
+                        <div class="collapsible-header">
+                            <div class="postAge jtzwp-aqua"><?php echo $postInfo->date->age->days; ?> Days Old</div>
+                            <?php echo $postInfo->title; ?>
                         </div>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-            </ul>
+                        <div class="collapsible-body">
+                            <?php $jtzwpHelpers->includeTemplatePart('partials/generic-item-listing',array(
+                                'scopedId' => $postInfo->id
+                            )); ?>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
         <?php /* END inner widget content */ ?>
         <?php echo $after_widget;
 

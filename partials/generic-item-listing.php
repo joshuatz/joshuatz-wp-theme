@@ -4,7 +4,8 @@
 <?php
     // per post pre-processing
     global $postSingularNoun, $jtzwpHelpers;
-    $postId = get_the_ID();
+    // Allow for passing in ID
+    $postId = isset($scopedId) ? $scopedId : get_the_ID();
     $postInfo = $jtzwpHelpers->getBasicPostInfo($postId);
     $linkTarget = $jtzwpHelpers->postOnlyLinksExternally($postId) ? '_blank' : '_self';
 ?>
@@ -29,11 +30,13 @@
         <?php endif; ?>
             
         <!-- Post Excerpt -->
+        <?php if($postInfo->hasExcerpt): ?>
         <div class="col <?php echo ($postInfo->featuredImage->hasFeaturedImage ? 's11 offset-s1 m6 l6 xl7' : 's11 offset-s1'); ?>">
             <div class="postExcerptWrapper">
                 <p><?php echo $postInfo->excerpt; ?></p>
             </div>
         </div>
+        <?php endif; ?>
 
          <!-- Read more Links -->
         <div class="col <?php echo ($postInfo->featuredImage->hasFeaturedImage ? 's2 offset-s1' : 's2 offset-s2'); ?>">
