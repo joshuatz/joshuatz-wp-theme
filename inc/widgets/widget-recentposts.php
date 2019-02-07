@@ -72,7 +72,8 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
                         </div>
                         <div class="collapsible-body">
                             <?php $jtzwpHelpers->includeTemplatePart('partials/generic-item-listing',array(
-                                'scopedId' => $postInfo->id
+                                'scopedId' => $postInfo->id,
+                                'showTitle' => false
                             )); ?>
                         </div>
                     </li>

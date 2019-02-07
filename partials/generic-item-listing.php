@@ -6,17 +6,20 @@
     global $postSingularNoun, $jtzwpHelpers;
     // Allow for passing in ID
     $postId = isset($scopedId) ? $scopedId : get_the_ID();
+    $showTitle = gettype($showTitle)==='boolean' ? $showTitle : true;
     $postInfo = $jtzwpHelpers->getBasicPostInfo($postId);
     $linkTarget = $jtzwpHelpers->postOnlyLinksExternally($postId) ? '_blank' : '_self';
 ?>
 <div id="<?php echo $postInfo->org->postTypeSingular . $postInfo->id; ?>" class="genericPostItem <?php echo implode(' ',get_post_class()); ?>">
 
     <!-- Title -->
+    <?php if($showTitle): ?>
     <div class="row">
         <div class="col s12 center">
             <a href="<?php echo $postInfo->permalink; ?>" target="<?php echo $linkTarget; ?>"><h3><?php echo $postInfo->title; ?></h3></a>
         </div>
     </div>
+    <?php endif; ?>
 
     <!-- Post Excerpt, image, etc. -->
     <div class="row">

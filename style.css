@@ -325,6 +325,9 @@ body {
   -webkit-animation-direction: normal, alternate;
   animation-direction: normal, alternate;
 }
+/**
+* Homepage
+*/
 .homepageButtonWrapper {
     padding: 8px;
 }
@@ -370,6 +373,14 @@ body {
 .homepageButton{
 	min-width:90px;
 }
+.homepageUpper {
+    background: rgba(255, 255, 255, 0.47);
+    padding-top: 4px;
+    margin: 10px 8px 10px 8px;
+    padding-bottom: 10px;
+}
+
+
 #main, .container.main, .main {
     padding-top: 100px; /* necessary to avoid appearing behind sticky nav */
 }
@@ -1084,7 +1095,7 @@ ul.collapsible li.active .whenCollapsed {
 }
 .widget .genericPostItem {
     width: 100%;
-    padding: 0px 0px 8px 0px;
+    padding: 8px 0px 8px 0px;
     margin: 0px;
     border: none;
 }
