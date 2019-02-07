@@ -31,6 +31,11 @@ Custom WordPress theme for joshuatz.com
          ````
          define( 'WP_POST_REVISIONS', 3);
          ````
+         -   Make sure that you put this above
+         ````
+         require_once(ABSPATH . 'wp-settings.php');
+         ````
+         - I recommend just putting at top of file
      - Here is a pretty good list of optimizations to make from the default config - [link](https://www.labnol.org/internet/wordpress-optimization-guide/3931/)
 ---
 ### ToDo
