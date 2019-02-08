@@ -661,7 +661,7 @@ ul.collapsible, ul.collapsible li {
 }
 /* Strange - they set <strong></strong> to 500, which is less than browser default. Let's reset it to browser default of 'bold' */
 strong {
-    font-weight: 'bold' !important;
+    font-weight: bold !important;
 }
 /**
 * SPECIAL: Materialize extension stuff
