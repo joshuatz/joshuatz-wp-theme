@@ -261,7 +261,7 @@ class JtzwpHelpers {
      * Check if page should load in debug mode or not, based on set criteria
      */
     private function getIsDebug(){
-        $debug = ($this->getIsDebugDomain()||$this->getIsDebugUser());
+        $debug = (($this->getIsDebugDomain()||$this->getIsDebugUser()) && !$this->getIsDebugForcedOff());
         return $debug;
     }
 
@@ -285,6 +285,10 @@ class JtzwpHelpers {
         else {
             return false;
         }
+    }
+
+    private function getIsDebugForcedOff(){
+        return preg_match('/debug=off/i',$_SERVER["REQUEST_URI"]);
     }
 
     public function getIsUserAdmin(){

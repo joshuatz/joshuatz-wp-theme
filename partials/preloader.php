@@ -22,10 +22,10 @@
 
 <script>
     (function(){
-        var userIsAdmin = (<?php echo (bool) $jtzwpHelpers->getIsUserAdmin(); ?>)==true;
+        var userIsAdmin = (<?php echo $jtzwpHelpers->boolToString($jtzwpHelpers->getIsUserAdmin()); ?>);
         var fallbackTimeout = userIsAdmin ? 200 : 6000;
         setTimeout(function(){
             document.querySelector('.preloaderWrapper').style.display = 'none';
         },fallbackTimeout);
-    })()
+    })();
 </script>
