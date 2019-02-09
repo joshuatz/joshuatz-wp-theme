@@ -1,1 +1,76 @@
 .preloader {display:none;}
+
+/**
+* SPECIAL: Materialize extension stuff
+*/
+/** Different headings for collapsible sections based on expanded vs collapsed */
+ul.collapsible li .whenExpanded {
+    display: none;
+}
+ul.collapsible li .whenCollapsed {
+    display: inherit;
+}
+ul.collapsible li.active .whenExpanded {
+    display: inherit;
+}
+ul.collapsible li.active .whenCollapsed {
+    display: none;
+}
+
+/**
+* SPECIAL: Materialize Reset Stuff
+*/
+/* Set default so inherit below will work properly */
+article ul, article ul li {
+    list-style-type: disc !important;
+}
+article ul,li {
+    padding-left: inherit !important;
+    list-style-type: inherit !important;
+}
+article ul {
+    margin-left: 2em;
+}
+article ol {
+    padding-inline-start: 20px;
+}
+/* set again */
+ul.collapsible, ul.collapsible li {
+    padding-left: 0px !important;
+    list-style-type: none !important;
+}
+
+/* Strange - they set <strong></strong> to 500, which is less than browser default. Let's reset it to browser default of 'bold' */
+strong {
+    font-weight: bold !important;
+}
+
+/**
+* Materialize Cards - Special Fixed Footers
+*/
+.card .fixed-footer {
+    text-align: center;
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    border-top: 1px solid black;
+    margin-left: -24px !important;
+    margin-bottom: -24px;
+    padding-bottom: 0px;
+}
+.card .fixed-footer > .col {
+    padding: 10px;
+}
+.card-content .fixed-footer {
+    position: relative;
+    width: calc(100% + 48px);
+}
+.card-reveal .fixed-footer {
+    margin-bottom: 0px;
+}
+.card .fixed-footer .col > .btn {
+    width: 100%;
+}
+.card .fixed-footer .btn, .card .fixed-footer a>i {
+    font-size: x-large !important;
+}
