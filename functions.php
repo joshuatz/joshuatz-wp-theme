@@ -55,12 +55,8 @@ remove_action( 'wp_head', 'rsd_link' ) ;
 
 function joshuatzwp_styles() {
     global $themeLibURL,$themeRootURL,$jtzwpHelpers,$cacheBustStamp;
-    if ($jtzwpHelpers->isPageWP()){
-        // Materialize CSS
-        wp_enqueue_style('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
-        // Materialize Icon Set
-        wp_enqueue_style('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
-    }
+    // Deque Gutenberg - I'll load this deferred
+    wp_dequeue_style('wp-block-library');
     // Load main theme CSS file (style.css)
     wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array(),$cacheBustStamp,'all');
     // Load final <head></head> style
@@ -68,7 +64,14 @@ function joshuatzwp_styles() {
 }
 
 function joshuatzwp_styles_deferred(){
-    global $themeRootURL,$cacheBustStamp,$jtzwpHelpers;
+    global $themeLibURL,$themeRootURL,$jtzwpHelpers,$cacheBustStamp;
+    // Materialize
+    if ($jtzwpHelpers->isPageWP()){
+        // Materialize CSS
+        wp_enqueue_style('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
+        // Materialize Icon Set
+        wp_enqueue_style('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
+    }
     // Font Awesome - defer OK
     wp_enqueue_style('font-awesome-style','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',array(),false,'all');
     // Google Fonts - defer OK
@@ -94,7 +97,8 @@ function joshuatzwp_styles_deferred(){
     // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css" integrity="sha256-+8ReLFz1xaTiP3T0xcJVWrHneeFwCnJUJwvcM0L+Ufw=" crossorigin="anonymous" />
     $prismJsCssFilePath = file_exists($jtzwpHelpers->siteRootPath . '/css/prism.css') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css';
     wp_enqueue_style('prism-js-style',$prismJsCssFilePath,array(),false,'all');
-
+    // Gutenberg block
+    wp_enqueue_style('wp-block-library');
 }
 
 function joshuatzwp_styles_for_admin(){
