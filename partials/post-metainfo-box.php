@@ -6,12 +6,13 @@
 ?>
 <?php
     global $jtzwpHelpers;
+    $tagsInfo = $jtzwpHelpers->getTagsInfoArrs();
 ?>
 <?php if(get_field('show_meta_info_box')!==false): ?>
-<div class="expandablePostDetailsSection">
+<div class="expandablePostDetailsSection postDetailsSection">
     <ul class="collapsible">
+        <!-- Disclaimers -->
         <?php if(jtzwp_get_disclaimer()): ?>
-            <!-- Disclaimers -->
             <li class="active">
                 <div class="collapsible-header">
                     <i class="material-icons">report</i>
@@ -48,6 +49,23 @@
                 </div>
             </div>
         </li>
+        <!-- Tags -->
+        <?php if(get_the_tag_list()): ?>
+            <li>
+                <div class="collapsible-header">
+                    <div class="whenExpanded"><i class="material-icons">class</i>Tags</div>
+                    <div class="whenCollapsed"><i class="material-icons">class</i>Click for Tags</div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="tagsTitle">Tags: </div>
+                    <div class="tagsWrapper">
+                        <?php foreach($tagsInfo->summaryArr as $tagDets): ?>
+                            <a class="tag jtzwp-dark" rel="tag" href="<?php echo $tagDets->permalink; ?>"><?php echo $tagDets->name; ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </li>
+        <?php endif; ?>
     </ul>
 </div>
 <?php endif; ?>

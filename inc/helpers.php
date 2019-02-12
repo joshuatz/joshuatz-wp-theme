@@ -735,6 +735,8 @@ class JtzwpHelpers {
             'tagIds' => array(),
             'commaSep' => '',
             'raw' => array(),
+            'summaryArr' => array(),
+            'baseUrl' => $this->getTagBaseUrl(),
             'count' => 0
         );
         $commaSepTags = '';
@@ -742,18 +744,30 @@ class JtzwpHelpers {
         if ($tags){
             $counter = 0;
             foreach ($tags as $tag) {
-                array_push($tagsInfo->tagNames,$tag->name);
-                array_push($tagsInfo->tagIds,$tag->term_id);
+                $tagId = $tag->term_id;
+                $tagName = $tag->name;
+                array_push($tagsInfo->tagNames,$tagName);
+                array_push($tagsInfo->tagIds,$tagId);
                 if ($counter>0){
                     $tagsInfo->commaSep .= ',';
                 }
                 $tagsInfo->commaSep .= $tag->name;
+                array_push($tagsInfo->summaryArr,(object) array(
+                    'id' => $tagId,
+                    'name' => $tagName,
+                    'permalink' => get_tag_link($tagId),
+                    'raw' => $tag
+                ));
                 $counter++;
             }
             $tagsInfo->raw = $tags;
             $tagsInfo->count = $counter;
         }
         return $tagsInfo;
+    }
+
+    public function getTagBaseUrl(){
+        return home_url() . '/' . get_option('tag_base');
     }
 
     public function getPostContentByRef($postRef){

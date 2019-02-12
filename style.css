@@ -665,6 +665,21 @@ a.readMore {
 .expandablePostDetailsSection .card-panel p {
     margin: 0px;
 }
+.postDetailsSection .tagsTitle {
+    float: left;
+    margin-right: 10px;
+}
+.postDetailsSection .tagsWrapper {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.postDetailsSection .tag {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 20px;
+}
 
 /**
 * Commenting System - Generic
