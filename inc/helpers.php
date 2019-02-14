@@ -43,6 +43,7 @@ class JtzwpHelpers {
         $this->themeIncPath = (get_template_directory() . '/inc');
         $this->siteRootPath = preg_replace('#\/$#','',isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : dirname(dirname(__FILE__)));
         $this->siteRootUrl = $this->getUrlInfo()['homepage'];
+        $this->homepage = $this->getUrlInfo()['homepage'];
     }
 
     /**
@@ -1025,6 +1026,21 @@ class JtzwpHelpers {
             $newKey = wp_generate_password(18,false,false);
             $this->setThemeUserSetting('jtzwp_webhook_key',$newKey);
             return $newKey;
+        }
+    }
+
+    public function getUsersGlobalOptOutPath(){
+        $configuredPage = $this->getThemeUserSetting('jtzwp_global_optout_path');
+        if ($configuredPage->isSet){
+            // Remove leading slash if user left it in
+            $configuredPagePath = preg_replace('/^\//','',$configuredPage->val);
+            // Remove trailing slash
+            $configuredPagePath = preg_replace('/\/$/','',$configuredPagePath);
+            return $configuredPagePath;
+        }
+        else {
+            // return a path that should never match
+            return '\/\/\/\?donotmatchme\?\/\/\/';
         }
     }
 

@@ -44,6 +44,18 @@ function jtzwp_initial_settings_api_init(){
         )
     );
 
+    // General Settings - Global Opt Out Path
+	add_settings_field(
+		'jtzwp_global_optout_path',
+		__( 'OPTIONAL: Global tracking opt out page. If left blank, page will not be generated. Example: "global-opt-out-page"', 'wordpress' ),
+		'jtzwp_generic_text_field_render',
+		'jtzwp_options_page',
+        'jtzwp_general_settings_section',
+        array(
+            'jtzwp_global_optout_path'
+        )
+    );
+
     // General Settings - Webhook Key
     add_settings_field(
 		'jtzwp_webhook_key',

@@ -11,8 +11,8 @@
     <?php
         global $themeIncPath;
     ?>
-    <?php include_once($themeIncPath . '/everypage-execute.php'); ?>
     <?php wp_head(); ?>
+    <?php include_once($themeIncPath . '/everypage-execute.php'); ?>
 </head>
 <body>
     <?php include 'nav.php'; ?>

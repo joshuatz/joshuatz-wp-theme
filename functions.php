@@ -54,7 +54,7 @@ remove_action( 'wp_head', 'rsd_link' ) ;
  */
 
 function joshuatzwp_styles() {
-    global $themeLibURL,$themeRootURL,$jtzwpHelpers,$cacheBustStamp;
+    global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // Deque Gutenberg - I'll load this deferred
     wp_dequeue_style('wp-block-library');
     // Load main theme CSS file (style.css)
@@ -64,7 +64,7 @@ function joshuatzwp_styles() {
 }
 
 function joshuatzwp_styles_deferred(){
-    global $themeLibURL,$themeRootURL,$jtzwpHelpers,$cacheBustStamp;
+    global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // Materialize
     if ($jtzwpHelpers->isPageWP()){
         // Materialize CSS
@@ -93,23 +93,23 @@ function joshuatzwp_styles_deferred(){
 }
 
 function joshuatzwp_styles_for_admin(){
-    global $themeRootURL,$cacheBustStamp;
+    global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     wp_enqueue_style('admin-styles', $themeRootURL.'/admin.css',array(),$cacheBustStamp,'all');
 }
 
 function joshuatzwp_scripts() {
-    global $themeLibURL, $themeIncPath, $themeRootURL, $cacheBustStamp;
+    global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     wp_enqueue_script('jquery-3','https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',array(),false,false);
-    // Main JS
-    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','materialize-js'),$cacheBustStamp,true);
+    // Helpers
+    wp_enqueue_script('helpers-js',$themeIncURL.'/helpers.js',array('jquery-3'),false,false);
 }
 
 function joshuatzwp_scripts_deferred(){
-    global $themeRootUrl;
-    global $jtzwpHelpers;
-    global $themeLibURL;
+    global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // Materialize JS
     wp_enqueue_script('materialize-js',$themeLibURL.'/materialize/js/materialize.min.js',array('jquery-3'),false,true);
+    // Main JS
+    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','materialize-js'),$cacheBustStamp,true);
     // Fancybox 3
     // integrity="sha256-ULR2qlEu6WigJY4xQsDsJeW76e9tEE2EWjnKEQ+0L8Q="
     wp_enqueue_script('fancybox3-js','https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js',array('jquery-3'),false,true);
@@ -124,8 +124,7 @@ function joshuatzwp_scripts_deferred(){
 }
 
 function joshuatzwp_scripts_admin(){
-    global $themeRootURL;
-    global $cacheBustStamp;
+    global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // admin.js
     wp_enqueue_script('admin-script',$themeRootURL.'/admin.js',array('jquery'),$cacheBustStamp,true);
 }
@@ -214,6 +213,8 @@ function jtzwp_template_include_hook($template){
     global $jtzwpHelpers,$wp_query;
     $currentUrl = $jtzwpHelpers->getCurrentUrl();
     $currentUrlInfo = $jtzwpHelpers->getUrlInfo($currentUrl);
+    // Generated optout page
+    $generatedOptOutPath = $jtzwpHelpers->getUsersGlobalOptOutPath();
     // Under construction page
     if (preg_match('/\/under-construction\//',$currentUrl) && $jtzwpHelpers->getIsUnderConstruction()===true){
         $underConstructionTemplate = locate_template(array('page-under-construction.php'));
@@ -229,7 +230,7 @@ function jtzwp_template_include_hook($template){
         }
     }
     // Post-deployment webhook
-    if ($currentUrlInfo['path']==='/deployment-hook/'){
+    else if ($currentUrlInfo['path']==='/deployment-hook/'){
         // Prevent 404
         $wp_query->is_404 = false;
         
@@ -252,6 +253,24 @@ function jtzwp_template_include_hook($template){
             $postDeployActionsResults->msg = 'Unauthorized! Please check your special key value!';
         }
         echo json_encode($postDeployActionsResults);
+        exit();
+    }
+    else if ($currentUrlInfo['path']==='/'.$generatedOptOutPath.'/' || $currentUrlInfo['path']==='/'.$generatedOptOutPath){
+        // Prevent 404
+        $wp_query->is_404 = false;
+        status_header('301');
+        ?>
+            <?php wp_head(); ?>
+            <script>
+            helpers.setCookie('jtzwpGlobalOptOut','true',365);
+            setTimeout(function(){
+                //window.location.href = '<?php echo $jtzwpHelpers->siteRootUrl; ?>';
+            },6000);
+            </script>
+            <div class="card-panel">
+                <p>You have been opted out of tracking. Redirecting you back to the homepage in a few seconds...</p>
+            </div>
+        <?php
         exit();
     }
     else {
