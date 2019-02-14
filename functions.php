@@ -109,7 +109,7 @@ function joshuatzwp_scripts_deferred(){
     // Materialize JS
     wp_enqueue_script('materialize-js',$themeLibURL.'/materialize/js/materialize.min.js',array('jquery-3'),false,true);
     // Main JS
-    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','materialize-js'),$cacheBustStamp,true);
+    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','materialize-js','j-prism-toolbar'),$cacheBustStamp,true);
     // Fancybox 3
     // integrity="sha256-ULR2qlEu6WigJY4xQsDsJeW76e9tEE2EWjnKEQ+0L8Q="
     wp_enqueue_script('fancybox3-js','https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js',array('jquery-3'),false,true);
