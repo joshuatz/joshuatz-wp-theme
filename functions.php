@@ -260,16 +260,21 @@ function jtzwp_template_include_hook($template){
         $wp_query->is_404 = false;
         status_header('301');
         ?>
-            <?php wp_head(); ?>
+            <?php
+            $optoutPageHtml = '
             <script>
-            helpers.setCookie('jtzwpGlobalOptOut','true',365);
+            helpers.setCookie("jtzwpGlobalOptOut","true",365);
             setTimeout(function(){
-                //window.location.href = '<?php echo $jtzwpHelpers->siteRootUrl; ?>';
+                window.location.href = "' . $jtzwpHelpers->siteRootUrl . '";
             },6000);
             </script>
             <div class="card-panel">
                 <p>You have been opted out of tracking. Redirecting you back to the homepage in a few seconds...</p>
-            </div>
+            </div>';
+            $jtzwpHelpers->includeTemplatePart('partials/single-page-scopable',array(
+                'scopedContent' => $optoutPageHtml
+            ));
+            ?>
         <?php
         exit();
     }
