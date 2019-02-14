@@ -92,8 +92,8 @@
                 // Attach listener to all activator triggers
                 $(card).find('.activator').on('click',function(){
                     $(card).find('.card-reveal .wow').each(function(){
-                        //
-                    })
+                        wow.show(this);
+                    });
                 });
             });
         }
@@ -101,8 +101,7 @@
         // Custom materialize init stuff
         $(document).ready(function(){
             materializeAutoCardHeight();
-            // wow seems to be working with toggled content at the moment
-            //forceWowAnimateOnCardReveal();
+            forceWowAnimateOnCardReveal();
         });
     }
 
