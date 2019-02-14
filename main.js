@@ -6,7 +6,10 @@
         jtzwpMaterializeInit();
         jtzwpMaterializeExtend();
         // wow.js init
-        new WOW().init();
+        window.wow = new WOW({
+            //animateClass : 'animated'
+        });
+        wow.init();
         // Fancybox
         jtzwpFancybox();
     });
@@ -82,9 +85,24 @@
             });
         }
 
+        function forceWowAnimateOnCardReveal(){
+            // Get all expandable cards
+            $('div.card > .card-reveal').parent().each(function(index){
+                var card = this;
+                // Attach listener to all activator triggers
+                $(card).find('.activator').on('click',function(){
+                    $(card).find('.card-reveal .wow').each(function(){
+                        //
+                    })
+                });
+            });
+        }
+
         // Custom materialize init stuff
         $(document).ready(function(){
             materializeAutoCardHeight();
+            // wow seems to be working with toggled content at the moment
+            //forceWowAnimateOnCardReveal();
         });
     }
 

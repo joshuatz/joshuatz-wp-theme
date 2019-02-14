@@ -65,12 +65,60 @@ strong {
     position: relative;
     width: calc(100% + 48px);
 }
+.card-reveal[style*="display: none"] .wow {
+    display: none;
+}
+.card-reveal .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
 .card-reveal .fixed-footer {
     margin-bottom: 0px;
 }
 .card .fixed-footer .col > .btn {
     width: 100%;
+    padding: 0px 4px;
+    overflow : hidden;
 }
-.card .fixed-footer .btn, .card .fixed-footer a>i {
-    font-size: x-large !important;
+.card .fixed-footer .externalCodePageLink .externalCodePageLinkName {
+    display : inline;
+    max-width : 87%;
+}
+.card .fixed-footer .externalCodePageLink .externalCodePageLinkIcon {
+    display : inline;
+    max-width : 8%;
+    margin-left: 5%;
+}
+
+/**
+* Main Materialize Breakpoints
+*/
+/** First breakpoint, .s */
+@media only screen and (max-width: 600px){
+    .card .fixed-footer .s12 .btn, .card .fixed-footer .s12 i {
+        font-size: x-large !important;
+    }
+    .card .fixed-footer .s6 .btn, .card .fixed-footer .s6 i {
+        font-size: large !important;
+    }
+}
+/** Second breakpoint, .m */
+@media only screen and (min-width:601px){
+    .card .fixed-footer .m6 .btn, .card .fixed-footer .m6 i {
+        font-size: medium !important;
+    }
+    .card .fixed-footer > .col.m6 {
+        padding: 4px 2px;
+    }
+}
+/** Third breakpoint, .l */
+@media only screen and (min-width:992px){
+
+}
+/** Fourth breakpoint, .xl */
+@media only screen and (min-width:1200px){
+
 }

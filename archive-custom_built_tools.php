@@ -15,20 +15,20 @@ $fallbackPromoImageSrc = get_template_directory_uri() . '/images/computer-tools-
 function getFixedFooter(){
     global $allowReadMoreLink, $footerColumns, $footerColumnsMaterialize, $readMoreLink, $hasExternalCodePage, $hasExternalCodePage, $externalCodePage, $externalProjectPage, $jtzwpHelpers;
     ?>
-    <div class="fixed-footer row valign-wrapper" data-column="<?php echo $footerColumns; ?>">
+    <div class="fixed-footer row" data-column="<?php echo $footerColumns; ?>">
         <?php if($allowReadMoreLink): ?>
             <div class="col <?php echo $footerColumnsMaterialize; ?> readMoreLinkWrapper">
                 <div class="btn black wow bounce" data-wow-delay="0.5s" data-wow-iteration="2">
-                    <a class="readMoreLink" href="<?php echo $readMoreLink; ?>">Read More</a>
+                    <a class="readMoreLink truncate" href="<?php echo $readMoreLink; ?>">Read More</a>
                 </div>
             </div>
         <?php endif; ?>
-        <?php if($hasExternalCodePage): ?>
+        <?php if($hasExternalCodePage && $jtzwpHelpers->codeHostIconMapper($externalCodePage)['foundMatch']): ?>
             <div class="col <?php echo $footerColumnsMaterialize; ?> externalCodePageLinkWrapper">
                 <div class="btn black wow bounce" data-wow-delay="0.5s" data-wow-iteration="2">
                     <a class="externalCodePageLink" href="<?php echo $externalCodePage; ?>" target="_blank">
-                        <span class="externalCodePageLinkName"><?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['name']; ?></span>
-                        <?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['html']; ?>
+                        <span class="externalCodePageLinkName truncate"><?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['name']; ?></span>
+                        <span class="externalCodePageLinkIcon"><?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['html']; ?></span>
                     </a>
                 </div>
             </div>
@@ -76,8 +76,7 @@ function getFixedFooter(){
                         $externalCodePage = get_field('externally_hosted_code_url');
                         // Determine number of columns that will appear in footer
                         $footerColumns = ($allowReadMoreLink && $externalCodePage) ? 2 : 1;
-                        $footerColumnsMaterialize = 's' . intval((12 / $footerColumns));
-
+                        $footerColumnsMaterialize = ('s12') . ' ' . ('m' . intval((12 / $footerColumns)));
                         
                     ?>
                     <div class="col s12 m6 l4 xl4 customToolListing" data-id="<?php echo the_ID(); ?>">
@@ -96,7 +95,7 @@ function getFixedFooter(){
                                 </div>
                             </div>
                             <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4"><?php echo $displayTitle; ?><i class="material-icons right">close</i></span>
+                                <span class="card-title grey-text text-darken-4"><?php echo $displayTitle; ?><i class="material-icons right closeButton">close</i></span>
                                 <?php if(has_excerpt()): ?>
                                     <?php the_excerpt(); ?>
                                 <?php else: ?>
