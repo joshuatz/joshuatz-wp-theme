@@ -24,13 +24,47 @@
         </div>
         
         <div id="mainmenu">
-            <?php $secDelay = 0.5; ?>
-            <?php foreach($projectTerms as $projectTerm): ?>
-                <?php $secDelay = $secDelay + 0.5; ?>
-                <div class="wow bounce homepageButtonWrapper" data-wow-delay="<?php echo $secDelay; ?>s" style="display:inline-block;">
-                    <a href="<?php echo get_term_link($projectTerm);?>" class="hvr-bob homepageButton"><?php echo $projectTerm->name; ?></a>
-                </div>
-            <?php endforeach; ?>
+            <?php 
+                $secDelay = 0.5;
+                $homepageButtonsMisc = array(
+                    array('link'=>'/custom-tools/','text'=>'Custom Developed Tools'),
+                    array('link'=>'/blog/','text'=>'Blog')
+                );
+                $homepageButtonsProjects = array();
+                foreach($projectTerms as $projectTerm){
+                    array_unshift($homepageButtonsProjects,array(
+                        'link' => get_term_link($projectTerm),
+                        'text' => $projectTerm->name
+                    ));
+                }
+
+                function getHomepageButtonHtml($homepageButton){
+                    ?>
+                    <?php
+                        // Add delay each time called so bounces cascade
+                        global $secDelay;
+                        $secDelay = $secDelay + 0.5;
+                    ?>
+                    <div class="wow bounce homepageButtonWrapper" data-wow-delay="<?php echo $secDelay; ?>s" style="display:inline-block;">
+                        <a href="<?php echo $homepageButton['link'];?>" class="hvr-bob homepageButton"><?php echo $homepageButton['text']; ?></a>
+                    </div>
+                    <?php
+                }
+            ?>
+            <!-- Projects First -->
+            <div class="homepageProjectButtonsWrapper">
+                <h2 class="title">Project Links:</h2>
+                <?php foreach($homepageButtonsProjects as $homepageButton): ?>
+                    <?php getHomepageButtonHtml($homepageButton); ?>
+                <?php endforeach; ?>
+            </div>
+            <!-- Then others -->
+            <div class="homepageOtherButtonsWrapper">
+                <h2 class="title">Other:</h2>
+                <?php foreach($homepageButtonsMisc as $homepageButton): ?>
+                    <?php getHomepageButtonHtml($homepageButton); ?>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </div>
