@@ -412,5 +412,31 @@ function jtzwp_after_post_edit($postId){
 add_action('save_post','jtzwp_after_post_edit');
 
 /**
- * 
+ * Hooks on BEFORE saving a post - this is called before post is inserted into DB
+ * @param {array} $data - this will be the post data, slashed (escaped), and as an associative arr.
+ * @param {array} $postArr - similar to $data, an associate array of props, but only sanitzed, not fully slashed / escaped.
+ * @returns {array} $finalPostData - Make sure to return this, as whatever you return will be used to insert into DB / save post
  */
+function jtzwp_before_post_save($data,$postArr){
+    $finalPostData = $data;
+    $hasPostContentBeenChanged = true;
+    $isRevision = false;
+    $postId = $postArr['ID'];
+    // $postArr['ID'] will be un-set if this is a new post being saved, as it won't have an ID until it is actually saved to DB
+    if (isset($postId)){
+        $oldPost = get_post($postId);
+        if (!empty($oldPost)){
+            $isRevision = true;
+            if (($oldPost->post_content === $finalPostData['post_content']) || ($oldPost->post_content === $postArr['post_content'])){
+                $hasPostContentBeenChanged = false;
+            }
+            // If post_content (this is the actual content of the post, not meta stuff like tags, categories, etc.) has NOT been modified, keep last modified stamps the same
+            if ($hasPostContentBeenChanged===false){
+                $finalPostData['post_modified'] = $oldPost->post_modified;
+                $finalPostData['post_modified_gmt'] = $oldPost->post_modified_gmt;
+            }
+        }
+    }
+    return $finalPostData;
+}
+add_action('wp_insert_post_data','jtzwp_before_post_save',10,2);
