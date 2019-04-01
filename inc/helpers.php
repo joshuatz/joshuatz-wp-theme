@@ -584,8 +584,13 @@ class JtzwpHelpers {
      * If you are unsure if passed arg was postID or post obj, pass it through this function to make sure you are getting post obj
      */
     public function getPostByMixed($postOrPostId){
+        global $post;
         if (gettype($postOrPostId)==='integer'){
             return get_post($postOrPostId);
+        }
+        else if (!(isset($postOrPostId)) && isset($post)){
+            // Try to retrive global post object
+            return $post;
         }
         else {
             return $postOrPostId;

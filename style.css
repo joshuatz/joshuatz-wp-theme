@@ -24,7 +24,7 @@ Text Domain: joshuatzwp
     background-color: #A3BFE1 !important;
     color: #2E3641 !important;
 }
-.btn.jtzwp-blue:hover,.btn.jtzwp-lightblue:hover {
+.btn.jtzwp-blue:hover,.btn.jtzwp-lightblue:hover, .customBtn.jtzwp-blue:hover,.customBtn.jtzwp-lightblue:hover {
     background-color: #2E3641 !important;
     color: white !important;
 }
@@ -40,7 +40,7 @@ Text Domain: joshuatzwp
     background-color: #F69087 !important;
     color: white !important;
 }
-.btn.jtzwp-dark:hover, .btn.jtzwp-darkblue:hover {
+.btn.jtzwp-dark:hover, .btn.jtzwp-darkblue:hover, .customBtn.jtzwp-dark:hover, .customBtn.jtzwp-darkblue:hover {
     background-color: #A3BFE1 !important;
     color: black !important;
 }
@@ -771,6 +771,16 @@ a.readMore {
 }
 
 /**
+* Widget Area - under post sidebar
+*/
+.underpostWidgetArea {
+    padding: 1px 12px;
+    margin: 14px 12px;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
+}
+
+/**
 * Preloader and Loading Animations
 */
 .preloaderWrapper {
@@ -1057,7 +1067,7 @@ a.readMore {
 .widget .widgettitle, .widget .widgetTitle {
     font-size: 2.5rem;
 }
-/** Customized */
+/** Customized - Recent Posts */
 .postsDrawer .postAge {
     display: inline-block;
     font-size: 0.75rem;
@@ -1091,4 +1101,32 @@ a.readMore {
     padding: 8px 0px 8px 0px;
     margin: 0px;
     border: none;
+}
+/* Custom - Share Buttons */
+.widget.jtzwpShareButtons {
+    width: 95%;
+    margin: auto;
+}
+.jtzwpShareButtonWrapper {
+    padding: 0px 3px !important;
+    margin-top: 10px;
+}
+.jtzwpShareButton {
+    display: inline-block;
+    background-color: white;
+    width: 100%;
+    min-height: 40px !important;
+    text-align: center;
+    border-radius: 30px;
+}
+.jtzwpShareButton > .autoCenterChild {
+    padding-top: 2px;
+}
+.jtzwpShareButton .buttonText {
+    float: right;
+    margin-top: 2px;
+}
+.jtzwpShareButton .icon i.fa {
+    font-size: 28px;
+    margin: -2px 10px 4px 0px;
 }
