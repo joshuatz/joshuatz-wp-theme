@@ -52,15 +52,24 @@
                 }
             ?>
             <!-- Projects First -->
-            <div class="homepageProjectButtonsWrapper">
-                <h2 class="title">Project Links:</h2>
-                <?php foreach($homepageButtonsProjects as $homepageButton): ?>
-                    <?php getHomepageButtonHtml($homepageButton); ?>
-                <?php endforeach; ?>
+            <div class="homepageProjectButtonsWrapper homepageButtonSection">
+                <h2 class="title bold">Project Links:</h2>
+                <div class="allProjectsButtonWrapper">
+                    <?php getHomepageButtonHtml(array(
+                        'link' => '/projects',
+                        'text' => 'ALL Projects'
+                    )); ?>
+                </div>
+                <div class="mediumDividerDashed" style="width: 80%; margin: 8px auto; border-color: rgba(0, 0, 0, 0.3);"></div>
+                <div class="projectsByTypeButtonWrapper">
+                    <?php foreach($homepageButtonsProjects as $homepageButton): ?>
+                        <?php getHomepageButtonHtml($homepageButton); ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
             <!-- Then others -->
-            <div class="homepageOtherButtonsWrapper">
-                <h2 class="title">Other:</h2>
+            <div class="homepageOtherButtonsWrapper homepageButtonSection">
+                <h2 class="title bold">Other Sections:</h2>
                 <?php foreach($homepageButtonsMisc as $homepageButton): ?>
                     <?php getHomepageButtonHtml($homepageButton); ?>
                 <?php endforeach; ?>

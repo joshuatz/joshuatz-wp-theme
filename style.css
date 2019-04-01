@@ -63,6 +63,9 @@ Text Domain: joshuatzwp
 }
 
 /** Theme Globals - helpers */
+.bold {
+    font-weight: bold;
+}
 .autoCenterParent {
     position: relative;
 }
@@ -92,6 +95,19 @@ Text Domain: joshuatzwp
     display: flex;
     flex-wrap: wrap;
 }
+.mediumDivider {
+    height: 2px;
+    overflow: hidden;
+    background-color: black;
+    margin-bottom: 8px;
+}
+.mediumDividerDashed {
+    height: auto;
+    overflow: hidden;
+    background-color: unset !important;
+    border-bottom: 2px dashed black;
+    margin-bottom: 10px;
+}
 .largeDivider {
     height: 4px;
     overflow: hidden;
@@ -99,11 +115,16 @@ Text Domain: joshuatzwp
     margin-bottom: 20px;
 }
 .largeDividerDashed {
-    height: auto;;
+    height: auto;
     overflow: hidden;
     background-color: unset !important;
     border-bottom: 4px dashed black;
     margin-bottom: 20px;
+}
+.verticalDivider {
+    display: inline-block;
+    background-color: black;
+    width: 2px;
 }
 .alignCenter, .aligncenter {
     margin-left: auto;
@@ -125,20 +146,23 @@ a > img.alignCenter, a > img.aligncenter {
     border-radius: 8px;
     margin-bottom: 10px;
 }
-.title {
-    font-size: 1.5rem;
+.entry-content h1 {
+    font-size: 2rem;
 }
-.entry-content h2 {
-    font-size: 1.5rem;
+.entry-content h2, .title {
+    font-size: 1.7rem;
 }
 .entry-content h3 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
 }
 .entry-content h4 {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
-.entry-content h5,h6 {
-    font-size: 1rem;
+.entry-content h5,.entry-content h6 {
+    font-size: 1.2rem;
+}
+.entry-content h3,.entry-content h4,.entry-content h5,.entry-content h6 {
+    margin-left: 4% !important;
 }
 .pageHeaderSection {
     background: rgba(255, 255, 255, 0.47);
@@ -328,8 +352,23 @@ body {
 /**
 * Homepage
 */
+.homepageButtonSection {
+    border: 1px dashed black;
+    margin: 18px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255,0.5);
+    padding: 0px 0px 10px 0px;
+}
 .homepageButtonWrapper {
     padding: 8px;
+}
+.projectsByTypeButtonWrapper .homepageButton {
+    font-size: 14px;
+    padding: 14px 20px;
+}
+.homepageOtherButtonsWrapper .homepageButton {
+    font-size: 18px;
+    padding: 14px 20px;
 }
 .homepageButton {
 	-moz-box-shadow: 0px 10px 14px -7px #276873;
@@ -395,7 +434,10 @@ p,body,h1,h2,h3,h4,h5,h6 {
     font-family: 'Lato',sans-serif;
 }
 h1,h2,h3,h4,h5,h6 {
-    font-weight: bold;
+    font-weight: bold !important;
+}
+h1,h2 {
+	text-align:center;
 }
 /* Main body content styling */
 .entry-content{
@@ -409,7 +451,8 @@ h1,h2,h3,h4,h5,h6 {
     border-radius: 5px;
 }
 .entry-content > p {
-    text-indent: 1.25rem;
+    /* Turned off first-line indent. Uncomment below to turn back on */
+    /* text-indent: 1.25rem; */
 }
 /*
 * Code blocks 
@@ -442,6 +485,10 @@ pre.wrap, pre.wrap > code, pre.noScroll, pre.noScroll > code {
     max-width: 100%;
     height: auto;
 }
+/* Disable materialize styling for Github gist embeds */
+.gist tr {
+    border-bottom: inherit;
+}
 
 #maingallery {
 	width:100%;
@@ -461,12 +508,7 @@ pre.wrap, pre.wrap > code, pre.noScroll, pre.noScroll > code {
 	display:inline-block;
 	padding:15px;
 }
-h1 {
-	text-align:center;
-}
-h2 {
-	text-align:center;
-}
+
 
 
 
@@ -635,6 +677,8 @@ a.readMore {
 }
 .customToolListing {
     max-width: 550px;
+    /* Min height forces grid */
+    min-height: 490px !important;
 }
 
 
