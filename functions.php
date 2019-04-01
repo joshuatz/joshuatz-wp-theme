@@ -18,6 +18,7 @@ require_once($themeIncPath . '/custom-sidebars.php');
 require_once($themeIncPath . '/helpers.php');
 // Widget files
 require_once($themeIncPath . '/widgets/widget-recentposts.php');
+require_once($themeIncPath . '/widgets/widget-sharebuttons.php');
 
 /**
  * Make sure helpers is loaded globally

@@ -44,7 +44,7 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
         $postsQuery = new WP_Query($queryOptions);
 
         if (!$postsQuery->have_posts()){
-            // return immediately
+            // return immediately - no posts to show
             return;
         }
 
@@ -88,7 +88,7 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
     public function form($instance){
         // Rendering the options form in the admin interface
         
-        // Check for values that already set by user
+        // Check for values already set by user
         $title = isset($instance['title']) ? esc_attr($instance['title']) : '';
         $numberOfPosts = isset($instance['numberOfPosts']) ? abs(intval($instance['numberOfPosts'])) : 5;
         $restrictToBlog = isset($instance['restrictToBlog']) ? (bool) $instance['restrictToBlog'] : false;
