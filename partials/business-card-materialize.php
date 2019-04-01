@@ -17,6 +17,7 @@
     $geography = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_geo_description');
     $linkedInURL = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_linkedin_url');
     $codingProfileURL = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_coding_profile_url');
+    $twitterUrl = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_twitter_url');
     $codingProfileIconInfo = $jtzwpHelpers->codeHostIconMapper($codingProfileURL->val);
     $profilePictureFilePath = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_profile_picture_filepath');
 
@@ -116,6 +117,19 @@
                                     <a href="<?php echo $codingProfileURL->val; ?>" target="_blank">
                                         <?php echo ($codingProfileIconInfo['foundMatch']===true) ? $codingProfileIconInfo['name'] : 'Coding Examples' ?>
                                     </a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($twitterUrl->isValid): ?>
+                            <div class="rowJoinerWrapper"><div class="rowJoiner iconsSolidBackground"></div></div>
+                            <div class="linkedInURL col s12 valign-wrapper">
+                                <div class="iconWrapper z-depth-2 iconsSolidBackground">
+                                    <div class="icon">
+                                        <i class="material-icons left">link</i><i class="fa fa-twitter-square iconsSolidBackground" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="textWrapper">
+                                    <a href="<?php echo $twitterUrl->val; ?>" target="_blank">Twitter</a>
                                 </div>
                             </div>
                         <?php endif; ?>

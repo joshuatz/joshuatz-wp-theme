@@ -104,6 +104,18 @@ function jtzwp_initial_settings_api_init(){
         )
     );
 
+    // About Me - Twitter URL
+    add_settings_field(
+        'jtzwp_about_me_twitter_url',
+        __( 'Twitter URL','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_twitter_url'
+        )
+    );
+
     // About Me - Public Coder Profile URL
     add_settings_field(
         'jtzwp_about_me_coding_profile_url',

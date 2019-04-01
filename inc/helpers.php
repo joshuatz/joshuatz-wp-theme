@@ -954,6 +954,10 @@ class JtzwpHelpers {
         }
     }
 
+    /**
+     * @param {string} $key - the key with which the setting is stored. Usually long and very unique to the theme.
+     * @return {object} - object with members for the actual value of the setting, as well as if it is valid (based on having non-empty value and/or passing a custom validation rule)
+     */
     public function getThemeUserSetting($key){
         $retVal = (object) array(
             'isSet' => false,
