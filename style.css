@@ -14,7 +14,7 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: visible;
 }
 
 /** Theme globals - reusable color classes */
@@ -915,7 +915,7 @@ a.readMore {
     border-left: 1px solid black;
     border-right: 1px solid black;
 }
-.businessCard .linkedInURL i, .businessCard .codingProfileURL i {
+.businessCard .linkedInURL i, .businessCard .codingProfileURL i, .businessCard .twitterUrl i {
     position: absolute;
     width: 24px;
     height: 24px;

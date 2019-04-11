@@ -122,7 +122,7 @@
                         <?php endif; ?>
                         <?php if ($twitterUrl->isValid): ?>
                             <div class="rowJoinerWrapper"><div class="rowJoiner iconsSolidBackground"></div></div>
-                            <div class="linkedInURL col s12 valign-wrapper">
+                            <div class="twitterUrl col s12 valign-wrapper">
                                 <div class="iconWrapper z-depth-2 iconsSolidBackground">
                                     <div class="icon">
                                         <i class="material-icons left">link</i><i class="fa fa-twitter-square iconsSolidBackground" aria-hidden="true"></i>
