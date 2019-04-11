@@ -205,17 +205,10 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 .dropdown-toggle i{font-size:12px;margin:0 0 0 4px}
 .jtnavbar .btn-jtnavbar{
     cursor:pointer;
-    margin:18px 15px 18px 0;
+    margin: 18px 5px 5px 5px;
     padding:0px 10px;
-    display:block;
     -webkit-appearance:inherit;
-}
-.jtnavbar .btn-jtnavbar {
-    display:none;
     float:right;
-    padding:7px 10px;
-    margin-left:5px;
-    margin-right:5px;
     color:#fff;
 }
 .nav-jtcollapse .nav > li > a,.nav-jtcollapse .dropdown-menu a{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0}
@@ -378,7 +371,7 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
     .share-story{margin:13px 0 0}
 }
 @media (min-width: 768px) and (max-width: 979px) {
-    #primary,.site-footer .jtcontainer{padding-left:20px;padding-right:20px}
+    .site-footer .jtcontainer{padding-left:20px;padding-right:20px}
     #masthead{position:fixed}
     .jtcontainer{width:auto}
     [class*="span"],.uneditable-input[class*="span"],.row-fluid [class*="span"]{-moz-box-sizing:border-box;display:block;float:none;margin-left:0;width:100%}
@@ -397,7 +390,7 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
     #footer-body > [class*="span"]{margin-bottom:20px}
 }
 @media (max-width: 767px) {
-    #primary,.site-footer .jtcontainer{padding-left:20px;padding-right:20px}
+    .site-footer .jtcontainer{padding-left:20px;padding-right:20px}
     #masthead{position:fixed}
     .jtcontainer{width:auto}
     #masthead .bl_search{float:none;margin:0}
@@ -416,7 +409,6 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
     .nav-jtcollapse .open > .dropdown-menu{background:#212833;margin:0}
 }
 @media (max-width: 480px) {
-    #primary{padding-left:5px;padding-right:5px}
     .jtnavbar .brand{padding-left:5px;padding-right:5px}
     .bl_background{display:none}
 }

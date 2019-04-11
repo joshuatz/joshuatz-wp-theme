@@ -119,7 +119,7 @@ function joshuatzwp_scripts_deferred(){
     $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js';
     wp_enqueue_script('prism-js',$prismJsFilePath,array(),false,true);
     // Prism.js custom toolbar
-    wp_enqueue_script('j-prism-toolbar',$themeLibURL . '/j-prism-toolbar/jPrismToolbar.js',array(),false,true);
+    wp_enqueue_script('j-prism-toolbar',$themeLibURL . '/j-prism-toolbar/jPrismToolbar.js',array(),$cacheBustStamp,true);
     // wow.js
     wp_enqueue_script('wow-js','https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js',array(),false,true);
 }
