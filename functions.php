@@ -87,7 +87,7 @@ function joshuatzwp_styles_deferred(){
     // Prism.js syntax highlighter
     // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
     // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css" integrity="sha256-+8ReLFz1xaTiP3T0xcJVWrHneeFwCnJUJwvcM0L+Ufw=" crossorigin="anonymous" />
-    $prismJsCssFilePath = file_exists($jtzwpHelpers->siteRootPath . '/css/prism.css') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css';
+    $prismJsCssFilePath = file_exists($jtzwpHelpers->siteRootPath . '/css/prism.css') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.css');
     wp_enqueue_style('prism-js-style',$prismJsCssFilePath,array(),false,'all');
     // Gutenberg block
     wp_enqueue_style('wp-block-library');
@@ -116,7 +116,7 @@ function joshuatzwp_scripts_deferred(){
     wp_enqueue_script('fancybox3-js','https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js',array('jquery-3'),false,true);
     // ClipboardJS
     wp_enqueue_script('clipboard-js',$themeLibURL . '/clipboardjs/clipboard.min.js',array(),false,true);
-    $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js';
+    $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.js');
     wp_enqueue_script('prism-js',$prismJsFilePath,array(),false,true);
     // Prism.js custom toolbar
     wp_enqueue_script('j-prism-toolbar',$themeLibURL . '/j-prism-toolbar/jPrismToolbar.js',array(),$cacheBustStamp,true);
