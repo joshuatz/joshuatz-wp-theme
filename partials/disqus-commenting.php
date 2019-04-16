@@ -22,7 +22,7 @@ else if (!isset($disqusCustomSubdomain) || $disqusCustomSubdomain===''){
     <?php if($hasValidDisqus): ?>
     <div id="disqus_thread"></div>
     <?php elseif(!$hasNoDisqus): ?>
-    <div>Invalid Disqus Config</div>
+    <!--<div>Invalid Disqus Config</div>-->
     <?php else: ?>
     <!-- No disqus configured -->
     <?php endif; ?>

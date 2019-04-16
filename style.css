@@ -694,8 +694,8 @@ a.readMore {
     align-items: flex-start;
 }
 .customToolListing {
-    max-width: 550px;
-    float: right !important;
+    /* max-width: 550px; */
+    /* float: right !important; */
 }
 .customToolListing .card-title {
     overflow-x: hidden;
