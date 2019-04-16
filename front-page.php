@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col s10 offset-s1">
                 <div class="card-panel white z-depth-4">
-                    <span class="flow-text">Welcome to the home page for Joshua Tzucker. This site serves as a pseudo-portfolio of some of my larger projects, as well as links to other projects. Please use the navigation bar at the top to navigate the site, or alternatively, use the project categories below.</span>
+                    <span class="flow-text">Welcome to the home page for Joshua Tzucker. This site serves as a portfolio of some of my larger projects, as well as links to other projects. Please use the navigation bar at the top to navigate the site, or alternatively, use the project categories below.</span>
                 </div>
             </div>
         </div>

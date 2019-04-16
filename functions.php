@@ -122,6 +122,9 @@ function joshuatzwp_scripts_deferred(){
     wp_enqueue_script('j-prism-toolbar',$themeLibURL . '/j-prism-toolbar/jPrismToolbar.js',array(),$cacheBustStamp,true);
     // wow.js
     wp_enqueue_script('wow-js','https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js',array(),false,true);
+    // Desandro Masonry
+    // integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI="
+    wp_enqueue_script('masonry','https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js',array(),false,true);
 }
 
 function joshuatzwp_scripts_admin(){

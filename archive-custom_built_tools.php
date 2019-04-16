@@ -44,7 +44,7 @@ function getFixedFooter(){
             <h2 class="customToolsListingsTitle mainTitle">Here are some software tools I have developed, either for myself or others.</h2>
 
             <div id="customToolsListings">
-                <div class="row">
+                <div class="row customToolsMasonryAuto">
                     <?php
                     // Loop through matching tools
                     while (have_posts()): the_post();

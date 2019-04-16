@@ -687,10 +687,19 @@ a.readMore {
     border-radius: 8px;
     margin: 10px;
 }
+.customToolsMasonry {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
 .customToolListing {
     max-width: 550px;
-    /* Min height forces grid */
-    min-height: 490px !important;
+    float: right !important;
+}
+.customToolListing .card-title {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 

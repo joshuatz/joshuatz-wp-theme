@@ -12,6 +12,8 @@
         wow.init();
         // Fancybox
         jtzwpFancybox();
+        // masonry
+        jtzwpMasonryInit();
     });
 
     /**
@@ -102,6 +104,15 @@
         $(document).ready(function(){
             materializeAutoCardHeight();
             forceWowAnimateOnCardReveal();
+        });
+    }
+
+    /**
+     * Masonry stuff
+     */
+    function jtzwpMasonryInit(){
+        $('.customToolsMasonryAuto').masonry({
+            itemSelector: '.customToolListing'
         });
     }
 
