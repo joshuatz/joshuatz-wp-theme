@@ -43,7 +43,7 @@
 
          <!-- Read more Links -->
         <div class="col <?php echo ($postInfo->featuredImage->hasFeaturedImage ? 's2 offset-s1' : 's2 offset-s2'); ?>">
-            <a class="btn waves-effect readMore jtzwp-dark" href="<?php echo $postInfo->permalink; ?>">
+            <a class="btn waves-effect readMore jtzwp-dark" href="<?php echo $postInfo->permalink; ?>" <?php echo $postInfo->permalinkIsExternal ? 'target="_blank"' : ''; ?>>
                 Read More <i class="material-icons right">more_horiz</i>
             </a>
         </div>

@@ -609,6 +609,7 @@ class JtzwpHelpers {
             'id' => $id,
             'ID' => $id,
             'permalink' => $this->getPostPermalink($id),
+            'permalinkIsExternal' => $this->postOnlyLinksExternally($id),
             'title' => get_the_title($id),
             'excerpt' => $this->getPostExcerpt($post),
             'hasExcerpt' => $this->hasExcerpt($post),
@@ -814,6 +815,7 @@ class JtzwpHelpers {
 
     /**
      * Determines whether a post only links externally (off-site) or not
+     * Works because get_permalink is a WP function and should *ALWAYS* return a permalink to this domain, whereas getPostPermalink can point elsewhere for the same post
      */
     public function postOnlyLinksExternally($postId){
         return get_permalink($postId)!==$this->getPostPermalink($postId);
