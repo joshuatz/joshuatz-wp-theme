@@ -18,7 +18,8 @@ get_header(); ?>
     $currentPageNum = isset($paged) ? $paged : 1;
 ?>
 
-<div id="main">
+<main id="main" role="main">
+    <?php get_sidebar('everypagetop'); ?>
     <div class="projectListing">
         <?php if(have_posts()): ?>
             <h1 class="projectListingTitle mainTitle"><?php echo $projectListingTitle; ?></h1>
@@ -77,6 +78,6 @@ get_header(); ?>
             <h1 class="mainTitle">No matching projects found :(</h1>
         <?php endif; ?>
     </div>
-</div>
+</main>
 
 <?php get_footer(); ?>

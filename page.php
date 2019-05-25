@@ -5,10 +5,11 @@
  */
 ?>
 <?php get_header(); ?>
-<div id="main">
+<main id="main" role="main">
+    <?php get_sidebar('everypagetop'); ?>
     <?php while ( have_posts() ) : the_post(); ?>
         <?php get_template_part('content',get_post_format()); ?>
     <?php endwhile; ?>
-</div>
+</main>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

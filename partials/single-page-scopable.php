@@ -9,8 +9,9 @@
     $content = isset($scopedContent) ? $scopedContent : '';
 ?>
 <?php get_header(); ?>
-<div id="main">
+<main id="main" role="main">
+    <?php get_sidebar('everypagetop'); ?>
     <?php echo $content; ?>
-</div>
+</main>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

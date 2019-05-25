@@ -29,4 +29,15 @@ function jtzwp_register_sidebars() {
         'before_title'  => '<h2 class="widgettitle">',
         'after_title'   => '</h2>'
     ));
+    /* Every Page - Top Callouts */
+    register_sidebar(array(
+        'id' => 'everypagetop',
+        'name' => __('Every Page Top Callouts'),
+        'description' => __('Widget area that will show up on (almost) every page of the site, as a top bar below the main navbar'),
+        'class' => $jtzwpAdminWidgetClass,
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>'
+    ));
 }

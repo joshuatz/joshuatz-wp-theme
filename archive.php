@@ -7,9 +7,10 @@ get_header(); ?>
 <?php
     global $jtzwpHelpers;
 ?>
-<div id="main">
+<main id="main" role="main">
+    <?php get_sidebar('everypagetop'); ?>
     <?php get_template_part('generic-archive-template'); ?>
-</div>
+</main>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

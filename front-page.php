@@ -10,7 +10,8 @@
     $projectTerms = $jtzwpHelpers->getProjectTypesTerms();
 ?>
 
-<div id="main">
+<main id="main" role="main">
+    <?php get_sidebar('everypagetop'); ?>
     <div class="homepageUpper">
         <div class="row">
             <h1 style="font-size:2rem; margin:20px 0px 0px 0px;">Homepage of Joshua Tzucker</h1>
@@ -76,7 +77,7 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 
 <?php get_sidebar('homepage'); ?>
 <?php get_footer(); ?>

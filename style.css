@@ -432,7 +432,7 @@ body {
     padding-left: 6px;
     padding-right: 6px
 }
-#main, .container.main, .main {
+#main, .container.main, .main, body > .everypageTopWidgetArea {
     padding-top: 100px; /* necessary to avoid appearing behind sticky nav */
 }
 p {
@@ -799,6 +799,13 @@ a.readMore {
     margin: 14px 12px;
     background-color: rgba(255, 255, 255, 0.65);
     border-radius: 10px;
+}
+
+/**
+* Widget Area - Every Page Top Bar Callouts
+*/
+.everypageTopWidgetArea {
+    width: 100%;
 }
 
 /**

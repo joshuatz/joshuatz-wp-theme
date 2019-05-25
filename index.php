@@ -8,12 +8,13 @@ $pageTitle = 'Blog / Misc.';
 ?>
 <?php get_header(); ?>
 
-<div id="main">
-<?php $jtzwpHelpers->includeTemplatePart('generic-archive-template',array(
-    'pageDescription' => $pageDescription,
-    'pageTitle' => $pageTitle
-));?>
-</div>
+<main id="main" role="main">
+    <?php get_sidebar('everypagetop'); ?>
+    <?php $jtzwpHelpers->includeTemplatePart('generic-archive-template',array(
+        'pageDescription' => $pageDescription,
+        'pageTitle' => $pageTitle
+    ));?>
+</main>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
