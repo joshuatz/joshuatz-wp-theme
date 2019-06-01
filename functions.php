@@ -217,6 +217,8 @@ function jtzwp_template_include_hook($template){
     global $jtzwpHelpers,$wp_query;
     $currentUrl = $jtzwpHelpers->getCurrentUrl();
     $currentUrlInfo = $jtzwpHelpers->getUrlInfo($currentUrl);
+    // Store selected template as global so other functions can use it
+    $GLOBALS['jtzwp_wp_selected_template'] = basename($template);
     // Generated optout page
     $generatedOptOutPath = $jtzwpHelpers->getUsersGlobalOptOutPath();
     // Under construction page

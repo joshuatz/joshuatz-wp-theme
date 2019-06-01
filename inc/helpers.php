@@ -1072,4 +1072,17 @@ class JtzwpHelpers {
         $filename = $name . (preg_match('/\.php/i',$name) ? '' : '.php');
         include(locate_template($filename));
     }
+
+    public function getCurrentThemeFile(){
+        global $template;
+        $templateFile = $template;
+        $outputString = '';
+        if (isset($templateFile)){
+            $outputString = basename($templateFile);
+        }
+        else if (isset($GLOBALS['jtzwp_wp_selected_template'])){
+            $outputString = $GLOBALS['jtzwp_wp_selected_template'];
+        }
+        return $outputString;
+    }
 }

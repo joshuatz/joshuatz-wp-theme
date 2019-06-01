@@ -14,7 +14,12 @@
 ?>
 <?php if($jtzwpHelpers->isDebug): ?>
     <script>window.isDebug = true;</script>
-    <script>console.log(<?php echo json_encode($wp_query); ?>);</script>
+    <script>
+        console.group('WordPress Info');
+            console.log(<?php echo json_encode($wp_query); ?>);
+            console.log('WordPress Template: ' + '<?php echo $jtzwpHelpers->getCurrentThemeFile(); ?>');
+        console.groupEnd();
+    </script>
     <script>
         console.group('URL Info');
             console.log(<?php echo json_encode($jtzwpHelpers->getUrlInfo()); ?>);
