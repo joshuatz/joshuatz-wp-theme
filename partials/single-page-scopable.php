@@ -13,5 +13,4 @@
     <?php get_sidebar('everypagetop'); ?>
     <?php echo $content; ?>
 </main>
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

@@ -59,8 +59,7 @@ remove_filter('the_content','wpautop');
 	?>
 
 	<footer class="entry-footer">
-		<?php //twentyfifteen_entry_meta(); ?>
 		<?php edit_post_link( __( 'Edit', 'joshuatzwp' ), '<span class="edit-link">', '</span>' ); ?>
-	</footer><!-- .entry-footer -->
+	</footer>
 
 </article><!-- #post-## -->

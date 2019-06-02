@@ -12,5 +12,4 @@ get_header(); ?>
     <?php get_template_part('generic-archive-template'); ?>
 </main>
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
