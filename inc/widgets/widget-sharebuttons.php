@@ -141,7 +141,7 @@
         $hasMaterialIcon = gettype($materialIcon)==='string';
         $hasFaIcon = gettype($faIcon)==='string';
         ?>
-            <div class="col s6 m4 l3 jtzwpShareButtonWrapper">
+            <div class="col s6 m4 l3 jtzwpShareButtonWrapper" style="min-width: 190px;">
                 <a class="jtzwpShareButton customBtn z-depth-2 hoverable autoCenterParent jtzwp-dark" href="<?php echo $url; ?>" target="_blank" title="<?php echo $stringName; ?>">
                     <div class="autoCenterChild">
                         <div class="icon" style="display:inline-block;">
