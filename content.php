@@ -31,7 +31,7 @@ else {
     $sidebarCssClass = 'hide';
 }
 ?>
-<div class="row">
+<div class="row articleWrapperWrapper" style="display:flex; flex-wrap:wrap;">
     <div class="articleWrapper <?php echo $articleCssClass; ?>">
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
@@ -80,7 +80,9 @@ else {
 
         </article><!-- #post-## -->
     </div>
-    <div class="<?php echo $sidebarCssClass; ?>">
-        <?php get_sidebar('innercontentmain'); ?>
+    <div class="stickySidebarWrapper <?php echo $sidebarCssClass; ?>">
+        <div class="pushpinSticky" data-extratopoffset="20" data-extrabottomoffset="20" style="bottom:inherit;" data-target=".stickySidebarWrapper">
+            <?php get_sidebar('innercontentmain'); ?>
+        </div>
     </div>
 </div>

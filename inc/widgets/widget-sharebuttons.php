@@ -59,7 +59,7 @@
         ?>
         <?php /* Now output the actual inner widget content */ ?>
             <div class="widgetBody">
-                <div class="row">
+                <div class="row center">
                     <?php if ($useEmail): ?>
                         <?php $this->_renderShareButton('mailto:?to=&body='.urlencode($postInfo->permalink).'&subject='.urlencode('Check out this link!'),'Email',null,'email'); ?>
                     <?php endif; ?>
@@ -141,7 +141,7 @@
         $hasMaterialIcon = gettype($materialIcon)==='string';
         $hasFaIcon = gettype($faIcon)==='string';
         ?>
-            <div class="col s6 m4 l3 jtzwpShareButtonWrapper" style="min-width: 190px;">
+            <div class="col s6 m4 l3 jtzwpShareButtonWrapper">
                 <a class="jtzwpShareButton customBtn z-depth-2 hoverable autoCenterParent jtzwp-dark" href="<?php echo $url; ?>" target="_blank" title="<?php echo $stringName; ?>">
                     <div class="autoCenterChild">
                         <div class="icon" style="display:inline-block;">

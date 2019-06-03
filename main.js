@@ -14,6 +14,10 @@
         jtzwpFancybox();
         // masonry
         jtzwpMasonryInit();
+        // sticky
+        jtzwpStickyInit();
+        // My custom init stuff
+        jtzwpCustomInit();
     });
 
     /**
@@ -113,6 +117,56 @@
     function jtzwpMasonryInit(){
         $('.customToolsMasonryAuto').masonry({
             itemSelector: '.customToolListing'
+        });
+    }
+
+    /**
+     * My custom init stuff
+     */
+
+    function jtzwpCustomInit(){
+        // Prevent duplicate share buttons
+        var $sidebarShareWidget = $('.innerContentMainSidebar .jtzwpShareButtons.widget');
+        var $footerShareWidget = $('.underpostWidgetArea.sidebar .jtzwpShareButtons.widget');
+        if ($sidebarShareWidget.length > 0 && $footerShareWidget.length > 0){
+            // Hide footer widget
+            $footerShareWidget.hide();
+            // If that was the only widget in the footer, hide entire footer
+            if ($footerShareWidget.parent().children().length === 1){
+                $footerShareWidget.parent().hide();
+            }
+        }
+    }
+
+    /**
+     * Sticky Stuff
+     */
+    function jtzwpStickyInit(){
+        // Use a default top margin equal to the height of the top nav bar
+        var stickyTopOffset = $('.jtnavbar-inner').height();
+        $('.pushpinSticky').each(function(){
+            var $this = $(this);
+            var currTopOffset = stickyTopOffset;
+            var currExtraBottomOffset = 0;
+            // Allow overriding of offset
+            if (this.hasAttribute('data-offset')){
+                currTopOffset = parseFloat(this.getAttribute('data-offset'));
+            }
+            if (this.hasAttribute('data-extratopoffset')){
+                currTopOffset += parseFloat(this.getAttribute('data-extratopoffset'));
+            }
+            if (this.hasAttribute('data-extrabottomoffset')){
+                currExtraBottomOffset = parseFloat(this.getAttribute('data-extrabottomoffset'));
+            }
+            // Target is the thing our sticky element is sticking within
+            var $target = $($this.attr('data-target'));
+            $target = $target.length > 0 ? $target : $(this.parentElement);
+            // Initiate materialize pushpin
+            $this.pushpin({
+                offset: currTopOffset,
+                top: $target.offset().top,
+                bottom: $target.offset().top + $target.outerHeight() - $this.height() - currExtraBottomOffset
+            });
         });
     }
 
