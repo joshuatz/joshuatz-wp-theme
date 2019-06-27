@@ -329,7 +329,7 @@
 
         // PrismJS
         if (typeof(PrismToolbar)==='function'){
-            window.jPrismToolbar = new PrismToolbar('pre');
+            window.jPrismToolbar = new PrismToolbar();
             jPrismToolbar.autoInit();
         }
 
