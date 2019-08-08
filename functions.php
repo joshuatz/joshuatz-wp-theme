@@ -90,7 +90,7 @@ function joshuatzwp_styles_deferred(){
     $prismJsCssFilePath = file_exists($jtzwpHelpers->siteRootPath . '/css/prism.css') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.css');
     wp_enqueue_style('prism-js-style',$prismJsCssFilePath,array(),false,'all');
     // Gutenberg block
-    wp_enqueue_style('wp-block-library');
+    //wp_enqueue_style('wp-block-library');
 }
 
 function joshuatzwp_styles_for_admin(){
