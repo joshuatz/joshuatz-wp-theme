@@ -8,11 +8,6 @@
     $navBreakpoint = 980;
     $navBreakpointPx = '' . $navBreakpoint . 'px';
 ?>
-<!--Ripped from original site-->
-<style>
-
-</style>
-<link rel="stylesheet" href="/wp-content/themes/joshuatzwp/style-nav.css">
 
 <div id='masthead' role='banner' class="mainNavContainerWrapper">
   <div class="top-color clearfix">
@@ -87,21 +82,10 @@
 		</div>
         <div id="nav-search-wrapper">
             <div class="bl_search nav-jtcollapse jtcollapse">
-                <script async src="https://cse.google.com/cse.js?cx=006023929046275200110:crr5g9pbyae"></script>
-                <style>
-                    .gsc-control-cse.gsc-control-cse-en {
-                        border-color: transparent !Important;
-                        background-color: transparent !Important;
-                    }
-                    form.gsc-search-box > table {
-                        border-collapse: separate;
-                    }
-                    .cse .gsc-control-cse, .gsc-control-cse {
-                        padding: 1px;
-                    }
-                </style>
                 <div class="siteSearchWrapper">
-                    <input type="text" class="siteSearchInput" autocomplete="off" placeholder="search the site!" />
+                    <form id="siteSearchForm">
+                        <input type="text" class="siteSearchInput" autocomplete="off" placeholder="search" />
+                    </form>
                 </div>
             </div>
         </div>
