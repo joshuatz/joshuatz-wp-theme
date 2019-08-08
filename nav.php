@@ -15,34 +15,34 @@
 <link rel="stylesheet" href="/wp-content/themes/joshuatzwp/style-nav.css">
 
 <div id='masthead' role='banner' class="mainNavContainerWrapper">
-  <div class='top-color clearfix'>
+  <div class="top-color clearfix">
 	<div style='background: none repeat scroll 0% 0% #F69087;'></div>
 	<div style='background: none repeat scroll 0% 0% #85CCB1;'></div>
 	<div style='background: none repeat scroll 0% 0% #85A9B3;'></div>
 	<div style='background: none repeat scroll 0% 0% #B0CB7A;'></div>
   </div>
-  <div class='jtcontainer' id='mainNavContainer'>
-	<div class='jtnavbar jtnavbar-inverse'>
-	  <div class='jtnavbar-inner'>
-		<div class='btn-jtnavbar jtcollapsed' data-target='.nav-jtcollapse' data-toggle='jtcollapse' type='button'>
+  <div class="jtcontainer" id='mainNavContainer'>
+	<div class="jtnavbar jtnavbar-inverse">
+	  <div class="jtnavbar-inner">
+		<div class="btn-jtnavbar jtcollapsed" data-target='.nav-jtcollapse' data-toggle='jtcollapse' type='button'>
 		  <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAjCAMAAADR57icAAAAdVBMVEWFzLGFzLGQ0bgAAACFzLGJxa99uKNjiYGR0bmGzbKDyK55t6KJxK9zrJljj4WDxq2Exa1ol4poloqFzLGGzbL6/v32+PiIyrFuoo6DzLCNz7aAyKxwo5Cr1buK0raDzLaAy6/3+Pjd9vb29vTa8PB+xK52qpLUNYl7AAAAE3RSTlPMgc8A9cV3EM/Ou5l2LSnHxz093oLWngAAAJNJREFUOMvt0rcSwkAMRVGBNjgTVoQliMz/fyIVRjMetFu68KnvjF4hQN/YYq4qbOMRvGUKpArE1oPjGJIiO1hSyEALKEOWEiAvhPGEJKjhUVDD9/7Ue9HfMF6e26/b43xVwvvmZxBKOyGxsTdtHJ4+COrGKIz1w8cZ1pzTcQ2doXRHpgNcVSbVmWqNgNi6WYJrET8q82NhjDxGFQAAAABJRU5ErkJggg==' />
 		</div>
-		<div class='header' id='header'>
-		  <div class='widget Header' data-version='1' id='Header1'>
+		<div class="header" id='header'>
+		  <div class="widget Header" data-version='1' id='Header1'>
 			<div id='header-inner'>
-			  <div class='titlewrapper'>
-				<div class='title'>
+			  <div class="titlewrapper">
+				<div class="title">
 				  <a href='/'>Joshuatz.com</a>
                 </div>
 			  </div>
-			  <div class='descriptionwrapper'>
-				<p class='description'></p>
+			  <div class="descriptionwrapper">
+				<p class="description"></p>
 			  </div>
 			</div>
 		  </div>
 		</div>
-		<div class='nav-jtcollapse jtcollapse'>
-		  <ul class='nav' id='menu-primary'>
+		<div class="nav-jtcollapse jtcollapse">
+		  <ul class="nav" id='menu-primary'>
             <?php if(!is_front_page()): ?>
 			<li>
 			  <a href='/'>Home</a>
@@ -57,9 +57,9 @@
 			  <a href="<?php echo $aboutMeLink; ?>" id="linkedIn" class="modal-trigger" target="<?php echo $aboutMeTarget; ?>" ga-on="click" ga-event-category="Social" ga-event-label="About Me Click">About / <i class="fa fa-linkedin-square" style="font-size:large"></i>
 				</a>
 			</li>
-			<li class='dropdown'>
-			  <a class='dropdown-toggle' data-toggle='dropdown' href='#'>Projects</a>
-			  <ul class='dropdown-menu'>
+			<li class="dropdown">
+			  <a class="dropdown-toggle" data-toggle='dropdown' href='#'>Projects</a>
+			  <ul class="dropdown-menu">
                 <li class="dropdown">
                     <a href="/projects/">All</a>
                 </li>
@@ -86,7 +86,7 @@
 		  </ul>
 		</div>
         <div id="nav-search-wrapper">
-            <div class='bl_search nav-jtcollapse jtcollapse'>
+            <div class="bl_search nav-jtcollapse jtcollapse">
                 <script async src="https://cse.google.com/cse.js?cx=006023929046275200110:crr5g9pbyae"></script>
                 <style>
                     .gsc-control-cse.gsc-control-cse-en {
@@ -109,7 +109,7 @@
 	  </div>
 	</div>
   </div>
-  <div class='clear'></div>
+  <div class="clear"></div>
 </div>
 
 <!-- Scripts -->
