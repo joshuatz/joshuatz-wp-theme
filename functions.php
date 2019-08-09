@@ -1,4 +1,10 @@
 <?php
+/*
+* Reminders:
+* wp_enqueue_script($handle, $srcString, $depArray, $version, $inFooter);
+* wp_enqueue_style($handle, $srcString, $depArray, $version, $media)
+*/
+
 /**
  * Setup resources
  */
@@ -54,6 +60,26 @@ remove_action( 'wp_head', 'rsd_link' ) ;
  * Reusable loaders
  */
 
+
+$deferredHandles = (object) array(
+    'scripts' => (object) array(
+        'async' => array()
+    ),
+    'styles' => array()
+);
+// Same signature as wp_enqueue_style
+function wp_enqueue_style_deferred($handle, $srcString, $depArray, $version, $media){
+    global $deferredHandles;
+    array_push($deferredHandles->styles,$handle);
+    wp_enqueue_style($handle, $srcString, $depArray, $version, $media);
+}
+// Same signature as wp_enqueue_script
+function wp_enqueue_script_async($handle, $srcString, $depArray, $version, $inFooter){
+    global $deferredHandles;
+    array_push($deferredHandles->scripts->async,$handle);
+    wp_enqueue_script($handle, $srcString, $depArray, $version, $inFooter);
+}
+
 function joshuatzwp_styles() {
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // Deque Gutenberg - I'll load this deferred
@@ -69,26 +95,26 @@ function joshuatzwp_styles_deferred(){
     // Materialize
     if ($jtzwpHelpers->isPageWP()){
         // Materialize CSS
-        wp_enqueue_style('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
+        wp_enqueue_style_deferred('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
         // Materialize Icon Set
-        wp_enqueue_style('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
+        wp_enqueue_style_deferred('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
     }
     // Font Awesome - defer OK
-    wp_enqueue_style('font-awesome-style','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',array(),false,'all');
+    wp_enqueue_style_deferred('font-awesome-style','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',array(),false,'all');
     // Google Fonts - defer OK
-    wp_enqueue_style('google-fonts','https://fonts.googleapis.com/css?family=Lato',array(),false,'all');
+    wp_enqueue_style_deferred('google-fonts','https://fonts.googleapis.com/css?family=Lato',array(),false,'all');
     // animate.css - defer OK
-    wp_enqueue_style('animate-css','https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css',array(),false,'all');
+    wp_enqueue_style_deferred('animate-css','https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css',array(),false,'all');
     // style-deferred.css - defer DESIRED
-    wp_enqueue_style('style-deferred',$themeRootURL.'/style-deferred.css',array(),$cacheBustStamp,'all');
+    wp_enqueue_style_deferred('style-deferred',$themeRootURL.'/style-deferred.css',array(),$cacheBustStamp,'all');
     // Fancybox 3 - Defer OK
     // sha256-5yrE3ZX38R20LqA/1Mvh3KHJWG1HJF42qtZlRtGGRgE=
-    wp_enqueue_style('fancybox3-style','https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css',array(),false,'all');
+    wp_enqueue_style_deferred('fancybox3-style','https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css',array(),false,'all');
     // Prism.js syntax highlighter
     // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
     // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css" integrity="sha256-+8ReLFz1xaTiP3T0xcJVWrHneeFwCnJUJwvcM0L+Ufw=" crossorigin="anonymous" />
     $prismJsCssFilePath = file_exists($jtzwpHelpers->siteRootPath . '/css/prism.css') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.css');
-    wp_enqueue_style('prism-js-style',$prismJsCssFilePath,array(),false,'all');
+    wp_enqueue_style_deferred('prism-js-style',$prismJsCssFilePath,array(),false,'all');
     // Gutenberg block
     //wp_enqueue_style('wp-block-library');
 }
@@ -100,7 +126,7 @@ function joshuatzwp_styles_for_admin(){
 
 function joshuatzwp_scripts() {
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
-    wp_enqueue_script('jquery-3','https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',array(),false,false);
+    wp_enqueue_script('jquery-3','https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',array(),false,true);
     // Helpers
     wp_enqueue_script('helpers-js',$themeIncURL.'/helpers.js',array('jquery-3'),false,false);
 }
@@ -446,3 +472,44 @@ function jtzwp_before_post_save($data,$postArr){
     return $finalPostData;
 }
 add_action('wp_insert_post_data','jtzwp_before_post_save',10,2);
+
+/**
+ * Custom Script and Style Enqueued stuff
+ */
+/**
+ * Callback for WP to hit before echoing out an enqueued resource
+ * @param {string} $tag - Will be the full string of the tag (`<link>` or `<script>`)
+ * @param {string} $handle - The handle that was specified for the resource when enqueuing it
+ */
+function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
+    global $deferredHandles;
+    $finalTag = $tag;
+    if ($isStyle && in_array($handle, $deferredHandles->styles, true)){
+        // Do not touch if already modified
+        if (!preg_match('/onload=|media="none"/',$tag)){
+            // Lazy load with JS, but also but noscript in case no JS
+            $noScriptStr = '<noscript>' . $tag . '</noscript>';
+            // Add onload and media="none" attr, and put together with noscript
+            $matches = array();
+            preg_match('/(<link[^>]+)>/',$tag,$matches);
+            $finalTag = $matches[1] . ' media="none" onload="if(media!=\'all\')media=\'all\'"' . '>' . $noScriptStr;
+        }
+    }
+    else if (!$isStyle && in_array($handle, $deferredHandles->scripts->async, true)){
+        // Do not touch if already modified, or missing src attr
+        if (!preg_match('/async=/', $tag) && preg_match('/src=/', $tag)){
+            // Add async attr
+            $matches = array();
+            preg_match('/(<script[^>]+)>/',$tag,$matches);
+            $finalTag = $matches[1] . ' async="true"' . '>';
+        }
+    }
+    return $finalTag;
+}
+// BE CAREFUL OF PRIORITY
+add_filter('script_loader_tag',function($tag, $handle, $src){
+    return scriptAndStyleTagCallback($tag, $handle, $src, null, false);
+},10,4);
+add_filter('style_loader_tag',function($tag, $handle, $src, $media){
+    return scriptAndStyleTagCallback($tag, $handle, $src, $media, true);
+},10,4);
