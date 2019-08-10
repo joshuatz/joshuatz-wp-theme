@@ -35,7 +35,7 @@ get_header(); ?>
                         $projectPermalink = $jtzwpHelpers->getPostPermalink($post->ID);
                     ?>
                     <div class="col <?php echo $projectCountOnPage >=5 ? 's12 m6' : 's12 m12'; ?>">
-                        <div id="<?php echo the_ID(); ?>" class="projectItem full">
+                        <div id="<?php echo the_ID(); ?>" class="projectItem full hoverable">
                             <h2 class="projectItemTitle title"><a href="<?php echo the_permalink(); ?>" target="_self" class="hoverLinkOutlineThin"><?php echo the_title(); ?></a></h2>
                             <!-- Project Link Area -->
                             <div>

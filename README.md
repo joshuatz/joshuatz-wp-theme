@@ -3,6 +3,8 @@ Custom WordPress theme for joshuatz.com
 ##
 ---
 ## Instructions
+### Building
+ - Vendored assets are bundled using gulp. `gulp` or `npm run build` should produce the files, which are checked into git, so they can be pre-built for WP.
 ### Install
  - There is currently no real setup required other than activating the theme
 ### Optional Settings
@@ -40,7 +42,6 @@ Custom WordPress theme for joshuatz.com
 ---
 ### ToDo
  - Create mapping system for loading scripts / styles
-     - Add async support to script queue
      - Add SRI attribute support to script queue
  - Redo nav and change from hardcoded to more dynamic based on native WP menu
      - Optionally, integrate Materialize walker version

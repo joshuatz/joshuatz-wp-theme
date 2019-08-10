@@ -529,6 +529,9 @@ div#main_post_wrapper > p {
     background-color: white;
     padding: 20px;
 }
+.genericPostItem .titleLink {
+    color: black;
+}
 a.readMore {
     margin-top: 30px;
     white-space: nowrap;

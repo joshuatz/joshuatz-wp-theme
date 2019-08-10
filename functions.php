@@ -86,8 +86,6 @@ function joshuatzwp_styles() {
     wp_dequeue_style('wp-block-library');
     // Load main theme CSS file (style.css)
     wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array(),$cacheBustStamp,'all');
-    // Load final <head></head> style
-    // wp_enqueue_style('style-final-head',$themeRootURL.'/style-final-head.css',array('joshuatzwp-style'),$cacheBustStamp,'all');
 }
 
 function joshuatzwp_styles_deferred(){
