@@ -42,7 +42,7 @@ function getFixedFooter(){
     <?php get_sidebar('everypagetop'); ?>
     <div class="customToolsListingsWrapper">
         <?php if(have_posts()): ?>
-            <h2 class="customToolsListingsTitle mainTitle">Here are some software tools I have developed, either for myself or others.</h2>
+            <h2 class="customToolsListingsTitle mainTitle">Here are some small one-off tools I have developed, either for myself or others.</h2>
 
             <div id="customToolsListings">
                 <div class="row customToolsMasonryAuto">

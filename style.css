@@ -16,6 +16,16 @@ html, body {
     height: 100%;
     overflow: visible;
 }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+	background-color: #A3BFE1;
+    margin: 0px;
+    font-family: 'lato',sans-serif;
+}
 
 /** Theme globals - reusable color classes */
 .jtzwp-salmon {
@@ -30,7 +40,7 @@ html, body {
     background-color: #85CCB1 !important;
 }
 .jtzwp-blue,.jtzwp-lightblue {
-    background-color: #A3BFE1 !important;
+    background-color: #b2c9e6 !important;
     color: #2E3641 !important;
 }
 .btn.jtzwp-blue:hover,.btn.jtzwp-lightblue:hover, .customBtn.jtzwp-blue:hover,.customBtn.jtzwp-lightblue:hover {
@@ -38,7 +48,7 @@ html, body {
     color: white !important;
 }
 .jtzwp-green {
-    background-color: #B0CB7A !important;
+    background-color: #d3e2b6 !important;
     color: #2E3641 !important;
 }
 .jtzwp-dark,.jtzwp-darkblue {
@@ -220,18 +230,6 @@ div.nav-collapse.collapse {
     float:left;
 }
 
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-
-    
-body {
-	background-color: #2E3641;
-    margin:0px;
-    font-family: 'lato',sans-serif;
-}
 #mainmenu {
 	text-align:center;
 }
@@ -1457,11 +1455,16 @@ a.readMore {
 
 .jtnavbar .btn-jtnavbar {
     cursor: pointer;
-    margin: 18px 5px 5px 5px;
+    margin: 25px 5px 5px 5px;
     padding: 0px 10px;
     -webkit-appearance: inherit;
     float: right;
     color: #fff;
+}
+.jtnavbar .btn-jtnavbar svg {
+    width: 40px;
+    height: 35px;
+    fill: white;
 }
 
 .nav-jtcollapse .nav>li>a, .nav-jtcollapse .dropdown-menu a {

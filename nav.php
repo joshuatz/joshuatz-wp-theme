@@ -10,17 +10,11 @@
 ?>
 
 <div id='masthead' role='banner' class="mainNavContainerWrapper">
-  <div class="top-color clearfix">
-	<div style='background: none repeat scroll 0% 0% #F69087;'></div>
-	<div style='background: none repeat scroll 0% 0% #85CCB1;'></div>
-	<div style='background: none repeat scroll 0% 0% #85A9B3;'></div>
-	<div style='background: none repeat scroll 0% 0% #B0CB7A;'></div>
-  </div>
   <div class="jtcontainer" id='mainNavContainer'>
 	<div class="jtnavbar jtnavbar-inverse">
 	  <div class="jtnavbar-inner">
 		<div class="btn-jtnavbar jtcollapsed" data-target='.nav-jtcollapse' data-toggle='jtcollapse' type='button'>
-		  <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAjCAMAAADR57icAAAAdVBMVEWFzLGFzLGQ0bgAAACFzLGJxa99uKNjiYGR0bmGzbKDyK55t6KJxK9zrJljj4WDxq2Exa1ol4poloqFzLGGzbL6/v32+PiIyrFuoo6DzLCNz7aAyKxwo5Cr1buK0raDzLaAy6/3+Pjd9vb29vTa8PB+xK52qpLUNYl7AAAAE3RSTlPMgc8A9cV3EM/Ou5l2LSnHxz093oLWngAAAJNJREFUOMvt0rcSwkAMRVGBNjgTVoQliMz/fyIVRjMetFu68KnvjF4hQN/YYq4qbOMRvGUKpArE1oPjGJIiO1hSyEALKEOWEiAvhPGEJKjhUVDD9/7Ue9HfMF6e26/b43xVwvvmZxBKOyGxsTdtHJ4+COrGKIz1w8cZ1pzTcQ2doXRHpgNcVSbVmWqNgNi6WYJrET8q82NhjDxGFQAAAABJRU5ErkJggg==' />
+            <svg enable-background="new 0 0 512 512" height="512px" id="Layer_1" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><rect height="64" width="256" x="128" y="320"/><rect height="64" width="256" x="128" y="224"/><path d="M480,0H32C14.312,0,0,14.312,0,32v448c0,17.688,14.312,32,32,32h448c17.688,0,32-14.312,32-32V32   C512,14.312,497.688,0,480,0z M448,448H64V64h384V448z"/><rect height="64" width="256" x="128" y="128"/></g></svg>
 		</div>
 		<div class="header" id='header'>
 		  <div class="widget Header" data-version='1' id='Header1'>
