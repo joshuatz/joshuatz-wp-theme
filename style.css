@@ -1003,6 +1003,10 @@ a.readMore {
 .businessCardMaterializeModal .modal-content {
     padding: 0px;
 }
+.businessCardMaterializeModal .aboutMeCard {
+    margin-bottom: 16px !important;
+    padding: 12px 14px 5px 14px;
+}
 .businessCard .modal-close {
     color: grey;
 }
@@ -1013,7 +1017,7 @@ a.readMore {
 .aboutMeCard .title {
     width: 100%;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-style: italic;
 }
 

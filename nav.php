@@ -66,13 +66,6 @@
             <li>
                 <a href="/blog/">Blog</a>
             </li>
-            <?php 
-            $emailAddress = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_email');
-            if ($emailAddress->isValid): ?>
-			<!--<li>
-			  <a href='mailto:<?php echo $emailAddress->val; ?>?subject=I%20Found%20Your%20Website' ga-on="click,auxclick,contextmenu", ga-event-category="Social" ga-event-label="Email" target="_blank">Contact / <i class="fa fa-envelope-square" style="font-size:large"></i></a>
-            </li>-->
-            <?php endif; ?>
 		  </ul>
 		</div>
         <div id="nav-search-wrapper">
@@ -275,8 +268,6 @@ var G = "/", C = location.href, H, D, B, F;
 </script>
 <!-- End Scripts -->
 
-
-
 <style>
     /* If width is SMALLER than breakpoint */
     @media (max-width: <?php echo $navBreakpointPx; ?>){
@@ -365,16 +356,6 @@ var G = "/", C = location.href, H, D, B, F;
         }
         function offsetMainFromTop(){
             var newOffset = getOffsetFromTop();
-            /*
-            console.group('height report');
-                console.log('topColorBarHeight = ' + topColorBarHeight);
-                console.log('mainNavHeight = ' + mainNavHeight);
-                console.log('innermostNavHeight = ' + innermostNavHeight);
-                console.log('mastheadTop = ' + mastheadTop);
-                console.log('wpAdminBarHeight = ' + wpAdminBarHeight);
-                console.log('newOffset = ' + newOffset);
-            console.groupEnd();
-            */
             $('#main').css({
                 'padding-top' : newOffset + 'px'
             });
@@ -440,6 +421,7 @@ var G = "/", C = location.href, H, D, B, F;
 </script>
 <div id="businessCardMaterializeModal" class=" businessCardMaterializeModal modal" data-opacity="0.9">
     <div class="modal-content">
+        <?php get_template_part('partials/about-me-card'); ?>
         <?php get_template_part('partials/business-card-materialize'); ?>
     </div>
 </div>
