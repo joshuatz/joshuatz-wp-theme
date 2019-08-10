@@ -73,7 +73,9 @@
             </script>
         <?php endif; ?>
     <?php else: ?>
+        <?php if($jtzwpHelpers->isDebug): ?>
         <script>console.log('Analytics tracking disabled for known user');</script>
+        <?php endif; ?>
     <?php endif; ?>
 <?php else: ?>
     <script>console.warn('Invalid or missing GAUID for GA');</script>

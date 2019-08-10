@@ -20,6 +20,18 @@
         jtzwpCustomInit();
     });
 
+    // Site Search
+    $('#siteSearchForm').on('submit',siteSearch);
+    function siteSearch(query){
+        if (typeof(query)!=='string' || typeof(query.length)!=='undefined' && query.length < 1){
+            query = $('.siteSearchInput')[0].value;
+        }
+        if (query){
+            var searchPage = 'https://cse.google.com/cse?cx=006023929046275200110:crr5g9pbyae&q=' + encodeURI(query);
+            window.open(searchPage,'_blank');
+        }
+    }
+
     /**
      * Materialize Stuff - Init
      */

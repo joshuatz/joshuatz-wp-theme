@@ -42,7 +42,7 @@ function getFixedFooter(){
     <?php get_sidebar('everypagetop'); ?>
     <div class="customToolsListingsWrapper">
         <?php if(have_posts()): ?>
-            <h2 class="customToolsListingsTitle mainTitle">Here are some software tools I have developed, either for myself or others.</h2>
+            <h2 class="customToolsListingsTitle mainTitle">Here are some small one-off tools I have developed, either for myself or others.</h2>
 
             <div id="customToolsListings">
                 <div class="row customToolsMasonryAuto">
@@ -81,7 +81,7 @@ function getFixedFooter(){
                         
                     ?>
                     <div class="col s12 m6 l4 xl4 customToolListing" data-id="<?php echo the_ID(); ?>">
-                        <div class="card">
+                        <div class="card hoverable">
                             <div class="card-image waves-effect waves-block waves-light">
                                 <img class="activator" style="padding:20px;" src="<?php echo $promoImageSrc; ?>">
                             </div>

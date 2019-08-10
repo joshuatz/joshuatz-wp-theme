@@ -4,3 +4,5 @@
 /scratch
 # vscode
 .vscode
+# Node
+node_modules

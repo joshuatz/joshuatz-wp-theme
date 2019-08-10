@@ -77,6 +77,7 @@
                 </div>
             </div>
             <div class="col s12 m12 l5">
+                <?php get_template_part('partials/about-me-card'); ?>
                 <?php get_template_part('partials/business-card-materialize'); ?>
             </div>
         </div>

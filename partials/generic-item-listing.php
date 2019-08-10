@@ -16,7 +16,7 @@
     <?php if($showTitle): ?>
     <div class="row">
         <div class="col s12 center">
-            <a href="<?php echo $postInfo->permalink; ?>" target="<?php echo $linkTarget; ?>"><h3><?php echo $postInfo->title; ?></h3></a>
+            <a href="<?php echo $postInfo->permalink; ?>" target="<?php echo $linkTarget; ?>" class="titleLink"><h3><?php echo $postInfo->title; ?></h3></a>
         </div>
     </div>
     <?php endif; ?>
