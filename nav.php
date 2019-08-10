@@ -43,8 +43,9 @@
                 $aboutMeLink = $jtzwpHelpers->isPageWP()===true ? '#businessCardMaterializeModal' : '/#businessCardMaterializeModal';
                 $aboutMeTarget = $jtzwpHelpers->isPageWP()===true ? '_self' : '_blank';
             ?>
-			  <a href="<?php echo $aboutMeLink; ?>" id="linkedIn" class="modal-trigger" target="<?php echo $aboutMeTarget; ?>" ga-on="click" ga-event-category="Social" ga-event-label="About Me Click">About / <i class="fa fa-linkedin-square" style="font-size:large"></i>
-				</a>
+            <?php if(!is_front_page()): ?>
+              <a href="<?php echo $aboutMeLink; ?>" id="linkedIn" class="modal-trigger" target="<?php echo $aboutMeTarget; ?>" ga-on="click" ga-event-category="Social" ga-event-label="About Me Click">About / Contact</a>
+            <?php endif; ?>
 			</li>
 			<li class="dropdown">
 			  <a class="dropdown-toggle" data-toggle='dropdown' href='#'>Projects</a>
@@ -68,9 +69,9 @@
             <?php 
             $emailAddress = $jtzwpHelpers->getThemeUserSetting('jtzwp_about_me_email');
             if ($emailAddress->isValid): ?>
-			<li>
+			<!--<li>
 			  <a href='mailto:<?php echo $emailAddress->val; ?>?subject=I%20Found%20Your%20Website' ga-on="click,auxclick,contextmenu", ga-event-category="Social" ga-event-label="Email" target="_blank">Contact / <i class="fa fa-envelope-square" style="font-size:large"></i></a>
-            </li>
+            </li>-->
             <?php endif; ?>
 		  </ul>
 		</div>
@@ -277,13 +278,6 @@ var G = "/", C = location.href, H, D, B, F;
 
 
 <style>
-    div.title {
-        font-size: 38px;
-        margin-top: 7px;
-        text-align: center;
-        display: inline-block;
-    }
-
     /* If width is SMALLER than breakpoint */
     @media (max-width: <?php echo $navBreakpointPx; ?>){
         #masthead .titlewrapper .title {

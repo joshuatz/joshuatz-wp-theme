@@ -188,6 +188,20 @@ function jtzwp_initial_settings_api_init(){
             'jtzwp_about_me_geo_description'
         )
     );
+
+    // About Me - Custom Paragraph Description
+    add_settings_field(
+        'jtzwp_about_me_short_blurb',
+        __( 'How you want to describe yourself in a sentence or two.','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_short_blurb',
+            null,
+            true
+        )
+    );
 }
 // Attach settings init function to wp settings init
 add_action('admin_init','jtzwp_initial_settings_api_init');
@@ -226,10 +240,16 @@ function jtzwp_generic_text_field_render($args){
     global $jtzwpHelpers;
     $options = get_option('jtzwp_settings');
     $currOptionName = $args[0];
-    $currOptionvalue = $options[$currOptionName];
-    $currOptionValidity = $jtzwpHelpers->validateThemeUserSetting($currOptionName,$currOptionvalue);
-    $classString = isset($ars[1]) ? $ars[1] : '';
-    echo '<input type="text" class="' . $classString . '" id="'. $currOptionName .'" name="jtzwp_settings['. $currOptionName .']" value="' . $currOptionvalue . '" invalid="' . $jtzwpHelpers->boolToString(!$currOptionValidity) . '" />';
+    $currOptionValue = $options[$currOptionName];
+    $currOptionValidity = $jtzwpHelpers->validateThemeUserSetting($currOptionName,$currOptionValue);
+    $classString = isset($args[1]) ? $args[1] : '';
+    $isTextArea = isset($args[2]) && $args[2]===true ? true : false;
+    if (!$isTextArea){
+        echo '<input type="text" class="' . $classString . '" id="'. $currOptionName .'" name="jtzwp_settings['. $currOptionName .']" value="' . $currOptionValue . '" invalid="' . $jtzwpHelpers->boolToString(!$currOptionValidity) . '" />';
+    }
+    else {
+        echo '<textarea type="text" class="' . $classString . '" id="'. $currOptionName .'" name="jtzwp_settings['. $currOptionName .']" " invalid="' . $jtzwpHelpers->boolToString(!$currOptionValidity) . '">' . $currOptionValue . '</textarea>';
+    }
 }
 
 /**

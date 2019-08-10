@@ -218,6 +218,9 @@ a > img.alignCenter, a > img.aligncenter {
 */
 .siteSearchWrapper {
     padding: 4px 20px;
+    max-width: 250px;
+    text-align: center;
+    margin: auto;
 }
 .siteSearchInput {
     color: white;
@@ -376,6 +379,9 @@ div.nav-collapse.collapse {
     padding-top: 4px;
     margin: 10px 8px 10px 8px;
     padding-bottom: 10px;
+}
+.homepageUpper .aboutMeCard, .homepageUpper .businessCard {
+    margin: 0px 0px 12px 0px;
 }
 
 #primary {
@@ -1000,6 +1006,17 @@ a.readMore {
 .businessCard .modal-close {
     color: grey;
 }
+
+/**
+* About Me Card
+*/
+.aboutMeCard .title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
 /**
 * Under construction page
 */
