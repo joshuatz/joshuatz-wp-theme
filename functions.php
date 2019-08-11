@@ -59,25 +59,31 @@ remove_action( 'wp_head', 'rsd_link' ) ;
 /**
  * Reusable loaders
  */
-
-
-$deferredHandles = (object) array(
+$specialLoads = (object) array(
     'scripts' => (object) array(
-        'async' => array()
+        'async' => array(),
+        'defer' => array()
     ),
-    'styles' => array()
+    'styles' => (object) array(
+        'async' => array(),
+        'asyncPreload' => array()
+    )
 );
-// Same signature as wp_enqueue_style
-function wp_enqueue_style_deferred($handle, $srcString, $depArray, $version, $media){
-    global $deferredHandles;
-    array_push($deferredHandles->styles,$handle);
+// Same signature as wp_enqueue_style, + $loadMethod as last arg
+function wp_enqueue_style_special($handle, $srcString, $depArray, $version, $media, $loadMethod){
+    global $specialLoads;
+    array_push($specialLoads->styles->{$loadMethod},$handle);
     wp_enqueue_style($handle, $srcString, $depArray, $version, $media);
 }
-// Same signature as wp_enqueue_script
-function wp_enqueue_script_async($handle, $srcString, $depArray, $version, $inFooter){
-    global $deferredHandles;
-    array_push($deferredHandles->scripts->async,$handle);
+// Same signature as wp_enqueue_script, + $loadMethod as last arg
+// Reminder - $inFooter should probably be false for both async and defer
+function wp_enqueue_script_special($handle, $srcString, $depArray, $version, $inFooter, $loadMethod){
+    global $specialLoads;
+    array_push($specialLoads->scripts->{$loadMethod},$handle);
     wp_enqueue_script($handle, $srcString, $depArray, $version, $inFooter);
+}
+function wp_enqueue_style_deferred($handle, $srcString, $depArray, $version, $media){
+    wp_enqueue_style_special($handle, $srcString, $depArray, $version, $media, 'async');
 }
 
 function joshuatzwp_styles() {
@@ -134,7 +140,7 @@ function joshuatzwp_scripts_deferred(){
     wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js'),$cacheBustStamp,true);
     // Prism JS
     $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.js');
-    wp_enqueue_script('prism-js',$prismJsFilePath,array(),false,true);
+    wp_enqueue_script_special('prism-js',$prismJsFilePath,array(),false,false,'defer');
 }
 
 function joshuatzwp_scripts_admin(){
@@ -464,28 +470,63 @@ add_action('wp_insert_post_data','jtzwp_before_post_save',10,2);
  * Callback for WP to hit before echoing out an enqueued resource
  * @param {string} $tag - Will be the full string of the tag (`<link>` or `<script>`)
  * @param {string} $handle - The handle that was specified for the resource when enqueuing it
+ * @param {string} $src - the URI of the resource
+ * @param {string|null} $media - if resources is style, should be the target media, else null
+ * @param {boolean} $isStyle - If the resource is a stylesheet
  */
 function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
-    global $deferredHandles;
+    global $specialLoads;
     $finalTag = $tag;
-    if ($isStyle && in_array($handle, $deferredHandles->styles, true)){
-        // Do not touch if already modified
-        if (!preg_match('/onload=|media="none"/',$tag)){
-            // Lazy load with JS, but also but noscript in case no JS
-            $noScriptStr = '<noscript>' . $tag . '</noscript>';
-            // Add onload and media="none" attr, and put together with noscript
-            $matches = array();
-            preg_match('/(<link[^>]+)>/',$tag,$matches);
-            $finalTag = $matches[1] . ' media="none" onload="if(media!=\'all\')media=\'all\'"' . '>' . $noScriptStr;
+    if ($isStyle){
+        // Async loading via invalid mediaquery switching
+        if (in_array($handle, $specialLoads->styles->async, true)){
+            // Do not touch if already modified
+            if (!preg_match('/\sonload=|\smedia="none"/',$tag)){
+                // Lazy load with JS, but also but noscript in case no JS
+                $noScriptStr = '<noscript>' . $tag . '</noscript>';
+                // Add onload and media="none" attr, and put together with noscript
+                $matches = array();
+                preg_match('/(<link[^>]+)>/',$tag,$matches);
+                $finalTag = preg_replace('/\/$/','',$matches[1],1) . ' media="none" onload="if(media!=\'all\')media=\'all\'"' . ' />' . $noScriptStr;
+            }
+        }
+        // Async loading via preload and loadCSS - https://github.com/filamentgroup/loadCSS/
+        else if (in_array($handle, $specialLoads->styles->asyncPreload, true)){
+            // Do not touch if already modified
+            if (!preg_match('/\srel="preload|\sonload="/',$tag)){
+                // Lazy load with JS, but also but noscript in case no JS
+                $noScriptStr = '<noscript>' . $tag . '</noscript>';
+                //var_dump($tag);
+                // Strip rel="" & as="" portion, if exist
+                $tag = preg_replace('/\srel="[^"]+"|\sas="[^"]+"/', '', $tag, -1);
+                // Add onload, rel="preload", as="style", and put together with noscript
+                $matches = array();
+                preg_match('/(<link[^>]+)>/',$tag,$matches);
+                //var_dump($matches);
+                $finalTag = preg_replace('/\/$/','',$matches[1],1) . ' rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"' . ' />' . $noScriptStr;
+            }
         }
     }
-    else if (!$isStyle && in_array($handle, $deferredHandles->scripts->async, true)){
-        // Do not touch if already modified, or missing src attr
-        if (!preg_match('/async=/', $tag) && preg_match('/src=/', $tag)){
-            // Add async attr
-            $matches = array();
-            preg_match('/(<script[^>]+)>/',$tag,$matches);
-            $finalTag = $matches[1] . ' async="true"' . '>';
+    else {
+        // Async
+        if (in_array($handle, $specialLoads->scripts->async, true)){
+            // Do not touch if already modified, or missing src attr
+            if (!preg_match('/\sasync/', $tag) && preg_match('/src=/', $tag)){
+                // Add async attr
+                $matches = array();
+                preg_match('/(<script[^>]+)>/',$tag,$matches);
+                $finalTag = $matches[1] . ' async="true"' . '>';
+            }
+        }
+        // Defer
+        else if (in_array($handle, $specialLoads->scripts->defer, true)){
+            // Do not touch if already modified, or missing src attr
+            if (!preg_match('/\sdefer/', $tag) && preg_match('/src=/', $tag)){
+                // Add defer attr
+                $matches = array();
+                preg_match('/(<script[^>]+)>/',$tag,$matches);
+                $finalTag = $matches[1] . ' defer' . '>';
+            }
         }
     }
     return $finalTag;
