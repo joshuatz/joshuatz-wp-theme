@@ -43,6 +43,7 @@ class JtzwpHelpers {
         $this->themeIncPath = (get_template_directory() . '/inc');
         $this->siteRootPath = preg_replace('#\/$#','',isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : dirname(dirname(__FILE__)));
         $this->siteRootUrl = $this->getUrlInfo()['homepage'];
+        $this->siteRootUrlBasedOnWp = $this->getUrlInfo(get_template_directory_uri())['homepage'];
         $this->homepage = $this->getUrlInfo()['homepage'];
     }
 
@@ -277,7 +278,7 @@ class JtzwpHelpers {
      */
     private function getIsDebugDomain(){
         $hostName = (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : gethostname());
-        return preg_match('/\.test$/',$hostName);
+        return preg_match('/\.test$|\.ngrok.io$/',$hostName);
     }
 
     /**
@@ -1084,5 +1085,15 @@ class JtzwpHelpers {
             $outputString = $GLOBALS['jtzwp_wp_selected_template'];
         }
         return $outputString;
+    }
+
+    /**
+     * Similar to wp_make_link_relative, but will have no effect on external links
+     */
+    public function makeInternalLinkRelative($link){
+        $link = str_replace($this->getUrlInfo()['homepage'],'',$link);
+        $link = str_replace(get_option('siteurl'),'',$link);
+        $link = str_replace($this->siteRootUrlBasedOnWp,'',$link);
+        return $link;
     }
 }

@@ -63,13 +63,11 @@ function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
             if (!preg_match('/\srel=["\']preload|\sonload=["\']/',$tag)){
                 // Lazy load with JS, but also but noscript in case no JS
                 $noScriptStr = '<noscript>' . $tag . '</noscript>';
-                //var_dump($tag);
                 // Strip rel="" & as="" portion, if exist
                 $tag = preg_replace('/\srel=["\'][^"\']*["\']|\sas=["\'][^"\']*["\']/', '', $tag, -1);
                 // Add onload, rel="preload", as="style", and put together with noscript
                 $matches = array();
                 preg_match('/(<link[^>]+)>/',$tag,$matches);
-                //var_dump($matches);
                 $finalTag = preg_replace('/\/$/','',$matches[1],1) . ' rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"' . ' />' . $noScriptStr;
             }
         }
@@ -82,7 +80,7 @@ function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
                 // Add async attr
                 $matches = array();
                 preg_match('/(<script[^>]+)>/',$tag,$matches);
-                $finalTag = $matches[1] . ' async="true"' . '>';
+                $finalTag = $matches[1] . ' async="true"' . '></script>';
             }
         }
         // Defer
@@ -92,7 +90,7 @@ function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
                 // Add defer attr
                 $matches = array();
                 preg_match('/(<script[^>]+)>/',$tag,$matches);
-                $finalTag = $matches[1] . ' defer' . '>';
+                $finalTag = $matches[1] . ' defer' . '></script>';
             }
         }
     }

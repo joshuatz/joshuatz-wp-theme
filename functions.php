@@ -5,13 +5,6 @@
 * wp_enqueue_style($handle, $srcString, $depArray, $version, $media)
 */
 
-/**
- * Setup resources
- */
-$debug = true;
-$themeRootURL = get_template_directory_uri();
-$themeLibURL = (get_template_directory_uri().'/lib');
-$themeIncURL = (get_template_directory_uri().'/inc');
 $themeIncPath = (get_template_directory() . '/inc');
 
 /**
@@ -32,6 +25,14 @@ require_once($themeIncPath . '/widgets/widget-sharebuttons.php');
  */
 global $jtzwpHelpers;
 $jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHelpers());
+
+/**
+ * Setup resources
+ */
+$debug = true;
+$themeRootURL = wp_make_link_relative(get_template_directory_uri());
+$themeLibURL = $themeRootURL . '/lib';
+$themeIncURL = $themeRootURL . '/inc';
 
 /**
  * Get cache busting info
@@ -64,10 +65,10 @@ function joshuatzwp_styles() {
     // Deque Gutenberg - I'll load this deferred
     wp_dequeue_style('wp-block-library');
     // Load main theme CSS file (style.css)
-    wp_enqueue_style('joshuatzwp-style',get_stylesheet_uri(),array(),$cacheBustStamp,'all');
+    wp_enqueue_style('joshuatzwp-style',wp_make_link_relative(get_stylesheet_uri()),array(),$cacheBustStamp,'all');
 }
 
-function joshuatzwp_styles_deferred(){
+function joshuatzwp_styles_footer(){
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // Materialize
     if ($jtzwpHelpers->isPageWP()){
@@ -87,7 +88,7 @@ function joshuatzwp_styles_deferred(){
     // Prism.js syntax highlighter
     // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
     // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css" integrity="sha256-+8ReLFz1xaTiP3T0xcJVWrHneeFwCnJUJwvcM0L+Ufw=" crossorigin="anonymous" />
-    $prismJsCssFilePath = file_exists($jtzwpHelpers->siteRootPath . '/css/prism.css') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.css');
+    $prismJsCssFilePath = file_exists($jtzwpHelpers->siteRootPath . '/css/prism.css') ? $jtzwpHelpers->siteRootUrl . '/css/prism.css' : ($themeLibURL . '/prism/prism.css');
     wp_enqueue_style_deferred('prism-js-style',$prismJsCssFilePath,array(),false,'all');
     // Gutenberg block
     //wp_enqueue_style('wp-block-library');
@@ -105,7 +106,7 @@ function joshuatzwp_scripts() {
     wp_enqueue_script('helpers-js',$themeIncURL.'/helpers.js',array('jquery-3'),false,false);
 }
 
-function joshuatzwp_scripts_deferred(){
+function joshuatzwp_scripts_footer(){
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // Vendored JS (materializeCSS, prismToolbar, wowjs, masonry, clipboard, fancybox3)
     wp_enqueue_script('vendor-js',$themeLibURL.'/vendor.min.js',array('jquery-3'),false,true);
@@ -129,11 +130,11 @@ function joshuatzwp_enqueue_loader_head() {
     joshuatzwp_scripts();
 }
 
-function joshuatzwp_enqueue_loader_deferred(){
+function joshuatzwp_enqueue_loader_footer(){
     // Load styles
-    joshuatzwp_styles_deferred();
+    joshuatzwp_styles_footer();
     // Load scripts
-    joshuatzwp_scripts_deferred();
+    joshuatzwp_scripts_footer();
 }
 
 function joshuatzwp_enqueue_loader_admin(){
@@ -149,7 +150,7 @@ function joshuatzwp_enqueue_loader_admin(){
 // Load scripts and styles
 add_action('wp_enqueue_scripts','joshuatzwp_enqueue_loader_head');
 // Load scripts and styles - DEFERRED
-add_action('wp_footer','joshuatzwp_enqueue_loader_deferred');
+add_action('wp_footer','joshuatzwp_enqueue_loader_footer');
 // Load scripts and styles - admin area
 add_action('admin_enqueue_scripts','joshuatzwp_enqueue_loader_admin');
 
@@ -435,3 +436,16 @@ function jtzwp_before_post_save($data,$postArr){
     return $finalPostData;
 }
 add_action('wp_insert_post_data','jtzwp_before_post_save',10,2);
+
+/*
+if ($jtzwpHelpers->isDebug && $jtzwpHelpers->getUrlInfo()['queryKeyPairs']['relativeUrl']=='on' || preg_match('/\.ngrok.io$/',$jtzwpHelpers->getUrlInfo()['hostname'])){
+    add_filter('style_loader_src',function($src, $handle){
+        global $jtzwpHelpers;
+        return $jtzwpHelpers->makeInternalLinkRelative($src);
+    },10,4);
+    add_filter('script_loader_src',function($src, $handle){
+        global $jtzwpHelpers;
+        return $jtzwpHelpers->makeInternalLinkRelative($src);
+    },10,4);
+}
+*/
