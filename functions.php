@@ -22,6 +22,7 @@ require_once($themeIncPath . '/custom-post-types.php');
 require_once($themeIncPath . '/custom-theme-settings.php');
 require_once($themeIncPath . '/custom-sidebars.php');
 require_once($themeIncPath . '/helpers.php');
+require_once($themeIncPath . '/special-loader.php');
 // Widget files
 require_once($themeIncPath . '/widgets/widget-recentposts.php');
 require_once($themeIncPath . '/widgets/widget-sharebuttons.php');
@@ -56,29 +57,7 @@ remove_action( 'wp_head', 'wp_generator' ) ;
 remove_action( 'wp_head', 'wlwmanifest_link' ) ;
 remove_action( 'wp_head', 'rsd_link' ) ;
 
-/**
- * Reusable loaders
- */
 
-
-$deferredHandles = (object) array(
-    'scripts' => (object) array(
-        'async' => array()
-    ),
-    'styles' => array()
-);
-// Same signature as wp_enqueue_style
-function wp_enqueue_style_deferred($handle, $srcString, $depArray, $version, $media){
-    global $deferredHandles;
-    array_push($deferredHandles->styles,$handle);
-    wp_enqueue_style($handle, $srcString, $depArray, $version, $media);
-}
-// Same signature as wp_enqueue_script
-function wp_enqueue_script_async($handle, $srcString, $depArray, $version, $inFooter){
-    global $deferredHandles;
-    array_push($deferredHandles->scripts->async,$handle);
-    wp_enqueue_script($handle, $srcString, $depArray, $version, $inFooter);
-}
 
 function joshuatzwp_styles() {
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
@@ -134,7 +113,7 @@ function joshuatzwp_scripts_deferred(){
     wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js'),$cacheBustStamp,true);
     // Prism JS
     $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.js');
-    wp_enqueue_script('prism-js',$prismJsFilePath,array(),false,true);
+    wp_enqueue_script_special('prism-js',$prismJsFilePath,array(),false,false,'defer');
 }
 
 function joshuatzwp_scripts_admin(){
@@ -456,44 +435,3 @@ function jtzwp_before_post_save($data,$postArr){
     return $finalPostData;
 }
 add_action('wp_insert_post_data','jtzwp_before_post_save',10,2);
-
-/**
- * Custom Script and Style Enqueued stuff
- */
-/**
- * Callback for WP to hit before echoing out an enqueued resource
- * @param {string} $tag - Will be the full string of the tag (`<link>` or `<script>`)
- * @param {string} $handle - The handle that was specified for the resource when enqueuing it
- */
-function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
-    global $deferredHandles;
-    $finalTag = $tag;
-    if ($isStyle && in_array($handle, $deferredHandles->styles, true)){
-        // Do not touch if already modified
-        if (!preg_match('/onload=|media="none"/',$tag)){
-            // Lazy load with JS, but also but noscript in case no JS
-            $noScriptStr = '<noscript>' . $tag . '</noscript>';
-            // Add onload and media="none" attr, and put together with noscript
-            $matches = array();
-            preg_match('/(<link[^>]+)>/',$tag,$matches);
-            $finalTag = $matches[1] . ' media="none" onload="if(media!=\'all\')media=\'all\'"' . '>' . $noScriptStr;
-        }
-    }
-    else if (!$isStyle && in_array($handle, $deferredHandles->scripts->async, true)){
-        // Do not touch if already modified, or missing src attr
-        if (!preg_match('/async=/', $tag) && preg_match('/src=/', $tag)){
-            // Add async attr
-            $matches = array();
-            preg_match('/(<script[^>]+)>/',$tag,$matches);
-            $finalTag = $matches[1] . ' async="true"' . '>';
-        }
-    }
-    return $finalTag;
-}
-// BE CAREFUL OF PRIORITY
-add_filter('script_loader_tag',function($tag, $handle, $src){
-    return scriptAndStyleTagCallback($tag, $handle, $src, null, false);
-},10,4);
-add_filter('style_loader_tag',function($tag, $handle, $src, $media){
-    return scriptAndStyleTagCallback($tag, $handle, $src, $media, true);
-},10,4);
