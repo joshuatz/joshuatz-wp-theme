@@ -2,7 +2,7 @@
 /**
  * Reusable loaders
  */
-$specialLoads = (object) array(
+$specialLoadHnds = (object) array(
     'scripts' => (object) array(
         'async' => array(),
         'defer' => array()
@@ -14,15 +14,15 @@ $specialLoads = (object) array(
 );
 // Same signature as wp_enqueue_style, + $loadMethod as last arg
 function wp_enqueue_style_special($handle, $srcString, $depArray, $version, $media, $loadMethod){
-    global $specialLoads;
-    array_push($specialLoads->styles->{$loadMethod},$handle);
+    global $specialLoadHnds;
+    array_push($specialLoadHnds->styles->{$loadMethod},$handle);
     wp_enqueue_style($handle, $srcString, $depArray, $version, $media);
 }
 // Same signature as wp_enqueue_script, + $loadMethod as last arg
 // Reminder - $inFooter should probably be false for both async and defer
 function wp_enqueue_script_special($handle, $srcString, $depArray, $version, $inFooter, $loadMethod){
-    global $specialLoads;
-    array_push($specialLoads->scripts->{$loadMethod},$handle);
+    global $specialLoadHnds;
+    array_push($specialLoadHnds->scripts->{$loadMethod},$handle);
     wp_enqueue_script($handle, $srcString, $depArray, $version, $inFooter);
 }
 // Identical signature to wp_enqueue_style
@@ -42,13 +42,13 @@ function wp_enqueue_style_deferred($handle, $srcString, $depArray, $version, $me
  * @param {boolean} $isStyle - If the resource is a stylesheet
  */
 function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
-    global $specialLoads;
+    global $specialLoadHnds;
     $finalTag = $tag;
     if ($isStyle){
         // Async loading via invalid mediaquery switching
-        if (in_array($handle, $specialLoads->styles->async, true)){
+        if (in_array($handle, $specialLoadHnds->styles->async, true)){
             // Do not touch if already modified
-            if (!preg_match('/\sonload=|\smedia="none"/',$tag)){
+            if (!preg_match('/\sonload=|\smedia=["\']none["\']/',$tag)){
                 // Lazy load with JS, but also but noscript in case no JS
                 $noScriptStr = '<noscript>' . $tag . '</noscript>';
                 // Add onload and media="none" attr, and put together with noscript
@@ -58,14 +58,14 @@ function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
             }
         }
         // Async loading via preload and loadCSS - https://github.com/filamentgroup/loadCSS/
-        else if (in_array($handle, $specialLoads->styles->asyncPreload, true)){
+        else if (in_array($handle, $specialLoadHnds->styles->asyncPreload, true)){
             // Do not touch if already modified
-            if (!preg_match('/\srel="preload|\sonload="/',$tag)){
+            if (!preg_match('/\srel=["\']preload|\sonload=["\']/',$tag)){
                 // Lazy load with JS, but also but noscript in case no JS
                 $noScriptStr = '<noscript>' . $tag . '</noscript>';
                 //var_dump($tag);
                 // Strip rel="" & as="" portion, if exist
-                $tag = preg_replace('/\srel="[^"]+"|\sas="[^"]+"/', '', $tag, -1);
+                $tag = preg_replace('/\srel=["\'][^"\']*["\']|\sas=["\'][^"\']*["\']/', '', $tag, -1);
                 // Add onload, rel="preload", as="style", and put together with noscript
                 $matches = array();
                 preg_match('/(<link[^>]+)>/',$tag,$matches);
@@ -76,7 +76,7 @@ function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
     }
     else {
         // Async
-        if (in_array($handle, $specialLoads->scripts->async, true)){
+        if (in_array($handle, $specialLoadHnds->scripts->async, true)){
             // Do not touch if already modified, or missing src attr
             if (!preg_match('/\sasync/', $tag) && preg_match('/src=/', $tag)){
                 // Add async attr
@@ -86,7 +86,7 @@ function scriptAndStyleTagCallback($tag, $handle, $src, $media, $isStyle){
             }
         }
         // Defer
-        else if (in_array($handle, $specialLoads->scripts->defer, true)){
+        else if (in_array($handle, $specialLoadHnds->scripts->defer, true)){
             // Do not touch if already modified, or missing src attr
             if (!preg_match('/\sdefer/', $tag) && preg_match('/src=/', $tag)){
                 // Add defer attr
