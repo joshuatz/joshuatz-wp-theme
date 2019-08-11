@@ -333,7 +333,7 @@ var G = "/", C = location.href, H, D, B, F;
             var mainNav = $('#mainNavContainer .jtnavbar-inner')[0];
             var innermostNav = $('#mainNavContainer #menu-primary')[0];
             var wpAdminBar = $('#wpadminbar')[0];
-            var topColorBarHeight = parseFloat(getComputedStyle(topColorBar).height.replace('px',''));
+            var topColorBarHeight = topColorBar ? parseFloat(getComputedStyle(topColorBar).height.replace('px','')): 0;
             var mainNavHeight = parseFloat(getComputedStyle(mainNav).height.replace('px',''));
             var mastheadTop = parseFloat(getComputedStyle(masthead).top.replace('px',''));
             var innermostNavHeight = parseFloat(getComputedStyle(innermostNav).height.replace('px',''));
