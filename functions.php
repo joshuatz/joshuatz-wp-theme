@@ -435,7 +435,7 @@ function jtzwp_before_post_save($data,$postArr){
     }
     return $finalPostData;
 }
-add_action('wp_insert_post_data','jtzwp_before_post_save',10,2);
+add_filter('wp_insert_post_data','jtzwp_before_post_save',10,2);
 
 /*
 if ($jtzwpHelpers->isDebug && $jtzwpHelpers->getUrlInfo()['queryKeyPairs']['relativeUrl']=='on' || preg_match('/\.ngrok.io$/',$jtzwpHelpers->getUrlInfo()['hostname'])){
