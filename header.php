@@ -13,6 +13,7 @@
     ?>
     <?php wp_head(); ?>
     <?php include_once($themeIncPath . '/everypage-execute.php'); ?>
+    <style>.hide,.hidden {display:none;}</style>
 </head>
 <body>
     <?php include 'nav.php'; ?>

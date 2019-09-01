@@ -47,3 +47,4 @@ Custom WordPress theme for joshuatz.com
      - Optionally, integrate Materialize walker version
  - Add Gutenberg support (color palettes, blocks, etc.)
  - Add support for the AMP spec version of pages/posts
+ - make `/blog` a true theme page, rather than have to manually create it

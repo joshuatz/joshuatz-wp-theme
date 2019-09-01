@@ -1096,4 +1096,13 @@ class JtzwpHelpers {
         $link = str_replace($this->siteRootUrlBasedOnWp,'',$link);
         return $link;
     }
+
+    public function getIpInfo($OPT_token){
+        if (isset($OPT_token)){
+            //
+        }
+        else {
+            //
+        }
+    }
 }
