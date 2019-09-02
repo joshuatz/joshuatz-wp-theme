@@ -3,6 +3,7 @@
  * Header
  */
 ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -13,6 +14,7 @@
     ?>
     <?php wp_head(); ?>
     <?php include_once($themeIncPath . '/everypage-execute.php'); ?>
+    <style>.hide,.hidden {display:none;}</style>
 </head>
 <body>
     <?php include 'nav.php'; ?>

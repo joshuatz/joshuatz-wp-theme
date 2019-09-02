@@ -345,6 +345,83 @@
             jPrismToolbar.autoInit();
         }
 
+        // Geo-Content Filtered
+        window.unhideByGeography = function(filters,OPT_token,selector){
+            function strToRegExp(e){var r=/^\/(.*)\/([igmuy]{0,5})$/;if(r.test(e)){var n=r.exec(e)[1],t=r.exec(e)[2];return new RegExp(n,t)}return new RegExp(e)}
+            getIpInfo(OPT_token,function(ipInfo){
+                var matchBlocked = false;
+                for (var x=0; x<filters.length; x++){
+                    var filter = filters[x];
+                    if (typeof(filter.filterVal)==='string'){
+                        if (!(filter.infoKey in ipInfo)){
+                            matchBlocked = true;
+                        }
+                        else {
+                            matchBlocked = strToRegExp(filter.filterVal).test(ipInfo[filter.infoKey])===false;
+                        }
+                    }
+                    if (matchBlocked){
+                        if (isDebug){
+                            console.group('Geo content blocked by filter:');
+                                console.log(filter);
+                            console.groupEnd();
+                        }
+                        break;
+                    }
+                }
+                if (!matchBlocked){
+                    document.querySelectorAll(selector).forEach(function(elem){
+                        elem.style.opacity = 0;
+                        elem.classList.remove('hide');
+                        setTimeout(function(){
+                            elem.style.opacity = 1;
+                        },100);
+                    });
+                }
+            });
+        }
+        function getIpInfo(OPT_token,callback){
+            var STORAGE_KEY = 'cachedIpInfo';
+            if (localStorage.getItem(STORAGE_KEY)){
+                try {
+                    callback(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+                    return;
+                }
+                catch (e){
+                    //
+                }
+            }
+            var endPoint = 'https://ipinfo.io';
+            var xhr = new XMLHttpRequest();
+            xhr.addEventListener('load',function(){
+                if (xhr.status === 200){
+                    var ipInfo = JSON.parse(xhr.responseText);
+                    callback(ipInfo);
+                    localStorage.setItem(STORAGE_KEY,JSON.stringify(ipInfo));
+                }
+                else {
+                    if (isDebug){
+                        console.warn('Bad response from IpInfo:');
+                        console.log(res);
+                    }
+                }
+            });
+            xhr.open('GET',endPoint);
+            xhr.setRequestHeader('Accept','application/json');
+            if (typeof(OPT_token)==='string'){
+                xhr.setRequestHeader('Authorization','Bearer ' + OPT_token);
+            }
+            xhr.send();
+        }
+        function unhideByGeographyObj(input){
+            window.unhideByGeography(input.filters,input.token,input.selector);
+        }
+        window.unhideByGeographyArr = (window.unhideByGeographyArr || []);
+        window.unhideByGeographyArr.forEach(function(input){unhideByGeographyObj(input);});
+        window.unhideByGeographyArr.push = function(input){
+            unhideByGeographyObj(input);
+        };
+
         /**
          * Wordpress Kludges
          */

@@ -19,6 +19,7 @@ require_once($themeIncPath . '/special-loader.php');
 // Widget files
 require_once($themeIncPath . '/widgets/widget-recentposts.php');
 require_once($themeIncPath . '/widgets/widget-sharebuttons.php');
+require_once($themeIncPath . '/widgets/widget-geo-locked-content.php');
 
 /**
  * Make sure helpers is loaded globally

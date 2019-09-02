@@ -22,11 +22,13 @@ class JtzwpHelpers {
         $this->isDebug = $this->getIsDebug();
         $this->resetPaths();
         $this->themeUserSettingsValidations = array(
+            'jtzwp_cachebust_stamp' => "/.+/",
             'jtzwp_ga_gauid' => "/UA-\d{8}-\d{1}/i",
             'jtzwp_disqus_subdomain' => "/[^\.]+\.disqus\.com/i",
             'jtzwp_about_me_email' => ",[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?,i",
             'jtzwp_about_me_birthdate' => "/\d{2}\/\d{2}\/\d{4}/i",
-            'jtzwp_about_me_profile_picture_filepath' => "/jpg|jpeg|webm|png|gif|bmp/i"
+            'jtzwp_about_me_profile_picture_filepath' => "/jpg|jpeg|webm|png|gif|bmp/i",
+            'jtzwp_ipinfo_token' => "/[a-z0-9]{10,}/"
         );
         // Make sure webhook key is set
         $this->getUsersWebhookKey();
@@ -321,7 +323,7 @@ class JtzwpHelpers {
         // Possible file paths
         $highestLevelFilePath = $_SERVER['DOCUMENT_ROOT'] . $this::CUSTOM_REDIRECTS_FILENAME;
         $themeFilePath = $this::CUSTOM_REDIRECTS_FILENAME;
-        $fileContentsRaw = '';
+        $fileContentsRaw = false;
 
         $customRedirectSettings = (object) array();
         
@@ -332,7 +334,9 @@ class JtzwpHelpers {
         else if (file_exists($themeFilePath)){
             $fileContentsRaw = file_get_contents($themeFilePath);
         }
-        $customRedirectSettings = json_decode($fileContentsRaw,true);
+        if ($fileContentsRaw){
+            $customRedirectSettings = json_decode($fileContentsRaw,true);
+        }
 
         // Set for future use
         $this->allRedirectSettings = $customRedirectSettings;
@@ -916,6 +920,10 @@ class JtzwpHelpers {
                     fclose($logFile);
                 }
                 else {
+                    // Turn array into string
+                    if (is_array($msg)){
+                        $msg = json_encode($msg);
+                    }
                     // make sure final char is new line, otherwise add
                     $msg = preg_match('/[\r\n]+[\s]{0,1}$/',$msg) ? $msg : $msg . "\n";
                     // Add timestamp to beginning of msg
@@ -943,6 +951,11 @@ class JtzwpHelpers {
         return $myBool ? 'true' : 'false';
     }
 
+    /**
+     * Validates a given setting value to see if it passes the rule (regexp) for the setting it is assigned to
+     * @param {string} $key - The the key with which the setting is stored
+     * @param {string} $value - The value to check if valid for the setting
+     */
     public function validateThemeUserSetting($key,$val){
         if ($val!==''){
             if (isset($this->themeUserSettingsValidations[$key])){
@@ -982,12 +995,15 @@ class JtzwpHelpers {
 
     public function setThemeUserSetting($key,$val){
         $success = false;
-        $existingSettings = get_option($this::USER_SETTINGS_REG_NAME,array());
-        if ($existingSettings){
-            $newSettings = $existingSettings;
-            $newSettings[$key] = $val;
-            $success = update_option($this::USER_SETTINGS_REG_NAME,$newSettings);
+        $settings = get_option($this::USER_SETTINGS_REG_NAME,false);
+        if (!$settings){
+            $settings = array(
+                $key => $val
+            );
         }
+        $settings[$key] = $val;
+        // This will also create the option if it doesn already exist
+        $success = update_option($this::USER_SETTINGS_REG_NAME,$settings);
         return $success;
     }
     
@@ -1095,5 +1111,110 @@ class JtzwpHelpers {
         $link = str_replace(get_option('siteurl'),'',$link);
         $link = str_replace($this->siteRootUrlBasedOnWp,'',$link);
         return $link;
+    }
+
+    /**
+     * Get Client's IP Info
+     * Uses https://ipinfo.io
+     * @param {string} $OPT_ip - IP address to get info for. If omitted, defaults to client, not server
+     * @param {boolean} $OPT_useToken - Whether or not try to use auth token stored in settings, versus anonymous use
+     */
+    public function getIpInfo($OPT_ip = null,$OPT_useToken = true){
+        $retInfo = (object) array(
+            'success' => false,
+            'failMsg' => '',
+            'info' => null,
+        );
+        $ipToUse = $_SERVER['REMOTE_ADDR'];
+        if (isset($OPT_ip) && $OPT_ip!==''){
+            $ipToUse = $OPT_ip;
+        }
+        $STORAGE_KEY = 'IPINFO_' . $ipToUse;
+        // Check for cached data
+        if (isset($_SESSION[$STORAGE_KEY]) && !$this->isDebug){
+            $retInfo->success = true;
+            $retInfo->info = json_decode($_SESSION[$STORAGE_KEY],true);
+            return $retInfo;
+        }
+        // Mock for dev
+        if ($ipToUse==='127.0.0.1'){
+            $ipToUse = '8.8.8.8';
+        }
+        // Check that cURL is even available
+        if (!function_exists('curl_version')){
+            $retInfo->failMsg = 'cURL is not installed';
+            return $retInfo;
+        }
+        // Start building cURL request
+        $reqHeaders = array(
+            "Accept: application/json"
+        );
+        // Check if user has saved an IpInfo token in settings
+        $tokenSetting = $this->getThemeUserSetting('jtzwp_ipinfo_token');
+        if ($tokenSetting->isValid && $OPT_useToken){
+            $token = $tokenSetting->val;
+            array_push($reqHeaders, ("Authorization: Bearer " . $token));
+        }
+        $reqUrl = 'https://ipinfo.io' . '/' . $ipToUse;
+        // Actually make request
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $reqUrl,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_MAXREDIRS => 4,
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => $reqHeaders
+        ));
+        $response = curl_exec($curl);
+        $httpCode = curl_getinfo($curl,CURLINFO_HTTP_CODE);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err){
+            $retInfo->failMsg = 'cURL Error #' . $err;
+        }
+        else {
+            if ($httpCode===200){
+                $retInfo->success = true;
+                $retInfo->info = json_decode($response,true);
+                $_SESSION[$STORAGE_KEY] = $response;
+            }
+            else {
+                $retInfo->failMsg = 'Response HTTP Status = ' . $httpCode;
+            }
+        }
+        return $retInfo;
+    }
+
+    /**
+     * Simple "does string contain other string" search, but case insensitive
+     */
+    public function strContainsCaseIns($haystack,$needle){
+        return strpos(strtolower($haystack),strtolower($needle))!==false;
+    }
+
+    /**
+     * More advanced string matcher - test can be either string or regex pattern as string
+     * @param {string} $tester - The string to test *against*. Can be plain string or "/.+/" style regex string
+     * @param {string} $input - the string to use as the input to run against tester
+     * @param {boolean} $OPT_caseIns - Whether to use case-insensitive matching for simple string comparison
+     */
+    public function autoStrMatchTest($tester,$input,$OPT_caseIns=false){
+        $looksLikeReg = preg_match('/^\/.*\/[igmuy]{0,5}$/',$tester);
+        if ($looksLikeReg){
+            // Check for regex input
+            try {
+                return preg_match($tester, $input);
+            }
+            catch (Exception $e){
+                // pattern failed
+            }
+        }
+        if ($OPT_caseIns){
+            return $this->strContainsCaseIns($tester,$input);
+        }
+        else {
+            return strpos($tester,$input)!==false;
+        }
     }
 }

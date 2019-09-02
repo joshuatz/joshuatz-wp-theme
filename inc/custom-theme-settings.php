@@ -80,6 +80,18 @@ function jtzwp_initial_settings_api_init(){
         )
     );
 
+    // General Settings - IpInfo token (optional)
+    add_settings_field(
+        'jtzwp_ipinfo_token',
+        __( 'IpInfo.io Token','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_general_settings_section',
+        array(
+            'jtzwp_ipinfo_token'
+        )
+    );
+
     // About Me - Email Address
     add_settings_field(
         'jtzwp_about_me_email',
