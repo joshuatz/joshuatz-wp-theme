@@ -26,7 +26,8 @@ class JtzwpHelpers {
             'jtzwp_disqus_subdomain' => "/[^\.]+\.disqus\.com/i",
             'jtzwp_about_me_email' => ",[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?,i",
             'jtzwp_about_me_birthdate' => "/\d{2}\/\d{2}\/\d{4}/i",
-            'jtzwp_about_me_profile_picture_filepath' => "/jpg|jpeg|webm|png|gif|bmp/i"
+            'jtzwp_about_me_profile_picture_filepath' => "/jpg|jpeg|webm|png|gif|bmp/i",
+            'jtzwp_ipinfo_token' => "/[a-z0-9]{10,}/"
         );
         // Make sure webhook key is set
         $this->getUsersWebhookKey();
@@ -943,6 +944,11 @@ class JtzwpHelpers {
         return $myBool ? 'true' : 'false';
     }
 
+    /**
+     * Validates a given setting value to see if it passes the rule (regexp) for the setting it is assigned to
+     * @param {string} $key - The the key with which the setting is stored
+     * @param {string} $value - The value to check if valid for the setting
+     */
     public function validateThemeUserSetting($key,$val){
         if ($val!==''){
             if (isset($this->themeUserSettingsValidations[$key])){
@@ -1097,12 +1103,58 @@ class JtzwpHelpers {
         return $link;
     }
 
-    public function getIpInfo($OPT_token){
-        if (isset($OPT_token)){
-            //
+    public function getIpInfo($OPT_ip = null,$OPT_useToken = true){
+        $retInfo = (object) array(
+            'success' => false,
+            'failMsg' => '',
+            'info' => null,
+        );
+        $ipToUse = $_SERVER['REMOTE_ADDR'];
+        if (isset($OPT_ip) && $OPT_ip!==''){
+            $ipToUse = $OPT_ip;
+        }
+        // Mock for dev
+        if ($ipToUse==='127.0.0.1'){
+            $ipToUse = '8.8.8.8';
+        }
+        // Check that cURL is even available
+        if (!function_exists('curl_version')){
+            $retInfo->failMsg = 'cURL is not installed';
+            return $retInfo;
+        }
+        // Start building cURL request
+        $reqHeaders = array(
+            "Accept: application/json"
+        );
+        // Check if user has saved an IpInfo token in settings
+        $tokenSetting = $this->getThemeUserSetting('jtzwp_ipinfo_token');
+        if ($tokenSetting->isValid && $OPT_useToken){
+            $token = $tokenSetting->val;
+            array_push($reqHeaders, ("Authorization: Bearer " . $token));
+        }
+        $reqUrl = 'https://ipinfo.io' . '/' . $ipToUse;
+        // Actually make request
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $reqUrl,
+            CURLOPT_RETURNTRANSFER => true,
+            // CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 4,
+            CURLOPT_TIMEOUT => 10,
+            // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => $reqHeaders
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err){
+            $retInfo->failMsg = 'cURL Error #' . $err;
         }
         else {
-            //
+            $retInfo->success = true;
+            $retInfo->info = $response;
         }
+        return $retInfo;
     }
 }

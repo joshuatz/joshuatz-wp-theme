@@ -29,15 +29,30 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
         // Get settings
         extract($args);
         $widgetTitle = apply_filters('widget_title',$instance['title']);
+        $useJavascript = !empty($instance['useJavascript']) ? $instance['useJavascript'] : false;
         $countryFilter = !empty($instance['countryFilter']) ? $instance['countryFilter'] : false;
         $regionFilter = !empty($instance['regionFilter']) ? $instance['regionFilter'] : false;
         $cityFilter = !empty($instance['cityFilter']) ? $instance['cityFilter'] : false;
         $actualContent = !empty($instance['actualContent']) ? $instance['actualContent'] : false;
         $hasFilter = ($countryFilter || $regionFilter || $cityFilter);
 
+        // Flag if using backend fails in some way
+        $backendBlocked = false;
+
         if (!$actualContent){
             // return immediately - nothing to show
             return;
+        }
+
+        if (!$useJavascript){
+            $ipInfoResponse = $jtzwpHelpers->getIpInfo();
+            if ($ipInfoResponse->success){
+                // Go ahead and test for match
+                $jtzwpHelpers->log($ipInfoResponse->info);
+            }
+            else {
+                $jtzwpHelpers->log($ipInfoResponse->failMsg);
+            }
         }
 
         // Before widget content
@@ -67,6 +82,7 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
         
         // Check for values already set by user
         $title = isset($instance['title']) ? esc_attr($instance['title']) : '';
+        $useJavascript = isset($instance['useJavascript']) ? (bool) $instance['useJavascript'] : false;
         $countryFilter = isset($instance['countryFilter']) ? esc_attr($instance['countryFilter']) : '';
         $regionFilter = isset($instance['regionFilter']) ? esc_attr($instance['regionFilter']) : '';
         $cityFilter = isset($instance['cityFilter']) ? esc_attr($instance['cityFilter']) : '';
@@ -77,6 +93,11 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
             <p>
                 <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title : '); ?></label>
                 <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+            </p>
+            <!-- Use JavaScript Checkbox -->
+            <p>
+                <input class="checkbox" type="checkbox"<?php checked($useJavascript);?> id="<?php echo $this->get_field_id('useJavascript'); ?>" name="<?php echo $this->get_field_name('useJavascript'); ?>" />
+                <label for="<?php echo $this->get_field_id('useJavascript'); ?>"><?php _e('Use Javascript to hide content instead of backend'); ?></label>
             </p>
             <!-- Country Filter -->
             <p>

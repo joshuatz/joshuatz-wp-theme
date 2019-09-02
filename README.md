@@ -10,6 +10,8 @@ Custom WordPress theme for joshuatz.com
 ### Optional Settings
 
  - Optional settings:
+     - Theme debug logging
+         - Logging will only occur if the log file exists. In theme folder, `touch config/log.txt`. Is gitignored.
      - Theme Settings Page (Dashboard -> Settings -> joshuatz-wp):
          - Google Analytics GA ID - this should be the analytics ID provided by Google Analytics. Should follow format of UA-12345678-01
          - Disqus Custom Subdomain - For if you have Disqus setup and want to enable their comment embed system
