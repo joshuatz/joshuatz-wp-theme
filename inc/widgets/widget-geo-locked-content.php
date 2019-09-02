@@ -37,7 +37,9 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
         $hasFilter = ($countryFilter || $regionFilter || $cityFilter);
 
         // Flag if using backend fails in some way
-        $backendBlocked = false;
+        $backendFailed = false;
+        // Flag if filters fail to match
+        $matchBlocked = false;
 
         if (!$actualContent){
             // return immediately - nothing to show
@@ -49,10 +51,42 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
             if ($ipInfoResponse->success){
                 // Go ahead and test for match
                 $jtzwpHelpers->log($ipInfoResponse->info);
+                $filters = array(
+                    array(
+                        'infoKey' => 'country',
+                        'filterVal' => $countryFilter
+                    ),
+                    array(
+                        'infoKey' => 'region',
+                        'filterVal' => $regionFilter
+                    ),
+                    array(
+                        'infoKey' => 'city',
+                        'filterVal' => $cityFilter
+                    )
+                );
+                foreach($filters as $filter){
+                    if ($filter['filterVal']){
+                        $ipInfoVal = $ipInfoResponse->info[$filter['infoKey']];
+                        if ($jtzwpHelpers->autoStrMatchTest($filter['filterVal'],$ipInfoVal)===false){
+                            $matchBlocked = true;
+                            $jtzwpHelpers->log('blocked by ' . $filter['infoKey'] . ' - "' . $filter['filterVal'] . '" [not match] ' . $ipInfoVal);
+                            break;
+                        }
+                    }
+                }
             }
             else {
                 $jtzwpHelpers->log($ipInfoResponse->failMsg);
+                // Try to switch over to JS
+                $backendFailed = true;
+                $useJavascript = true;
             }
+        }
+        
+        // If match blocked, return
+        if ($matchBlocked){
+            return;
         }
 
         // Before widget content
@@ -64,9 +98,9 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
         }
         ?>
         <?php /* Now output the actual inner widget content */ ?>
-            <div class="widgetBody <?php echo $hasFilter ? 'hide' : ''?>">
+            <div class="widgetBody <?php echo $hasFilter && $useJavascript ? 'hide' : ''?>">
                 <?php echo $actualContent; ?>
-                <?php if($hasFilter): ?>
+                <?php if($hasFilter && $useJavascript): ?>
                     <script>
                         // Need to implement logic
                     </script>

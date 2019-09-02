@@ -917,6 +917,10 @@ class JtzwpHelpers {
                     fclose($logFile);
                 }
                 else {
+                    // Turn array into string
+                    if (is_array($msg)){
+                        $msg = json_encode($msg);
+                    }
                     // make sure final char is new line, otherwise add
                     $msg = preg_match('/[\r\n]+[\s]{0,1}$/',$msg) ? $msg : $msg . "\n";
                     // Add timestamp to beginning of msg
@@ -1103,6 +1107,12 @@ class JtzwpHelpers {
         return $link;
     }
 
+    /**
+     * Get Client's IP Info
+     * Uses https://ipinfo.io
+     * @param {string} $OPT_ip - IP address to get info for. If omitted, defaults to client, not server
+     * @param {boolean} $OPT_useToken - Whether or not try to use auth token stored in settings, versus anonymous use
+     */
     public function getIpInfo($OPT_ip = null,$OPT_useToken = true){
         $retInfo = (object) array(
             'success' => false,
@@ -1146,15 +1156,47 @@ class JtzwpHelpers {
             CURLOPT_HTTPHEADER => $reqHeaders
         ));
         $response = curl_exec($curl);
+        $httpCode = curl_getinfo($curl,CURLINFO_HTTP_CODE);
         $err = curl_error($curl);
         curl_close($curl);
         if ($err){
             $retInfo->failMsg = 'cURL Error #' . $err;
         }
         else {
-            $retInfo->success = true;
-            $retInfo->info = $response;
+            if ($httpCode===200){
+                $retInfo->success = true;
+                $retInfo->info = json_decode($response,true);
+            }
+            else {
+                $retInfo->failMsg = 'Response HTTP Status = ' . $httpCode;
+            }
         }
         return $retInfo;
+    }
+
+    /**
+     * Simple "does string contain other string" search, but case insensitive
+     */
+    public function strContainsCaseIns($haystack,$needle){
+        return strpos(strtolower($haystack),strtolower($needle))!==false;
+    }
+
+    public function autoStrMatchTest($tester,$input,$OPT_caseIns=false){
+        $looksLikeReg = preg_match('/^\/.*\/[igmuy]{0,5}$/',$tester);
+        if ($looksLikeReg){
+            // Check for regex input
+            try {
+                return preg_match($tester, $input);
+            }
+            catch (Exception $e){
+                // pattern failed
+            }
+        }
+        if ($OPT_caseIns){
+            return $this->strContainsCaseIns($tester,$input);
+        }
+        else {
+            return strpos($tester,$input)!==false;
+        }
     }
 }
