@@ -323,7 +323,7 @@ class JtzwpHelpers {
         // Possible file paths
         $highestLevelFilePath = $_SERVER['DOCUMENT_ROOT'] . $this::CUSTOM_REDIRECTS_FILENAME;
         $themeFilePath = $this::CUSTOM_REDIRECTS_FILENAME;
-        $fileContentsRaw = '';
+        $fileContentsRaw = false;
 
         $customRedirectSettings = (object) array();
         
@@ -334,7 +334,9 @@ class JtzwpHelpers {
         else if (file_exists($themeFilePath)){
             $fileContentsRaw = file_get_contents($themeFilePath);
         }
-        $customRedirectSettings = json_decode($fileContentsRaw,true);
+        if ($fileContentsRaw){
+            $customRedirectSettings = json_decode($fileContentsRaw,true);
+        }
 
         // Set for future use
         $this->allRedirectSettings = $customRedirectSettings;
