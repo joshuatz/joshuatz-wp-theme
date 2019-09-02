@@ -1131,14 +1131,14 @@ class JtzwpHelpers {
         }
         $STORAGE_KEY = 'IPINFO_' . $ipToUse;
         // Check for cached data
-        if (isset($_SESSION[$STORAGE_KEY])){
+        if (isset($_SESSION[$STORAGE_KEY]) && !$this->isDebug){
             $retInfo->success = true;
             $retInfo->info = json_decode($_SESSION[$STORAGE_KEY],true);
             return $retInfo;
         }
         // Mock for dev
         if ($ipToUse==='127.0.0.1'){
-            //$ipToUse = '8.8.8.8';
+            $ipToUse = '8.8.8.8';
         }
         // Check that cURL is even available
         if (!function_exists('curl_version')){
@@ -1161,10 +1161,8 @@ class JtzwpHelpers {
         curl_setopt_array($curl, array(
             CURLOPT_URL => $reqUrl,
             CURLOPT_RETURNTRANSFER => true,
-            // CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 4,
             CURLOPT_TIMEOUT => 10,
-            // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => $reqHeaders
         ));
@@ -1197,6 +1195,9 @@ class JtzwpHelpers {
 
     /**
      * More advanced string matcher - test can be either string or regex pattern as string
+     * @param {string} $tester - The string to test *against*. Can be plain string or "/.+/" style regex string
+     * @param {string} $input - the string to use as the input to run against tester
+     * @param {boolean} $OPT_caseIns - Whether to use case-insensitive matching for simple string comparison
      */
     public function autoStrMatchTest($tester,$input,$OPT_caseIns=false){
         $looksLikeReg = preg_match('/^\/.*\/[igmuy]{0,5}$/',$tester);
