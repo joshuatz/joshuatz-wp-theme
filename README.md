@@ -5,8 +5,12 @@ Custom WordPress theme for joshuatz.com
 ## Instructions
 ### Building
  - Vendored assets are bundled using gulp. `gulp` or `npm run build` should produce the files, which are checked into git, so they can be pre-built for WP.
+     - Currently, this is also dependent on the jPrismToolbar submodule already being installed (see below)
 ### Install
  - There is currently no real setup required other than activating the theme
+ - To use jPrismToolbar, currently you need to use the submodule
+     - On initial cloning of the whole repo, you after need to run (once):
+         - `git submodule init && git submodule update`
 ### Optional Settings
 
  - Optional settings:

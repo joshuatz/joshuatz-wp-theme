@@ -22,6 +22,7 @@ class JtzwpHelpers {
         $this->isDebug = $this->getIsDebug();
         $this->resetPaths();
         $this->themeUserSettingsValidations = array(
+            'jtzwp_cachebust_stamp' => "/.+/",
             'jtzwp_ga_gauid' => "/UA-\d{8}-\d{1}/i",
             'jtzwp_disqus_subdomain' => "/[^\.]+\.disqus\.com/i",
             'jtzwp_about_me_email' => ",[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?,i",
@@ -992,12 +993,15 @@ class JtzwpHelpers {
 
     public function setThemeUserSetting($key,$val){
         $success = false;
-        $existingSettings = get_option($this::USER_SETTINGS_REG_NAME,array());
-        if ($existingSettings){
-            $newSettings = $existingSettings;
-            $newSettings[$key] = $val;
-            $success = update_option($this::USER_SETTINGS_REG_NAME,$newSettings);
+        $settings = get_option($this::USER_SETTINGS_REG_NAME,false);
+        if (!$settings){
+            $settings = array(
+                $key => $val
+            );
         }
+        $settings[$key] = $val;
+        // This will also create the option if it doesn already exist
+        $success = update_option($this::USER_SETTINGS_REG_NAME,$settings);
         return $success;
     }
     
@@ -1181,6 +1185,9 @@ class JtzwpHelpers {
         return strpos(strtolower($haystack),strtolower($needle))!==false;
     }
 
+    /**
+     * More advanced string matcher - test can be either string or regex pattern as string
+     */
     public function autoStrMatchTest($tester,$input,$OPT_caseIns=false){
         $looksLikeReg = preg_match('/^\/.*\/[igmuy]{0,5}$/',$tester);
         if ($looksLikeReg){
