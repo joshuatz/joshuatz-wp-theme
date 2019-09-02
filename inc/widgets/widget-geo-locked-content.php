@@ -65,7 +65,6 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
             $ipInfoResponse = $jtzwpHelpers->getIpInfo();
             if ($ipInfoResponse->success){
                 // Go ahead and test for match
-                $jtzwpHelpers->log($ipInfoResponse->info);
                 foreach($filters as $filter){
                     if ($filter['filterVal']){
                         $ipInfoVal = $ipInfoResponse->info[$filter['infoKey']];

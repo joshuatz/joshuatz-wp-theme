@@ -3,6 +3,7 @@
  * Header
  */
 ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">

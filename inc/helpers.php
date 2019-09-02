@@ -1129,9 +1129,16 @@ class JtzwpHelpers {
         if (isset($OPT_ip) && $OPT_ip!==''){
             $ipToUse = $OPT_ip;
         }
+        $STORAGE_KEY = 'IPINFO_' . $ipToUse;
+        // Check for cached data
+        if (isset($_SESSION[$STORAGE_KEY])){
+            $retInfo->success = true;
+            $retInfo->info = json_decode($_SESSION[$STORAGE_KEY],true);
+            return $retInfo;
+        }
         // Mock for dev
         if ($ipToUse==='127.0.0.1'){
-            $ipToUse = '8.8.8.8';
+            //$ipToUse = '8.8.8.8';
         }
         // Check that cURL is even available
         if (!function_exists('curl_version')){
@@ -1172,6 +1179,7 @@ class JtzwpHelpers {
             if ($httpCode===200){
                 $retInfo->success = true;
                 $retInfo->info = json_decode($response,true);
+                $_SESSION[$STORAGE_KEY] = $response;
             }
             else {
                 $retInfo->failMsg = 'Response HTTP Status = ' . $httpCode;
