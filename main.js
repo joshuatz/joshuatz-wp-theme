@@ -3,7 +3,7 @@
     // Materialize and some other stuff is deferred, so wait for document ready
     $(document).ready(function(){
         var Materialize = window.M;
-        jtzwpMaterializeInit();
+        jtzwpMaterializeInit(Materialize);
         jtzwpMaterializeExtend();
         // wow.js init
         window.wow = new WOW({
@@ -35,7 +35,7 @@
     /**
      * Materialize Stuff - Init
      */
-    function jtzwpMaterializeInit(){
+    function jtzwpMaterializeInit(Materialize){
         // Collapsible (aka accordian) sections
         $('.collapsible').collapsible();
         // Modals
