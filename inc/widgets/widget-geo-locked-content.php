@@ -71,7 +71,6 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
                         $ipInfoVal = $ipInfoResponse->info[$filter['infoKey']];
                         if ($jtzwpHelpers->autoStrMatchTest($filter['filterVal'],$ipInfoVal)===false){
                             $matchBlocked = true;
-                            $jtzwpHelpers->log('blocked by ' . $filter['infoKey'] . ' - "' . $filter['filterVal'] . '" [not match] ' . $ipInfoVal);
                             break;
                         }
                     }
@@ -109,52 +108,16 @@ class JTZWP_GeoLockedContent_Widget extends WP_Widget {
                     <script>
                         // Need to refactor into global file which can be called from this, instead of echoing out script once per widget
                         (function(){
-                            function strToRegExp(e){var r=/^\/(.*)\/([igmuy]{0,5})$/;if(r.test(e)){var n=r.exec(e)[1],t=r.exec(e)[2];return new RegExp(n,t)}return new RegExp(e)}
                             var filters = <?php echo json_encode($filters); ?>;
                             var widgetId = '<?php echo $widgetId; ?>';
                             var tokenSetting = <?php echo json_encode($jtzwpHelpers->getThemeUserSetting('jtzwp_ipinfo_token')); ?>;
-                            var endPoint = 'https://ipinfo.io';
-                            var xhr = new XMLHttpRequest();
-                            xhr.addEventListener('load',function(){
-                                if (xhr.status === 200){
-                                    var matchBlocked = false;
-                                    var ipInfo = JSON.parse(xhr.responseText);
-                                    for (var x=0; x<filters.length; x++){
-                                        var filter = filters[x];
-                                        if (typeof(filter.filterVal)==='string'){
-                                            if (!(filter.infoKey in ipInfo)){
-                                                matchBlocked = true;
-                                            }
-                                            else {
-                                                matchBlocked = strToRegExp(filter.filterVal).test(ipInfo[filter.infoKey])===false;
-                                            }
-                                        }
-                                        if (matchBlocked){
-                                            break;
-                                        }
-                                    }
-                                    if (!matchBlocked){
-                                        var wrapper = document.getElementById(widgetId + '-wrapper');
-                                        wrapper.style.opacity = 0;
-                                        wrapper.classList.remove('hide');
-                                        setTimeout(function(){
-                                            wrapper.style.opacity = 1;
-                                        },100);
-                                    }
-                                }
-                                else {
-                                    if (isDebug){
-                                        console.warn('Bad response from IpInfo:');
-                                        console.log(res);
-                                    }
-                                }
+                            var token = tokenSetting.isValid ? tokenSetting.val : false;
+                            window.unhideByGeographyArr = (window.unhideByGeographyArr || []);
+                            unhideByGeographyArr.push({
+                                filters: filters,
+                                token: token,
+                                selector: '#' + widgetId + ' > .wrapper'
                             });
-                            xhr.open('GET',endPoint);
-                            xhr.setRequestHeader('Accept','application/json');
-                            if (tokenSetting.isValid){
-                                xhr.setRequestHeader('Authorization','Bearer ' + tokenSetting.val);
-                            }
-                            xhr.send();
                         })();
                     </script>
                 <?php endif; ?>
