@@ -154,31 +154,39 @@
      * Sticky Stuff
      */
     function jtzwpStickyInit(){
+        $('.pushpinSticky').each(function(){
+            var elem = this;
+            jtzwpPushpin(elem);
+            // Since pushpin breaks on resize of window, setup listeners and destroy / re-init on resize
+            $(window).resize(function(){
+                $(elem).pushpin('destroy');
+                jtzwpPushpin(elem);
+            });
+        });
+    }
+
+    function jtzwpPushpin(elem){
+        $elem = $(elem);
         // Use a default top margin equal to the height of the top nav bar
         var stickyTopOffset = $('.jtnavbar-inner').height();
-        $('.pushpinSticky').each(function(){
-            var $this = $(this);
-            var currTopOffset = stickyTopOffset;
-            var currExtraBottomOffset = 0;
-            // Allow overriding of offset
-            if (this.hasAttribute('data-offset')){
-                currTopOffset = parseFloat(this.getAttribute('data-offset'));
-            }
-            if (this.hasAttribute('data-extratopoffset')){
-                currTopOffset += parseFloat(this.getAttribute('data-extratopoffset'));
-            }
-            if (this.hasAttribute('data-extrabottomoffset')){
-                currExtraBottomOffset = parseFloat(this.getAttribute('data-extrabottomoffset'));
-            }
-            // Target is the thing our sticky element is sticking within
-            var $target = $($this.attr('data-target'));
-            $target = $target.length > 0 ? $target : $(this.parentElement);
-            // Initiate materialize pushpin
-            $this.pushpin({
-                offset: currTopOffset,
-                top: $target.offset().top,
-                bottom: $target.offset().top + $target.outerHeight() - $this.height() - currExtraBottomOffset
-            });
+        var stickyBottomOffset = 0;
+        // Allow overriding of offset
+        if (elem.hasAttribute('data-offset')){
+            stickyTopOffset = parseFloat(elem.getAttribute('data-offset'));
+        }
+        if (elem.hasAttribute('data-extratopoffset')){
+            stickyTopOffset += parseFloat(elem.getAttribute('data-extratopoffset'));
+        }
+        if (elem.hasAttribute('data-extrabottomoffset')){
+            stickyBottomOffset = parseFloat(elem.getAttribute('data-extrabottomoffset'));
+        }
+        // Target is the thing our sticky element is sticking within
+        var $target = $($elem.attr('data-target'));
+        $target = $target.length > 0 ? $target : $(elem.parentElement);
+        $elem.pushpin({
+            offset: stickyTopOffset,
+            top: $target.offset().top,
+            bottom: $target.offset().top + $target.outerHeight() - $elem.height() - stickyBottomOffset
         });
     }
 
