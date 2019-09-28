@@ -35,38 +35,31 @@ get_header(); ?>
                         $projectPermalink = $jtzwpHelpers->getPostPermalink($post->ID);
                     ?>
                     <div class="col <?php echo $projectCountOnPage >=5 ? 's12 m6' : 's12 m12'; ?>">
-                        <div id="<?php echo the_ID(); ?>" class="projectItem full hoverable">
-                            <h2 class="projectItemTitle title"><a href="<?php echo the_permalink(); ?>" target="_self" class="hoverLinkOutlineThin"><?php echo the_title(); ?></a></h2>
-                            <!-- Project Link Area -->
-                            <div>
-                                <?php if($hasFeaturedImage): ?>
-                                    <a href="<?php echo $projectPermalink; ?>" target="_self" class="projectLinkWrapper">
-                                        <div class="projectLinkClickPrefix">Click here or the image below for the full project page!</div>
-                                    </a>
-                                    <a href="<?php echo $projectPermalink; ?>" target="_self" class="projectLinkWrapper">
-                                        <?php the_post_thumbnail('medium',array('class'=>'projectLinkClickArea')); ?>
-                                    </a>
-                                <?php else: ?>
-                                    <div class="projectLinkClickArea">
-                                        <a href="<?php echo $projectPermalink; ?>" target="_self" class="projectLinkWrapper">
-                                            <h3 style="padding:10px;">Click for Project Details!</h3>
-                                        </a>
+                        <a href="<?php echo the_permalink(); ?>" target="_self" class="projectItemWrapper">
+                            <div id="<?php echo the_ID(); ?>" class="projectItem full purpleHoverable jtzwpHoverable">
+                                <h2 class="projectItemTitle title"><?php echo the_title(); ?></h2>
+                                <!-- Project Link Area -->
+                                <div>
+                                    <?php if($hasFeaturedImage): ?>
+                                        <?php the_post_thumbnail('medium',array('class'=>'projectFeaturedImage')); ?>
+                                    <?php else: ?>
+                                        <h3 style="padding:10px;">Click for Project Details!</h3>
+                                    <?php endif; ?>
+                                </div>
+                                <!-- Project Excerpt Area -->
+                                <?php if($hasExcerpt): ?>
+                                    <div class="projectExcerptWrapper">
+                                        <p><?php echo get_the_excerpt(); ?></p>
+                                    </div>
+                                <?php endif; ?>
+                                <!-- Project Custom Content For Listing -->
+                                <?php if(get_field('custom_content_for_listing') && get_field('custom_content_for_listing')!==''): ?>
+                                    <div class="projectCustomContentForListingWrapper">
+                                        <?php echo get_field('custom_content_for_listing'); ?>
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <!-- Project Excerpt Area -->
-                            <?php if($hasExcerpt): ?>
-                                <div class="projectExcerptWrapper">
-                                    <p><?php echo get_the_excerpt(); ?></p>
-                                </div>
-                            <?php endif; ?>
-                            <!-- Project Custom Content For Listing -->
-                            <?php if(get_field('custom_content_for_listing') && get_field('custom_content_for_listing')!==''): ?>
-                                <div class="projectCustomContentForListingWrapper">
-                                    <?php echo get_field('custom_content_for_listing'); ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
+                        </a>
                     </div>
                 <?php
                 // End loop

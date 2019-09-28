@@ -75,6 +75,16 @@ body {
     outline-width: 10px;
     outline-offset: 8px;
 }
+.jtzwpHoverable {
+    -webkit-transition: -webkit-box-shadow .25s;
+    transition: -webkit-box-shadow .25s;
+    transition: box-shadow .25s;
+    transition: box-shadow .25s, -webkit-box-shadow .25s;
+}
+.purpleHoverable:hover {
+    -webkit-box-shadow: 0 8px 17px 0 rgba(25,0,252,0.2), 0 6px 20px 0 rgba(25,0,252,0.19);
+    box-shadow: 0 8px 17px 0 rgba(25,0,252,0.2), 0 6px 20px 0 rgba(25,0,252,0.19);
+}
 
 /** Theme Globals - blocks */
 .jtzwp-seethrough {
@@ -594,19 +604,6 @@ a.readMore {
     margin-left: auto;
     margin-right: auto;
     display: block;
-}
-.projectItem a > .projectLinkClickArea {
-    width: 100%;
-    max-width: 410px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-.projectItem .projectLinkClickArea:hover,.projectItem .projectLinkClickPrefix:hover{
-	outline-color: rgba(25,0,252,0.5);
-	outline-style:solid;
-	outline-width:20px;
-	outline-offset:-10px;
 }
 .projectExcerptWrapper {
 	padding-top:10px;
