@@ -81,6 +81,12 @@ body {
     transition: box-shadow .25s;
     transition: box-shadow .25s, -webkit-box-shadow .25s;
 }
+.jtzwpTransitionColor {
+    -webkit-transition: color .25s;
+    transition: color .25s;
+    transition: color .25s;
+    transition: color .25s, color .25s;
+}
 .purpleHoverable:hover {
     -webkit-box-shadow: 0 8px 17px 0 rgba(25,0,252,0.2), 0 6px 20px 0 rgba(25,0,252,0.19);
     box-shadow: 0 8px 17px 0 rgba(25,0,252,0.2), 0 6px 20px 0 rgba(25,0,252,0.19);
@@ -582,6 +588,9 @@ a.readMore {
 }
 .projectItem.half {
     width: 45%;
+}
+.projectItem:hover .projectItemTitle {
+    color: rgba(25,0,252,0.5);
 }
 .projectItemTitle {
     color: black;

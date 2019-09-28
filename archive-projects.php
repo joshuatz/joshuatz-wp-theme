@@ -37,7 +37,7 @@ get_header(); ?>
                     <div class="col <?php echo $projectCountOnPage >=5 ? 's12 m6' : 's12 m12'; ?>">
                         <a href="<?php echo the_permalink(); ?>" target="_self" class="projectItemWrapper">
                             <div id="<?php echo the_ID(); ?>" class="projectItem full purpleHoverable jtzwpHoverable">
-                                <h2 class="projectItemTitle title"><?php echo the_title(); ?></h2>
+                                <h2 class="projectItemTitle title jtzwpTransitionColor"><?php echo the_title(); ?></h2>
                                 <!-- Project Link Area -->
                                 <div>
                                     <?php if($hasFeaturedImage): ?>
