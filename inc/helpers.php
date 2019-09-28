@@ -1217,4 +1217,18 @@ class JtzwpHelpers {
             return strpos($tester,$input)!==false;
         }
     }
+
+    /**
+     * Dump a php var to the browser console as JSON encoded
+     * @param {any} $var
+     */
+    public function dumpAsJsonEncoded($var){
+        if ($this->isDebug){
+            ?>
+            <script>
+                console.log(<?php echo json_encode($var); ?>);
+            </script>
+            <?php
+        }
+    }
 }
