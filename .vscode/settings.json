@@ -1,0 +1,11 @@
+{
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.autoIndent": true,
+    "[php]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "vscode.php-language-features"
+    }
+}

@@ -19,10 +19,10 @@ function jtzwp_initial_settings_api_init(){
     register_setting('jtzwp_options_page','jtzwp_settings');
     // Add "general settings" group / section
     add_settings_section(
-		'jtzwp_general_settings_section', 
-		__( 'General Settings', 'wordpress' ), 
-		'jtzwp_section_description_echo_general_settings', 
-		'jtzwp_options_page'
+        'jtzwp_general_settings_section', 
+        __( 'General Settings', 'wordpress' ), 
+        'jtzwp_section_description_echo_general_settings', 
+        'jtzwp_options_page'
     );
     // Add "About Me" settings group / section
     add_settings_section(
@@ -33,11 +33,11 @@ function jtzwp_initial_settings_api_init(){
     );
 
     // General Settings - Google Analytics GAUID
-	add_settings_field(
-		'jtzwp_ga_gauid',
-		__( 'Google Analytics GA ID', 'wordpress' ),
-		'jtzwp_generic_text_field_render',
-		'jtzwp_options_page',
+    add_settings_field(
+        'jtzwp_ga_gauid',
+        __( 'Google Analytics GA ID', 'wordpress' ),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
         'jtzwp_general_settings_section',
         array(
             'jtzwp_ga_gauid'
@@ -45,11 +45,11 @@ function jtzwp_initial_settings_api_init(){
     );
 
     // General Settings - Global Opt Out Path
-	add_settings_field(
-		'jtzwp_global_optout_path',
-		__( 'OPTIONAL: Global tracking opt out page. If left blank, page will not be generated. Example: "global-opt-out-page"', 'wordpress' ),
-		'jtzwp_generic_text_field_render',
-		'jtzwp_options_page',
+    add_settings_field(
+        'jtzwp_global_optout_path',
+        __( 'OPTIONAL: Global tracking opt out page. If left blank, page will not be generated. Example: "global-opt-out-page"', 'wordpress' ),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
         'jtzwp_general_settings_section',
         array(
             'jtzwp_global_optout_path'
@@ -58,10 +58,10 @@ function jtzwp_initial_settings_api_init(){
 
     // General Settings - Webhook Key
     add_settings_field(
-		'jtzwp_webhook_key',
-		__( 'Random string for webhooks', 'wordpress' ),
-		'jtzwp_generic_text_field_render',
-		'jtzwp_options_page',
+        'jtzwp_webhook_key',
+        __( 'Random string for webhooks', 'wordpress' ),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
         'jtzwp_general_settings_section',
         array(
             'jtzwp_webhook_key'

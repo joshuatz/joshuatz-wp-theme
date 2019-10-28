@@ -3,6 +3,7 @@
 # Ignore scratch
 /scratch
 # vscode
-.vscode
+.vscode/*
+!.vscode/settings.json
 # Node
 node_modules

@@ -10,78 +10,78 @@
 ?>
 
 <div id='masthead' role='banner' class="mainNavContainerWrapper">
-  <div class="jtcontainer" id='mainNavContainer'>
-	<div class="jtnavbar jtnavbar-inverse">
-	  <div class="jtnavbar-inner">
-		<div class="btn-jtnavbar jtcollapsed" data-target='.nav-jtcollapse' data-toggle='jtcollapse' type='button'>
-            <svg enable-background="new 0 0 512 512" height="512px" id="Layer_1" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><rect height="64" width="256" x="128" y="320"/><rect height="64" width="256" x="128" y="224"/><path d="M480,0H32C14.312,0,0,14.312,0,32v448c0,17.688,14.312,32,32,32h448c17.688,0,32-14.312,32-32V32   C512,14.312,497.688,0,480,0z M448,448H64V64h384V448z"/><rect height="64" width="256" x="128" y="128"/></g></svg>
-		</div>
-		<div class="header" id='header'>
-		  <div class="widget Header" data-version='1' id='Header1'>
-			<div id='header-inner'>
-			  <div class="titlewrapper">
-				<div class="title">
-				  <a href='/'>Joshuatz.com</a>
+    <div class="jtcontainer" id='mainNavContainer'>
+        <div class="jtnavbar jtnavbar-inverse">
+            <div class="jtnavbar-inner">
+                <div class="btn-jtnavbar jtcollapsed" data-target='.nav-jtcollapse' data-toggle='jtcollapse' type='button'>
+                    <svg enable-background="new 0 0 512 512" height="512px" id="Layer_1" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><rect height="64" width="256" x="128" y="320"/><rect height="64" width="256" x="128" y="224"/><path d="M480,0H32C14.312,0,0,14.312,0,32v448c0,17.688,14.312,32,32,32h448c17.688,0,32-14.312,32-32V32   C512,14.312,497.688,0,480,0z M448,448H64V64h384V448z"/><rect height="64" width="256" x="128" y="128"/></g></svg>
                 </div>
-			  </div>
-			  <div class="descriptionwrapper">
-				<p class="description"></p>
-			  </div>
-			</div>
-		  </div>
-		</div>
-		<div class="nav-jtcollapse jtcollapse">
-		  <ul class="nav" id='menu-primary'>
-            <?php if(!is_front_page()): ?>
-			<li>
-			  <a href='/'>Home</a>
-            </li>
-            <?php endif; ?>
-			<li>
-            <?php
-                // The business card materialize modal can really only be reliably shown on WP pages, so change to link to homepage and about popup if on non wp
-                $aboutMeLink = $jtzwpHelpers->isPageWP()===true ? '#businessCardMaterializeModal' : '/#businessCardMaterializeModal';
-                $aboutMeTarget = $jtzwpHelpers->isPageWP()===true ? '_self' : '_blank';
-            ?>
-            <?php if(!is_front_page()): ?>
-              <a href="<?php echo $aboutMeLink; ?>" id="linkedIn" class="modal-trigger" target="<?php echo $aboutMeTarget; ?>" ga-on="click" ga-event-category="Social" ga-event-label="About Me Click">About / Contact</a>
-            <?php endif; ?>
-			</li>
-			<li class="dropdown">
-			  <a class="dropdown-toggle" data-toggle='dropdown' href='#'>Projects</a>
-			  <ul class="dropdown-menu">
-                <li class="dropdown">
-                    <a href="/projects/">All</a>
-                </li>
-                <?php foreach($projectTerms as $projectTerm): ?>
-                    <li class="dropdown">
-                        <a href="<?php echo get_term_link($projectTerm);?>">|--> <?php echo $projectTerm->name; ?></a>
-                    </li>
-                <?php endforeach; ?>
-			  </ul>
-            </li>
-            <li>
-                <a href="/custom-tools/">Custom Developed Tools</a>
-            </li>
-            <li>
-                <a href="/blog/">Blog</a>
-            </li>
-		  </ul>
-		</div>
-        <div id="nav-search-wrapper">
-            <div class="bl_search nav-jtcollapse jtcollapse">
-                <div class="siteSearchWrapper">
-                    <form id="siteSearchForm">
-                        <input type="text" class="siteSearchInput" autocomplete="off" placeholder="search" />
-                    </form>
+                <div class="header" id='header'>
+                    <div class="widget Header" data-version='1' id='Header1'>
+                        <div id='header-inner'>
+                            <div class="titlewrapper">
+                                <div class="title">
+                                    <a href='/'>Joshuatz.com</a>
+                                </div>
+                            </div>
+                            <div class="descriptionwrapper">
+                                <p class="description"></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="nav-jtcollapse jtcollapse">
+                    <ul class="nav" id='menu-primary'>
+                        <?php if(!is_front_page()): ?>
+                        <li>
+                            <a href='/'>Home</a>
+                        </li>
+                        <?php endif; ?>
+                        <li>
+                            <?php
+                            // The business card materialize modal can really only be reliably shown on WP pages, so change to link to homepage and about popup if on non wp
+                            $aboutMeLink = $jtzwpHelpers->isPageWP()===true ? '#businessCardMaterializeModal' : '/#businessCardMaterializeModal';
+                            $aboutMeTarget = $jtzwpHelpers->isPageWP()===true ? '_self' : '_blank';
+                            ?>
+                            <?php if(!is_front_page()): ?>
+                                <a href="<?php echo $aboutMeLink; ?>" id="linkedIn" class="modal-trigger" target="<?php echo $aboutMeTarget; ?>" ga-on="click" ga-event-category="Social" ga-event-label="About Me Click">About / Contact</a>
+                            <?php endif; ?>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle='dropdown' href='#'>Projects</a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown">
+                                    <a href="/projects/">All</a>
+                                </li>
+                                <?php foreach($projectTerms as $projectTerm): ?>
+                                <li class="dropdown">
+                                    <a href="<?php echo get_term_link($projectTerm);?>">|--> <?php echo $projectTerm->name; ?></a>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/custom-tools/">Custom Developed Tools</a>
+                        </li>
+                        <li>
+                            <a href="/blog/">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="nav-search-wrapper">
+                    <div class="bl_search nav-jtcollapse jtcollapse">
+                        <div class="siteSearchWrapper">
+                            <form id="siteSearchForm">
+                                <input type="text" class="siteSearchInput" autocomplete="off" placeholder="search" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="fullHeightEnd" style="height:100%; width:1px;"></div>
             </div>
         </div>
-        <div class="fullHeightEnd" style="height:100%; width:1px;"></div>
-	  </div>
-	</div>
-  </div>
-  <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
 </div>
 
 <!-- Scripts -->
@@ -110,8 +110,7 @@ var G = "/", C = location.href, H, D, B, F;
 !function(a) {
     var b = function(b) {
         this.element = a(b)
-    }
-    ;
+    };
     b.prototype = {
         constructor: b,
         show: function() {
@@ -159,14 +158,12 @@ var G = "/", C = location.href, H, D, B, F;
             e || d.data("tab", e = new b(this)),
             typeof c == "string" && e[c]()
         })
-    }
-    ,
+    },
     a.fn.tab.Constructor = b,
     a.fn.tab.noConflict = function() {
         return a.fn.tab = c,
         this
-    }
-    ,
+    },
     a(document).on("click.tab.data-api", '[data-toggle="tab"], [data-toggle="pill"]', function(b) {
         b.preventDefault(),
         a(this).tab("show")
@@ -256,8 +253,7 @@ var G = "/", C = location.href, H, D, B, F;
     a.fn.jtcollapse.noConflict = function() {
         return a.fn.jtcollapse = c,
         this
-    }
-    ,
+    },
     a(document).on("click.jtcollapse.data-api", "[data-toggle=jtcollapse]", function(b) {
         var c = a(this), d, e = c.attr("data-target") || (b.preventDefault() || (d = c.attr("href")) && d.replace(/.*(?=#[^\s]+$)/, "")), f = a(e).data("jtcollapse") ? "toggle" : c.data();
         c[a(e).hasClass("in") ? "addClass" : "removeClass"]("jtcollapsed"),
