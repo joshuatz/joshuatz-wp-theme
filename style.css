@@ -461,6 +461,9 @@ pre.wrap, pre.wrap > code, pre.noScroll, pre.noScroll > code {
     white-space: pre-wrap;
 }
 /* Fix for content overflowing the body */
+.entry-content code, .entry-content pre {
+    overflow-wrap: break-word;
+}
 .entry-content p > iframe {
     max-width: 100%;
 }
