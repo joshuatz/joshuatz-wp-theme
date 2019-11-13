@@ -26,6 +26,10 @@ body {
     margin: 0px;
     font-family: 'lato',sans-serif;
 }
+/** All links */
+body a {
+    color: #7326ce;
+}
 
 /** Theme globals - reusable color classes */
 .jtzwp-salmon {
@@ -904,6 +908,10 @@ a.readMore {
     font-size: 1.1em;
     position: relative;
 }
+.businessCard .textWrapper a {
+    text-underline-offset: 2px;
+    text-decoration: underline;
+}
 .modal-content .businessCard {
     width: 80%;
 }
@@ -1274,6 +1282,9 @@ a.readMore {
     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
     *zoom: 1
+}
+.jtnavbar-inner a {
+    color: white;
 }
 
 .jtnavbar-inner:before, .jtnavbar-inner:after {
