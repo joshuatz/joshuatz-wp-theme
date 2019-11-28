@@ -231,6 +231,12 @@ a > img.alignCenter, a > img.aligncenter {
     padding-left: 16px;
     padding-top: 3px;
 }
+/* Auto-center post images, but Don't apply fix for those images with a class */
+.entry-content p > img:not([class*=""]) {
+    margin: auto;
+    display: block;
+}
+
 /** Nav stuff */
 #wpadminbar {
     position: fixed !important;
@@ -478,6 +484,11 @@ pre.wrap, pre.wrap > code, pre.noScroll, pre.noScroll > code {
 .entry-content p > iframe {
     max-width: 100%;
 }
+/* Don't overflow images */
+.entry-content p > img  {
+    max-width: 100%;
+}
+
 .entry-content pre {
     max-width: 100%;
     overflow-x: auto;
@@ -1487,8 +1498,6 @@ a.readMore {
     display: block
 }
 .jtnavbar-inverse .nav>li>a {
-    
-    
     text-shadow: none
 }
 
