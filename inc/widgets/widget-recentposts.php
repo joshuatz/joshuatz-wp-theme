@@ -58,7 +58,7 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
         ?>
         <?php /* Now output the actual inner widget content */ ?>
             <div class="widgetBody">
-                <ul class="collapsible postsDrawer">
+                <ul class="collapsible postsDrawer" tabindex="0">
                 <?php $counter = 0; ?>
                 <?php foreach($postsQuery->posts as $recentPost): ?>
                     <?php

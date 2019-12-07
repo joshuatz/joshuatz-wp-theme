@@ -5,6 +5,7 @@
 ?>
 <?php session_start(); ?>
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <!--Let browser know website is optimized for mobile-->

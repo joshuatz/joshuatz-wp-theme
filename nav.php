@@ -72,7 +72,7 @@
                     <div class="bl_search nav-jtcollapse jtcollapse">
                         <div class="siteSearchWrapper">
                             <form id="siteSearchForm">
-                                <input type="text" class="siteSearchInput" autocomplete="off" placeholder="search" />
+                                <input type="text" class="siteSearchInput" autocomplete="off" placeholder="search" aria-label="Site search box" />
                             </form>
                         </div>
                     </div>
