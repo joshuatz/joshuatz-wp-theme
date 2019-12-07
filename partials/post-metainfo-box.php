@@ -10,7 +10,7 @@
 ?>
 <?php if(get_field('show_meta_info_box')!==false): ?>
 <div class="expandablePostDetailsSection postDetailsSection">
-    <ul class="collapsible">
+    <ul class="collapsible" tabindex="0" aria-label="Click to expand post meta info section">
         <!-- Disclaimers -->
         <?php if(jtzwp_get_disclaimer()): ?>
             <li class="active">

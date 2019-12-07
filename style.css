@@ -808,7 +808,9 @@ a.readMore {
 #wordpress-comments .children li {
     margin: 20px 0px;
 }
-
+#wordpress-comments label {
+    color: #2e3641;
+}
 /**
 * Widget Area - under post sidebar
 */
@@ -954,7 +956,6 @@ a.readMore {
     min-height: 1px;
     position: relative;
     text-align: center;
-    z-index: 999;
     float: left;
     margin-bottom: -1px;
     margin-top: -1px;
