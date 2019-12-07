@@ -28,7 +28,7 @@
                 <?php 
                     $secDelay = 0.5;
                     $homepageButtonsMisc = array(
-                        array('link'=>'/custom-tools/','text'=>'Custom Developed Tools'),
+                        array('link'=>'/custom-tools/','text'=>'One-Off Tools'),
                         array('link'=>'/blog/','text'=>'Blog')
                     );
                     $homepageButtonsProjects = array();
