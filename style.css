@@ -457,12 +457,13 @@ h1,h2 {
     color: black;
     padding: 2px 0px 2px 10px;
 }
+/** <code>, but not inside pre, not prism */
 :not(pre) > code:not([class*="language-"]) {
     padding: 0px 2px 0px 2px;
     margin: 0px 1px 0px 1px;
     border-radius: 6px;
-    background-color: black;
-    color:white;
+    font-weight: bold;
+    color: #2d512d;
 }
 /* Emulate z-depth-3 on all code blocks */
 article pre {
