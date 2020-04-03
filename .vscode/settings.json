@@ -2,10 +2,10 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "editor.detectIndentation": false,
-    "editor.formatOnSave": true,
-    "editor.autoIndent": true,
+    "editor.autoIndent": "advanced",
     "[php]": {
         "editor.tabSize": 4,
-        "editor.defaultFormatter": "vscode.php-language-features"
+        "editor.defaultFormatter": "vscode.php-language-features",
+        "editor.formatOnSave": true
     }
 }

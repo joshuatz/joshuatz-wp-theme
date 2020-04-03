@@ -349,8 +349,10 @@
 
         // PrismJS
         if (typeof(PrismToolbar)==='function'){
-            window.jPrismToolbar = new PrismToolbar();
-            jPrismToolbar.autoInit();
+            window.jPrismToolbar = new PrismToolbar({
+                autoFix: true
+            });
+            jPrismToolbar.autoInitAll();
         }
 
         // Geo-Content Filtered
