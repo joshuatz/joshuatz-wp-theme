@@ -352,7 +352,10 @@
             window.jPrismToolbar = new PrismToolbar({
                 autoFix: true
             });
-            jPrismToolbar.autoInitAll();
+            setTimeout(() => {
+                // Let prism load
+                jPrismToolbar.autoInitAll();
+            }, 500);
         }
 
         // Geo-Content Filtered
