@@ -91,6 +91,13 @@ strong {
 }
 
 /**
+* Page Navigation
+*/
+.materializePaginationWrapper .pageNavBlock {
+    margin: 4px 10px;
+}
+
+/**
 * Main Materialize Breakpoints
 */
 /** First breakpoint, .s */

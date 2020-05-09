@@ -6,11 +6,22 @@ Custom WordPress theme for joshuatz.com
 ### Building
  - Vendored assets are bundled using gulp. `gulp` or `npm run build` should produce the files, which are checked into git, so they can be pre-built for WP.
      - Currently, this is also dependent on the jPrismToolbar submodule already being installed (see below)
+
 ### Install
  - There is currently no real setup required other than activating the theme
  - To use jPrismToolbar, currently you need to use the submodule
      - On initial cloning of the whole repo, you after need to run (once):
          - `git submodule init && git submodule update`
+
+### Page Setup
+If you want a homepage, and blog page (e.g. `Posts Page`), you can set those up by creating blank pages under `Pages`, and then heading to `Settings -> Reading`, and setting the pages you created as the static pages to display.
+
+> This is also where you can control some related settings, like how many posts show up, per page, on the blog archive / `Posts Page`
+
+The theme has templates to handle both those pages.
+
+You can read detailed instructions on how to do that [here](https://www.wpbeginner.com/wp-tutorials/how-to-create-a-separate-page-for-blog-posts-in-wordpress/).
+
 ### Optional Settings
 
  - Optional settings:

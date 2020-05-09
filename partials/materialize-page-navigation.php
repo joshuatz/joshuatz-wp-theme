@@ -21,15 +21,15 @@
         <div class="materializePaginationWrapper valign-wrapper center">
             <?php if($hasPrevPage): ?>
                 <div class="col s12 <?php echo 'm' . 12/$columnCount; ?> prevPage">
-                    <a class="waves-effect btn btn-large jtzwp-lightblue z-depth-4" href="<?php echo $prevPageLink; ?>"><i class="material-icons left">chevron_left</i>Previous Page</a>
+                    <a class="waves-effect btn btn-large jtzwp-lightblue z-depth-4 pageNavBlock" href="<?php echo $prevPageLink; ?>"><i class="material-icons left">chevron_left</i>Previous Page</a>
                 </div>
             <?php endif; ?>
             <div class="col s12 <?php echo 'm' . 12/$columnCount; ?> pageCounter center">
-                <div class="card-panel jtzwp-lightblue z-depth-4" style="width:80%; margin:auto;">Page #<?php echo $currentPageNum; ?> / <?php echo $totalNumPages; ?></div>
+                <div class="card-panel jtzwp-lightblue z-depth-4 pageNavBlock">Page #<?php echo $currentPageNum; ?> / <?php echo $totalNumPages; ?></div>
             </div>
             <?php if($hasNextPage): ?>
                 <div class="col s12 <?php echo 'm' . 12/$columnCount; ?> nextPage">
-                    <a class="waves-effect btn btn-large jtzwp-lightblue z-depth-4" href="<?php echo $nextPageLink; ?>"><i class="material-icons right">chevron_right</i>Next Page</a>
+                    <a class="waves-effect btn btn-large jtzwp-lightblue z-depth-4 pageNavBlock" href="<?php echo $nextPageLink; ?>"><i class="material-icons right">chevron_right</i>Next Page</a>
                 </div>
             <?php endif; ?>
         </div>
