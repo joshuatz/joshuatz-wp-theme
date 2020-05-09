@@ -4,7 +4,7 @@
  * Materialize themed share buttons widget
  */
 
- class JTZWP_ShareButtons_Widget extends WP_Widget {
+class JTZWP_ShareButtons_Widget extends WP_Widget {
     public function __construct(){
         $widgetConfig = (object) array(
             'id' => 'jtzwp_shareButtons',
@@ -35,6 +35,7 @@
         $useLinkedin = $this->_retrieveBool('useLinkedin',$instance,false);
         $usePocket = $this->_retrieveBool('usePocket',$instance,false);
         $useReddit = $this->_retrieveBool('useReddit',$instance,false);
+        $twitterHandle = !empty($instance['twitterHandle']) ? $instance['twitterHandle'] : false;
         // @todo ?
         $useFacebook = false;
 
@@ -64,7 +65,15 @@
                         <?php $this->_renderShareButton('mailto:?to=&body='.urlencode($postInfo->permalink).'&subject='.urlencode('Check out this link!'),'Email',null,'email'); ?>
                     <?php endif; ?>
                     <?php if ($useTwitter): ?>
-                        <?php $this->_renderShareButton('https://twitter.com/intent/tweet?url='.urlencode($postInfo->permalink).'&text=%20-%20','Twitter','fa-twitter',null); ?>
+                        <?php
+                            $twitterText = $postInfo->title;
+                            if ($twitterHandle) {
+                                $twitterText = $twitterText . ', by ' . $twitterHandle;
+                            }
+                            // Twitter will add space before URL
+                            $twitterText = $twitterText . ' -';
+                        ?>
+                        <?php $this->_renderShareButton('https://twitter.com/intent/tweet?url='.urlencode($postInfo->permalink).'&text='.urlencode($twitterText),'Twitter','fa-twitter',null); ?>
                     <?php endif; ?>
                     <?php if ($useLinkedin): ?>
                         <?php
@@ -97,6 +106,8 @@
         $useLinkedin = isset($instance['useLinkedin']) ? (bool) $instance['useLinkedin'] : false;
         $usePocket = isset($instance['usePocket']) ? (bool) $instance['usePocket'] : false;
         $useReddit = isset($instance['useReddit']) ? (bool) $instance['useReddit'] : false;
+        // Vendor specific settings
+        $twitterHandle = isset($instance['twitterHandle']) ? esc_attr($instance['twitterHandle']) : '';
         ?>
         <?php /* Output the actual form HTML */ ?>
             <!-- Title -->
@@ -111,6 +122,11 @@
             <?php $this->_generateCheckbox('useLinkedin',$useLinkedin,'LinkedIn'); ?>
             <?php $this->_generateCheckbox('usePocket',$usePocket,'Pocket'); ?>
             <?php $this->_generateCheckbox('useReddit',$useReddit,'Reddit'); ?>
+            <p>Vendor Specific Settings:</p>
+            <p>
+                <label for="<?php echo $this->get_field_id('twitterHandle'); ?>"><?php _e('Twitter Handle : '); ?></label>
+                <input class="widefat" id="<?php echo $this->get_field_id('cityFilter'); ?>" name="<?php echo $this->get_field_name('twitterHandle'); ?>" type="text" value="<?php echo $twitterHandle; ?>" />
+            </p>
         <?php /* End form */ ?>
         <?php
     }
@@ -157,5 +173,6 @@
             </div>
         <?php
     }
- }
- add_action('widgets_init',function(){register_widget('JTZWP_ShareButtons_Widget');});
+}
+
+add_action('widgets_init',function(){register_widget('JTZWP_ShareButtons_Widget');});
