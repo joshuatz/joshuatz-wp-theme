@@ -10,7 +10,7 @@ $pageTitle = 'Blog / Misc.';
 
 <main id="main" role="main">
     <?php get_sidebar('everypagetop'); ?>
-    <?php $jtzwpHelpers->includeTemplatePart('generic-archive-template',array(
+    <?php $jtzwpHelpers->includeTemplatePart('partials/generic-archive-template',array(
         'pageDescription' => $pageDescription,
         'pageTitle' => $pageTitle
     ));?>

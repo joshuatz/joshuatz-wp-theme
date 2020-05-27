@@ -1,3 +1,7 @@
+<?php
+global $jtzwpHelpers;
+?>
+
 <div class="archiveContent">
     <?php if(have_posts()): ?>
         <div class="pageHeaderSection">

@@ -9,7 +9,7 @@ get_header(); ?>
 ?>
 <main id="main" role="main">
     <?php get_sidebar('everypagetop'); ?>
-    <?php get_template_part('generic-archive-template'); ?>
+    <?php get_template_part('partials/generic-archive-template'); ?>
 </main>
 
 <?php get_footer(); ?>
