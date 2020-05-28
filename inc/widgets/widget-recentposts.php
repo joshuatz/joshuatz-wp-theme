@@ -34,16 +34,6 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
         $showViewAllButton = $instance['showViewAllButton'] ? true : false;
         $viewAllButtonLink = apply_filters('viewAllButtonLink', $instance['viewAllButtonLink']);
 
-        $dbgObj = (object) array(
-            'instance' => $instance,
-            'widgetTitle' => $widgetTitle,
-            'numberOfPosts' => $numberOfPosts,
-            'restrictToBlog' => $restrictToBlog,
-            'showViewAllButton' => $showViewAllButton,
-            'viewAllButtonLink' => $viewAllButtonLink
-        );
-        var_dump($dbgObj);
-
         // Get posts and check to make sure there are some
         $queryOptions = array(
             'posts_per_page' => intval($numberOfPosts),
