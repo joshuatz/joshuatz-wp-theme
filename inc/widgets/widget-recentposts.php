@@ -30,7 +30,19 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
         extract($args);
         $widgetTitle = apply_filters('widget_title',$instance['title']);
         $numberOfPosts = !empty($instance['numberOfPosts']) ? abs(intval($instance['numberOfPosts'])) : 5;
-        $restrictToBlog = (!empty($instance['restrictToBlog']) && gettype($instance['restrictToBlog'])==='boolean') ? $instance['restrictToBlog'] : false;
+        $restrictToBlog = $instance['restrictToBlog'] ? true : false;
+        $showViewAllButton = $instance['showViewAllButton'] ? true : false;
+        $viewAllButtonLink = apply_filters('viewAllButtonLink', $instance['viewAllButtonLink']);
+
+        $dbgObj = (object) array(
+            'instance' => $instance,
+            'widgetTitle' => $widgetTitle,
+            'numberOfPosts' => $numberOfPosts,
+            'restrictToBlog' => $restrictToBlog,
+            'showViewAllButton' => $showViewAllButton,
+            'viewAllButtonLink' => $viewAllButtonLink
+        );
+        var_dump($dbgObj);
 
         // Get posts and check to make sure there are some
         $queryOptions = array(
@@ -80,6 +92,13 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
                 <?php endforeach; ?>
                 </ul>
             </div>
+            <div class="widgetFooter row">
+                <?php if($showViewAllButton && !empty($viewAllButtonLink)): ?>
+                    <div class="col s4 offset-s8">
+                        <a class="btn waves-effect readMore jtzwp-dark" href="<?php echo $viewAllButtonLink; ?>">View All Posts</a>
+                    </div>
+                <?php endif; ?>
+            </div>
         <?php /* END inner widget content */ ?>
         <?php echo $after_widget;
 
@@ -92,6 +111,8 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : '';
         $numberOfPosts = isset($instance['numberOfPosts']) ? abs(intval($instance['numberOfPosts'])) : 5;
         $restrictToBlog = isset($instance['restrictToBlog']) ? (bool) $instance['restrictToBlog'] : false;
+        $showViewAllButton = isset($instance['showViewAllButton']) ? (bool) $instance['showViewAllButton'] : false;
+        $viewAllButtonLink = isset($instance['viewAllButtonLink']) ? esc_attr($instance['viewAllButtonLink']) : '';
         ?>
         <?php /* Ouptut the actual form HTML */ ?>
             <!-- Title -->
@@ -108,6 +129,16 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
             <p>
                 <label for="<?php echo $this->get_field_id('numberOfPosts'); ?>"><?php _e('Number of Posts to Show : '); ?></label>
                 <input class="widefat" id="<?php echo $this->get_field_id('numberOfPosts'); ?>" name="<?php echo $this->get_field_name('numberOfPosts'); ?>" type="number" step="1" min="1" value="<?php echo $numberOfPosts; ?>" />
+            </p>
+            <!-- Show All Posts - Show Button? -->
+            <p>
+                <input class="checkbox" type="checkbox"<?php checked($showViewAllButton);?> id="<?php echo $this->get_field_id('showViewAllButton'); ?>" name="<?php echo $this->get_field_name('showViewAllButton'); ?>" />
+                <label for="<?php echo $this->get_field_id('showViewAllButton'); ?>"><?php _e('Show "View All Posts" button?'); ?></label>
+            </p>
+            <!-- Show All Posts - Button Link Target -->
+            <p>
+                <label for="<?php echo $this->get_field_id('viewAllButtonLink'); ?>"><?php _e('View All - Link Target : '); ?></label>
+                <input class="widefat" id="<?php echo $this->get_field_id('viewAllButtonLink'); ?>" name="<?php echo $this->get_field_name('viewAllButtonLink'); ?>" type="url" value="<?php echo $viewAllButtonLink; ?>" />
             </p>
         <?php
     }
