@@ -41,6 +41,19 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
             'order' => 'DESC',
             'orderby' => 'publish_date',
             'post_type' => $restrictToBlog ? array('post') : array('any'),
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key' => 'suppress_from_results',
+                    'value' => '',
+                    'compare' => 'NOT EXISTS'
+                ),
+                array(
+                    'key' => 'suppress_from_results',
+                    'value' => true,
+                    'compare' => '!='
+                ),
+            ),
             'suppress_filters' => true
         );
         $postsQuery = new WP_Query($queryOptions);

@@ -18,6 +18,19 @@ $queryOptions = array(
     'order' => 'DESC',
     'orderby' => 'publish_date',
     'post_type' => array('any'),
+    'meta_query' => array(
+        'relation' => 'OR',
+        array(
+            'key' => 'suppress_from_results',
+            'value' => '',
+            'compare' => 'NOT EXISTS'
+        ),
+        array(
+            'key' => 'suppress_from_results',
+            'value' => true,
+            'compare' => '!='
+        ),
+    ),
     'suppress_filters' => true,
     'paged' => $pageNum
 );

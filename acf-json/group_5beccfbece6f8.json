@@ -300,6 +300,25 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5ecf6bd0f3b49",
+            "label": "Suppress From Results",
+            "name": "suppress_from_results",
+            "type": "true_false",
+            "instructions": "If true, will hide post\/page\/etc from \"recent posts\" widgets, generic archive pages, and more. Use carefully!!!",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -326,5 +345,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1544221826
+    "modified": 1590651978
 }
