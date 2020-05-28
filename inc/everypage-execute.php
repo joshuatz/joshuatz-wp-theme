@@ -15,15 +15,17 @@
 <?php if($jtzwpHelpers->isDebug): ?>
     <script>window.isDebug = true;</script>
     <script>
-        console.group('WordPress Info');
-            console.log(<?php echo json_encode($wp_query); ?>);
-            console.log('WordPress Template: ' + '<?php echo $jtzwpHelpers->getCurrentThemeFile(); ?>');
-        console.groupEnd();
+        const $wp_query = <?php echo json_encode($wp_query); ?>;
+        const postInfo = <?php echo json_encode($jtzwpHelpers->getBasicPostInfo(null)); ?>;
+        const currentThemeFile = '<?php echo $jtzwpHelpers->getCurrentThemeFile(); ?>';
+        console.log('WordPress Info', {
+            $wp_query,
+            postInfo,
+            currentThemeFile
+        });
     </script>
     <script>
-        console.group('URL Info');
-            console.log(<?php echo json_encode($jtzwpHelpers->getUrlInfo()); ?>);
-        console.groupEnd();
+        console.log('URL Info', <?php echo json_encode($jtzwpHelpers->getUrlInfo()); ?>);
     </script>
 <?php endif; ?>
 

@@ -622,6 +622,7 @@ class JtzwpHelpers {
                 'hasFeaturedImage' => has_post_thumbnail($id),
                 'hasShadow' => $this->featuredImageHasShadow($id)
             ),
+            'templateSlug' => get_page_template_slug($id),
             'date' => (object) array(
                 'published' => $this->wpDateToDateTime(get_the_date('',$post)),
                 'age' => (object) array(
