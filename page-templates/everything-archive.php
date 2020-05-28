@@ -9,6 +9,8 @@ global $jtzwpHelpers;
 // Get info about page itself
 $pageInfo = $jtzwpHelpers->getBasicPostInfo(null);
 
+$pageNum = get_query_var('paged') ? get_query_var('paged') : 1;
+
 // Get ALL posts (blog posts, projects, anything else)
 $queryOptions = array(
     'posts_per_page' => 10,
@@ -16,7 +18,8 @@ $queryOptions = array(
     'order' => 'DESC',
     'orderby' => 'publish_date',
     'post_type' => array('any'),
-    'suppress_filters' => true
+    'suppress_filters' => true,
+    'paged' => $pageNum
 );
 // Set global query variable
 query_posts($queryOptions);
