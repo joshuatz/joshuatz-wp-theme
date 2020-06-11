@@ -97,7 +97,7 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
             </div>
             <div class="widgetFooter row">
                 <?php if($showViewAllButton && !empty($viewAllButtonLink)): ?>
-                    <div class="col s4 offset-s8">
+                    <div class="col s6 offset-s6 m4 offset-m8">
                         <a class="btn waves-effect readMore jtzwp-dark" href="<?php echo $viewAllButtonLink; ?>">View All Posts</a>
                     </div>
                 <?php endif; ?>
