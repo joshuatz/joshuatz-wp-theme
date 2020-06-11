@@ -59,6 +59,9 @@ body a {
     background-color: #2E3641 !important;
     color: white !important;
 }
+.jtzwp-dark a, .jtzwp-darkblue a {
+    color: #be97ec;
+}
 .jtzwp-error {
     background-color: #F69087 !important;
     color: white !important;
