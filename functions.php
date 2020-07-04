@@ -102,20 +102,20 @@ function joshuatzwp_styles_for_admin(){
 
 function joshuatzwp_scripts() {
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
-    wp_enqueue_script('jquery-3','https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',array(),false,true);
+    wp_enqueue_script('jquery-3','https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',array(),false,true);
     // Helpers
     wp_enqueue_script('helpers-js',$themeIncURL.'/helpers.js',array('jquery-3'),false,false);
 }
 
 function joshuatzwp_scripts_footer(){
-    global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
+    global $themeLibURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // Vendored JS (materializeCSS, prismToolbar, wowjs, masonry, clipboard, fancybox3)
     wp_enqueue_script('vendor-js',$themeLibURL.'/vendor.min.js',array('jquery-3'),$cacheBustStamp,true);
     // Main JS
     wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js'),$cacheBustStamp,true);
     // Prism JS
     $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.js');
-    wp_enqueue_script_special('prism-js',$prismJsFilePath,array(),false,false,'defer');
+    wp_enqueue_script_special('prism-js',$prismJsFilePath,array(),false,false,'async');
 }
 
 function joshuatzwp_scripts_admin(){
