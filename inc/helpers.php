@@ -958,6 +958,9 @@ class JtzwpHelpers {
      * @param {string} $value - The value to check if valid for the setting
      */
     public function validateThemeUserSetting($key,$val){
+        if (!isset($val)) {
+            return false;
+        }
         if ($val!==''){
             if (isset($this->themeUserSettingsValidations[$key])){
                 return preg_match($this->themeUserSettingsValidations[$key],$val);

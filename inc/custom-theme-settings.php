@@ -140,6 +140,18 @@ function jtzwp_initial_settings_api_init(){
         )
     );
 
+    // About Me - Stack Overflow URL
+    add_settings_field(
+        'jtzwp_about_me_stackoverflow_url',
+        __( 'Stack Overflow Profile URL','wordpress'),
+        'jtzwp_generic_text_field_render',
+        'jtzwp_options_page',
+        'jtzwp_about_me_settings_section',
+        array(
+            'jtzwp_about_me_stackoverflow_url'
+        )
+    );
+
     // About Me - Birthday
     add_settings_field(
         'jtzwp_about_me_birthdate',
