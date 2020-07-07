@@ -587,19 +587,24 @@ class JtzwpHelpers {
 
     /**
      * If you are unsure if passed arg was postID or post obj, pass it through this function to make sure you are getting post obj
+     *  - Can also be used to get current post / page / etc.
      */
-    public function getPostByMixed($postOrPostId){
+    public function getPostByMixed($postOrPostId = null){
         global $post;
         if (gettype($postOrPostId)==='integer'){
             return get_post($postOrPostId);
         }
-        else if (!(isset($postOrPostId)) && isset($post)){
+        else if (!(isset($postOrPostId))){
             // Try to retrive global post object
-            return $post;
+            if (is_single() && isset($post)) {
+                return $post;
+            } else {
+                $itemObj = get_queried_object();
+                return $itemObj;
+            }
         }
-        else {
-            return $postOrPostId;
-        }
+
+        return $postOrPostId;
     }
 
     /**
@@ -741,11 +746,6 @@ class JtzwpHelpers {
             $formattedDiff = $diffInterval;
         }
         return $formattedDiff;
-    }
-
-    public function getCurrPost(){
-        $currPost = isset($post) ? $post : get_post();
-        return $currPost;
     }
 
     public function getTagsInfoArrs(){

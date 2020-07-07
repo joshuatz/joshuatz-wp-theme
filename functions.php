@@ -326,14 +326,16 @@ function jtzwp_yoast_save_meta_val($postId,$metaKey,$metaVal){
         },11);
     }
 }
+
 function jtzwp_yoast_var_replacement__jtzwp_description($varName){
     global $jtzwpHelpers;
+    $item = $jtzwpHelpers->getPostByMixed();
     // Lower
     $metaDescription = '';
-    if (is_single() && get_field('custom_seo_meta_description') && get_field('custom_seo_meta_description')!==''){
-        $metaDescription = get_field('custom_seo_meta_description');
+    if (get_field('custom_seo_meta_description', $item->ID)){
+        $metaDescription = get_field('custom_seo_meta_description', $item->ID);
     }
-    else if (!is_single() && term_description() && term_description()!==''){
+    else if (!is_single() && term_description()){
         $metaDescription = strip_tags(term_description());
     }
     else if (!is_single() && get_post_type()===$jtzwpHelpers::PROJECTS_POST_TYPE){
@@ -342,7 +344,7 @@ function jtzwp_yoast_var_replacement__jtzwp_description($varName){
         $metaDescription = 'Projects using the ' . strtolower(single_cat_title('',false)) . ' skills of ' . $name;
     }
     else {
-        $metaDescription = get_the_excerpt();
+        $metaDescription = $jtzwpHelpers->getPostExcerpt($item);
     }
     return $metaDescription;
 }
@@ -360,6 +362,9 @@ function jtzwp_yoast_var_replacement__jtzwp_keywords($varName){
     }
     return $keywordsCommaSep;
 }
+/**
+ * To have the functions kick in, make sure you go to the Yoast settings page, and use the variables by pasting / typing in the macro - e.g. `%%jtzwp_description%%` - into the box where you want to use it
+ */
 function jtzwp_register_yoast_extra_vars(){
     wpseo_register_var_replacement('%%jtzwp_description%%','jtzwp_yoast_var_replacement__jtzwp_description','advanced','Generated description based on ACF');
     wpseo_register_var_replacement('%%jtzwp_keywords%%','jtzwp_yoast_var_replacement__jtzwp_keywords','advanced','Generated keywords based on ACF and post');
