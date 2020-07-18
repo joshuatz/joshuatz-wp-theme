@@ -951,7 +951,7 @@ a.readMore {
     font-size: large;
 }
 .businessCard .linksAndDetailsSection i.fa {
-    font-size: x-large;
+    font-size: 24px;
 }
 .businessCard .linksAndDetailsSection .iconWrapper {
     display: inline-block;
