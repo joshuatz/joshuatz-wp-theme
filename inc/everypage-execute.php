@@ -93,7 +93,7 @@
     <script>
         (function($){
             $(document).ready(function(){
-                helpers.setCookie('jtzwpKnownUser','true',365);
+                helpers.setCookie('jtzwpKnownUser','true',365,'Lax');
             });
         })(jQuery)
     </script>
