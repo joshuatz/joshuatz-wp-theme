@@ -252,6 +252,7 @@ function jtzwp_template_include_hook($template){
         echo json_encode($postDeployActionsResults);
         exit();
     }
+    // Opt out URL
     else if ($currentUrlInfo['path']==='/'.$generatedOptOutPath.'/' || $currentUrlInfo['path']==='/'.$generatedOptOutPath){
         // Prevent 404
         $wp_query->is_404 = false;
@@ -332,7 +333,7 @@ function jtzwp_yoast_var_replacement__jtzwp_description($varName){
     $item = $jtzwpHelpers->getPostByMixed();
     // Lower
     $metaDescription = '';
-    if (get_field('custom_seo_meta_description', $item->ID)){
+    if ($item && get_field('custom_seo_meta_description', $item->ID)){
         $metaDescription = get_field('custom_seo_meta_description', $item->ID);
     }
     else if (!is_single() && term_description()){

@@ -1,6 +1,7 @@
 <?php
 /**
  * Special: Home page template file - doesn't show posts, just shows custom home page
+ * @file - Default homepage template. Mostly just buttons that link to subpages
  */
 ?>
 <?php get_header(); ?>

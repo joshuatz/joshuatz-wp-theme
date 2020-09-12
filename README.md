@@ -1,6 +1,6 @@
 # joshuatzwp / joshuatz-wp
 Custom WordPress theme for joshuatz.com
-##
+
 ---
 ## Instructions
 ### Building
@@ -21,6 +21,18 @@ If you want a homepage, and blog page (e.g. `Posts Page`), you can set those up 
 The theme has templates to handle both those pages.
 
 You can read detailed instructions on how to do that [here](https://www.wpbeginner.com/wp-tutorials/how-to-create-a-separate-page-for-blog-posts-in-wordpress/).
+
+#### Adding a New Page Template
+> 📘 [Docs](https://developer.wordpress.org/themes/template-files-section/page-template-files/)
+
+ - Create page under `/page-templates`
+     - Do **not** prefix with `page-`, unless you are trying to match to specific slug
+ - Use multi-line comment to specify:
+     - `Template Name` and (optionally) `Template Post Type`
+     - Good practice: `@file` to explain in detail
+ - You can assign the template when editing pages (and posts)
+
+> ⚠ Be very aware of the [WP Template Hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/) and how it can override settings based on filenames
 
 ### Optional Settings
 

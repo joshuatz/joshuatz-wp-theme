@@ -2,6 +2,7 @@
 /**
  * Template Name: Everything Archive (Displays Everything)
  * Template Post Type: page
+ * @file - Displays everything (posts, pages, etc.) in the typical paged archive view
  */
 
 global $jtzwpHelpers;
