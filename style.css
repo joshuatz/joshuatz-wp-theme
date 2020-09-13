@@ -602,7 +602,21 @@ a.readMore {
     top: -5px;
     position: relative;
 }
-.projectItemWrapper .tagsWrapper {
+.itemCardRow {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.itemCardRow .itemCardWrapper {
+    flex-grow: 0;
+    width: 30%;
+    align-content: space-around;
+    padding-bottom: 42px;
+    min-width: 400px;
+    padding: 0px 4px;
+}
+.itemCardWrapper .tagsWrapper {
     border: 1px solid black;
     width: 97%;
     border-top-right-radius: 0px;
@@ -613,7 +627,7 @@ a.readMore {
     margin: -80px auto 10px 1px;
     z-index: 1;
 }
-.projectItem {
+.itemCard {
     background-color:#A3BFE1;
     padding-bottom:30px;
     padding-top:10px;
@@ -633,13 +647,10 @@ a.readMore {
     /* Comment out the below line if you don't care about equal height columns */
     height: 96%;
 }
-.projectItem.half {
-    width: 45%;
-}
-.projectItem:hover .projectItemTitle {
+.itemCard:hover .itemCardTitle {
     color: rgba(25,0,252,0.5);
 }
-.projectItemTitle {
+.itemCardTitle {
     color: black;
     border-top: 2px solid rgba(0,0,0,0.2);
     border-bottom: 2px solid rgba(0,0,0,0.2);
@@ -650,18 +661,18 @@ a.readMore {
     text-decoration: underline;
     text-underline-position: under;
 }
-.projectItemTitle > a {
+.itemCardTitle > a {
     color: #2E3641;
     text-decoration-color: #039be5
 }
-.projectItem a.projectLinkWrapper {
+.itemCard a.projectLinkWrapper {
     width: 70%;
     max-width: 580px;
     margin-left: auto;
     margin-right: auto;
     display: block;
 }
-.projectExcerptWrapper {
+.itemExcerptWrapper {
     padding-top:10px;
     width:95%;
     margin-left:auto;
@@ -678,7 +689,7 @@ a.readMore {
     border-color: rgba(46, 54, 65, 0.76);
     border-width: 2px;
 }
-.projectExcerptWrapper p {
+.itemExcerptWrapper p {
     font-size: 1.2rem;
 }
 .projectLinkClickPrefix {
@@ -1138,7 +1149,7 @@ a.readMore {
     .entry-content h5,h6 {
         font-size: 1rem;
     }
-    .projectExcerptWrapper p {
+    .itemExcerptWrapper p {
         font-size: 1rem;
     }
 }

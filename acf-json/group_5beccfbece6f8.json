@@ -319,6 +319,25 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5f5d140623ee6",
+            "label": "Promote As Featured",
+            "name": "promote_as_featured",
+            "type": "true_false",
+            "instructions": "Promote this item as \"featured\" in various parts of the website (especially for `portfolio-homepage` template).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [

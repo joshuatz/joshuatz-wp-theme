@@ -63,6 +63,9 @@
         if (document.location.hash === '#businessCardMaterializeModal'){
             Materialize.Modal.getInstance($('#businessCardMaterializeModal')[0]).open();
         }
+        
+        // Tooltips
+        $('.tooltipped').tooltip();
     }
 
     /**
