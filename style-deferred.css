@@ -139,6 +139,43 @@ strong {
     .card .fixed-footer .s6 .btn, .card .fixed-footer .s6 i {
         font-size: large !important;
     }
+    /** Allow grid system to be used outside of .row or .col */
+    .s12 {
+        width: calc(100% / (12/12));
+    }
+    .s11 {
+        width: calc(100% / (12/11));
+    }
+    .s10 {
+        width: calc(100% / (12/10));
+    }
+    .s9 {
+        width: calc(100% / (12/9));
+    }
+    .s8 {
+        width: calc(100% / (12/8));
+    }
+    .s7 {
+        width: calc(100% / (12/7));
+    }
+    .s6 {
+        width: calc(100% / (12/6));
+    }
+    .s5 {
+        width: calc(100% / (12/5));
+    }
+    .s4 {
+        width: calc(100% / (12/4));
+    }
+    .s3 {
+        width: calc(100% / (12/3));
+    }
+    .s2 {
+        width: calc(100% / (12/2));
+    }
+    .s1 {
+        width: calc(100% / (12/1));
+    }
 }
 /** Second breakpoint, .m */
 @media only screen and (min-width:601px){
@@ -148,12 +185,121 @@ strong {
     .card .fixed-footer > .col.m6 {
         padding: 4px 2px;
     }
+    /** Allow grid system to be used outside of .row or .col */
+    .m12 {
+        width: calc(100% / (12/12));
+    }
+    .m11 {
+        width: calc(100% / (12/11));
+    }
+    .m10 {
+        width: calc(100% / (12/10));
+    }
+    .m9 {
+        width: calc(100% / (12/9));
+    }
+    .m8 {
+        width: calc(100% / (12/8));
+    }
+    .m7 {
+        width: calc(100% / (12/7));
+    }
+    .m6 {
+        width: calc(100% / (12/6));
+    }
+    .m5 {
+        width: calc(100% / (12/5));
+    }
+    .m4 {
+        width: calc(100% / (12/4));
+    }
+    .m3 {
+        width: calc(100% / (12/3));
+    }
+    .m2 {
+        width: calc(100% / (12/2));
+    }
+    .m1 {
+        width: calc(100% / (12/1));
+    }
 }
 /** Third breakpoint, .l */
 @media only screen and (min-width:992px){
-
+    /** Allow grid system to be used outside of .row or .col */
+    .l12 {
+        width: calc(100% / (12/12));
+    }
+    .l11 {
+        width: calc(100% / (12/11));
+    }
+    .l10 {
+        width: calc(100% / (12/10));
+    }
+    .l9 {
+        width: calc(100% / (12/9));
+    }
+    .l8 {
+        width: calc(100% / (12/8));
+    }
+    .l7 {
+        width: calc(100% / (12/7));
+    }
+    .l6 {
+        width: calc(100% / (12/6));
+    }
+    .l5 {
+        width: calc(100% / (12/5));
+    }
+    .l4 {
+        width: calc(100% / (12/4));
+    }
+    .l3 {
+        width: calc(100% / (12/3));
+    }
+    .l2 {
+        width: calc(100% / (12/2));
+    }
+    .l1 {
+        width: calc(100% / (12/1));
+    }
 }
 /** Fourth breakpoint, .xl */
 @media only screen and (min-width:1200px){
-
+    /** Allow grid system to be used outside of .row or .col */
+    .xl12 {
+        width: calc(100% / (12/12));
+    }
+    .xl11 {
+        width: calc(100% / (12/11));
+    }
+    .xl10 {
+        width: calc(100% / (12/10));
+    }
+    .xl9 {
+        width: calc(100% / (12/9));
+    }
+    .xl8 {
+        width: calc(100% / (12/8));
+    }
+    .xl7 {
+        width: calc(100% / (12/7));
+    }
+    .xl6 {
+        width: calc(100% / (12/6));
+    }
+    .xl5 {
+        width: calc(100% / (12/5));
+    }
+    .xl4 {
+        width: calc(100% / (12/4));
+    }
+    .xl3 {
+        width: calc(100% / (12/3));
+    }
+    .xl2 {
+        width: calc(100% / (12/2));
+    }
+    .xl1 {
+        width: calc(100% / (12/1));
+    }
 }

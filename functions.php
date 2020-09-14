@@ -328,7 +328,6 @@ function jtzwp_yoast_var_replacement__jtzwp_description($varName){
     $item = $jtzwpHelpers->getPostByMixed();
     // Lower
     $metaDescription = '';
-    $jtzwpHelpers->dumpAsJsonEncoded($item);
     if (!empty($item) && !empty($item->ID) && get_field('custom_seo_meta_description', $item->ID)){
         $metaDescription = get_field('custom_seo_meta_description', $item->ID);
     }

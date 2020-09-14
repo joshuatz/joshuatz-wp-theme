@@ -111,6 +111,12 @@ body a {
     left: 0px;
     overflow: hidden;
 }
+.full {
+    width: 100%;
+}
+.textCenter {
+    text-align: center;
+}
 .flex {
     display: flex;
     flex-wrap: wrap;
@@ -392,6 +398,15 @@ div.nav-collapse.collapse {
     margin: 0px 0px 12px 0px;
 }
 
+.portfolioHomepage .portfolioSection > h2 {
+    margin: 0px;
+    padding-top: 10px;
+}
+.portfolioHomepage .portfolioSection.altColor {
+    background-color: #3b506b;
+    color: white;
+}
+
 #primary {
     padding-left: 6px;
     padding-right: 6px
@@ -607,12 +622,14 @@ a.readMore {
     justify-content: space-around;
     flex-wrap: wrap;
     flex-direction: row;
+    padding: 20px 10px 0px 10px;
+    border-radius: 20px;
 }
 .itemCardRow .itemCardWrapper {
     flex-grow: 0;
     width: 30%;
     align-content: space-around;
-    padding-bottom: 42px;
+    margin-bottom: 42px;
     min-width: 400px;
     padding: 0px 4px;
 }
@@ -675,9 +692,7 @@ a.readMore {
 .itemExcerptWrapper {
     padding-top:10px;
     width:95%;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:20px;
+    margin: 20px auto 10px auto;
     font-family:Georgia, "Times New Roman", Times, serif;
     background-color:#FFF;
     padding:4px;

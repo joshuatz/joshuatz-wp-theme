@@ -32,10 +32,6 @@
                     <?php the_post_thumbnail('medium',array('class'=>'featuredImage')); ?>
                 <?php elseif ($postInfo->org->postType === $jtzwpHelpers::PROJECTS_POST_TYPE): ?>
                     <h3 style="padding:10px;">Click for Project Details!</h3>
-                <?php else: ?>
-                    <div class="btn waves-effect readMore jtzwp-dark">
-                        Read More <i class="material-icons right">more_horiz</i>
-                    </div>
                 <?php endif; ?>
             </div>
 
@@ -50,6 +46,15 @@
             <?php if(get_field('custom_content_for_listing') && get_field('custom_content_for_listing')!==''): ?>
                 <div class="projectCustomContentForListingWrapper">
                     <?php echo get_field('custom_content_for_listing'); ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Blog Posts - Read More Button -->
+            <?php if ($postInfo->org->postType === $jtzwpHelpers::BASE_POST_TYPE): ?>
+                <div style="width: 100%; text-align:center;">
+                    <div class="jtzwp-dark" style="display: inline-block; border-radius: 7px; padding: 4px; text-align: center;">
+                        Read More <i class="material-icons right">more_horiz</i>
+                    </div>
                 </div>
             <?php endif; ?>
         </div>
