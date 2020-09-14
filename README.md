@@ -22,6 +22,13 @@ The theme has templates to handle both those pages.
 
 You can read detailed instructions on how to do that [here](https://www.wpbeginner.com/wp-tutorials/how-to-create-a-separate-page-for-blog-posts-in-wordpress/).
 
+#### Homepage Template
+There are multiple homepage templates available. The best way to use one is to manually create a homepage page in Wordpress, assign the template you want, and then under `Reading Settings`, set the homepage to the static page you created.
+
+This allows you to customize both:
+ - The template that is used
+ - Some of the content pulled into the template
+
 #### Adding a New Page Template
 > 📘 [Docs](https://developer.wordpress.org/themes/template-files-section/page-template-files/)
 

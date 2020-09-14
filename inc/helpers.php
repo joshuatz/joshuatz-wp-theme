@@ -614,7 +614,7 @@ class JtzwpHelpers {
      */
     public function getBasicPostInfo($postOrPostId){
         $postObj = $this->getPostByMixed($postOrPostId);
-        $id = $postObj->ID;
+        $id = isset($postObj) ? $postObj->ID : null;
         $publishedDateDiff = $this->getPublishedDateDiff($postObj);
         $postInfo = (object) array (
             'postObj' => $postObj,

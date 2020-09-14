@@ -3,6 +3,7 @@
  * Template Name: Portfolio Homepage
  * Template Post Type: page
  * @file - Homepage design that is more portfolio focused
+ * - If you manually create a homepage to use this template, you can customize the content!
  */
 ?>
 
