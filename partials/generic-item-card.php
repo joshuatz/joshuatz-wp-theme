@@ -29,7 +29,7 @@
             <!-- Item Link Area -->
             <div class="center">
                 <?php if($postInfo->featuredImage->hasFeaturedImage): ?>
-                    <?php the_post_thumbnail('medium',array('class'=>'featuredImage')); ?>
+                    <?php the_post_thumbnail('medium',array('class'=>'featuredImage responsive-img')); ?>
                 <?php elseif ($postInfo->org->postType === $jtzwpHelpers::PROJECTS_POST_TYPE): ?>
                     <h3 style="padding:10px;">Click for Project Details!</h3>
                 <?php endif; ?>

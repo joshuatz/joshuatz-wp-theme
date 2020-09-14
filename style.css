@@ -398,6 +398,9 @@ div.nav-collapse.collapse {
     margin: 0px 0px 12px 0px;
 }
 
+.portfolioSection {
+    padding: 0px 4px;
+}
 .portfolioHomepage .portfolioSection > h2 {
     margin: 0px;
     padding-top: 10px;
@@ -630,7 +633,7 @@ a.readMore {
     width: 30%;
     align-content: space-around;
     margin-bottom: 42px;
-    min-width: 400px;
+    min-width: 310px;
     padding: 0px 4px;
 }
 .itemCardWrapper .tagsWrapper {
@@ -651,7 +654,6 @@ a.readMore {
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
-    min-width: 200px;
     border-top-left-radius: 60px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -662,7 +664,8 @@ a.readMore {
     z-index: 2;
     position: relative;
     /* Comment out the below line if you don't care about equal height columns */
-    height: 96%;
+    /* Make less than 100% to give room for tag area */
+    height: 86%;
 }
 .itemCard:hover .itemCardTitle {
     color: rgba(25,0,252,0.5);
@@ -1028,8 +1031,11 @@ a.readMore {
     transform: rotateZ(24deg);
     background-color: #38013d;
 }
-.homepageUpper .businessCard .diagonals {
+.portfolioHomepage .businessCard .diagonals, .homepageUpper .businessCard .diagonals {
     display: none;
+}
+.portfolioHomepage .businessCard {
+    color: black;
 }
 .businessCard > .card-panel {
     position: relative;
