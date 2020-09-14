@@ -127,12 +127,13 @@ $promotedPosts = getPostsByType(array($jtzwpHelpers::BASE_POST_TYPE));
 
 <!-- Highlighted Projects -->
 <?php if (count($promotedProjects)): ?>
-<div class="portfolioSection altColor">
+<div class="portfolioSection altLight">
     <h2 class="full textCenter">Featured Projects</h2>
     <div class="flex itemCardRow">
         <?php foreach($promotedProjects as $project): ?>
             <?php $jtzwpHelpers->includeTemplatePart('partials/generic-item-card',array(
-                'scopedId' => $project->ID
+                'scopedId' => $project->ID,
+                'wrapperClasses' => array('s12', 'm6', 'l4')
             )); ?>
         <?php endforeach; ?>
     </div>
@@ -141,12 +142,13 @@ $promotedPosts = getPostsByType(array($jtzwpHelpers::BASE_POST_TYPE));
 
 <!-- Highlighted Posts -->
 <?php if (count($promotedPosts)): ?>
-<div class="portfolioSection">
+<div class="portfolioSection altDark">
     <h2 class="full textCenter">Featured Posts</h2>
     <div class="flex itemCardRow">
         <?php foreach($promotedPosts as $promotedPost): ?>
             <?php $jtzwpHelpers->includeTemplatePart('partials/generic-item-card',array(
-                'scopedId' => $promotedPost->ID
+                'scopedId' => $promotedPost->ID,
+                'wrapperClasses' => array('s12', 'm6', 'l4')
             )); ?>
         <?php endforeach; ?>
     </div>
@@ -154,7 +156,7 @@ $promotedPosts = getPostsByType(array($jtzwpHelpers::BASE_POST_TYPE));
 <?php endif; ?>
 
 <!-- Contact Info / Social Links -->
-<div class="portfolioSection full altColor" style=>
+<div class="portfolioSection full altLight" style=>
     <h2 class="full textCenter">Contact Info</h2>
     <div class="flex" style="justify-content: space-around;">
         <div class="autoCenterParent s12 m4" style="min-height: 100px;">

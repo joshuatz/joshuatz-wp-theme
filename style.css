@@ -405,11 +405,14 @@ div.nav-collapse.collapse {
     margin: 0px;
     padding-top: 10px;
 }
-.portfolioHomepage .portfolioSection.altColor {
+.portfolioHomepage .portfolioSection.altLight {
     background-color: #3b506b;
     color: white;
 }
-
+.portfolioHomepage .portfolioSection.altDark {
+    background-color: #2E3641;
+    color: white;
+}
 #primary {
     padding-left: 6px;
     padding-right: 6px
@@ -630,11 +633,9 @@ a.readMore {
 }
 .itemCardRow .itemCardWrapper {
     flex-grow: 0;
-    width: 30%;
-    align-content: space-around;
     margin-bottom: 42px;
     min-width: 310px;
-    padding: 0px 4px;
+    padding: 0px 10px;
 }
 .itemCardWrapper .tagsWrapper {
     border: 1px solid black;
@@ -680,6 +681,7 @@ a.readMore {
     text-align: center;
     text-decoration: underline;
     text-underline-position: under;
+    line-height: 2.3rem;
 }
 .itemCardTitle > a {
     color: #2E3641;

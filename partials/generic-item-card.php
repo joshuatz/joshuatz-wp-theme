@@ -10,6 +10,9 @@
     global $post;
     // Allow for passing in ID
     $postId = isset($scopedId) && !empty($scopedId) ? $scopedId : get_the_ID();
+    // Allow for passing in classes
+    $wrapperClasses = isset($wrapperClasses) ? $wrapperClasses : array('');
+    $wrapperClassStr = count($wrapperClasses) ? ' ' . join(' ', $wrapperClasses) : '';
     $postInfo = $jtzwpHelpers->getBasicPostInfo($postId);
     $post = $postInfo->postObj;
     setup_postdata($post);
@@ -19,7 +22,7 @@
     $tags = $jtzwpHelpers->getTagsInfoArrs($postId);
 ?>
 
-<div class="itemCardWrapper">
+<div class="itemCardWrapper<?php echo $wrapperClassStr; ?>">
     <a href="<?php echo get_permalink(); ?>" target="_self" class="">
         <div id="<?php echo the_ID(); ?>" class="itemCard full purpleHoverable jtzwpHoverable">
             <?php if($showTitle): ?>
