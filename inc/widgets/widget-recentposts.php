@@ -30,8 +30,8 @@ class JTZWP_RecentPosts_Widget extends WP_Widget {
         extract($args);
         $widgetTitle = apply_filters('widget_title',$instance['title']);
         $numberOfPosts = !empty($instance['numberOfPosts']) ? abs(intval($instance['numberOfPosts'])) : 5;
-        $restrictToBlog = $instance['restrictToBlog'] ? true : false;
-        $showViewAllButton = $instance['showViewAllButton'] ? true : false;
+        $restrictToBlog = !empty($instance['restrictToBlog']) ? true : false;
+        $showViewAllButton = !empty($instance['showViewAllButton']) ? true : false;
         $viewAllButtonLink = apply_filters('viewAllButtonLink', $instance['viewAllButtonLink']);
 
         // Get posts and check to make sure there are some

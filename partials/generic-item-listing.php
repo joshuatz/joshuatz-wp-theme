@@ -3,10 +3,10 @@
 ?>
 <?php
     // per post pre-processing
-    global $postSingularNoun, $jtzwpHelpers;
+    global $jtzwpHelpers;
     // Allow for passing in ID
     $postId = isset($scopedId) ? $scopedId : get_the_ID();
-    $showTitle = gettype($showTitle)==='boolean' ? $showTitle : true;
+    $showTitle = isset($showTitle) && gettype($showTitle)==='boolean' ? $showTitle : true;
     $postInfo = $jtzwpHelpers->getBasicPostInfo($postId);
     $linkTarget = $jtzwpHelpers->postOnlyLinksExternally($postId) ? '_blank' : '_self';
 ?>

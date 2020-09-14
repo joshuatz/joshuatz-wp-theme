@@ -10,6 +10,7 @@ class JtzwpHelpers {
      * Constants
      */
     const PROJECT_TYPES_TAXONOMY_BASE = 'project_types';
+    const BASE_POST_TYPE = 'post';
     const PROJECTS_POST_TYPE = 'projects';
     const TOOLS_POST_TYPE = 'custom_built_tools';
     const CUSTOM_REDIRECTS_FILENAME = 'jtzwp-custom-redirects.json';
@@ -609,27 +610,28 @@ class JtzwpHelpers {
 
     /**
      * Get basic post info
+     * @return BasicPostInfo postInfo
      */
     public function getBasicPostInfo($postOrPostId){
-        $post = $this->getPostByMixed($postOrPostId);
-        $id = $post->ID;
-        $publishedDateDiff = $this->getPublishedDateDiff($post);
+        $postObj = $this->getPostByMixed($postOrPostId);
+        $id = isset($postObj) ? $postObj->ID : null;
+        $publishedDateDiff = $this->getPublishedDateDiff($postObj);
         $postInfo = (object) array (
-            'postObj' => $post,
+            'postObj' => $postObj,
             'id' => $id,
             'ID' => $id,
             'permalink' => $this->getPostPermalink($id),
             'permalinkIsExternal' => $this->postOnlyLinksExternally($id),
             'title' => get_the_title($id),
-            'excerpt' => $this->getPostExcerpt($post),
-            'hasExcerpt' => $this->hasExcerpt($post),
+            'excerpt' => $this->getPostExcerpt($postObj),
+            'hasExcerpt' => $this->hasExcerpt($postObj),
             'featuredImage' => (object) array(
                 'hasFeaturedImage' => has_post_thumbnail($id),
                 'hasShadow' => $this->featuredImageHasShadow($id)
             ),
             'templateSlug' => get_page_template_slug($id),
             'date' => (object) array(
-                'published' => $this->wpDateToDateTime(get_the_date('',$post)),
+                'published' => $this->wpDateToDateTime(get_the_date('',$postObj)),
                 'age' => (object) array(
                     'days' => $this->getDateDiffByUnit($publishedDateDiff,'days'),
                     'months' => $this->getDateDiffByUnit($publishedDateDiff,'months'),
@@ -637,9 +639,9 @@ class JtzwpHelpers {
                 )
             ),
             'org' => (object) array(
-                'isCustomPostType' => $this->getIsPostCustomType($post),
-                'postType' => get_post_type($post),
-                'postTypeSingular' => $this->getCustomPostTypeSingularName(false,$post)
+                'isCustomPostType' => $this->getIsPostCustomType($postObj),
+                'postType' => get_post_type($postObj),
+                'postTypeSingular' => $this->getCustomPostTypeSingularName(false,$postObj)
             )
         );
         return $postInfo;
@@ -748,7 +750,8 @@ class JtzwpHelpers {
         return $formattedDiff;
     }
 
-    public function getTagsInfoArrs(){
+    public function getTagsInfoArrs($postOrPostId = null){
+        $post = $this->getPostByMixed($postOrPostId);
         $tagsInfo = (object) array(
             'tagNames' => array(),
             'tagIds' => array(),
@@ -758,8 +761,7 @@ class JtzwpHelpers {
             'baseUrl' => $this->getTagBaseUrl(),
             'count' => 0
         );
-        $commaSepTags = '';
-        $tags = get_the_tags();
+        $tags = get_the_tags($post);
         if ($tags){
             $counter = 0;
             foreach ($tags as $tag) {
@@ -837,21 +839,13 @@ class JtzwpHelpers {
 
     public function getPostExcerpt($post = null){
         $excerpt = false;
+        $post = $this->getPostByMixed($post);
         // Note - most excerpt related WP functions can only be used inside the loop
-        if (!isset($post)){
-            if (has_excerpt()){
-                $excerpt = get_the_excerpt();
-            }
-            else {
-                $excerpt =  wp_trim_excerpt();
-            }
+        if (has_excerpt($post)){
+            $excerpt = get_the_excerpt($post);
         }
         else {
-            $excerpt = apply_filters('get_the_excerpt',get_post_field('post_excerpt',$post->ID));
-            if ($excerpt === ''){
-                // Fall back to first 55 words, which is wp_trim_excerpt equivalent
-                $excerpt = wp_trim_words($post->post_content,55);
-            }
+            $excerpt =  wp_trim_excerpt('', $post);
         }
         return $excerpt;
     }
