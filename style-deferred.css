@@ -118,9 +118,6 @@ strong {
     outline-offset: 8px;
 }
 .jtzwpHoverable {
-    -webkit-transition: -webkit-box-shadow .25s;
-    transition: -webkit-box-shadow .25s;
-    transition: box-shadow .25s;
     transition: box-shadow .25s, -webkit-box-shadow .25s;
 }
 .purpleHoverable:hover {

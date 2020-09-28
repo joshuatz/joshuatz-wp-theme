@@ -31,7 +31,7 @@ else {
     $sidebarCssClass = 'hide';
 }
 ?>
-<div class="row articleWrapperWrapper" style="display:flex; flex-wrap:wrap;">
+<div class="row">
     <div class="articleWrapper <?php echo $articleCssClass; ?>">
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
