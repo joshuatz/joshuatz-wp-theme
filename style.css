@@ -1862,3 +1862,16 @@ table.responsive-table tr td:first-child {
     border-bottom: 1px solid black;
     padding-top: 0px;
 }
+
+/** This is not the best way to have "responsive" tables, but it prevents super wide tables from pushing the body outside 100% width on mobile */
+table {
+    border: 1px solid black !important;
+    overflow-x: auto;
+    width: 100% !important;
+    display: block !important;
+}
+
+/** Another responsive fix: prevent ul > lis from overflowing / clipping 100vw width */
+.entry-content ul li {
+    word-wrap: break-word;
+}
