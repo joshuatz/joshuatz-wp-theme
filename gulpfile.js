@@ -11,7 +11,7 @@ const uglify = require('gulp-uglify');
 function bundleVendorJs(){
     return gulp.src([
         './lib/materialize/js/materialize.min.js',
-        './lib/j-prism-toolbar/jPrismToolbar.min.js',
+        './node_modules/j-prism-toolbar/dist/jPrismToolbar.min.js',
         './node_modules/wowjs/dist/wow.min.js',
         './node_modules/clipboard/dist/clipboard.min.js',
         './node_modules/masonry-layout/dist/masonry.pkgd.min.js',

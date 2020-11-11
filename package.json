@@ -26,6 +26,7 @@
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-uglify": "^3.0.2",
+    "j-prism-toolbar": "^1.2.2",
     "masonry-layout": "^4.2.2",
     "wowjs": "^1.1.3"
   }
