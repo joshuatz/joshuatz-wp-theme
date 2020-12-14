@@ -1721,3 +1721,10 @@ table {
     width: 100% !important;
     display: block !important;
 }
+
+/**
+* Notice: This will break Materialize's "auto resize" feature of <textarea> elements, BUT, setting display:none is necessary since this is currently causing body content to overflow width (breaks responsiveness)
+*/
+.hiddendiv {
+    display: none;
+}
