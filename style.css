@@ -358,11 +358,11 @@ pre.wrap, pre.wrap > code, pre.noScroll, pre.noScroll > code {
 .entry-content code, .entry-content pre {
     overflow-wrap: break-word;
 }
-.entry-content p > iframe {
+.entry-content iframe {
     max-width: 100%;
 }
 /* Don't overflow images */
-.entry-content p > img  {
+.entry-content img  {
     max-width: 100%;
 }
 
