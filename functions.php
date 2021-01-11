@@ -27,11 +27,11 @@ require_once($themeIncPath . '/widgets/widget-geo-locked-content.php');
 /** @var JtzwpHelpers $jtzwpHelpers */
 global $jtzwpHelpers;
 $jtzwpHelpers = (gettype($jtzwpHelpers)==='object' ? $jtzwpHelpers : new JtzwpHelpers());
+$fullUrl = $jtzwpHelpers->getCurrentUrl();
 
 /**
  * Setup resources
  */
-$debug = true;
 $themeRootURL = wp_make_link_relative(get_template_directory_uri());
 $themeLibURL = $themeRootURL . '/lib';
 $themeIncURL = $themeRootURL . '/inc';
@@ -40,6 +40,9 @@ $themeIncURL = $themeRootURL . '/inc';
  * Get cache busting info
  */
 $cacheBustStamp = $jtzwpHelpers->getCacheBuster();
+if ($jtzwpHelpers->isDebug && preg_match('/\?cb=true/', $fullUrl)) {
+    $cacheBustStamp = microtime(true);
+}
 
 /**
  * Special WP flags
@@ -116,9 +119,12 @@ function joshuatzwp_styles_for_admin(){
 
 function joshuatzwp_scripts() {
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
-    wp_enqueue_script('jquery-3','https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',array(),false,true);
-    // Helpers
-    wp_enqueue_script('helpers-js',$themeIncURL.'/helpers.js',array('jquery-3'),false,false);
+    // Helpers - load early
+    wp_enqueue_script('helpers-js',$themeIncURL.'/helpers.js',array(),false,false);
+    // jQuery
+    wp_enqueue_script('jquery-3', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', array(), $cacheBustStamp, false);
+    add_attribute('jquery-3', 'integrity', 'sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==', true);
+    add_attribute('jquery-3', 'crossorigin', 'anonymous', true);
 }
 
 function joshuatzwp_scripts_footer(){
@@ -126,7 +132,7 @@ function joshuatzwp_scripts_footer(){
     // Vendored JS (materializeCSS, prismToolbar, wowjs, masonry, clipboard, fancybox3)
     wp_enqueue_script('vendor-js',$themeLibURL.'/vendor.min.js',array('jquery-3'),$cacheBustStamp,true);
     // Main JS
-    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js'),$cacheBustStamp,true);
+    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js', 'helpers-js'),$cacheBustStamp,true);
     // Prism JS
     $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.js');
     wp_enqueue_script_special('prism-js',$prismJsFilePath,array(),false,false,'async');

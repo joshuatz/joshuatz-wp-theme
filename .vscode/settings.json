@@ -3,6 +3,8 @@
     "editor.tabSize": 4,
     "editor.detectIndentation": false,
     "editor.autoIndent": "advanced",
+    "prettier.useTabs": false,
+    "prettier.tabWidth": 4,
     "[php]": {
         "editor.tabSize": 4,
         "editor.defaultFormatter": "vscode.php-language-features",

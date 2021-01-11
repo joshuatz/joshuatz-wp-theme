@@ -1,7 +1,6 @@
 (function($){
-
     // Materialize and some other stuff is deferred, so wait for document ready
-    $(document).ready(function(){
+    helpers.onDomReady(function(){
         var Materialize = window.M;
         jtzwpMaterializeInit(Materialize);
         jtzwpMaterializeExtend();
@@ -24,7 +23,7 @@
     $('#siteSearchForm').on('submit',siteSearch);
     function siteSearch(query){
         if (typeof(query)!=='string' || typeof(query.length)!=='undefined' && query.length < 1){
-            query = $('.siteSearchInput')[0].value;
+            query = helpers.qs('.siteSearchInput').value;
         }
         if (query){
             var searchPage = 'https://cse.google.com/cse?cx=006023929046275200110:crr5g9pbyae&q=' + encodeURI(query);
@@ -39,8 +38,8 @@
         // Collapsible (aka accordian) sections
         $('.collapsible').collapsible();
         // Modals
-        $('.modal').each(function(){
-            var modal = this;
+        helpers.qsa('.modal').forEach(function(elem){
+            var modal = elem;
             var modalConfig = {};
             var modalOptions = ['opacity','inDuration','outDuration','onOpenStart','onOpenEnd','onCloseStart','onCloseEnd','preventScrolling','dismissible','startingTop','endingTop'];
             var matchingOptions = 0;
@@ -120,7 +119,7 @@
         }
 
         // Custom materialize init stuff
-        $(document).ready(function(){
+        helpers.onDomReady(function(){
             materializeAutoCardHeight();
             forceWowAnimateOnCardReveal();
         });
