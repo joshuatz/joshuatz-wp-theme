@@ -21,12 +21,11 @@
   "devDependencies": {
     "@fancyapps/fancybox": "^3.5.7",
     "animate.css": "^4.1.1",
-    "clipboard": "^2.0.6",
     "font-awesome": "4.7.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-uglify": "^3.0.2",
-    "j-prism-toolbar": "^1.2.2",
+    "j-prism-toolbar": "^1.2.3",
     "masonry-layout": "^4.2.2",
     "wowjs": "^1.1.3"
   }

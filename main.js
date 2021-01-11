@@ -352,7 +352,8 @@
         // PrismJS
         if (typeof(PrismToolbar)==='function'){
             window.jPrismToolbar = new PrismToolbar({
-                autoFix: true
+                autoFix: true,
+                animate: false
             });
             setTimeout(() => {
                 // Let prism load

@@ -326,6 +326,21 @@ h1,h2 {
 }
 
 /**
+* Prism - Make room for toolbar to avoid layout shift
+*/
+/** These selector(s) should target code blocks BEFORE Prism loads, but not after */
+pre[class]:not([class*="language-"]) {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    border-radius: 0.3em;
+}
+pre[class]:not([id^="jCode"]) {
+    margin-top: 68px;
+}
+
+
+/**
 * Prism - Missing Language Fallback
 *  - If the Prism language is present, the class (on pre wrapper) should look like "{name} language-{name}",
 * but, if it is missing, it will just be "{name}". E.g "sh language-sh" vs just "sh"

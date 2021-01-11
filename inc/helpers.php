@@ -648,16 +648,23 @@ class JtzwpHelpers {
     }
 
     public function getFeaturedImageSrc($postId,$size=null){
+        $imageUrl = false;
         // Ensure that thumbnail size matches - glitchy
         if (gettype($size)==='string' && in_array($size,array('thumbnail','post-thumbnail'))){
             if (get_the_post_thumbnail_url($postId,$size) === get_the_post_thumbnail_url($postId,'full')){
                 // Something went wrong. Fall back to medium size (usually 300x300)
-                return get_the_post_thumbnail_url($postId,'medium');
+                $imageUrl = get_the_post_thumbnail_url($postId,'medium');
             }
         }
         else {
-            return (has_post_thumbnail($postId)) ? get_the_post_thumbnail_url($postId,$size) : '';
+            $imageUrl = (has_post_thumbnail($postId)) ? get_the_post_thumbnail_url($postId,$size) : false;
         }
+
+        if ($imageUrl === '' || strval($imageUrl) === 'unknown') {
+            return false;
+        }
+
+        return $imageUrl;
     }
 
     public function featuredImageHasShadow($postId){

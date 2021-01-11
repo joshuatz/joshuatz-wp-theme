@@ -4,28 +4,33 @@
  */
 ?>
 <?php
+/** @var JtzwpHelpers $jtzwpHelpers */
+global $jtzwpHelpers;
 $currPost = get_post();
+
 $prevPost = get_previous_post();
 $hasPrevPost = isset($prevPost) && $prevPost !=='' && $prevPost!==$currPost;
-$prevPostHasFeaturedImage = has_post_thumbnail($prevPost);
+$prevPostFeatImg = $hasPrevPost ? $jtzwpHelpers->getFeaturedImageSrc($prevPost->ID, 'small') : false;
+
 $nextPost = get_next_post();
 $hasNextPost = isset($nextPost) && $nextPost !== '' && $nextPost!==$currPost;
-$nextPostHasFeaturedImage = has_post_thumbnail($nextPost);
+$nextPostFeatImg = $hasNextPost ? $jtzwpHelpers->getFeaturedImageSrc($nextPost->ID, 'small') : false;
+
 ?>
 <div class="row postNavigation">
     <!-- Previous Post -->
     <?php if ($hasPrevPost): ?>
         <div class="col s12 m6 l3 prevPost">
             <div class="card">
-                <?php if ($prevPostHasFeaturedImage): ?>
+                <?php if ($prevPostFeatImg): ?>
                 <div class="card-image">
-                    <img src="<?php echo get_the_post_thumbnail_url($prevPost,'small'); ?>">
+                    <img src="<?php echo $prevPostFeatImg ?>">
                     <a href="<?php echo get_permalink($prevPost); ?>"><span class="card-title">Previous Post</span></a>
                 </div>
                 <?php endif; ?>
 
                 <div class="card-content">
-                    <?php if(!$prevPostHasFeaturedImage):?><span class="card-title">Previous Post</span><?php endif; ?>
+                    <?php if(!$prevPostFeatImg):?><span class="card-title">Previous Post</span><?php endif; ?>
                     <p><?php echo wp_trim_words(get_the_excerpt($prevPost),20); ?></p>
                 </div>
                 <div class="card-action">
@@ -39,15 +44,15 @@ $nextPostHasFeaturedImage = has_post_thumbnail($nextPost);
     <?php if ($hasNextPost): ?>
         <div class="col s12 m6 l3 nextPost <?php echo $hasPrevPost ? '' : 'offset-m6 offset-l9'; ?>">
             <div class="card">
-                <?php if ($nextPostHasFeaturedImage): ?>
+                <?php if ($nextPostFeatImg): ?>
                 <div class="card-image">
-                    <img src="<?php echo get_the_post_thumbnail_url($nextPost,'small'); ?>">
+                    <img src="<?php echo $nextPostFeatImg; ?>">
                     <a href="<?php echo get_permalink($nextPost); ?>"><span class="card-title">Next Post</span></a>
                 </div>
                 <?php endif; ?>
 
                 <div class="card-content">
-                    <?php if(!$nextPostHasFeaturedImage):?><span class="card-title">Next Post</span><?php endif; ?>
+                    <?php if(!$nextPostFeatImg):?><span class="card-title">Next Post</span><?php endif; ?>
                     <p><?php echo wp_trim_words(get_the_excerpt($nextPost),20); ?></p>
                 </div>
                 <div class="card-action">

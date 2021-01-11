@@ -129,7 +129,7 @@ function joshuatzwp_scripts() {
 
 function joshuatzwp_scripts_footer(){
     global $themeLibURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
-    // Vendored JS (materializeCSS, prismToolbar, wowjs, masonry, clipboard, fancybox3)
+    // Vendored JS (materializeCSS, prismToolbar, wowjs, masonry, fancybox3)
     wp_enqueue_script('vendor-js',$themeLibURL.'/vendor.min.js',array('jquery-3'),$cacheBustStamp,true);
     // Main JS
     wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js', 'helpers-js'),$cacheBustStamp,true);
