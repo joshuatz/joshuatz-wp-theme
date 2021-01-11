@@ -10,11 +10,11 @@ $currPost = get_post();
 
 $prevPost = get_previous_post();
 $hasPrevPost = isset($prevPost) && $prevPost !=='' && $prevPost!==$currPost;
-$prevPostFeatImg = $hasPrevPost ? $jtzwpHelpers->getFeaturedImageSrc($prevPost->ID, 'small') : false;
+$prevPostFeatImg = $hasPrevPost ? $jtzwpHelpers->getFeaturedImageSrc($prevPost, 'medium') : false;
 
 $nextPost = get_next_post();
 $hasNextPost = isset($nextPost) && $nextPost !== '' && $nextPost!==$currPost;
-$nextPostFeatImg = $hasNextPost ? $jtzwpHelpers->getFeaturedImageSrc($nextPost->ID, 'small') : false;
+$nextPostFeatImg = $hasNextPost ? $jtzwpHelpers->getFeaturedImageSrc($nextPost, 'medium') : false;
 
 ?>
 <div class="row postNavigation">
@@ -24,7 +24,7 @@ $nextPostFeatImg = $hasNextPost ? $jtzwpHelpers->getFeaturedImageSrc($nextPost->
             <div class="card">
                 <?php if ($prevPostFeatImg): ?>
                 <div class="card-image">
-                    <img src="<?php echo $prevPostFeatImg ?>">
+                    <img loading="lazy" src="<?php echo $prevPostFeatImg ?>">
                     <a href="<?php echo get_permalink($prevPost); ?>"><span class="card-title">Previous Post</span></a>
                 </div>
                 <?php endif; ?>
@@ -46,7 +46,7 @@ $nextPostFeatImg = $hasNextPost ? $jtzwpHelpers->getFeaturedImageSrc($nextPost->
             <div class="card">
                 <?php if ($nextPostFeatImg): ?>
                 <div class="card-image">
-                    <img src="<?php echo $nextPostFeatImg; ?>">
+                    <img loading="lazy" src="<?php echo $nextPostFeatImg; ?>">
                     <a href="<?php echo get_permalink($nextPost); ?>"><span class="card-title">Next Post</span></a>
                 </div>
                 <?php endif; ?>
@@ -76,6 +76,13 @@ $nextPostFeatImg = $hasNextPost ? $jtzwpHelpers->getFeaturedImageSrc($nextPost->
     left: unset;
     right: 10px;
     bottom: 10px;
-
+}
+.postNavigation .card-image {
+    width: 100%;
+    min-height: 150px;
+}
+.postNavigation img {
+    width: 100%;
+    height: auto;
 }
 </style>

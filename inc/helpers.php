@@ -647,17 +647,19 @@ class JtzwpHelpers {
         return $postInfo;
     }
 
-    public function getFeaturedImageSrc($postId,$size=null){
+    public function getFeaturedImageSrc($postObj,$size=null){
+        $size = isset($size) ? $size : 'full';
         $imageUrl = false;
-        // Ensure that thumbnail size matches - glitchy
-        if (gettype($size)==='string' && in_array($size,array('thumbnail','post-thumbnail'))){
-            if (get_the_post_thumbnail_url($postId,$size) === get_the_post_thumbnail_url($postId,'full')){
-                // Something went wrong. Fall back to medium size (usually 300x300)
-                $imageUrl = get_the_post_thumbnail_url($postId,'medium');
-            }
+        if (has_post_thumbnail($postObj)) {
+            $imageUrl = get_the_post_thumbnail_url($postObj, $size);
         }
-        else {
-            $imageUrl = (has_post_thumbnail($postId)) ? get_the_post_thumbnail_url($postId,$size) : false;
+
+        // Ensure that thumbnail size matches - glitchy
+        if (in_array($size, array('thumbnail', 'post-thumbnail'))){
+            if ($imageUrl === get_the_post_thumbnail_url($postObj, 'full')){
+                // Something went wrong. Fall back to medium size (usually 300x300)
+                $imageUrl = get_the_post_thumbnail_url($postObj, 'medium');
+            }
         }
 
         if ($imageUrl === '' || strval($imageUrl) === 'unknown') {

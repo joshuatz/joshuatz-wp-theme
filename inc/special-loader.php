@@ -171,9 +171,7 @@ function scriptAndStyleTagAttributeAdder($tag, $handle, $src, $media, $isStyle){
                 $resourceTagNode->setAttribute($attrKey, $attrVal);
             }
         }
-        $headStr = $dom->saveHTML($dom->getElementsByTagName('head')[0]);
-        // Capture content between <head></head>. Kind of hackish, but should be faster than preg_match
-        $content = substr($headStr, 7, (strlen($headStr) - 15));
+        $content = $dom->saveHTML($dom->getElementsByTagName($nodeName)[0]);
         return $content;
     }
 
