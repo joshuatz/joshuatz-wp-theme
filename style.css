@@ -138,13 +138,6 @@ body a {
     background-color: black;
     margin-bottom: 8px;
 }
-.mediumDividerDashed {
-    height: auto;
-    overflow: hidden;
-    background-color: unset !important;
-    border-bottom: 2px dashed black;
-    margin-bottom: 10px;
-}
 .largeDivider {
     height: 4px;
     overflow: hidden;
@@ -253,10 +246,6 @@ a > img.alignCenter, a > img.aligncenter {
 .portfolioHomepage .portfolioSection.altDark {
     background-color: #2E3641;
     color: white;
-}
-#primary {
-    padding-left: 6px;
-    padding-right: 6px
 }
 #main, .container.main, .main, body > .everypageTopWidgetArea {
     padding-top: 60px; /* necessary to avoid appearing behind sticky nav */
@@ -376,36 +365,6 @@ pre.wrap, pre.wrap > code, pre.noScroll, pre.noScroll > code {
 .entry-content a > img[class*="wp-image-"] {
     max-width: 100%;
     height: auto;
-}
-
-#maingallery {
-    width:100%;
-    text-align:center;
-    padding-top: 40px;
-}
-
-div.Promo_Image_Wrapper img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 900px;
-    width: 95%;
-}
-div.Promo_Image_Wrapper > a {
-    display: inline-block;
-}
-
-.hero_image_wrapper {
-    width: 100%;
-    text-align: center;
-}
-.hero_image_wrapper > img {
-    width: 100%;
-    height: auto;
-}
-div#main_post_wrapper > p {
-    padding-left: 20px;
-    padding-right: 10px;
 }
 
 /**
@@ -533,13 +492,6 @@ a.readMore {
     color: #2E3641;
     text-decoration-color: #039be5
 }
-.itemCard a.projectLinkWrapper {
-    width: 70%;
-    max-width: 580px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
 .itemExcerptWrapper {
     padding-top:10px;
     width:95%;
@@ -558,41 +510,6 @@ a.readMore {
 .itemExcerptWrapper p {
     font-size: 1.2rem;
 }
-.projectLinkClickPrefix {
-    background-color: white;
-    width: 100%;
-    /* max-width: 300px; */
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    margin-bottom: 7px;
-    font-size: 1rem;
-    padding: 8px 0px;
-}
-/**
-* Custom Tool Listings
-*/
-.customToolsListingsWrapper {
-    background: rgba(255, 255, 255, 0.45);
-    padding: 10px;
-    border-radius: 8px;
-    margin: 10px;
-}
-.customToolsMasonry {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-}
-.customToolListing {
-    /* max-width: 550px; */
-    /* float: right !important; */
-}
-.customToolListing .card-title {
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-}
-
 
 /** Horizontal Align */
 .halign {
@@ -637,53 +554,6 @@ a.readMore {
     border-radius: 20px;
 }
 
-/**
-* Commenting System - Generic
-*/
-.comments-area {
-    width: 98%;
-    margin-left: 1%;
-    margin-bottom: 20px;
-}
-
-/**
-* Commenting System - Wordpress
-*/
-#wordpress-comments {
-    padding: 1px 12px;
-    background-color: rgba(255, 255, 255, 0.65);
-    border-radius: 10px;
-}
-#wordpress-comments .comment-reply-title {
-    text-align: center;
-    font-size: 30px;
-}
-#wordpress-comments .submit {
-    margin-left: 20%;
-}
-#wordpress-comments .reply {
-    margin-left: 10%;
-    background-color: #f69087;
-    border-radius: 30px;
-    padding: 12px;
-    text-align: center;
-    max-width: 100px;
-}
-#wordpress-comments .reply > a {
-    color: white !important;
-}
-#wordpress-comments .comment-list li.comment {
-    padding: 20px 10px;
-    background-color: rgba(255, 255, 255, 0.59);
-    border-radius: 10px;
-    list-style-type: none !important;
-}
-#wordpress-comments .children li {
-    margin: 20px 0px;
-}
-#wordpress-comments label {
-    color: #2e3641;
-}
 /**
 * Widget Area - under post sidebar
 */
@@ -786,172 +656,6 @@ a.readMore {
 }
 
 /**
-* Business Card - Materialize Styled
-*/
-.businessCard {
-    /* width: 80%; */
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    font-family: 'lato','sans-serif';
-    font-size: 1.1em;
-    position: relative;
-}
-.businessCard .textWrapper a {
-    text-underline-offset: 2px;
-    text-decoration: underline;
-}
-.modal-content .businessCard {
-    width: 80%;
-}
-.businessCard .fullName {
-    font-weight: bolder;
-    font-size: 2em;
-}
-.businessCard .jobTitle {
-    font-style: italic;
-    font-size: 1.3em;
-}
-.businessCard .profilePictureWrapper {
-    overflow: hidden;
-    border-radius: 50%;
-    padding: 10px !important;
-    border: 4px solid black;
-    margin-top: 38%;
-    background-color: white;
-}
-.businessCard .linksAndDetailsSection .rowJoinerWrapper {
-    width: 34px;
-    height: 15px;
-    padding-left: 0.75rem;
-    min-height: 1px;
-    position: relative;
-    text-align: center;
-    float: left;
-    margin-bottom: -1px;
-    margin-top: -1px;
-}
-.businessCard .linksAndDetailsSection .rowJoiner {
-    width: 50%;
-    height: 100%;
-    margin-left: auto;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-.businessCard .linkedInURL i, .businessCard .codingProfileURL i, .businessCard .twitterUrl i {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    font-size: large;
-}
-.businessCard .linksAndDetailsSection i.fa {
-    font-size: 24px;
-}
-.businessCard .linksAndDetailsSection .iconWrapper {
-    display: inline-block;
-    width: 34px;
-    height: 31px;
-    padding-top: 3px;
-    padding-left: 4px;
-    margin-right: 10px;
-    border-radius: 8px;
-    border: 1px solid black;
-    
-}
-.businessCard .linksAndDetailsSection .textWrapper {
-    display: inline-block;
-}
-.businessCard .iconsSolidBackground {
-    background-color: black;
-    color: white !important;
-}
-.businessCard .diagonals {
-    position: absolute;
-    height: 200%;
-    width: 14px;
-    top: -50%;
-    right: 222px;
-    border-left: 4px solid red;
-    border-right: 4px solid red;
-    transform: rotateZ(24deg);
-    background-color: #38013d;
-}
-.portfolioHomepage .businessCard .diagonals, .homepageUpper .businessCard .diagonals {
-    display: none;
-}
-.portfolioHomepage .businessCard {
-    color: black;
-}
-.businessCard > .card-panel {
-    position: relative;
-    background-color: unset;
-}
-.businessCard .background {
-    width: 100%;
-    position: absolute;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-    background-color: white;
-}
-.businessCard .ageWrapper {
-    margin-top: 4px;
-    font-size: medium;
-    font-style: italic;
-}
-.businessCard .linksAndDetailsSection {
-    min-height: 88px;
-}
-.businessCard .fixedUpperRightToolbar {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    display: none;
-}
-.modal-content .businessCard .fixedUpperRightToolbar {
-    display: inherit;
-}
-@media (max-width: 600px) {
-    .businessCard .profilePictureWrapper {
-        margin-top: 0px;
-    }
-}
-/**
-* Modal version of business card
-*/
-.businessCardMaterializeModal {
-    top: 10% !important;
-    background-color: unset !important;
-    max-width: 600px;
-    width: 94% !important;
-    min-height: 450px;
-    overflow-y: hidden;
-    display: none;
-    box-shadow: unset !important;
-}
-.businessCardMaterializeModal .businessCard {
-    width: 100%;
-    margin-top: 0px;
-    /* min-width: 500px; */
-}
-.businessCardMaterializeModal .card-panel {
-    margin: unset !important;
-}
-.businessCardMaterializeModal .modal-content {
-    padding: 0px;
-}
-.businessCardMaterializeModal .aboutMeCard {
-    margin-bottom: 16px !important;
-    padding: 12px 14px 5px 14px;
-}
-.businessCard .modal-close {
-    color: grey;
-}
-
-/**
 * About Me Card
 */
 .aboutMeCard .title {
@@ -962,35 +666,10 @@ a.readMore {
 }
 
 /**
-* Under construction page
-*/
-.underConstruction .iconWrapper {
-    padding: 20px;
-    border-radius: 51px;
-    border: 10px solid white;
-    width: 50%;
-    min-width: 220px;
-    max-width: 300px;
-}
-/**
-* Dev Bar
-*/
-.devBar {
-    width: 100%;
-    position: fixed;
-    bottom: -20px;
-}
-
-
-/**
 * Main Materialize Breakpoints
 */
 /** Non-material breakpoint, but used for nav and elsewhere */
 @media only screen and (max-width: 480px){
-    #primary {
-        padding-left: 4px;
-        padding-right: 4px
-    }
     #main article {
         padding: 2px;
         margin-left: 4px;
@@ -1137,27 +816,6 @@ a.readMore {
 @media (max-width:979px) {
     body {
         padding-top: 0;
-    }
-}
-
-@media (min-width: 1200px) {
-    .span9 {
-        width: 840px
-    }
-    
-    .share-story-jtcontainer small {
-        margin: 19px;
-        position: static
-    }
-    
-    .share-story {
-        margin: 13px 0 0
-    }
-}
-
-@media (min-width: 768px) and (max-width: 979px) {
-    .row {
-        margin-left: 0
     }
 }
 

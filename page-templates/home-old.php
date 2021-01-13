@@ -13,6 +13,13 @@
 /**
 * Homepage - old style
 */
+.mediumDividerDashed {
+    height: auto;
+    overflow: hidden;
+    background-color: unset !important;
+    border-bottom: 2px dashed black;
+    margin-bottom: 10px;
+}
 .homepageButtonSection {
     border: 1px dashed black;
     margin: 18px;
