@@ -84,6 +84,14 @@ function joshuatzwp_styles() {
     wp_dequeue_style('wp-block-library');
     // Load main theme CSS file (style.css)
     wp_enqueue_style('joshuatzwp-style',wp_make_link_relative(get_stylesheet_uri()),array(),$cacheBustStamp,'all');
+    // Google Fonts - body font
+    wp_enqueue_style('google-fonts-lato','https://fonts.googleapis.com/css2?family=Lato&display=swap',array(),false,'all');
+    ?>
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <?php
+    // Material Icon Set
+    wp_enqueue_style('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
+
 }
 
 function joshuatzwp_styles_footer(){
@@ -92,20 +100,14 @@ function joshuatzwp_styles_footer(){
     if ($jtzwpHelpers->isPageWP()){
         // Materialize CSS
         wp_enqueue_style_deferred('materialize-style',$themeLibURL.'/materialize/css/materialize.min.css',array(),false,'all');
-        // Materialize Icon Set
-        wp_enqueue_style_deferred('materialize-icons','https://fonts.googleapis.com/icon?family=Material+Icons',array(),false,'all');
     }
     // Vendored css - defer OK
     wp_enqueue_style_deferred('vendor-css',$themeLibURL.'/vendor.min.css',array(),$cacheBustStamp,'all');
     // Font Awesome - defer OK
     wp_enqueue_style_deferred('font-awesome-style','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',array(),false,'all');
-    // Google Fonts - defer OK
-    wp_enqueue_style_deferred('google-fonts','https://fonts.googleapis.com/css?family=Lato',array(),false,'all');
     // style-deferred.css - defer DESIRED
     wp_enqueue_style_deferred('style-deferred',$themeRootURL.'/style-deferred.css',array(),$cacheBustStamp,'all');
     // Prism.js syntax highlighter
-    // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
-    // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css" integrity="sha256-+8ReLFz1xaTiP3T0xcJVWrHneeFwCnJUJwvcM0L+Ufw=" crossorigin="anonymous" />
     $prismJsCssFilePath = file_exists($jtzwpHelpers->siteRootPath . '/css/prism.css') ? $jtzwpHelpers->siteRootUrl . '/css/prism.css' : ($themeLibURL . '/prism/prism.css');
     wp_enqueue_style_deferred('prism-js-style',$prismJsCssFilePath,array(),false,'all');
     // Gutenberg block
@@ -119,8 +121,6 @@ function joshuatzwp_styles_for_admin(){
 
 function joshuatzwp_scripts() {
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
-    // Helpers - load early
-    wp_enqueue_script('helpers-js',$themeIncURL.'/helpers.js',array(),false,false);
     // jQuery
     wp_enqueue_script('jquery-3', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', array(), $cacheBustStamp, true);
     add_attribute('jquery-3', 'integrity', 'sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==', true);
@@ -132,7 +132,7 @@ function joshuatzwp_scripts_footer(){
     // Vendored JS (materializeCSS, prismToolbar, wowjs, masonry, fancybox3)
     wp_enqueue_script('vendor-js',$themeLibURL.'/vendor.min.js',array('jquery-3'),$cacheBustStamp,true);
     // Main JS
-    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js', 'helpers-js'),$cacheBustStamp,true);
+    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js'),$cacheBustStamp,true);
     // Prism JS
     $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.js');
     wp_enqueue_script_special('prism-js',$prismJsFilePath,array(),false,false,'async');

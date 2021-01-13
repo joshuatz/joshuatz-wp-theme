@@ -4,7 +4,13 @@
  */
 ?>
 <?php
+    /** @var JtzwpHelpers $jtzwpHelpers */
     global $jtzwpHelpers;
+    ?>
+    <script>
+    <?php echo file_get_contents(dirname(__FILE__) . '/helpers.js'); ?>
+    </script>
+    <?php
 ?>
 
 <?php
@@ -91,10 +97,10 @@
 <?php if ($jtzwpHelpers->getIsUserAdmin() || $jtzwpHelpers->isDebug): ?>
     <?php // This cookie will not be used for security ?>
     <script>
-        (function($){
-            $(document).ready(function(){
+        (function(helpers){
+            helpers.onDomReady(function(){
                 helpers.setCookie('jtzwpKnownUser','true',365,'Lax');
             });
-        })(jQuery)
+        })(helpers)
     </script>
 <?php endif; ?>

@@ -524,7 +524,10 @@ class JtzwpHelpers {
                 // Break apart keypair by =
                 $arr = explode('=',$keyPair);
                 $key = $arr[0];
-                $val = $arr[1];
+                $val = null;
+                if (count($arr) === 2) {
+                    $val = $arr[1];
+                }
                 // Save down to assoc array
                 $finalInfo['queryKeyPairs'][$key] = $val;
             }
