@@ -176,7 +176,7 @@
             </div>
         </div>
         <div class="row">
-            <div id="mainmenu" class="col s12 m12 l7">
+            <div class="textCenter col s12 m12 l7">
                 <?php 
                     $secDelay = 0.5;
                     $homepageButtonsMisc = array(

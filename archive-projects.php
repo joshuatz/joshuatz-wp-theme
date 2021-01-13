@@ -23,7 +23,7 @@ get_header(); ?>
     <div class="projectListing">
         <?php if(have_posts()): ?>
             <h1 class="projectListingTitle mainTitle"><?php echo $projectListingTitle; ?></h1>
-            <div id="mainmenu" class="flex row">
+            <div class="flex row textCenter">
                 <?php 
                 // Loop through matching posts
                 while (have_posts()): the_post();
