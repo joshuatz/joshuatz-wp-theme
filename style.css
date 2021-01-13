@@ -39,6 +39,13 @@ body a {
 }
 
 /** Theme globals - reusable color classes */
+:root {
+    --color-primary: #2E3641;
+    --color-on-primary: white;
+    --color-secondary: #b2c9e6;
+    --color-on-secondary: black;
+}
+
 .jtzwp-salmon {
     background-color: #F69087 !important;
     color: white !important;
@@ -252,7 +259,7 @@ a > img.alignCenter, a > img.aligncenter {
     padding-right: 6px
 }
 #main, .container.main, .main, body > .everypageTopWidgetArea {
-    padding-top: 100px; /* necessary to avoid appearing behind sticky nav */
+    padding-top: 60px; /* necessary to avoid appearing behind sticky nav */
 }
 
 /* Default Font */
