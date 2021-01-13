@@ -18,7 +18,7 @@
     <style>.hide,.hidden {display:none;}</style>
 </head>
 <body>
-    <?php require_once dirname(__FILE__) . '../partials/nav.php'; ?>
+    <?php require_once $themeIncPath . '/../partials/nav.php'; ?>
     <?php if ($jtzwpHelpers->getIsUserAdmin()): ?>
         <?php get_template_part('partials/dev-bar'); ?>
     <?php endif; ?>

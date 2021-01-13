@@ -6,9 +6,10 @@
 <?php
     /** @var JtzwpHelpers $jtzwpHelpers */
     global $jtzwpHelpers;
+    global $themeIncPath;
     ?>
     <script>
-    <?php echo file_get_contents(dirname(__FILE__) . '/helpers.js'); ?>
+    <?php echo file_get_contents($themeIncPath . '/helpers.js'); ?>
     </script>
     <?php
 ?>
