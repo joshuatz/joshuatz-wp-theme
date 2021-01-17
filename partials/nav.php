@@ -22,14 +22,19 @@ $aboutMeTarget = $jtzwpHelpers->isPageWP()===true ? '_self' : '_blank';
     <!-- Actual Menu Entries -->
     <ul class="menu hideMobileCollapsed">
         <!-- About Me -->
-        <?php if(!is_front_page()): ?>
-            <li>
+        <li>
+            <?php if(is_front_page()): ?>
+                <a href="#contactInfo" title="About me / contact" target="_self" ga-on="click" ga-event-category="Social" ga-event-label="About Me Click">
+                    <span class="largest">Contact</span>
+                    <span class="smaller">Contact</span>
+                </a>
+            <?php else: ?>
                 <a href="<?php echo $aboutMeLink; ?>" title="About me / contact" class="modal-trigger" target="<?php echo $aboutMeTarget; ?>" ga-on="click" ga-event-category="Social" ga-event-label="About Me Click">
                     <span class="largest">About / Contact</span>
                     <span class="smaller">❔ / Contact</span>
                 </a>
-            </li>
-        <?php endif; ?>
+            <?php endif; ?>
+        </li>
         <!-- Projects -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle='dropdown' href='#'>Projects</a>

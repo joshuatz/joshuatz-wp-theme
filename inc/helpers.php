@@ -617,7 +617,7 @@ class JtzwpHelpers {
      */
     public function getBasicPostInfo($postOrPostId){
         $postObj = $this->getPostByMixed($postOrPostId);
-        $id = isset($postObj) ? $postObj->ID : null;
+        $id = isset($postObj) && property_exists($postObj, 'ID') ? $postObj->ID : null;
         $publishedDateDiff = $this->getPublishedDateDiff($postObj);
         $postInfo = (object) array (
             'postObj' => $postObj,
@@ -928,8 +928,10 @@ class JtzwpHelpers {
                 }
                 else {
                     // Turn array into string
-                    if (is_array($msg)){
+                    if (is_array($msg) || is_object($msg)){
                         $msg = json_encode($msg);
+                    } else if (gettype($msg) !== 'string') {
+                        $msg = serialize($msg);
                     }
                     // make sure final char is new line, otherwise add
                     $msg = preg_match('/[\r\n]+[\s]{0,1}$/',$msg) ? $msg : $msg . "\n";

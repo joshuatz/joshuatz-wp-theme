@@ -86,3 +86,32 @@ This allows you to customize both:
  - Redo nav and change from hardcoded to more dynamic based on native WP menu
      - Optionally, integrate Materialize walker version
  - make `/blog` a true theme page, rather than have to manually create it
+
+---
+
+## Dev JS Helpers
+Toggle prism toolbars:
+```js
+function toggle() {
+	let _this = this;
+	window.showingToolbar = typeof window.showingToolbar === 'undefined' ? true : window.showingToolbar;
+	window.showingToolbar = !window.showingToolbar;
+	document.querySelectorAll('.jToolbarWrapper').forEach(e => {
+		e.style.display = showingToolbar ? 'block' : 'none';
+	});
+	document.querySelectorAll('pre[class*="language"]').forEach(e => {
+		const fn = showingToolbar ? e.classList.remove.bind(e.classList) : e.classList.add.bind(e.classList);
+		fn('noToolbar');
+	});
+}
+
+document.body.insertAdjacentHTML('beforeend',
+`
+<style>
+pre.noToolbar {
+	margin-top: 68px;
+}
+</style>
+`
+)
+```

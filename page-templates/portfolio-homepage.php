@@ -156,8 +156,8 @@ $promotedPosts = getPostsByType(array($jtzwpHelpers::BASE_POST_TYPE));
 <?php endif; ?>
 
 <!-- Contact Info / Social Links -->
-<div class="portfolioSection full altLight" style=>
-    <h2 class="full textCenter">Contact Info</h2>
+<div class="portfolioSection full altLight">
+    <h2 class="full textCenter" id="contactInfo">Contact Info</h2>
     <div class="flex" style="justify-content: space-around;">
         <div class="autoCenterParent s12 m4" style="min-height: 100px;">
             <p class="flow-text full" style="padding:10px;">Want to get in touch? Find me elsewhere on the internet? Look no further than my virtual business card!</p>
