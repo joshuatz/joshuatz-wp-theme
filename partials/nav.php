@@ -71,6 +71,12 @@ $aboutMeTarget = $jtzwpHelpers->isPageWP()===true ? '_self' : '_blank';
     top: 0px;
     z-index: 99;
 }
+/**
+ * Offset the height of the fixed nav
+ */
+html, :target {
+    scroll-margin-top: 68px;
+}
 .jtNavBar, .jtNavBar .menu > .dropdown, .siteSearchInput, .jtNavBar .dropdownMenu {
     background-color: var(--color-primary);
     color: var(--color-on-primary);
