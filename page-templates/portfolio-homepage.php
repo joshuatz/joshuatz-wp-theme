@@ -12,6 +12,7 @@
  * CONFIGURATION
  */
 $HOW_MANY_PROMOTED_TO_SHOW = 3;
+$EVERYTHING_ARCHIVE_URL = "/all-posts/";
 ?>
 
 <?php
@@ -137,6 +138,11 @@ $promotedPosts = getPostsByType(array($jtzwpHelpers::BASE_POST_TYPE));
             )); ?>
         <?php endforeach; ?>
     </div>
+    <div class="seeMoreSingleButtonRowWrapper">
+        <div>
+            <a class="btn jtzwp-blue" href="/projects/">All Projects 📂</a>
+        </div>
+    </div>
 </div>
 <?php endif; ?>
 
@@ -152,11 +158,24 @@ $promotedPosts = getPostsByType(array($jtzwpHelpers::BASE_POST_TYPE));
             )); ?>
         <?php endforeach; ?>
     </div>
+    <div class="seeMoreSingleButtonRowWrapper">
+        <div>
+            <a class="btn jtzwp-blue" href="/blog/">All Posts 📂</a>
+        </div>
+    </div>
 </div>
 <?php endif; ?>
 
+<div class="portfolioSection altLight">
+    <h2 class="full textCenter">Everything</h2>
+    <p class="flow-text center">Want to browse <span class="bold italic">all</span> posts, projects, and entries on the site? Visit the archives:</p>
+    <div class="full center">
+        <a class="btn jtzwp-blue" href="<?php echo $EVERYTHING_ARCHIVE_URL; ?>">Archives 📚</a>
+    </div>
+</div>
+
 <!-- Contact Info / Social Links -->
-<div class="portfolioSection full altLight">
+<div class="portfolioSection full altDark">
     <h2 class="full textCenter" id="contactInfo">Contact Info</h2>
     <div class="flex" style="justify-content: space-around;">
         <div class="autoCenterParent s12 m4" style="min-height: 100px;">
