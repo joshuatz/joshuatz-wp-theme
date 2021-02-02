@@ -34,7 +34,6 @@ footer, header, hgroup, menu, nav, section {
 body {
     background-color: #A3BFE1;
     margin: 0px;
-    font-family: 'lato',sans-serif;
 }
 /** All links */
 body a {
@@ -263,7 +262,7 @@ a > img.alignCenter, a > img.aligncenter {
 
 /* Default Font */
 p,body,h1,h2,h3,h4,h5,h6 {
-    font-family: 'Lato',sans-serif;
+    font-family: 'Inter',sans-serif;
 }
 p, ul, ol, .entry-content a {
     /** 18px default */

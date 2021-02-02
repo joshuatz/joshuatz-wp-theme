@@ -159,7 +159,7 @@ html, :target {
     font-size: 1.6rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 840px) {
     .jtNavBar .largest {
         display: none;
     }

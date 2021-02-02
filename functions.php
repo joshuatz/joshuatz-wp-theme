@@ -85,7 +85,7 @@ function joshuatzwp_styles() {
     // Load main theme CSS file (style.css)
     wp_enqueue_style('joshuatzwp-style',wp_make_link_relative(get_stylesheet_uri()),array(),$cacheBustStamp,'all');
     // Google Fonts - body font
-    wp_enqueue_style('google-fonts-lato','https://fonts.googleapis.com/css2?family=Lato&display=swap',array(),false,'all');
+    wp_enqueue_style('google-fonts','https://fonts.googleapis.com/css2?family=Inter&display=swap',array(),false,'all');
     ?>
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <?php
