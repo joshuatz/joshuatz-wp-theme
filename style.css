@@ -451,6 +451,9 @@ a.readMore {
     min-width: 310px;
     padding: 0px 10px;
 }
+.itemCardWrapper > a {
+    display: inline-block;
+}
 .itemCardWrapper .tagsWrapper {
     border: 1px solid black;
     width: 97%;
@@ -458,15 +461,14 @@ a.readMore {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 60px;
     background-color: #a3bfe1;
-    padding: 65px 2px 2px 4px;
-    margin: -80px auto 10px 1px;
+    padding: 40px 2px 2px 4px;
+    margin: -30px auto 10px 1px;
     z-index: 1;
 }
 .itemCard {
     background-color:#A3BFE1;
     padding-bottom:30px;
     padding-top:10px;
-    margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     border-top-left-radius: 60px;
@@ -505,7 +507,6 @@ a.readMore {
     padding-top:10px;
     width:95%;
     margin: 20px auto 10px auto;
-    font-family:Georgia, "Times New Roman", Times, serif;
     background-color:#FFF;
     padding:4px;
     border-top-left-radius: 10px;
