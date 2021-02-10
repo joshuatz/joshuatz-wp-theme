@@ -430,6 +430,10 @@ a.readMore {
     margin-bottom: 7px;
     display: inline-block;
     position: relative;
+    transition: all 0.25s ease-in-out !important;
+}
+.tagLink:hover {
+    transform: translate(2px,4px) skew(1deg,0deg) rotateZ(2deg);
 }
 .tagLink .tagText {
     margin-left: -2px;
@@ -450,6 +454,7 @@ a.readMore {
     margin: 16px 0px;
     min-width: 310px;
     padding: 0px 10px;
+    display: inline-block;
 }
 .itemCardWrapper > a {
     display: inline-block;
@@ -562,6 +567,7 @@ a.readMore {
     display: inline-block;
     padding: 5px 8px;
     border-radius: 20px;
+    margin: 0px 4px 6px 0px;
 }
 
 /**
@@ -799,6 +805,7 @@ a.readMore {
 .jtzwpShareButton .buttonText {
     float: right;
     margin-top: 2px;
+    font-size: 14px;
 }
 .jtzwpShareButton .icon i.fa {
     font-size: 28px;
