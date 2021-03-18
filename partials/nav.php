@@ -10,7 +10,7 @@ $aboutMeLink = $jtzwpHelpers->isPageWP()===true ? '#businessCardMaterializeModal
 $aboutMeTarget = $jtzwpHelpers->isPageWP()===true ? '_self' : '_blank';
 ?>
 
-<nav class="full jtNavBar browser-default" data-collapsed="false">
+<nav class="full jtNavBar noPrint browser-default" data-collapsed="false">
     <!-- Menu Open/Close Toggle -->
     <button class="navToggle hideFull">
         <svg enable-background="new 0 0 512 512" id="Layer_1" version="1.1" viewBox="0 0 512 512" width="100%" height="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><rect height="64" width="256" x="128" y="320"/><rect height="64" width="256" x="128" y="224"/><path d="M480,0H32C14.312,0,0,14.312,0,32v448c0,17.688,14.312,32,32,32h448c17.688,0,32-14.312,32-32V32   C512,14.312,497.688,0,480,0z M448,448H64V64h384V448z"/><rect height="64" width="256" x="128" y="128"/></g></svg>

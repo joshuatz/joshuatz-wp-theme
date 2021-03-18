@@ -384,6 +384,44 @@ strong {
     bottom: -20px;
 }
 
+.onlyPrint {
+    display: none;
+}
+
+@media print {
+    .onlyPrint {
+        display: inherit;
+    }
+    .noPrint {
+        display: none !important;
+    }
+    #main {
+        padding-top: 10px;
+    }
+    .entry-content, #main article {
+        width: 100%;
+        margin: 0px;
+    }
+    #main article {
+        padding: 0px;
+    }
+    body {
+        background-color: white;
+    }
+    .expandablePostDetailsSection .whenCollapsed {
+        display: none !important;
+    }
+    .expandablePostDetailsSection .whenExpanded {
+        display: inherit !important;
+    }
+    .expandablePostDetailsSection .collapsible-body {
+        display: block !important;
+    }
+    .jtzwpShareButtons, .comment-respond, .entry-footer .edit-link {
+        display: none !important;
+    }
+}
+
 /**
 * Main Materialize Breakpoints
 */

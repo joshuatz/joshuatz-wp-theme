@@ -17,7 +17,7 @@ $hasNextPost = isset($nextPost) && $nextPost !== '' && $nextPost!==$currPost;
 $nextPostFeatImg = $hasNextPost ? $jtzwpHelpers->getFeaturedImageSrc($nextPost, 'medium') : false;
 
 ?>
-<div class="row postNavigation">
+<div class="row postNavigation noPrint">
     <!-- Previous Post -->
     <?php if ($hasPrevPost): ?>
         <div class="col s12 m6 l3 prevPost">
