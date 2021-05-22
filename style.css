@@ -682,6 +682,15 @@ a.readMore {
 }
 
 /**
+* Sticky Sidebar
+*/
+.stickySidebarWrapper .stickyContent {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 72px;
+}
+
+/**
 * Main Materialize Breakpoints
 */
 /** Non-material breakpoint, but used for nav and elsewhere */

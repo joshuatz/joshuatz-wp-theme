@@ -354,10 +354,6 @@ strong {
     flex-wrap: wrap;
     align-items: flex-start;
 }
-.customToolListing {
-    /* max-width: 550px; */
-    /* float: right !important; */
-}
 .customToolListing .card-title {
     overflow-x: hidden;
     text-overflow: ellipsis;

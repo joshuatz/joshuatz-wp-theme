@@ -86,6 +86,8 @@ This allows you to customize both:
  - Redo nav and change from hardcoded to more dynamic based on native WP menu
      - Optionally, integrate Materialize walker version
  - make `/blog` a true theme page, rather than have to manually create it
+ - Add back some sort of lightbox gallery viewer?
+ - Add back some form of CSS animations (removed wow.js)
 
 ---
 

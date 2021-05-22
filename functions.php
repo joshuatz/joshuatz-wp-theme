@@ -121,18 +121,17 @@ function joshuatzwp_styles_for_admin(){
 
 function joshuatzwp_scripts() {
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
-    // jQuery
-    wp_enqueue_script('jquery-3', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', array(), $cacheBustStamp, true);
-    add_attribute('jquery-3', 'integrity', 'sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==', true);
-    add_attribute('jquery-3', 'crossorigin', 'anonymous', true);
 }
 
 function joshuatzwp_scripts_footer(){
     global $themeLibURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
-    // Vendored JS (materializeCSS, prismToolbar, wowjs, masonry, fancybox3)
-    wp_enqueue_script('vendor-js',$themeLibURL.'/vendor.min.js',array('jquery-3'),$cacheBustStamp,true);
+    // Vendored JS (materializeCSS, prismToolbar)
+    wp_enqueue_script('vendor-js',$themeLibURL.'/vendor.min.js',array(),$cacheBustStamp,true);
     // Main JS
-    wp_enqueue_script('main-js',$themeRootURL.'/main.js',array('jquery-3','vendor-js'),$cacheBustStamp,true);
+    wp_enqueue_script('main-js',$themeRootURL.'/inc/main.js',array('vendor-js'),$cacheBustStamp,true);
+    // Geo JS - defer def OK
+    wp_enqueue_script('geo-js', $themeRootURL.'/inc/geo.js', array(), $cacheBustStamp, true);
+    add_attribute('geo-js', 'defer', 'true', true);
     // Prism JS
     $prismJsFilePath = file_exists($jtzwpHelpers->siteRootPath . '/js/prism.js') ? $jtzwpHelpers->siteRootUrl . '/js/prism.js' : ($themeLibURL . '/prism/prism.js');
     wp_enqueue_script_special('prism-js',$prismJsFilePath,array(),false,false,'async');
@@ -141,7 +140,7 @@ function joshuatzwp_scripts_footer(){
 function joshuatzwp_scripts_admin(){
     global $themeLibURL, $themeIncPath, $themeIncURL, $themeRootURL, $cacheBustStamp, $jtzwpHelpers;
     // admin.js
-    wp_enqueue_script('admin-script',$themeRootURL.'/admin.js',array('jquery'),$cacheBustStamp,true);
+    wp_enqueue_script('admin-script',$themeRootURL.'/admin.js',array(),$cacheBustStamp,true);
 }
 
 function joshuatzwp_enqueue_loader_head() {
@@ -186,14 +185,6 @@ add_action('init','jtwp_register_all_custom_taxonomies');
 
 // Load / register custom sidebars / widgets
 add_action('widgets_init','jtzwp_register_sidebars');
-
-/**
- * Hook into wp_head for anything that needs to run first - useful for global includes
- */
-function jtzwp_head_hook(){
-    //
-}
-add_action('wp_head','jtzwp_head_hook');
 
 /**
  * Hook into template_redirect for anything that needs to happen after query, but BEFORE headers are sent - e.g. redirects

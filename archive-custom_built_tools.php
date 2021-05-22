@@ -18,14 +18,14 @@ function getFixedFooter(){
     <div class="fixed-footer row" data-column="<?php echo $footerColumns; ?>">
         <?php if($allowReadMoreLink): ?>
             <div class="col <?php echo $footerColumnsMaterialize; ?> readMoreLinkWrapper">
-                <div class="btn black wow bounce" data-wow-delay="0.5s" data-wow-iteration="2">
+                <div class="btn black bounce">
                     <a class="readMoreLink truncate" href="<?php echo $readMoreLink; ?>">Read More</a>
                 </div>
             </div>
         <?php endif; ?>
         <?php if($hasExternalCodePage && $jtzwpHelpers->codeHostIconMapper($externalCodePage)['foundMatch']): ?>
             <div class="col <?php echo $footerColumnsMaterialize; ?> externalCodePageLinkWrapper">
-                <div class="btn black wow bounce" data-wow-delay="0.5s" data-wow-iteration="2">
+                <div class="btn black bounce">
                     <a class="externalCodePageLink" href="<?php echo $externalCodePage; ?>" target="_blank">
                         <span class="externalCodePageLinkName truncate"><?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['name']; ?></span>
                         <span class="externalCodePageLinkIcon"><?php echo $jtzwpHelpers->codeHostIconMapper($externalCodePage)['html']; ?></span>
@@ -45,7 +45,7 @@ function getFixedFooter(){
             <h2 class="customToolsListingsTitle mainTitle">Here are some small one-off tools I have developed, either for myself or others.</h2>
 
             <div id="customToolsListings">
-                <div class="row customToolsMasonryAuto">
+                <div class="row customToolsMasonry">
                     <?php
                     // Loop through matching tools
                     while (have_posts()): the_post();
