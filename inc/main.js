@@ -109,7 +109,8 @@
         if (window.isDebug) {
             // SEO
             window.setTimeout(function () {
-                const description = qs('meta[name="description"]').getAttribute('content');
+                const descriptionTag = qs('meta[name="description"]');
+                const description = descriptionTag ? descriptionTag.getAttribute('content') : undefined;
                 console.group('SEO Stuff');
                 const keywordsTag = qs('meta[name="keywords"]');
                 const robotsTag = qs('meta[name="robots"]');

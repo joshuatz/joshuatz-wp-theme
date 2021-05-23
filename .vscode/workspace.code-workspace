@@ -12,7 +12,8 @@
             "**/node_modules": true,
             "**/bower_components": true,
             "**/*.code-search": true,
-            "**/wp-includes": true
+            "**/wp-includes": true,
+            "**/wp-content/plugins": true
         }
     }
 }
