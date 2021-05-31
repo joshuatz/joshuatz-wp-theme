@@ -174,14 +174,31 @@ add_action('wp_footer','joshuatzwp_enqueue_loader_footer');
 // Load scripts and styles - admin area
 add_action('admin_enqueue_scripts','joshuatzwp_enqueue_loader_admin');
 
-// Load custom post types
-add_action('init','jtwp_register_all_custom_posttypes');
-
 // Add support for custom post types showing up in queries
 add_filter('pre_get_posts','jtzwp_custom_posttypes_archive_support');
 
-// Load custom taxonomies
-add_action('init','jtwp_register_all_custom_taxonomies');
+// Load custom post types and taxonomies
+// Order matters!
+add_action('init', function() {
+    jtwp_register_all_custom_posttypes();
+    jtwp_register_all_custom_taxonomies();
+}, 10);
+
+add_filter('request', function($arg) {
+    $request = $arg;
+    // This is really strange edge-case with CPT + taxonomy archives
+    // Triggers on CPT archive pagination URLs that also use nested taxonomy slugs, like /projects/web-stuff/page/2/
+    // ^ /{CPT}/{TAXONOMY}/page/2
+    // The query it is creating results in a 404, if not modified as I am below
+    if (isset($request['projects']) && $request['projects'] === 'page' && isset($request['post_type']) && $request['post_type'] === 'projects' && isset($request['page'])) {
+        // Remap `page` to `paged`, and remove all other params that will cause 404-inducing `AND (wp_posts.ID = '0')` to be emitted in SQL
+        $request['paged'] = $request['page'];
+        unset($request['name']);
+        unset($request['projects']);
+        unset($request['page']);
+    }
+    return $request;
+}, 10);
 
 // Load / register custom sidebars / widgets
 add_action('widgets_init','jtzwp_register_sidebars');
