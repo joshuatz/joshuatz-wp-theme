@@ -1,10 +1,10 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 
 function bundleVendorJs(){
     return gulp.src([
-        './lib/materialize/js/materialize.min.js',
+        './node_modules/materialize-css/dist/js/materialize.min.js',
         './node_modules/j-prism-toolbar/dist/jPrismToolbar.min.js'
     ])
         .pipe(concat('vendor.min.js'))

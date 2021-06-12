@@ -24,8 +24,9 @@
     "font-awesome": "4.7.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
-    "gulp-uglify": "^3.0.2",
-    "j-prism-toolbar": "^1.2.3"
+    "gulp-uglify-es": "^2.0.0",
+    "j-prism-toolbar": "^1.3.1",
+    "materialize-css": "^1.0.0"
   },
   "dependencies": {}
 }

@@ -1,11 +1,13 @@
 export {};
+import type {PrismToolbar as JPrismToolbarClass} from 'j-prism-toolbar'
 
 declare global {
     const ga: any;
     const gtag: any;
     const isDebug: boolean;
     const fireEvent: (action: string, category: string, label: string, value: string) => void;
-    const PrismToolbar: any;
+    // Constructable class
+    const PrismToolbar: typeof JPrismToolbarClass;
 
     interface Window {
         isDebug: typeof isDebug;
@@ -14,7 +16,8 @@ declare global {
         ga: any;
         baguetteBox: any;
         unhideByGeographyArr?: Array<GeoUnHideRuleSet>;
-        jPrismToolbar: any;
+        // Class instance
+        jPrismToolbar: JPrismToolbarClass;
     }
 
     interface GeoResult {
