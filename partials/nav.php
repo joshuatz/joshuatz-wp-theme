@@ -55,6 +55,9 @@ $aboutMeTarget = $jtzwpHelpers->isPageWP()===true ? '_self' : '_blank';
         <li>
             <a href="/blog/">Blog</a>
         </li>
+        <li>
+            <a href="https://docs.joshuatz.com/?utm_source=joshuatz.com&utm_medium=menu-bar" target="_blank" rel="noopener" title="Visit my documentation mega-site.">Docs</a>
+        </li>
         <div class="navSearchWrapper">
             <div class="siteSearchWrapper">
                 <form id="siteSearchForm">
@@ -146,6 +149,9 @@ html, :target {
 
 .jtNavBar .navSearchWrapper {
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .jtNavBar .navSearchWrapper .siteSearchWrapper {
     max-width: 250px;
