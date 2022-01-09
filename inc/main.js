@@ -38,7 +38,7 @@
                 'preventScrolling',
                 'dismissible',
                 'startingTop',
-                'endingTop'
+                'endingTop',
             ];
             /** @type {Record<string, any>} */
             const modalConfig = {};
@@ -95,10 +95,6 @@
                 });
         });
         window.baguetteBox.run(gallerySelector);
-        // Find single images that are not set to trigger fancybox, but do link
-        // $('a > img[class*="wp-image-"]').each(function(){
-        //     forceFancyBoxOnImage(this);
-        // });
     }
 
     /**
@@ -165,12 +161,11 @@
                 action: action,
                 category: category,
                 label: label,
-                value: value
+                value: value,
             };
 
-            /** @type {Array<keyof typeof eventConfig>} */
             // prettier-ignore
-            const acceptedKeys = (Object.keys(eventConfig));
+            const acceptedKeys = /** @type {Array<keyof typeof eventConfig>} */ (Object.keys(eventConfig));
             if (typeof action === 'object') {
                 eventConfig = action;
             }
@@ -194,7 +189,7 @@
                         eventCategory: formattedEventParams.category,
                         eventAction: formattedEventParams.action,
                         eventLabel: formattedEventParams.label,
-                        eventValue: formattedEventParams.value
+                        eventValue: formattedEventParams.value,
                     });
                 }
                 return true;
@@ -207,7 +202,7 @@
         if (typeof PrismToolbar === 'function') {
             window.jPrismToolbar = new PrismToolbar({
                 autoFix: true,
-                animate: false
+                animate: false,
             });
             setTimeout(() => {
                 // Let prism load
