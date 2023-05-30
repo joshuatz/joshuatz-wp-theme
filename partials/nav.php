@@ -120,6 +120,9 @@ html, :target {
 .jtNavBar ul li:hover {
     background-color: rgba(252, 252, 252, 0.10) !important;
 }
+.jtNavBar ul li a {
+    float: left;
+}
 .jtNavBar ul li a:hover {
     background-color: unset;
 }
