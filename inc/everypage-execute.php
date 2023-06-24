@@ -42,11 +42,17 @@
  * Note: Disabled for logged in WP users and debug
  */
 ?>
-<?php $gauid = jtzwp_validate_gauid_setting(); ?>
-<?php if($gauid): ?>
-    <?php if ($jtzwpHelpers->getIsUserAdmin()===false && $jtzwpHelpers->isDebug===false && $_COOKIE['jtzwpKnownUser']!=='true' && $_COOKIE['jtzwpGlobalOptOut']!=='true'): ?>
-        <?php $analyticsVersion = 'analytics.js'; ?>
-
+<?php
+    $gauidInfo = jtzwp_get_gauid_setting();
+    $gauid = $gauidInfo['gauid'];
+    $analyticsVersion = $gauidInfo['analyticsVersion'];
+    $userHasTrackingEnabled = $jtzwpHelpers->getIsUserAdmin()===false && $jtzwpHelpers->isDebug===false && $_COOKIE['jtzwpKnownUser']!=='true' && $_COOKIE['jtzwpGlobalOptOut']!=='true';
+?>
+<?php if($jtzwpHelpers->isDebug): ?>
+    <script>console.log('Analytics Config (`gauidInfo`):', <?php echo json_encode($gauidInfo); ?>);</script>
+<?php endif; ?>
+<?php if($gauid && $gauidInfo['valid']): ?>
+    <?php if ($userHasTrackingEnabled): ?>
         <?php if ($analyticsVersion==='gtag.js'): ?>
             <!-- Global site tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $gauid; ?>"></script>
@@ -86,7 +92,7 @@
         <script>console.log('Analytics tracking disabled for known user');</script>
         <?php endif; ?>
     <?php endif; ?>
-<?php else: ?>
+<?php elseif ($jtzwpHelpers->isDebug): ?>
     <script>console.warn('Invalid or missing GAUID for GA');</script>
 <?php endif; ?>
 

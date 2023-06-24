@@ -313,16 +313,27 @@ function jtzwp_template_include_hook($template){
 add_action('template_include','jtzwp_template_include_hook');
 
 /**
- * Check whether or not the stored GAUID string is valid (at least based on pattern)
+ * Check whether or not the stored GAUID string confirms to a known GA ID pattern,
+ * and if so, which type.
+ *
+ * Examples:
+ *  - `UA-12345678-9`: Universal Analytics
+ *  - `G-A1B2C34567`: GA4 or generic gtag (gtag.js)
  */
-function jtzwp_validate_gauid_setting(){
+function jtzwp_get_gauid_setting(){
     $gauid = get_option('jtzwp_settings')['jtzwp_ga_gauid'];
-    if ($gauid && preg_match('/UA-\d{8}-\d{1}/',$gauid)){
-        return $gauid;
+    $gauidInfo = array('valid' => false, 'analyticsVersion' => 'unknown', 'gauid' => $gauid);
+    if (!$gauid) {
+        return $gauidInfo;
     }
-    else {
-        return false;
-    }   
+    if (preg_match('/UA-\d{8}-\d{1}/', $gauid)) {
+        $gauidInfo['valid'] = true;
+        $gauidInfo['analyticsVersion'] = 'analytics.js';
+    } else if (preg_match('/G-[A-Z0-9]{10}/', $gauid)) {
+        $gauidInfo['valid'] = true;
+        $gauidInfo['analyticsVersion'] = 'gtag.js';
+    }
+    return $gauidInfo;
 }
 
 function jtzwp_get_disclaimer(){
