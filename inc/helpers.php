@@ -24,7 +24,7 @@ class JtzwpHelpers {
         $this->resetPaths();
         $this->themeUserSettingsValidations = array(
             'jtzwp_cachebust_stamp' => "/.+/",
-            'jtzwp_ga_gauid' => "/UA-\d{8}-\d{1}/i",
+            'jtzwp_ga_gauid' => "/UA-\d{8}-\d{1}|G-[A-Z0-9]{10}/i",
             'jtzwp_disqus_subdomain' => "/[^\.]+\.disqus\.com/i",
             'jtzwp_about_me_email' => ",[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?,i",
             'jtzwp_about_me_birthdate' => "/\d{2}\/\d{2}\/\d{4}/i",
