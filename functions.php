@@ -484,15 +484,16 @@ function jtzwp_before_post_save($data,$postArr){
 }
 add_filter('wp_insert_post_data','jtzwp_before_post_save',10,2);
 
-/*
-if ($jtzwpHelpers->isDebug && $jtzwpHelpers->getUrlInfo()['queryKeyPairs']['relativeUrl']=='on' || preg_match('/\.ngrok.io$/',$jtzwpHelpers->getUrlInfo()['hostname'])){
-    add_filter('style_loader_src',function($src, $handle){
-        global $jtzwpHelpers;
-        return $jtzwpHelpers->makeInternalLinkRelative($src);
-    },10,4);
-    add_filter('script_loader_src',function($src, $handle){
-        global $jtzwpHelpers;
-        return $jtzwpHelpers->makeInternalLinkRelative($src);
-    },10,4);
+function jtzwp_comment_filtering($commentData) {
+    global $jtzwpHelpers;
+
+    // Check for missing required fields / easy spam trap
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'comment_nonce')) {
+        // Nice try
+        wp_redirect($jtzwpHelpers->getUrlInfo(get_permalink($commentData['comment_post_ID']))['withoutQueryString'] . '?unapproved=999&moderation-hash=haha#comment-999');
+        exit;
+    }
+
+    return $commentData;
 }
-*/
+add_filter('preprocess_comment', 'jtzwp_comment_filtering');

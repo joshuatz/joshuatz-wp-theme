@@ -538,6 +538,7 @@ class JtzwpHelpers {
          * Put collected info together for some combination values
          */
         $finalInfo['homepage'] = $finalInfo['protocol'] . $finalInfo['hostname'];
+        $finalInfo['withoutQueryString'] = $finalInfo['protocol'] . $finalInfo['hostname'] . $finalInfo['path'];
 
         // Return info
         return $finalInfo;
